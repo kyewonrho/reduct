@@ -143,6 +143,11 @@ body.menu-open{overflow:hidden}
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{border-color:var(--black)}
 .form-note{margin:0;font-size:13px;color:var(--gray-500)}
 
+.form-status{min-height:20px;margin:0;font-size:13px;line-height:1.55;color:var(--gray-600)}
+.form-status.success{color:var(--black)}
+.form-status.error{color:var(--gray-700);font-weight:500}
+.contact-form .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
 .site-footer{padding:70px 0 26px}
 .footer-grid{display:grid;grid-template-columns:1fr .8fr 1.1fr;gap:36px;align-items:start}
 .footer-logo{display:block;width:190px;height:auto;margin-bottom:14px;color:var(--white)}
