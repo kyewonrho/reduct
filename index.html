@@ -263,7 +263,7 @@
 <h2>Build Better<br/>with REDUCT.</h2>
 <p>산업설비 부품 설계·OEM 제작, Hardware · Firmware 개발, 구조설계 · 기구설계 · 산업디자인, 금형 설계 · 제작 관련 문의를 받습니다.</p>
 <div class="contact-meta">
-<div><span>COMPANY</span><p>REDUCT Co., Ltd.<br/>주식회사 리덕트</p></div>
+<div><span>COMPANY</span><p>REDUCT Co., Ltd.</p></div>
 <div><span>CEO</span><p>노계원</p></div>
 <div><span>ADDRESS</span><p>인천광역시 연수구 송도과학로 80, 송도 AIT센터</p></div>
 <div><span>E-MAIL</span><p><a href="mailto:ceo@reduct.co.kr">ceo@reduct.co.kr</a></p></div>
@@ -271,19 +271,20 @@
 </div>
 <form class="contact-form reveal" id="contactForm">
 <div class="field-row">
-<label>이름 *<input name="name" required="" type="text"/></label>
-<label>회사명<input name="company" type="text"/></label>
+<label>이름 *<input name="name" required="" type="text" autocomplete="name"/></label>
+<label>회사명<input name="company" type="text" autocomplete="organization"/></label>
 </div>
 <div class="field-row">
-<label>이메일 *<input name="email" required="" type="email"/></label>
-<label>연락처<input name="phone" type="text"/></label>
+<label>이메일 *<input name="email" required="" type="email" autocomplete="email"/></label>
+<label>연락처<input name="phone" type="text" autocomplete="tel"/></label>
 </div>
 <label>문의 유형
             <select name="type"><option>Equipment Parts / OEM Production</option><option>Hardware / Firmware Development</option><option>Structural / Mechanical Design</option><option>Industrial Design</option><option>Mold Design / Mold Manufacturing</option><option>Injection Production Linkage</option><option>Business Partnership</option><option>General Inquiry</option></select>
 </label>
 <label>문의 내용 *<textarea name="message" required="" rows="6"></textarea></label>
 <button class="btn btn-dark" type="submit">SEND INQUIRY</button>
-<p class="form-note">초기 버전에서는 메일 앱으로 문의 내용이 전달됩니다.</p>
+<p class="form-note">입력하신 문의 내용은 REDUCT 담당 이메일로 직접 전송됩니다.</p>
+<p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 </form>
 </div>
 </section>
@@ -302,7 +303,7 @@
 <a href="#contact">CONTACT</a>
 </nav>
 <div class="footer-info">
-<p>주식회사 리덕트</p>
+<p>REDUCT Co., Ltd.</p>
 <p>대표이사 노계원</p>
 <p>인천광역시 연수구 송도과학로 80, 송도 AIT센터</p>
 <p>ceo@reduct.co.kr</p>
