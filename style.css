@@ -206,3 +206,61 @@ body.menu-open{overflow:hidden}
   .reveal{opacity:1;transform:none;transition:none}
   .btn,.desktop-nav a::after,.menu-toggle span,.mobile-menu{transition:none}
 }
+
+/* Mobile menu overlay fix: prevent iOS/Safari fixed-layer clipping after scroll */
+@media (max-width:980px){
+  .site-header .header-inner{
+    position:relative;
+    z-index:30;
+  }
+
+  .mobile-menu{
+    z-index:20;
+    height:100dvh;
+    min-height:100dvh;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    padding-top:calc(110px + env(safe-area-inset-top));
+    padding-bottom:calc(40px + env(safe-area-inset-bottom));
+  }
+
+  body.menu-open{
+    overflow:hidden;
+    height:100%;
+    touch-action:none;
+  }
+
+  /* backdrop-filter on the scrolled header can create a containing block
+     for fixed descendants in Safari. Expand the header itself instead. */
+  body.menu-open .site-header,
+  body.menu-open .site-header.scrolled{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100dvh;
+    min-height:100dvh;
+    background:var(--black);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    border-color:transparent;
+    overflow:hidden;
+  }
+
+  body.menu-open .mobile-menu{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100dvh;
+    min-height:100dvh;
+    transform:none;
+    opacity:1;
+    visibility:visible;
+    background:var(--black);
+  }
+
+  body.menu-open main,
+  body.menu-open .site-footer{
+    visibility:hidden;
+  }
+}
