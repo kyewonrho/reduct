@@ -491,3 +491,14 @@ body.diagnosis-open .diagnosis-launcher{opacity:0;pointer-events:none}
 html[lang="ja"] body{font-family:"Pretendard","Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
 html[lang="en"] .hero-copy{max-width:1180px}
 html[lang="ja"] .hero-copy{max-width:1180px}
+
+@media(min-width:1200px){
+  .language-switcher{position:relative;right:-48px}
+}
+
+/* SEO service index */
+.service-index-grid{grid-template-columns:repeat(3,1fr)}
+.service-index-card{display:block;color:var(--black);min-height:170px}
+.service-index-card p{font-size:14px;line-height:1.65;color:var(--gray-600);margin:0}
+@media(max-width:980px){.service-index-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.service-index-grid{grid-template-columns:1fr}}

@@ -66,7 +66,7 @@ if(form){
     formStatus.textContent = '문의 내용을 전송하고 있습니다.';
 
     const payload = {
-      _subject: `[REDUCT 홈페이지 문의] ${data.get('type')} / ${data.get('company') || data.get('name')}`,
+      _subject: `[홈페이지 문의] ${data.get('type')} / ${data.get('company') || data.get('name')}`,
       _template: 'table',
       _replyto: data.get('email'),
       Name: data.get('name'),
