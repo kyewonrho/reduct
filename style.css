@@ -67,6 +67,18 @@ body.menu-open{overflow:hidden}
 .hero-copy span{display:block}
 .hero-copy .hero-copy-final{white-space:nowrap;margin-top:2px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+
+.hero-diagnosis-teaser{position:relative;display:block;margin-top:26px;width:min(100%,420px);padding:0;border:0;background:transparent;color:var(--white);cursor:pointer;text-align:left}
+.hero-diagnosis-glow,.hero-diagnosis-teaser::before{content:"";position:absolute;inset:-2px;border-radius:30px;pointer-events:none}
+.hero-diagnosis-teaser::before{background:conic-gradient(from 0deg, rgba(255,255,255,.12), rgba(255,255,255,.85), rgba(115,115,115,.28), rgba(255,255,255,.8), rgba(255,255,255,.12));filter:blur(.2px);animation:orbitBorder 9s linear infinite;opacity:.95}
+.hero-diagnosis-glow{background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.18), transparent 62%);filter:blur(18px);opacity:.55;animation:softPulse 4.6s ease-in-out infinite}
+.hero-diagnosis-inner{position:relative;z-index:1;display:grid;gap:6px;padding:18px 22px;border-radius:28px;background:linear-gradient(135deg, rgba(12,12,12,.92), rgba(30,30,30,.88));border:1px solid rgba(255,255,255,.18);box-shadow:0 16px 40px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.14)}
+.hero-diagnosis-kicker{font-size:11px;letter-spacing:.2em;color:var(--gray-400)}
+.hero-diagnosis-inner strong{font-size:28px;line-height:1.06;letter-spacing:-.03em;font-weight:700}
+.hero-diagnosis-inner em{font-style:normal;color:var(--gray-300);line-height:1.6;font-size:14px}
+.hero-diagnosis-teaser:hover{transform:translateY(-2px)}
+@keyframes orbitBorder{to{transform:rotate(360deg)}}
+@keyframes softPulse{0%,100%{opacity:.38;transform:scale(.98)}50%{opacity:.72;transform:scale(1.02)}}
 .scroll-cue{position:absolute;right:var(--pad);bottom:34px;z-index:2;color:var(--gray-400);font-size:12px;letter-spacing:.16em;display:flex;gap:8px;align-items:center}
 .scroll-cue span{font-size:16px}
 
@@ -218,6 +230,7 @@ body.menu-open{overflow:hidden}
   .brand svg{width:160px}
   .hero{padding:120px 0 72px}
   .hero-actions{display:grid;grid-template-columns:1fr 1fr}
+  .hero-diagnosis-teaser{width:min(100%,460px)}
   .scroll-cue{display:none}
   .overview-grid,.business-grid,.project-grid,.technology-grid,.footer-grid{grid-template-columns:1fr}
   .photo-card{min-height:360px}
@@ -232,6 +245,8 @@ body.menu-open{overflow:hidden}
   .section-intro h2,.copy-block h2,.vision-box h2,.org-box h2,.contact-copy h2{font-size:clamp(30px,11vw,46px)}
   .hero h1{font-size:clamp(40px,13vw,58px)}
   .hero-kicker{font-size:20px;margin-top:24px}
+  .hero-diagnosis-inner{padding:16px 18px;border-radius:24px}
+  .hero-diagnosis-inner strong{font-size:24px}
   .hero-copy .hero-copy-final{white-space:normal}
   .vision-box,.org-box,.contact-form,.info-card,.technology-card,.scope-item,.business-body,.project-body{padding:24px}
   .top-row{grid-template-columns:1fr}
@@ -362,6 +377,12 @@ body.menu-open{overflow:hidden}
 
 /* REDUCT Cost Optimization Pre-Diagnosis Bot */
 .diagnosis-launcher{
+  position:fixed;z-index:60;right:24px;bottom:24px;height:60px;padding:0 22px;display:inline-flex;align-items:center;gap:12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:var(--black);color:var(--white);box-shadow:0 16px 40px rgba(0,0,0,.22);cursor:pointer;transition:transform .2s ease, background .2s ease, opacity .2s ease;
+}
+.diagnosis-launcher::before{content:"";position:absolute;inset:-2px;border-radius:999px;background:conic-gradient(from 0deg, rgba(255,255,255,.12), rgba(255,255,255,.95), rgba(115,115,115,.25), rgba(255,255,255,.9), rgba(255,255,255,.12));animation:orbitBorder 11s linear infinite;z-index:-2;opacity:.9}
+.diagnosis-launcher::after{content:"";position:absolute;inset:1px;border-radius:999px;background:var(--black);z-index:-1}
+/* base duplicated below intentionally kept for compatibility */
+.diagnosis-launcher{
   position:fixed;right:24px;bottom:24px;z-index:70;
   display:inline-flex;align-items:center;gap:10px;
   height:54px;padding:0 20px;border:1px solid rgba(255,255,255,.16);
@@ -421,9 +442,21 @@ body.menu-open{overflow:hidden}
 .diagnosis-status.error{color:var(--gray-700)}
 .diagnosis-foot{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-top:1px solid var(--gray-200);background:var(--white);font-size:11px;color:var(--gray-500);letter-spacing:.05em}
 .diagnosis-reset{border:0;background:transparent;padding:4px 0;color:var(--gray-600);cursor:pointer;font:inherit}
-body.diagnosis-open .diagnosis-launcher{opacity:0;pointer-events:none}
+body.diagnosis-open .diagnosis-launcher{
+  position:fixed;z-index:60;right:24px;bottom:24px;height:60px;padding:0 22px;display:inline-flex;align-items:center;gap:12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:var(--black);color:var(--white);box-shadow:0 16px 40px rgba(0,0,0,.22);cursor:pointer;transition:transform .2s ease, background .2s ease, opacity .2s ease;
+}
+.diagnosis-launcher::before{content:"";position:absolute;inset:-2px;border-radius:999px;background:conic-gradient(from 0deg, rgba(255,255,255,.12), rgba(255,255,255,.95), rgba(115,115,115,.25), rgba(255,255,255,.9), rgba(255,255,255,.12));animation:orbitBorder 11s linear infinite;z-index:-2;opacity:.9}
+.diagnosis-launcher::after{content:"";position:absolute;inset:1px;border-radius:999px;background:var(--black);z-index:-1}
+/* base duplicated below intentionally kept for compatibility */
+.diagnosis-launcher{opacity:0;pointer-events:none}
 @media(max-width:680px){
-  .diagnosis-launcher{right:16px;bottom:16px;height:52px;padding:0 17px}
+  .diagnosis-launcher{
+  position:fixed;z-index:60;right:24px;bottom:24px;height:60px;padding:0 22px;display:inline-flex;align-items:center;gap:12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:var(--black);color:var(--white);box-shadow:0 16px 40px rgba(0,0,0,.22);cursor:pointer;transition:transform .2s ease, background .2s ease, opacity .2s ease;
+}
+.diagnosis-launcher::before{content:"";position:absolute;inset:-2px;border-radius:999px;background:conic-gradient(from 0deg, rgba(255,255,255,.12), rgba(255,255,255,.95), rgba(115,115,115,.25), rgba(255,255,255,.9), rgba(255,255,255,.12));animation:orbitBorder 11s linear infinite;z-index:-2;opacity:.9}
+.diagnosis-launcher::after{content:"";position:absolute;inset:1px;border-radius:999px;background:var(--black);z-index:-1}
+/* base duplicated below intentionally kept for compatibility */
+.diagnosis-launcher{right:16px;bottom:16px;height:52px;padding:0 17px}
   .diagnosis-bot{right:0;bottom:0;width:100%;height:100dvh;max-height:none;border-radius:0;border:0;transform:translateY(24px)}
   .diagnosis-head{padding-top:calc(18px + env(safe-area-inset-top))}
   .diagnosis-body{padding:20px 18px}

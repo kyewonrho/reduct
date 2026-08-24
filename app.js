@@ -106,9 +106,10 @@ if(form){
   });
 }
 
-// REDUCT Cost Optimization Pre-Diagnosis Bot
+// Cost Optimization Pre-Diagnosis Bot
 (() => {
   const launcher = document.getElementById('diagnosisLauncher');
+  const heroTeaser = document.getElementById('heroDiagnosisTeaser');
   const bot = document.getElementById('diagnosisBot');
   const closeBtn = document.getElementById('diagnosisClose');
   const resetBtn = document.getElementById('diagnosisReset');
@@ -176,7 +177,7 @@ if(form){
   function render(){
     setProgress();
     if(state.step === 1){
-      body.innerHTML = `<div class="diagnosis-message"><strong>어떤 비용을 줄이고 싶으신가요?</strong>현재 검토하려는 영역을 선택해 주세요.<p class="diagnosis-sub">정확한 견적이 아니라, REDUCT에서 어떤 방식으로 검토해야 하는지 판단하기 위한 사전진단입니다.</p></div>${options(categoryOptions,'category')}`;
+      body.innerHTML = `<div class="diagnosis-message"><strong>어떤 비용을 먼저 점검해볼까요?</strong>현재 검토하려는 영역을 선택해 주세요.<p class="diagnosis-sub">정확한 견적이 아니라, 어떤 방식으로 원가와 구조를 검토해야 하는지 빠르게 판단하기 위한 사전진단입니다.</p></div>${options(categoryOptions,'category')}`;
     } else if(state.step === 2){
       body.innerHTML = `<div class="diagnosis-message"><strong>현재 프로젝트 상태는 어떤 단계인가요?</strong>현재 제작·개발 상황에 가장 가까운 항목을 선택해 주세요.</div>${options(stageOptions,'stage')}`;
     } else if(state.step === 3){
@@ -199,7 +200,7 @@ if(form){
       const cur=num(state.currentCost), tar=num(state.targetCost);
       const saving = cur>0 && tar>0 && cur>tar ? cur-tar : 0;
       const rate = saving ? (saving/cur*100).toFixed(1) : '';
-      body.innerHTML = `<div class="diagnosis-message"><strong>사전진단 정보가 정리되었습니다.</strong>아래 내용을 REDUCT에 보내면 실제 도면·사양·제작조건을 기준으로 검토할 수 있습니다.</div>
+      body.innerHTML = `<div class="diagnosis-message"><strong>사전진단 정보가 정리되었습니다.</strong>아래 내용을 보내면 실제 도면·사양·제작조건을 기준으로 검토를 시작할 수 있습니다.</div>
       <div class="diagnosis-summary">
         <div class="diagnosis-summary-row"><span>검토 영역</span><strong>${esc(state.category)}</strong></div>
         <div class="diagnosis-summary-row"><span>현재 단계</span><strong>${esc(state.stage)}</strong></div>
@@ -214,7 +215,7 @@ if(form){
         <label class="diagnosis-field"><span>연락처 *</span><input id="dPhone" type="tel" autocomplete="tel" value="${esc(state.phone)}"></label>
       </div>
       <label class="diagnosis-consent"><input id="dConsent" type="checkbox"> <span>사전진단 및 상담을 위한 개인정보 수집·이용에 동의합니다. 입력정보는 상담 목적으로만 사용합니다.</span></label>
-      <div class="diagnosis-actions"><button class="diagnosis-next" id="dSubmit" type="button">REDUCT에 진단 요청 보내기</button></div>
+      <div class="diagnosis-actions"><button class="diagnosis-next" id="dSubmit" type="button">진단 내용 보내기</button></div>
       <div class="diagnosis-status" id="dStatus"></div>`;
     }
     body.scrollTop = 0;
@@ -257,7 +258,7 @@ if(form){
     const saving = cur>0 && tar>0 && cur>tar ? cur-tar : 0;
     const rate = saving ? (saving/cur*100).toFixed(1) : '-';
     const payload={
-      _subject:`[REDUCT 원가절감 사전진단] ${state.company || state.name} / ${state.category}`,
+      _subject:`[홈페이지 비용 최적화 사전진단] ${state.company || state.name} / ${state.category}`,
       _template:'table',_replyto:state.email,
       Name:state.name,Company:state.company || '-',Email:state.email,Phone:state.phone,
       Diagnosis_Type:state.category,Project_Stage:state.stage,
@@ -272,10 +273,10 @@ if(form){
       const result=await response.json().catch(()=>({}));
       if(!response.ok || result.success===false || result.success==='false') throw new Error(result.message||'failed');
       status.className='diagnosis-status success';
-      status.innerHTML='<strong>진단 요청이 전송되었습니다.</strong><br>도면이나 BOM이 있다면 회신 메일에 첨부해 주세요. REDUCT에서 검토 후 연락드리겠습니다.';
+      status.innerHTML='<strong>진단 요청이 전송되었습니다.</strong><br>도면이나 BOM이 있다면 회신 메일에 첨부해 주세요. 검토 후 연락드리겠습니다.';
       button.textContent='전송 완료';
     }catch(err){
-      console.error('Diagnosis submission failed:',err);status.className='diagnosis-status error';status.textContent='전송에 실패했습니다. 잠시 후 다시 시도하거나 ceo@reduct.co.kr로 문의해 주세요.';button.disabled=false;button.textContent='REDUCT에 진단 요청 보내기';
+      console.error('Diagnosis submission failed:',err);status.className='diagnosis-status error';status.textContent='전송에 실패했습니다. 잠시 후 다시 시도하거나 ceo@reduct.co.kr로 문의해 주세요.';button.disabled=false;button.textContent='진단 내용 보내기';
     }
   }
   function reset(){
@@ -283,6 +284,7 @@ if(form){
   }
 
   launcher.addEventListener('click',()=>{openBot();render();});
+  heroTeaser?.addEventListener('click',()=>{openBot();render();});
   closeBtn?.addEventListener('click',closeBot);
   resetBtn?.addEventListener('click',reset);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&bot.classList.contains('open'))closeBot();});
