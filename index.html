@@ -399,6 +399,28 @@
 </div>
 <div class="shell footer-bottom">Copyright © REDUCT Co., Ltd. All Rights Reserved.</div>
 </footer>
+<!-- REDUCT Cost Optimization Pre-Diagnosis Bot -->
+<button class="diagnosis-launcher" id="diagnosisLauncher" type="button" aria-label="원가절감 사전진단 열기" aria-expanded="false">
+  <span class="diagnosis-launcher-dot"></span>
+  <span>원가절감 사전진단</span>
+</button>
+
+<section class="diagnosis-bot" id="diagnosisBot" aria-hidden="true" aria-label="REDUCT 원가절감 사전진단">
+  <div class="diagnosis-head">
+    <div>
+      <span class="diagnosis-kicker">REDUCE PRODUCT TECHNOLOGY</span>
+      <strong>원가절감 사전진단</strong>
+    </div>
+    <button class="diagnosis-close" id="diagnosisClose" type="button" aria-label="사전진단 닫기">×</button>
+  </div>
+  <div class="diagnosis-progress" aria-hidden="true"><span id="diagnosisProgressBar"></span></div>
+  <div class="diagnosis-body" id="diagnosisBody" aria-live="polite"></div>
+  <div class="diagnosis-foot">
+    <button class="diagnosis-reset" id="diagnosisReset" type="button">처음부터</button>
+    <span id="diagnosisStepText">STEP 1 / 7</span>
+  </div>
+</section>
+
 <script src="./app.js"></script>
 </body>
 </html>

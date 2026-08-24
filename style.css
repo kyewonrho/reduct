@@ -359,3 +359,76 @@ body.menu-open{overflow:hidden}
 .area-service-grid strong{display:block;font-size:19px;margin-bottom:6px}
 .area-service-grid span{font-size:14px;color:var(--gray-600);line-height:1.5}
 @media(max-width:760px){.area-list,.area-service-grid{grid-template-columns:1fr}.local-area-home .shell{align-items:flex-start}}
+
+/* REDUCT Cost Optimization Pre-Diagnosis Bot */
+.diagnosis-launcher{
+  position:fixed;right:24px;bottom:24px;z-index:70;
+  display:inline-flex;align-items:center;gap:10px;
+  height:54px;padding:0 20px;border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;background:var(--black);color:var(--white);
+  font-family:var(--font);font-weight:500;font-size:14px;letter-spacing:-.01em;
+  box-shadow:0 14px 44px rgba(0,0,0,.22);cursor:pointer;
+  transition:transform .2s ease,background .2s ease;
+}
+.diagnosis-launcher:hover{transform:translateY(-2px);background:var(--gray-900)}
+.diagnosis-launcher-dot{width:8px;height:8px;border-radius:50%;background:var(--white);box-shadow:0 0 0 5px rgba(255,255,255,.1)}
+.diagnosis-bot{
+  position:fixed;right:24px;bottom:92px;z-index:72;
+  width:min(430px,calc(100vw - 32px));height:min(690px,calc(100dvh - 120px));
+  display:flex;flex-direction:column;background:var(--white);color:var(--black);
+  border:1px solid var(--gray-200);border-radius:26px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.28);
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.985);
+  transform-origin:bottom right;transition:opacity .2s ease,transform .2s ease,visibility .2s;
+}
+.diagnosis-bot.open{opacity:1;visibility:visible;transform:none}
+.diagnosis-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 22px 18px;background:var(--black);color:var(--white)}
+.diagnosis-head strong{display:block;margin-top:6px;font-size:21px;line-height:1.15;letter-spacing:-.025em}
+.diagnosis-kicker{font-size:10px;letter-spacing:.16em;color:var(--gray-400)}
+.diagnosis-close{width:38px;height:38px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:transparent;color:var(--white);font-size:28px;line-height:1;cursor:pointer}
+.diagnosis-progress{height:3px;background:var(--gray-200)}
+.diagnosis-progress span{display:block;height:100%;width:14.285%;background:var(--black);transition:width .25s ease}
+.diagnosis-body{flex:1;overflow:auto;padding:22px;-webkit-overflow-scrolling:touch}
+.diagnosis-message{max-width:92%;margin:0 0 14px;padding:15px 16px;border-radius:18px 18px 18px 6px;background:var(--gray-100);font-size:15px;line-height:1.6;word-break:keep-all}
+.diagnosis-message strong{display:block;margin-bottom:6px;font-size:18px;line-height:1.35;letter-spacing:-.02em}
+.diagnosis-sub{margin:8px 0 0;color:var(--gray-600);font-size:13px;line-height:1.55}
+.diagnosis-options{display:grid;grid-template-columns:1fr;gap:9px;margin-top:16px}
+.diagnosis-option{min-height:48px;padding:12px 15px;border:1px solid var(--gray-300);border-radius:14px;background:var(--white);color:var(--black);text-align:left;cursor:pointer;transition:border .15s,background .15s}
+.diagnosis-option:hover{border-color:var(--black);background:var(--gray-100)}
+.diagnosis-fields{display:grid;gap:12px;margin-top:16px}
+.diagnosis-fields.two{grid-template-columns:1fr 1fr}
+.diagnosis-field{display:grid;gap:7px}
+.diagnosis-field span{font-size:12px;color:var(--gray-600)}
+.diagnosis-field input,.diagnosis-field textarea,.diagnosis-field select{
+  width:100%;min-height:48px;padding:12px 13px;border:1px solid var(--gray-300);border-radius:14px;background:var(--white);color:var(--black);outline:none;font-family:var(--font);font-weight:500;
+}
+.diagnosis-field textarea{min-height:82px;resize:vertical}
+.diagnosis-field input:focus,.diagnosis-field textarea:focus,.diagnosis-field select:focus{border-color:var(--black)}
+.diagnosis-actions{display:flex;gap:9px;margin-top:16px}
+.diagnosis-next{flex:1;min-height:48px;border:0;border-radius:999px;background:var(--black);color:var(--white);cursor:pointer;font-weight:500}
+.diagnosis-skip{min-height:48px;padding:0 16px;border:1px solid var(--gray-300);border-radius:999px;background:var(--white);cursor:pointer}
+.diagnosis-summary{display:grid;gap:10px;margin-top:14px}
+.diagnosis-summary-row{padding:12px 14px;border:1px solid var(--gray-200);border-radius:14px;background:var(--white)}
+.diagnosis-summary-row span{display:block;margin-bottom:4px;font-size:11px;color:var(--gray-500);letter-spacing:.05em}
+.diagnosis-summary-row strong{font-size:14px;line-height:1.5}
+.diagnosis-saving{padding:16px;border-radius:16px;background:var(--black);color:var(--white);margin-top:12px}
+.diagnosis-saving span{display:block;font-size:11px;color:var(--gray-400);letter-spacing:.08em;margin-bottom:6px}
+.diagnosis-saving strong{font-size:24px;letter-spacing:-.03em}
+.diagnosis-consent{display:flex;align-items:flex-start;gap:9px;margin-top:4px;font-size:12px;line-height:1.5;color:var(--gray-600)}
+.diagnosis-consent input{margin-top:3px}
+.diagnosis-status{margin-top:12px;font-size:13px;line-height:1.5;color:var(--gray-600)}
+.diagnosis-status.success{color:var(--black)}
+.diagnosis-status.error{color:var(--gray-700)}
+.diagnosis-foot{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-top:1px solid var(--gray-200);background:var(--white);font-size:11px;color:var(--gray-500);letter-spacing:.05em}
+.diagnosis-reset{border:0;background:transparent;padding:4px 0;color:var(--gray-600);cursor:pointer;font:inherit}
+body.diagnosis-open .diagnosis-launcher{opacity:0;pointer-events:none}
+@media(max-width:680px){
+  .diagnosis-launcher{right:16px;bottom:16px;height:52px;padding:0 17px}
+  .diagnosis-bot{right:0;bottom:0;width:100%;height:100dvh;max-height:none;border-radius:0;border:0;transform:translateY(24px)}
+  .diagnosis-head{padding-top:calc(18px + env(safe-area-inset-top))}
+  .diagnosis-body{padding:20px 18px}
+  .diagnosis-fields.two{grid-template-columns:1fr}
+  .diagnosis-foot{padding-bottom:calc(13px + env(safe-area-inset-bottom))}
+  body.diagnosis-open{overflow:hidden;touch-action:none}
+}
+@media(prefers-reduced-motion:reduce){.diagnosis-bot,.diagnosis-launcher,.diagnosis-progress span{transition:none}}
