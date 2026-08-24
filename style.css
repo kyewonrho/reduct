@@ -468,3 +468,26 @@ body.diagnosis-open .diagnosis-launcher{opacity:0;pointer-events:none}
 @media(max-width:980px){.location-map-card{min-height:500px}.location-map-frame{min-height:410px}}
 @media(max-width:680px){.location-map-card{min-height:460px}.location-map-frame{min-height:360px}.location-map-head{padding:22px}.location-map-head strong{font-size:22px}}
 
+
+/* Language switcher */
+.header-actions{display:flex;align-items:center;gap:22px;margin-left:auto}
+.language-switcher{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:var(--gray-500);font-size:11px;letter-spacing:.08em}
+.language-switcher a{position:relative;padding:6px 1px;color:var(--gray-400);transition:color .2s ease}
+.language-switcher a:hover,.language-switcher a.active{color:var(--white)}
+.language-switcher a.active::after{content:"";position:absolute;left:0;right:0;bottom:1px;height:1px;background:var(--white)}
+.language-switcher span{color:var(--gray-700);font-size:10px}
+@media(max-width:980px){
+  .header-actions{gap:10px}
+  .language-switcher{gap:6px;font-size:10px;letter-spacing:.04em}
+  .language-switcher a{padding:6px 0}
+}
+@media(max-width:480px){
+  .language-switcher{gap:5px;font-size:9px}
+  .language-switcher a[data-lang-code="ko"]{font-size:0}
+  .language-switcher a[data-lang-code="ko"]::before{content:"KR";font-size:9px}
+  .language-switcher a[data-lang-code="ja"]{font-size:0}
+  .language-switcher a[data-lang-code="ja"]::before{content:"JP";font-size:9px}
+}
+html[lang="ja"] body{font-family:"Pretendard","Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+html[lang="en"] .hero-copy{max-width:1180px}
+html[lang="ja"] .hero-copy{max-width:1180px}
