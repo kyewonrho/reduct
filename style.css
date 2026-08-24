@@ -364,23 +364,22 @@ body.menu-open{overflow:hidden}
 .diagnosis-launcher{
   position:fixed;right:24px;bottom:24px;z-index:70;
   display:inline-flex;align-items:center;gap:10px;
-  height:54px;padding:0 20px;border:1px solid rgba(255,255,255,.16);
-  border-radius:999px;background:var(--black);color:var(--white);
+  height:54px;padding:0 20px;border:0;
+  border-radius:999px;background:linear-gradient(180deg, rgba(16,16,16,.98), rgba(0,0,0,.98));color:var(--white);
   font-family:var(--font);font-weight:500;font-size:14px;letter-spacing:-.01em;
   box-shadow:0 14px 44px rgba(0,0,0,.22);cursor:pointer;
   transition:transform .2s ease,background .2s ease;
   isolation:isolate;
 }
 .diagnosis-launcher::before{
-  content:"";position:absolute;inset:-2px;border-radius:999px;z-index:-2;
-  background:conic-gradient(from 0deg, rgba(255,255,255,.16), rgba(255,255,255,.9), rgba(115,115,115,.3), rgba(255,255,255,.82), rgba(40,40,40,.18), rgba(255,255,255,.16));
-  filter:blur(.4px) drop-shadow(0 0 8px rgba(255,255,255,.22)) drop-shadow(0 0 18px rgba(170,170,170,.16));
+  content:"";position:absolute;inset:-2px;border-radius:999px;z-index:-1;
+  padding:2px;
+  background:conic-gradient(from 0deg, rgba(255,255,255,.14), rgba(255,255,255,.95), rgba(115,115,115,.38), rgba(255,255,255,.82), rgba(40,40,40,.22), rgba(255,255,255,.14));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  box-shadow:0 0 8px rgba(255,255,255,.18), 0 0 14px rgba(140,140,140,.12);
   animation:diagnosisBorderRotate 10s linear infinite;
-}
-.diagnosis-launcher::after{
-  content:"";position:absolute;inset:1px;border-radius:999px;z-index:-1;
-  background:linear-gradient(180deg, rgba(16,16,16,.98), rgba(0,0,0,.98));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
 }
 .diagnosis-launcher:hover{transform:translateY(-2px);background:var(--gray-900)}
 .diagnosis-launcher-dot{width:8px;height:8px;border-radius:50%;background:var(--white);box-shadow:0 0 0 5px rgba(255,255,255,.1), 0 0 10px rgba(255,255,255,.35)}
