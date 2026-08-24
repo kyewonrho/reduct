@@ -49,13 +49,59 @@ const sectionObserver = new IntersectionObserver((entries)=>{
 sections.forEach(s=>sectionObserver.observe(s));
 
 const form = document.getElementById('contactForm');
-form.addEventListener('submit',(e)=>{
-  e.preventDefault();
-  if(!form.reportValidity()) return;
-  const data = new FormData(form);
-  const subject = encodeURIComponent(`[REDUCT 문의] ${data.get('type')} / ${data.get('company') || data.get('name')}`);
-  const body = encodeURIComponent(
-`이름: ${data.get('name')}\n회사명: ${data.get('company') || '-'}\n이메일: ${data.get('email')}\n연락처: ${data.get('phone') || '-'}\n문의 유형: ${data.get('type')}\n\n문의 내용\n${data.get('message')}`
-  );
-  window.location.href = `mailto:ceo@reduct.co.kr?subject=${subject}&body=${body}`;
-});
+const formStatus = document.getElementById('formStatus');
+const submitButton = form?.querySelector('button[type="submit"]');
+
+if(form){
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if(!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const originalButtonText = submitButton.textContent;
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'SENDING...';
+    formStatus.className = 'form-status';
+    formStatus.textContent = '문의 내용을 전송하고 있습니다.';
+
+    const payload = {
+      _subject: `[REDUCT 홈페이지 문의] ${data.get('type')} / ${data.get('company') || data.get('name')}`,
+      _template: 'table',
+      _replyto: data.get('email'),
+      Name: data.get('name'),
+      Company: data.get('company') || '-',
+      Email: data.get('email'),
+      Phone: data.get('phone') || '-',
+      Inquiry_Type: data.get('type'),
+      Message: data.get('message')
+    };
+
+    try{
+      const response = await fetch('https://formsubmit.co/ajax/ceo@reduct.co.kr', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json().catch(()=>({}));
+      if(!response.ok || result.success === 'false' || result.success === false){
+        throw new Error(result.message || 'Submission failed');
+      }
+
+      form.reset();
+      formStatus.className = 'form-status success';
+      formStatus.textContent = '문의가 정상적으로 전송되었습니다. 확인 후 연락드리겠습니다.';
+    }catch(error){
+      console.error('Inquiry submission failed:', error);
+      formStatus.className = 'form-status error';
+      formStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하거나 ceo@reduct.co.kr로 직접 문의해 주세요.';
+    }finally{
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+  });
+}
