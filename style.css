@@ -445,3 +445,15 @@ body.diagnosis-open .diagnosis-launcher{opacity:0;pointer-events:none}
   body.diagnosis-open{overflow:hidden;touch-action:none}
 }
 @media(prefers-reduced-motion:reduce){.diagnosis-bot,.diagnosis-launcher,.diagnosis-progress span{transition:none}}
+
+
+.location-grid{align-items:stretch}
+.location-map-card{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:28px;overflow:hidden;min-height:520px;display:flex;flex-direction:column}
+.location-map-head{display:grid;gap:7px;padding:26px 28px 22px;background:var(--gray-100);border-bottom:1px solid var(--gray-200)}
+.location-map-head span{font-size:11px;letter-spacing:.14em;color:var(--gray-500)}
+.location-map-head strong{font-size:24px;line-height:1.2;letter-spacing:-.03em}
+.location-map-frame{position:relative;flex:1;min-height:430px;background:var(--gray-200)}
+.location-map-frame iframe{position:absolute;inset:0;width:100%;height:100%;display:block;border:0}
+@media(max-width:980px){.location-map-card{min-height:500px}.location-map-frame{min-height:410px}}
+@media(max-width:680px){.location-map-card{min-height:460px}.location-map-frame{min-height:360px}.location-map-head{padding:22px}.location-map-head strong{font-size:22px}}
+
