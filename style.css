@@ -521,3 +521,79 @@ html[lang="ja"] .hero-copy{max-width:1180px}
 .service-index-card p{font-size:14px;line-height:1.65;color:var(--gray-600);margin:0}
 @media(max-width:980px){.service-index-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.service-index-grid{grid-template-columns:1fr}}
+
+/* Japanese responsive fixes */
+html[lang="ja"] body{
+  font-family:"Pretendard","Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+}
+html[lang="ja"] p,
+html[lang="ja"] li,
+html[lang="ja"] h1,
+html[lang="ja"] h2,
+html[lang="ja"] h3,
+html[lang="ja"] .lead,
+html[lang="ja"] .hero-kicker{
+  word-break:normal;
+  overflow-wrap:anywhere;
+  line-break:strict;
+}
+html[lang="ja"] h1,
+html[lang="ja"] h2,
+html[lang="ja"] h3{letter-spacing:-.02em}
+html[lang="ja"] .hero-kicker span,
+html[lang="ja"] .hero-copy>span,
+html[lang="ja"] .hero-copy .hero-copy-final,
+html[lang="ja"] .why-lead-inline,
+html[lang="ja"] .why-question,
+html[lang="ja"] .nowrap-desktop{
+  white-space:normal !important;
+}
+html[lang="ja"] .hero-copy{max-width:1120px}
+html[lang="ja"] .why-intro{max-width:1120px}
+
+@media (min-width:981px) and (max-width:1320px){
+  html[lang="ja"] .desktop-nav{gap:15px}
+  html[lang="ja"] .desktop-nav a{font-size:13px;letter-spacing:.02em}
+  html[lang="ja"] .header-actions{gap:12px}
+  html[lang="ja"] .language-switcher{font-size:11px;gap:5px;right:0}
+}
+@media (min-width:1200px) and (max-width:1399px){
+  html[lang="ja"] .language-switcher{right:0}
+}
+@media (min-width:1400px){
+  html[lang="ja"] .language-switcher{right:-32px}
+}
+
+@media (max-width:980px){
+  html[lang="ja"] .mobile-menu nav a{
+    font-size:clamp(30px,8vw,48px);
+    line-height:1.22;
+    letter-spacing:-.02em;
+  }
+  html[lang="ja"] .section-intro h2,
+  html[lang="ja"] .copy-block h2,
+  html[lang="ja"] .vision-box h2,
+  html[lang="ja"] .org-box h2,
+  html[lang="ja"] .contact-copy h2{
+    text-wrap:pretty;
+  }
+  html[lang="ja"] .process-list h3{
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+}
+@media (max-width:680px){
+  .process-list li{grid-template-columns:46px minmax(0,1fr);gap:14px}
+  .process-list h3{font-size:22px;line-height:1.15;overflow-wrap:anywhere;word-break:normal}
+  .process-list p{font-size:14px;line-height:1.6}
+  html[lang="ja"] .hero-kicker{font-size:19px;line-height:1.5}
+  html[lang="ja"] .hero-copy{font-size:14px;line-height:1.72}
+  html[lang="ja"] .why-question{font-size:22px;line-height:1.48!important}
+  html[lang="ja"] .technology-card h3{font-size:22px}
+  html[lang="ja"] .business-body h3,
+  html[lang="ja"] .project-body h3{font-size:25px}
+}
+@media (max-width:480px){
+  html[lang="ja"] .language-switcher{font-size:9px;gap:5px}
+  html[lang="ja"] .hero h1{font-size:clamp(38px,12vw,54px);line-height:1.02}
+}
