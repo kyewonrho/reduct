@@ -646,3 +646,14 @@ html[lang="ja"] .why-intro{max-width:1120px}
   }
   .site-footer .footer-nav a{font-size:19px;font-weight:600;}
 }
+
+
+/* Final Korean copy rhythm / orphan-line prevention */
+.section-intro>p,.optimization-pillar p,.optimization-lens p,.case-card p,.manufacturing-grid p,.diagnosis-cta p,.contact-copy p,.info-card p,.business-body p,.project-body p,.scope-item p{
+  word-break:keep-all;overflow-wrap:normal;text-wrap:pretty;
+}
+@media(min-width:1100px){
+  .section-copy-clean{max-width:1240px!important;}
+  .diagnosis-cta p{max-width:920px!important;}
+  .manufacturing-grid>div>p{max-width:900px;}
+}
