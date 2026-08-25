@@ -356,6 +356,58 @@
   #technology .final-capability-grid .technology-card:before{left:24px;right:24px}
 }
 </style>
+
+<style id="uniform-card-rebalance-hotfix">
+/* 2026-08-26 uniform card rebalance */
+#overview .overview-grid,#optimization .optimization-pillar-grid,#technology .final-capability-grid,#project .optimization-lens-grid{align-items:stretch}
+#overview .info-card{min-height:286px!important}
+#overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){min-height:286px!important;margin-top:0!important}
+#optimization .optimization-pillar{min-height:300px!important}
+#optimization .optimization-pillar:nth-child(2){transform:none!important}
+#technology .final-capability-grid .technology-card{min-height:230px!important}
+#project .optimization-lens{min-height:286px!important}
+@media(max-width:1100px){
+  #overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){margin-top:0!important}
+}
+</style>
+
+
+<style id="reduct-gray-panel-no-ai-number-final">
+/* 2026-08-26: visible gray translucent panels, no decorative index numbers */
+#overview .info-card,
+#optimization .optimization-pillar,
+#technology .final-capability-grid .technology-card,
+#project .optimization-lens,
+#case .case-card{
+  background:linear-gradient(145deg,rgba(238,239,241,.88),rgba(232,234,237,.70))!important;
+  border:1px solid rgba(17,17,17,.105)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.035),inset 0 1px 0 rgba(255,255,255,.62)!important;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+#overview .info-card:hover,
+#optimization .optimization-pillar:hover,
+#technology .final-capability-grid .technology-card:hover,
+#project .optimization-lens:hover,
+#case .case-card:hover{
+  border-color:rgba(17,17,17,.16)!important;
+}
+/* Semantic labels remain; decorative numbers are removed from markup. */
+#overview .card-index{font-size:15px!important;font-weight:600!important;letter-spacing:.12em!important;color:rgba(17,17,17,.50)!important}
+#optimization .optimization-pillar>span{font-size:15px!important;font-weight:600!important;letter-spacing:.105em!important;color:rgba(17,17,17,.52)!important}
+#project .optimization-lens{position:relative;padding-top:44px!important}
+#project .optimization-lens:before{content:"";position:absolute;left:28px;top:28px;width:34px;height:2px;background:rgba(17,17,17,.48);border-radius:999px}
+#project .optimization-lens h3{margin:auto 0 14px!important;font-size:29px!important}
+#project .optimization-lens p{font-size:18px!important;line-height:1.72!important}
+#technology .tech-tag{font-size:14px!important;color:rgba(17,17,17,.52)!important}
+#technology .technology-card .tech-en{font-size:18px!important;color:rgba(17,17,17,.65)!important}
+@media(max-width:760px){
+  #project .optimization-lens{padding-top:40px!important}
+  #project .optimization-lens:before{left:24px;top:24px}
+  #project .optimization-lens h3{font-size:27px!important}
+  #project .optimization-lens p{font-size:17px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -432,17 +484,17 @@
 </div>
 <div class="overview-grid">
 <article class="info-card reveal">
-<span class="card-index">01 / 市場</span>
+<span class="card-index">市場</span>
 <h3>作る方法は多い</h3>
 <p>設計会社、加工会社、OEMメーカー、金型メーカーなど、製品を作る供給者はすでに十分に存在します。</p>
 </article>
 <article class="info-card reveal">
-<span class="card-index">02 / 課題</span>
+<span class="card-index">課題</span>
 <h3>コストは分断の中で増える</h3>
 <p>問題は、各工程が分断されたまま仕様・構造・工法・供給先が積み重なり、不要なコストが発生することです。</p>
 </article>
 <article class="info-card reveal">
-<span class="card-index">03 / アプローチ</span>
+<span class="card-index">アプローチ</span>
 <h3>最適化を先に</h3>
 <p>製造会社を一社追加するのではなく、製品全体を見直し、コストと効率を改善したうえで必要な設計・開発・製造だけをつなぎます。</p>
 </article>
@@ -464,9 +516,9 @@
 </div>
 </section>
 <section class="section section-gray" id="optimization"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">WHAT WE OPTIMIZE</p><h2>Optimization First.<br/>Execution Second.</h2><p>目的は最適化であり、設計・開発・製造はその結果を実現するための手段です。まずコスト構造を分析し、必要な技術だけを選択して実行します。</p></div><div class="optimization-pillar-grid">
-<article class="optimization-pillar reveal"><span>01 / PRODUCT COST OPTIMIZATION</span><h3>製品・設備の原価最適化</h3><p>構造、部品点数、仕様、製造工法、サプライチェーンを一体で分析し、コスト要因と改善方向を特定します。</p></article>
-<article class="optimization-pillar reveal"><span>02 / ENGINEERING</span><h3>設計・開発</h3><p>構造・機構設計、インダストリアルデザイン、Hardware・Firmware、金型設計を目標性能と目標原価に合わせて行います。</p></article>
-<article class="optimization-pillar reveal"><span>03 / MANUFACTURING SOLUTION</span><h3>製造実行</h3><p>CNC加工、板金・溶接、試作、金型製作、OEM、射出成形をプロジェクト条件に適した製造ネットワークへ接続します。</p></article>
+<article class="optimization-pillar reveal"><span>PRODUCT COST OPTIMIZATION</span><h3>製品・設備の原価最適化</h3><p>構造、部品点数、仕様、製造工法、サプライチェーンを一体で分析し、コスト要因と改善方向を特定します。</p></article>
+<article class="optimization-pillar reveal"><span>ENGINEERING</span><h3>設計・開発</h3><p>構造・機構設計、インダストリアルデザイン、Hardware・Firmware、金型設計を目標性能と目標原価に合わせて行います。</p></article>
+<article class="optimization-pillar reveal"><span>MANUFACTURING SOLUTION</span><h3>製造実行</h3><p>CNC加工、板金・溶接、試作、金型製作、OEM、射出成形をプロジェクト条件に適した製造ネットワークへ接続します。</p></article>
 </div></div></section>
 <section class="section section-light" id="technology"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CAPABILITY</p><h2>Engineering Built<br/>Around Optimization.</h2><p>各技術を別々のサービスとして扱うのではなく、製品をよりシンプルに、より作りやすく、より合理的なコストにするために必要な技術を統合します。</p></div><div class="technology-grid final-capability-grid">
 <article class="technology-card reveal"><div class="tech-tag" aria-hidden="true">ANALYSIS</div><h3>原価・構造分析</h3><p class="tech-en">Cost &amp; Structure Analysis</p></article>
@@ -484,11 +536,11 @@
 <li><strong>05</strong><div><h3>VALIDATE</h3><p>コスト、品質、生産性、調達性を検証したうえで実行します。</p></div></li>
 </ol></div></section>
 <section class="section section-light" id="project"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">WHERE WE OPTIMIZE</p><h2>Cost Is Hidden<br/>Across the Product.</h2><p>原価は購入単価だけで決まりません。構造、部品、電子仕様、製造工程、サプライチェーン全体で積み上がります。</p></div><div class="optimization-lens-grid">
-<article class="optimization-lens reveal"><span>01</span><h3>STRUCTURE</h3><p>構造の簡素化、締結・組立方式の改善、不要形状の削減</p></article>
-<article class="optimization-lens reveal"><span>02</span><h3>PARTS</h3><p>部品点数削減、共通化、代替部品、加工難易度の改善</p></article>
-<article class="optimization-lens reveal"><span>03</span><h3>ELECTRONICS</h3><p>必要機能を基準にPCB、センサー、モーター、電源、通信仕様を最適化</p></article>
-<article class="optimization-lens reveal"><span>04</span><h3>PROCESS</h3><p>CNC、板金、溶接、金型、射出成形など製造工法を再検討</p></article>
-<article class="optimization-lens reveal"><span>05</span><h3>SUPPLY CHAIN</h3><p>OEM、加工、金型・射出成形の供給条件を比較・再構成</p></article>
+<article class="optimization-lens reveal"><h3>STRUCTURE</h3><p>構造の簡素化、締結・組立方式の改善、不要形状の削減</p></article>
+<article class="optimization-lens reveal"><h3>PARTS</h3><p>部品点数削減、共通化、代替部品、加工難易度の改善</p></article>
+<article class="optimization-lens reveal"><h3>ELECTRONICS</h3><p>必要機能を基準にPCB、センサー、モーター、電源、通信仕様を最適化</p></article>
+<article class="optimization-lens reveal"><h3>PROCESS</h3><p>CNC、板金、溶接、金型、射出成形など製造工法を再検討</p></article>
+<article class="optimization-lens reveal"><h3>SUPPLY CHAIN</h3><p>OEM、加工、金型・射出成形の供給条件を比較・再構成</p></article>
 </div></div></section>
 <section class="section section-gray case-section" id="case"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CASE STUDY</p><h2>Optimization<br/>Made Measurable.</h2><p>プロジェクト名は非公開とし、公開可能な範囲で最適化結果のみを要約しています。</p></div><div class="case-grid">
 <article class="case-card reveal"><div class="case-top"><span>CASE 01 / COST REDUCTION</span><strong class="case-metric">-15%</strong></div><h3>A社 | 煎じ器用耐熱ガラス</h3><p>煎じ器に使用される耐熱ガラスのコスト構造と調達条件を見直し、仕様・供給条件を最適化しました。</p><div class="case-result"><span>RESULT</span><strong>従来比15%の原価低減を達成</strong></div></article>

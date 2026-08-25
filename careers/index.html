@@ -100,7 +100,72 @@
   .principle strong{font-size:23px}.principle p{font-size:16px}
   .path-track-title span{font-size:13px}.path-track-head p{font-size:14px}.path-node{font-size:17px}.path-link{font-size:12px}.path-note{font-size:13px}
 }
-</style></head><body>
+</style>
+<style id="career-ui-uniform-hotfix">
+/* 2026-08-26 careers uniform card + path refresh */
+.role-grid,.principle-grid,.path-stack{align-items:stretch}
+.role-card:nth-child(2),.role-card:nth-child(5),.role-card:nth-child(2):hover,.role-card:nth-child(5):hover{transform:none!important}
+.role-card{min-height:226px!important}
+
+.career-path{margin-top:84px;padding-top:72px;border-top:1px solid rgba(17,17,17,.1)}
+.career-path-head{display:flex!important;flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:34px}
+.career-path-head .label{font-size:14px!important;font-weight:700;letter-spacing:.18em;color:#8a8a8a}
+.career-path-head h3{font-size:clamp(44px,5vw,72px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+.career-path-head p{max-width:920px;font-size:18px!important;line-height:1.72!important;color:#666!important}
+.path-stack{gap:22px}
+.path-track{padding:34px 36px 36px!important;border-radius:30px!important;background:rgba(255,255,255,.72)!important;border:1px solid rgba(17,17,17,.085)!important;box-shadow:0 18px 46px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.9)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.path-track-head{align-items:center!important;justify-content:space-between!important;gap:18px;margin-bottom:28px!important}
+.path-track-title{gap:14px!important;align-items:center!important}
+.path-track-title span{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(17,17,17,.05);font-size:13px!important;font-weight:700!important;letter-spacing:.14em!important;color:#7c7c7c!important}
+.path-track-title strong{font-size:30px!important;letter-spacing:-.03em!important}
+.path-track-head p{font-size:16px!important;color:#777!important}
+.path-line{display:grid;grid-template-columns:minmax(150px,1fr) minmax(96px,.55fr) minmax(160px,1fr) minmax(96px,.55fr) minmax(160px,1fr) minmax(120px,.72fr) minmax(160px,1fr);gap:10px;align-items:center}
+.path-node{min-height:94px!important;padding:18px 16px!important;border-radius:18px!important;border:1px solid rgba(17,17,17,.1)!important;background:rgba(255,255,255,.82)!important;box-shadow:0 10px 24px rgba(0,0,0,.025), inset 0 1px 0 rgba(255,255,255,.88)!important;font-size:21px!important;font-weight:700!important;letter-spacing:-.03em!important}
+.path-link{position:relative;height:60px;display:flex;align-items:flex-start;justify-content:center;padding-top:0;color:#707070!important;font-size:13px!important;font-weight:700!important;letter-spacing:.12em!important;white-space:nowrap}
+.path-link:after{content:'';position:absolute;left:6px;right:6px;top:34px;height:1px;background:rgba(17,17,17,.2)}
+.path-link:before{content:'';position:absolute;right:8px;top:30px;width:8px;height:8px;border-top:1px solid rgba(17,17,17,.45);border-right:1px solid rgba(17,17,17,.45);transform:rotate(45deg)}
+.path-note{margin:22px 0 0;font-size:14px!important;line-height:1.72!important;color:#737373!important}
+
+@media(max-width:1100px){
+  .career-path-head{gap:12px!important}
+  .path-track{padding:28px 28px 30px!important}
+  .path-track-head{flex-direction:column;align-items:flex-start!important}
+  .path-track-title strong{font-size:26px!important}
+  .path-line{grid-template-columns:1fr!important;gap:8px}
+  .path-link{height:54px;align-items:center;padding-top:0}
+  .path-link:after{left:50%;right:auto;top:8px;bottom:8px;width:1px;height:auto}
+  .path-link:before{right:auto;left:calc(50% - 3px);top:auto;bottom:8px;transform:rotate(135deg)}
+}
+@media(max-width:720px){
+  .role-card{min-height:200px!important}
+  .career-path{margin-top:60px;padding-top:52px}
+  .career-path-head h3{font-size:clamp(34px,11vw,48px)!important}
+  .career-path-head p{font-size:16px!important}
+  .path-track{padding:22px 20px 24px!important;border-radius:22px!important}
+  .path-track-title span{font-size:12px!important;min-height:30px}
+  .path-track-title strong{font-size:22px!important}
+  .path-track-head p{font-size:14px!important}
+  .path-node{min-height:78px!important;font-size:18px!important}
+  .path-link{font-size:12px!important}
+  .path-note{font-size:13px!important}
+}
+</style>
+
+
+<style id="reduct-careers-gray-panel-no-ai-number-final">
+/* Careers: equal-height cards + stronger panel contrast + semantic labels only */
+.role-card:nth-child(2),.role-card:nth-child(5),.role-card:nth-child(2):hover,.role-card:nth-child(5):hover{transform:none!important}
+.role-card span{font-size:15px!important;letter-spacing:.12em!important}
+.role-card{min-height:226px!important}
+.principle,.path-track{
+  background:linear-gradient(145deg,rgba(239,240,242,.90),rgba(232,234,237,.74))!important;
+  border-color:rgba(17,17,17,.105)!important;
+}
+.path-node{background:rgba(248,248,249,.88)!important;border-color:rgba(17,17,17,.11)!important}
+@media(max-width:720px){.role-card{min-height:200px!important}.role-card span{font-size:14px!important}}
+</style>
+
+</head><body>
 <header class="career-header"><div class="shell career-header-inner"><a class="career-brand" href="/" aria-label="REDUCT 홈"><svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg></a><nav class="career-nav"><a href="/">COMPANY SITE</a><a class="apply-top" href="/careers/apply/">입사지원하기</a></nav></div></header>
 <main><section class="career-hero"><div class="shell career-hero-content"><div class="career-eyebrow">CAREERS / REDUCT</div><h1>BUILD BETTER.<br>WITH US.</h1><p class="career-hero-copy"><span>복잡한 문제를 구조적으로 보고,</span><span>더 나은 제품과 더 효율적인 방법을 만드는 사람을 찾습니다.</span></p><div class="career-actions"><a class="career-btn primary" href="/careers/apply/">입사지원하기</a><a class="career-btn" href="#process">채용절차 보기</a></div></div></section>
 <section class="career-section gray" id="process"><div class="shell"><div class="section-head"><div><div class="label">RECRUITMENT PROCESS</div></div><div><h2>채용절차</h2><p class="process-intro-copy"><span>지원서 접수부터 최종합격까지 아래 절차로 진행됩니다.</span><span>직무 특성에 따라 면접 과정에서 실무 과제 또는 포트폴리오 검토가 추가될 수 있습니다.</span></p></div></div><div class="process-grid">
@@ -111,12 +176,12 @@
 <div class="process-card"><span class="num">05</span><div><h3>최종합격</h3><p>처우 협의 및 입사 일정 확정</p></div></div>
 </div></div></section>
 <section class="career-section" id="roles"><div class="shell"><div class="section-head"><div><div class="label">OPEN ROLES</div></div><div><h2>지원 분야</h2><p>지원 직무를 선택하면 지원서에서 해당 직무의 핵심 역량 항목이 자동으로 구성됩니다.</p></div></div><div class="role-grid">
-<div class="role-card"><span>01 / SALES</span><div><h3>영업</h3><p>B2B 고객 발굴, 기술·제조 프로젝트 제안 및 커뮤니케이션</p></div></div>
-<div class="role-card"><span>02 / SALES OPS</span><div><h3>영업관리</h3><p>견적·수주·일정·고객 대응 및 영업 운영 관리</p></div></div>
-<div class="role-card"><span>03 / HARDWARE</span><div><h3>하드웨어 개발</h3><p>회로·PCB·센서·전원·제어 하드웨어 개발 및 검증</p></div></div>
-<div class="role-card"><span>04 / FIRMWARE</span><div><h3>펌웨어 개발</h3><p>MCU·통신·센서·제어 로직 및 디바이스 펌웨어 개발</p></div></div>
-<div class="role-card"><span>05 / SOFTWARE</span><div><h3>SW 개발</h3><p>웹·앱·백엔드·API 등 제품과 서비스를 연결하는 소프트웨어 개발</p></div></div>
-<div class="role-card"><span>06 / MARKETING</span><div><h3>마케팅</h3><p>콘텐츠·검색·퍼포먼스·B2B 기술 마케팅 및 브랜드 운영</p></div></div>
+<div class="role-card"><span>SALES</span><div><h3>영업</h3><p>B2B 고객 발굴, 기술·제조 프로젝트 제안 및 커뮤니케이션</p></div></div>
+<div class="role-card"><span>SALES OPS</span><div><h3>영업관리</h3><p>견적·수주·일정·고객 대응 및 영업 운영 관리</p></div></div>
+<div class="role-card"><span>HARDWARE</span><div><h3>하드웨어 개발</h3><p>회로·PCB·센서·전원·제어 하드웨어 개발 및 검증</p></div></div>
+<div class="role-card"><span>FIRMWARE</span><div><h3>펌웨어 개발</h3><p>MCU·통신·센서·제어 로직 및 디바이스 펌웨어 개발</p></div></div>
+<div class="role-card"><span>SOFTWARE</span><div><h3>SW 개발</h3><p>웹·앱·백엔드·API 등 제품과 서비스를 연결하는 소프트웨어 개발</p></div></div>
+<div class="role-card"><span>MARKETING</span><div><h3>마케팅</h3><p>콘텐츠·검색·퍼포먼스·B2B 기술 마케팅 및 브랜드 운영</p></div></div>
 </div></div></section>
 <section class="career-section gray"><div class="shell"><div class="section-head"><div><div class="label">HOW WE WORK</div></div><div><h2>우리가 중요하게 보는 것</h2></div></div><div class="principle-grid"><div class="principle"><strong>문제를 구조로 봅니다.</strong><p><span>현상만 처리하지 않고 원인과 조건을 구분합니다.</span><span>우선순위를 정해 해결합니다.</span></p></div><div class="principle"><strong>빠르게 공유합니다.</strong><p><span>문제가 생기면 사실을 빠르게 공유합니다.</span><span>필요한 대안을 함께 제시합니다.</span></p></div><div class="principle"><strong>결과까지 책임집니다.</strong><p><span>업무가 최종 제품과 고객 결과에 미치는 영향을</span><span>끝까지 생각합니다.</span></p></div></div><div class="career-path"><div class="career-path-head"><div><div class="label">CAREER PATH</div></div><div><h3>직급 체계</h3><p>직무 특성에 따라 일반직과 연구개발직의 직급 체계를 구분하여 운영합니다.</p></div></div><div class="path-stack"><article class="path-track"><div class="path-track-head"><div class="path-track-title"><span>GENERAL</span><strong>일반직</strong></div><p>영업 · 영업관리 · 마케팅 등</p></div><div class="path-line"><div class="path-node">매니저</div><div class="path-link">2 YEARS</div><div class="path-node">선임매니저</div><div class="path-link">4 YEARS</div><div class="path-node">책임매니저</div><div class="path-link">EVALUATION</div><div class="path-node">수석매니저</div></div></article><article class="path-track"><div class="path-track-head"><div class="path-track-title"><span>R&amp;D</span><strong>연구개발직</strong></div><p>하드웨어 · 펌웨어 · SW 개발 등</p></div><div class="path-line"><div class="path-node">연구원</div><div class="path-link">4 YEARS</div><div class="path-node">선임연구원</div><div class="path-link">4 YEARS</div><div class="path-node">책임연구원</div><div class="path-link">EVALUATION</div><div class="path-node">수석연구원</div></div></article></div><p class="path-note">표기된 기간은 최소 승진 소요기간이며, 승진은 업무성과·직무역량 및 내부 평가 결과에 따라 결정됩니다.</p></div></div></section>
 <section class="career-cta"><div class="shell career-cta-inner"><div><h2>READY TO APPLY?</h2><p>작성 내용은 자동 저장되어 브라우저를 닫아도 이어서 작성할 수 있습니다.</p></div><a class="career-btn primary" href="/careers/apply/">입사지원서 작성</a></div></section></main>

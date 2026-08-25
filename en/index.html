@@ -356,6 +356,58 @@
   #technology .final-capability-grid .technology-card:before{left:24px;right:24px}
 }
 </style>
+
+<style id="uniform-card-rebalance-hotfix">
+/* 2026-08-26 uniform card rebalance */
+#overview .overview-grid,#optimization .optimization-pillar-grid,#technology .final-capability-grid,#project .optimization-lens-grid{align-items:stretch}
+#overview .info-card{min-height:286px!important}
+#overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){min-height:286px!important;margin-top:0!important}
+#optimization .optimization-pillar{min-height:300px!important}
+#optimization .optimization-pillar:nth-child(2){transform:none!important}
+#technology .final-capability-grid .technology-card{min-height:230px!important}
+#project .optimization-lens{min-height:286px!important}
+@media(max-width:1100px){
+  #overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){margin-top:0!important}
+}
+</style>
+
+
+<style id="reduct-gray-panel-no-ai-number-final">
+/* 2026-08-26: visible gray translucent panels, no decorative index numbers */
+#overview .info-card,
+#optimization .optimization-pillar,
+#technology .final-capability-grid .technology-card,
+#project .optimization-lens,
+#case .case-card{
+  background:linear-gradient(145deg,rgba(238,239,241,.88),rgba(232,234,237,.70))!important;
+  border:1px solid rgba(17,17,17,.105)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.035),inset 0 1px 0 rgba(255,255,255,.62)!important;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+#overview .info-card:hover,
+#optimization .optimization-pillar:hover,
+#technology .final-capability-grid .technology-card:hover,
+#project .optimization-lens:hover,
+#case .case-card:hover{
+  border-color:rgba(17,17,17,.16)!important;
+}
+/* Semantic labels remain; decorative numbers are removed from markup. */
+#overview .card-index{font-size:15px!important;font-weight:600!important;letter-spacing:.12em!important;color:rgba(17,17,17,.50)!important}
+#optimization .optimization-pillar>span{font-size:15px!important;font-weight:600!important;letter-spacing:.105em!important;color:rgba(17,17,17,.52)!important}
+#project .optimization-lens{position:relative;padding-top:44px!important}
+#project .optimization-lens:before{content:"";position:absolute;left:28px;top:28px;width:34px;height:2px;background:rgba(17,17,17,.48);border-radius:999px}
+#project .optimization-lens h3{margin:auto 0 14px!important;font-size:29px!important}
+#project .optimization-lens p{font-size:18px!important;line-height:1.72!important}
+#technology .tech-tag{font-size:14px!important;color:rgba(17,17,17,.52)!important}
+#technology .technology-card .tech-en{font-size:18px!important;color:rgba(17,17,17,.65)!important}
+@media(max-width:760px){
+  #project .optimization-lens{padding-top:40px!important}
+  #project .optimization-lens:before{left:24px;top:24px}
+  #project .optimization-lens h3{font-size:27px!important}
+  #project .optimization-lens p{font-size:17px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -434,17 +486,17 @@
 </div>
 <div class="overview-grid">
 <article class="info-card reveal">
-<span class="card-index">01 / MARKET</span>
+<span class="card-index">MARKET</span>
 <h3>Many Ways to Build</h3>
 <p>There is no shortage of design firms, machining shops, OEM manufacturers, and mold makers.</p>
 </article>
 <article class="info-card reveal">
-<span class="card-index">02 / PROBLEM</span>
+<span class="card-index">PROBLEM</span>
 <h3>Cost Is Fragmented</h3>
 <p>The problem is that fragmented processes allow unnecessary cost to accumulate across specifications, structure, manufacturing methods, and suppliers.</p>
 </article>
 <article class="info-card reveal">
-<span class="card-index">03 / APPROACH</span>
+<span class="card-index">APPROACH</span>
 <h3>Optimization First</h3>
 <p>We do not add another vendor. We review the entire product, improve cost and efficiency, then connect only the engineering and manufacturing that are actually needed.</p>
 </article>
@@ -469,9 +521,9 @@
 <div class="shell">
 <div class="section-intro reveal"><p class="eyebrow dark">WHAT WE OPTIMIZE</p><h2>Optimization First.<br/>Execution Second.</h2><p>Optimization is the objective. Engineering, development, and manufacturing are the means used to implement it. We analyze the cost structure first, then execute only what is necessary.</p></div>
 <div class="optimization-pillar-grid">
-<article class="optimization-pillar reveal"><span>01 / PRODUCT COST OPTIMIZATION</span><h3>Product &amp; Equipment Cost Optimization</h3><p>We analyze structure, part count, specifications, manufacturing methods, and supply conditions together to identify cost drivers and redesign opportunities.</p></article>
-<article class="optimization-pillar reveal"><span>02 / ENGINEERING</span><h3>Engineering &amp; Development</h3><p>Mechanical engineering, industrial design, hardware, firmware, and tooling are developed around target performance and target cost.</p></article>
-<article class="optimization-pillar reveal"><span>03 / MANUFACTURING SOLUTION</span><h3>Manufacturing Execution</h3><p>CNC machining, sheet metal, welding, prototypes, molds, OEM production, and injection molding are connected through the manufacturing process best suited to the project.</p></article>
+<article class="optimization-pillar reveal"><span>PRODUCT COST OPTIMIZATION</span><h3>Product &amp; Equipment Cost Optimization</h3><p>We analyze structure, part count, specifications, manufacturing methods, and supply conditions together to identify cost drivers and redesign opportunities.</p></article>
+<article class="optimization-pillar reveal"><span>ENGINEERING</span><h3>Engineering &amp; Development</h3><p>Mechanical engineering, industrial design, hardware, firmware, and tooling are developed around target performance and target cost.</p></article>
+<article class="optimization-pillar reveal"><span>MANUFACTURING SOLUTION</span><h3>Manufacturing Execution</h3><p>CNC machining, sheet metal, welding, prototypes, molds, OEM production, and injection molding are connected through the manufacturing process best suited to the project.</p></article>
 </div></div></section>
 <section class="section section-light" id="technology"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CAPABILITY</p><h2>Engineering Built<br/>Around Optimization.</h2><p>We do not treat each discipline as a separate service. The required capabilities are combined around one objective: making the product simpler, easier to manufacture, and more cost-efficient.</p></div><div class="technology-grid final-capability-grid">
 <article class="technology-card reveal"><div class="tech-tag" aria-hidden="true">ANALYSIS</div><h3>Cost &amp; Structure Analysis</h3><p class="tech-en">Cost Drivers / Architecture</p></article>
@@ -489,11 +541,11 @@
 <li><strong>05</strong><div><h3>VALIDATE</h3><p>Validate cost, quality, productivity, and sourcing conditions before execution.</p></div></li>
 </ol></div></section>
 <section class="section section-light" id="project"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">WHERE WE OPTIMIZE</p><h2>Cost Is Hidden<br/>Across the Product.</h2><p>Cost is not determined by purchase price alone. It accumulates across structure, parts, electronics, manufacturing processes, and the supply chain.</p></div><div class="optimization-lens-grid">
-<article class="optimization-lens reveal"><span>01</span><h3>STRUCTURE</h3><p>Simplify architecture, fastening, assembly, and unnecessary geometry.</p></article>
-<article class="optimization-lens reveal"><span>02</span><h3>PARTS</h3><p>Reduce part count, standardize components, review substitutes, and lower machining difficulty.</p></article>
-<article class="optimization-lens reveal"><span>03</span><h3>ELECTRONICS</h3><p>Optimize PCB, sensors, motors, power, and communication specifications around required functions.</p></article>
-<article class="optimization-lens reveal"><span>04</span><h3>PROCESS</h3><p>Review CNC, sheet metal, welding, tooling, and molding processes.</p></article>
-<article class="optimization-lens reveal"><span>05</span><h3>SUPPLY CHAIN</h3><p>Compare and restructure OEM, machining, mold, and molding suppliers.</p></article>
+<article class="optimization-lens reveal"><h3>STRUCTURE</h3><p>Simplify architecture, fastening, assembly, and unnecessary geometry.</p></article>
+<article class="optimization-lens reveal"><h3>PARTS</h3><p>Reduce part count, standardize components, review substitutes, and lower machining difficulty.</p></article>
+<article class="optimization-lens reveal"><h3>ELECTRONICS</h3><p>Optimize PCB, sensors, motors, power, and communication specifications around required functions.</p></article>
+<article class="optimization-lens reveal"><h3>PROCESS</h3><p>Review CNC, sheet metal, welding, tooling, and molding processes.</p></article>
+<article class="optimization-lens reveal"><h3>SUPPLY CHAIN</h3><p>Compare and restructure OEM, machining, mold, and molding suppliers.</p></article>
 </div></div></section>
 <section class="section section-gray case-section" id="case"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CASE STUDY</p><h2>Optimization<br/>Made Measurable.</h2><p>Project identities remain confidential. Only outcomes that can be disclosed are summarized below.</p></div><div class="case-grid">
 <article class="case-card reveal"><div class="case-top"><span>CASE 01 / COST REDUCTION</span><strong class="case-metric">-15%</strong></div><h3>Company A | Heat-Resistant Glass for Decoction Equipment</h3><p>We reviewed the cost structure and sourcing conditions for heat-resistant glass used in decoction equipment and optimized the specification and supply conditions.</p><div class="case-result"><span>RESULT</span><strong>15% cost reduction achieved</strong></div></article>

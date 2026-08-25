@@ -370,6 +370,58 @@
   #technology .final-capability-grid .technology-card:before{left:24px;right:24px}
 }
 </style>
+
+<style id="uniform-card-rebalance-hotfix">
+/* 2026-08-26 uniform card rebalance */
+#overview .overview-grid,#optimization .optimization-pillar-grid,#technology .final-capability-grid,#project .optimization-lens-grid{align-items:stretch}
+#overview .info-card{min-height:286px!important}
+#overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){min-height:286px!important;margin-top:0!important}
+#optimization .optimization-pillar{min-height:300px!important}
+#optimization .optimization-pillar:nth-child(2){transform:none!important}
+#technology .final-capability-grid .technology-card{min-height:230px!important}
+#project .optimization-lens{min-height:286px!important}
+@media(max-width:1100px){
+  #overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){margin-top:0!important}
+}
+</style>
+
+
+<style id="reduct-gray-panel-no-ai-number-final">
+/* 2026-08-26: visible gray translucent panels, no decorative index numbers */
+#overview .info-card,
+#optimization .optimization-pillar,
+#technology .final-capability-grid .technology-card,
+#project .optimization-lens,
+#case .case-card{
+  background:linear-gradient(145deg,rgba(238,239,241,.88),rgba(232,234,237,.70))!important;
+  border:1px solid rgba(17,17,17,.105)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.035),inset 0 1px 0 rgba(255,255,255,.62)!important;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+#overview .info-card:hover,
+#optimization .optimization-pillar:hover,
+#technology .final-capability-grid .technology-card:hover,
+#project .optimization-lens:hover,
+#case .case-card:hover{
+  border-color:rgba(17,17,17,.16)!important;
+}
+/* Semantic labels remain; decorative numbers are removed from markup. */
+#overview .card-index{font-size:15px!important;font-weight:600!important;letter-spacing:.12em!important;color:rgba(17,17,17,.50)!important}
+#optimization .optimization-pillar>span{font-size:15px!important;font-weight:600!important;letter-spacing:.105em!important;color:rgba(17,17,17,.52)!important}
+#project .optimization-lens{position:relative;padding-top:44px!important}
+#project .optimization-lens:before{content:"";position:absolute;left:28px;top:28px;width:34px;height:2px;background:rgba(17,17,17,.48);border-radius:999px}
+#project .optimization-lens h3{margin:auto 0 14px!important;font-size:29px!important}
+#project .optimization-lens p{font-size:18px!important;line-height:1.72!important}
+#technology .tech-tag{font-size:14px!important;color:rgba(17,17,17,.52)!important}
+#technology .technology-card .tech-en{font-size:18px!important;color:rgba(17,17,17,.65)!important}
+@media(max-width:760px){
+  #project .optimization-lens{padding-top:40px!important}
+  #project .optimization-lens:before{left:24px;top:24px}
+  #project .optimization-lens h3{font-size:27px!important}
+  #project .optimization-lens p{font-size:17px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -448,17 +500,17 @@
 </div>
 <div class="overview-grid">
 <article class="info-card reveal">
-<span class="card-index">01 / MARKET</span>
+<span class="card-index">MARKET</span>
 <h3>Many Ways to Build</h3>
 <p>설계·가공·OEM·금형 등 제품 제작을 위한 선택지는 이미 다양합니다.</p>
 </article>
 <article class="info-card reveal">
-<span class="card-index">02 / PROBLEM</span>
+<span class="card-index">PROBLEM</span>
 <h3>Cost Is Fragmented</h3>
 <p>문제는 각 공정이 분리된 상태에서 부품 사양, 구조, 공법과 공급처가 그대로 누적되며 불필요한 비용이 발생한다는 점입니다.</p>
 </article>
 <article class="info-card reveal">
-<span class="card-index">03 / APPROACH</span>
+<span class="card-index">APPROACH</span>
 <h3>Optimization First</h3>
 <p>제작사를 하나 더 추가하는 것이 아니라, 제품 전체를 다시 보고 비용과 효율을 개선한 뒤 필요한 설계·개발·제작을 연결합니다.</p>
 </article>
@@ -488,17 +540,17 @@
 </div>
 <div class="optimization-pillar-grid">
 <article class="optimization-pillar reveal">
-<span>01 / PRODUCT COST OPTIMIZATION</span>
+<span>PRODUCT COST OPTIMIZATION</span>
 <h3>제품·장비 원가 최적화</h3>
 <p>구조, 부품 수, 사양, 제조공법과 공급망을 함께 분석해 비용 발생 원인을 찾고 대체·개선 방향을 설계합니다.</p>
 </article>
 <article class="optimization-pillar reveal">
-<span>02 / ENGINEERING</span>
+<span>ENGINEERING</span>
 <h3>설계·개발</h3>
 <p>구조·기구설계, 산업디자인, Hardware·Firmware 개발, 금형설계를 목표 성능과 목표 원가에 맞춰 수행합니다.</p>
 </article>
 <article class="optimization-pillar reveal">
-<span>03 / MANUFACTURING SOLUTION</span>
+<span>MANUFACTURING SOLUTION</span>
 <h3>제조 실행</h3>
 <p>CNC 가공, 판금·용접, 시제품, 금형 제작, OEM 및 사출 생산을 프로젝트 조건에 맞는 제조 네트워크와 연결합니다.</p>
 </article>
@@ -546,11 +598,11 @@
 <p>원가는 구매단가 하나로 결정되지 않습니다. 구조, 부품, 전자사양, 공정과 공급망 전반에서 누적됩니다.</p>
 </div>
 <div class="optimization-lens-grid">
-<article class="optimization-lens reveal"><span>01</span><h3>STRUCTURE</h3><p>구조 단순화, 체결·조립 방식 개선, 불필요 형상 제거</p></article>
-<article class="optimization-lens reveal"><span>02</span><h3>PARTS</h3><p>부품 수 축소, 공용화, 대체 부품 검토, 가공 난이도 개선</p></article>
-<article class="optimization-lens reveal"><span>03</span><h3>ELECTRONICS</h3><p>필요 기능 기준의 PCB·센서·모터·전원·통신 사양 최적화</p></article>
-<article class="optimization-lens reveal"><span>04</span><h3>PROCESS</h3><p>CNC, 판금, 용접, 금형, 사출 등 제조공법 재검토</p></article>
-<article class="optimization-lens reveal"><span>05</span><h3>SUPPLY CHAIN</h3><p>OEM 제작사, 가공처, 금형·사출 공급망의 조건 비교 및 재구성</p></article>
+<article class="optimization-lens reveal"><h3>STRUCTURE</h3><p>구조 단순화, 체결·조립 방식 개선, 불필요 형상 제거</p></article>
+<article class="optimization-lens reveal"><h3>PARTS</h3><p>부품 수 축소, 공용화, 대체 부품 검토, 가공 난이도 개선</p></article>
+<article class="optimization-lens reveal"><h3>ELECTRONICS</h3><p>필요 기능 기준의 PCB·센서·모터·전원·통신 사양 최적화</p></article>
+<article class="optimization-lens reveal"><h3>PROCESS</h3><p>CNC, 판금, 용접, 금형, 사출 등 제조공법 재검토</p></article>
+<article class="optimization-lens reveal"><h3>SUPPLY CHAIN</h3><p>OEM 제작사, 가공처, 금형·사출 공급망의 조건 비교 및 재구성</p></article>
 </div>
 </div>
 </section>
