@@ -1,0 +1,96 @@
+REDUCT MULTILINGUAL SEO SERVICE MAP
+================================
+
+Total service clusters: 18
+Localized service pages: 54
+Languages: Korean / English / Japanese
+
+[cost-reduction]
+  KO: 원가절감, 제조 원가절감, 장비 원가절감, 제품 원가절감, 제조비 절감, 원가개선, BOM 원가절감, 부품 원가절감
+  EN: manufacturing cost reduction, equipment cost reduction, product cost optimization, cost engineering Korea, BOM cost reduction, value engineering, manufacturing cost optimization Korea
+  JA: 製造原価低減, 設備コスト削減, 製品コスト最適化, コストダウン 韓国, BOM コスト削減, VA VE 韓国, 製造コスト最適化
+
+[equipment-parts]
+  KO: 장비 부품 제작, 산업설비 부품 제작, 자동화 장비 부품 제작, 기계부품 제작, 장비 부품 외주, 설비 부품 OEM, 장비 부품 가공
+  EN: industrial equipment parts manufacturing, custom machine parts Korea, automation equipment parts, equipment parts supplier Korea, machine parts fabrication, OEM machine parts Korea
+  JA: 産業設備部品 製作, 装置部品 製作 韓国, 自動化設備部品, 機械部品 製作, 設備部品 OEM 韓国
+
+[manufacturing-outsourcing]
+  KO: 제작 외주 업체, 장비 제작 외주, 부품 제작 외주, OEM 제작 업체, 제조 외주 업체, 가공 외주 업체, 위탁 생산 업체
+  EN: manufacturing outsourcing Korea, OEM manufacturing Korea, contract manufacturing Korea, equipment manufacturing outsourcing, machining outsourcing Korea, OEM supplier Korea
+  JA: 製造委託 韓国, OEM 製作 韓国, 装置製作 外注 韓国, 加工外注 韓国, 韓国 OEM メーカー
+
+[mechanical-design]
+  KO: 기구설계 업체, 구조설계 업체, 도면 설계 업체, 기계설계 업체, 3D CAD 설계, Fusion 360 설계, 제작도면 업체
+  EN: mechanical design services Korea, 3D CAD design Korea, Fusion 360 design service, engineering drawing service Korea, structural design Korea, DFM engineering Korea
+  JA: 機構設計 韓国, 構造設計 韓国, 図面設計 韓国, Fusion 360 設計, 3D CAD 韓国, 製作図面 韓国
+
+[mold-design]
+  KO: 금형 제작 업체, 금형 설계 업체, 사출금형 제작, 사출 금형 설계, 제품 금형 제작, 금형 제작 인천
+  EN: injection mold design Korea, mold manufacturing Korea, tooling supplier Korea, plastic injection mold Korea, prototype mold Korea
+  JA: 金型製作 韓国, 金型設計 韓国, 射出金型 韓国, プラスチック金型 韓国, 試作金型 韓国
+
+[hardware-firmware]
+  KO: 하드웨어 개발 업체, 펌웨어 개발 업체, PCB 설계 업체, 회로설계 업체, MCU 펌웨어 개발, 임베디드 개발 업체, 전자제품 개발 업체
+  EN: hardware development Korea, firmware development Korea, PCB design Korea, embedded systems development Korea, MCU firmware Korea, electronics product development Korea
+  JA: ハードウェア開発 韓国, ファームウェア開発 韓国, PCB設計 韓国, 組込み開発 韓国, MCU ファームウェア 韓国
+
+[automotive-advanced-development]
+  KO: 자동차 선행개발 설계, 자동차 선행개발 업체, 차량 선행개발, 자동차 프로토 설계, 자동차 부품 선행개발, 자동차 시제품 설계, 자동차 브라켓 설계
+  EN: automotive advanced development Korea, automotive concept engineering Korea, automotive prototype design Korea, automotive engineering prototype Korea, automotive bracket design Korea
+  JA: 自動車先行開発 韓国, 自動車先行開発 設計, 自動車プロト設計 韓国, 自動車試作 開発 韓国, 自動車ブラケット 設計
+
+[automotive-prototype-parts]
+  KO: 자동차 프로토 부품 제작, 자동차 시제품 부품, 자동차 선행개발 부품 제작, 자동차 프로토 가공, 시험차 부품 제작, 자동차 5축 가공
+  EN: automotive prototype parts Korea, automotive prototype machining Korea, automotive 5-axis machining Korea, vehicle prototype parts Korea, automotive development parts Korea
+  JA: 自動車プロト部品 韓国, 自動車試作部品 韓国, 自動車5軸加工 韓国, 自動車先行開発 部品製作, 試験車 部品 韓国
+
+[cnc-machining]
+  KO: CNC 5축가공, CNC 3축가공, 5축 가공 업체, 3축 가공 업체, 정밀가공 업체, CNC 가공 업체, 알루미늄 가공, 시제품 CNC 가공
+  EN: 5-axis CNC machining Korea, 3-axis CNC machining Korea, precision machining Korea, CNC machining supplier Korea, aluminum machining Korea, prototype CNC machining Korea
+  JA: 5軸CNC加工 韓国, 3軸CNC加工 韓国, 精密加工 韓国, CNC加工 韓国, アルミ加工 韓国, 試作CNC 韓国
+
+[sheet-metal-fabrication]
+  KO: 판금 제작 업체, 레이저 가공 업체, 절곡 업체, 제관 업체, 용접 제작 업체, 장비 프레임 제작, 판금 외주
+  EN: sheet metal fabrication Korea, laser cutting Korea, metal bending Korea, welding fabrication Korea, equipment frame fabrication Korea, sheet metal supplier Korea
+  JA: 板金製作 韓国, レーザー加工 韓国, 曲げ加工 韓国, 溶接製缶 韓国, 装置フレーム 製作 韓国
+
+[prototype-development]
+  KO: 시제품 제작 업체, 프로토타입 제작 업체, 기능시제품 제작, 장비 시제품 제작, 제품 개발 시제품, 시제품 외주
+  EN: prototype development Korea, prototype manufacturing Korea, functional prototype Korea, engineering prototype Korea, product prototype Korea, rapid prototype Korea
+  JA: 試作品製作 韓国, プロトタイプ開発 韓国, 機能試作 韓国, 装置試作 韓国, 製品試作 韓国
+
+[jig-fixture]
+  KO: 지그 제작 업체, 치구 제작 업체, 조립지그 제작, 용접지그 제작, 검사지그 제작, 검사구 제작, 가공지그 설계
+  EN: jig fixture design Korea, fixture manufacturing Korea, assembly jig Korea, welding fixture Korea, inspection jig Korea, machining fixture Korea
+  JA: 治具製作 韓国, 治具設計 韓国, 組立治具 韓国, 溶接治具 韓国, 検査治具 韓国
+
+[reverse-engineering]
+  KO: 역설계 업체, 3D 스캔 업체, 도면 복원 업체, 단종부품 복원, 부품 역설계, 현물 도면화, 기계부품 복원
+  EN: reverse engineering Korea, 3D scanning Korea, legacy part reproduction Korea, obsolete part manufacturing Korea, CAD reconstruction Korea
+  JA: リバースエンジニアリング 韓国, 3Dスキャン 韓国, 廃番部品 復元 韓国, 部品復元 韓国, CAD復元 韓国
+
+[industrial-design]
+  KO: 산업디자인 업체, 제품디자인 업체, 산업디자인 회사, 제품 외관 디자인, CMF 디자인, 3D 렌더링 업체, 하드웨어 디자인
+  EN: industrial design Korea, product design Korea, hardware product design Korea, CMF design Korea, 3D rendering product Korea
+  JA: 工業デザイン 韓国, 製品デザイン 韓国, CMF 韓国, 3Dレンダリング 韓国, ハードウェアデザイン 韓国
+
+[3d-printing]
+  KO: 3D 프린팅 업체, 3D 출력 업체, 3D 프린팅 시제품, 시제품 3D 출력, 프로토타입 3D 프린팅, 산업용 3D 프린팅
+  EN: 3D printing Korea, rapid prototyping Korea, 3D printed prototype Korea, prototype printing Korea, industrial 3D printing Korea
+  JA: 3Dプリント 韓国, 試作品 3Dプリント 韓国, ラピッドプロトタイピング 韓国, 3D出力 韓国
+
+[signage-fabrication]
+  KO: 간판 제작 업체, 회사 간판 제작, 사무실 간판 제작, 금속 간판 제작, 아크릴 간판 제작, LED 간판 제작, 기업 사인 제작
+  EN: signage fabrication Korea, corporate sign Korea, office sign Korea, metal sign fabrication Korea, acrylic signage Korea, illuminated sign Korea
+  JA: 看板製作 韓国, 企業サイン 韓国, オフィス看板 韓国, 金属看板 韓国, アクリル看板 韓国
+
+[industrial-equipment-design]
+  KO: 산업설비 설계 업체, 자동화 장비 설계, 장비 기구설계, 장비 구조설계, 설비 설계 업체, 자동화 설비 제작 설계
+  EN: industrial equipment design Korea, automation machine design Korea, machine design engineering Korea, equipment mechanical design Korea, automation engineering Korea
+  JA: 産業設備設計 韓国, 自動化装置 設計 韓国, 装置機構設計 韓国, 設備設計 韓国
+
+[machining-drawing-review]
+  KO: 가공도면 검토, 제작도면 작성, 도면 업체, 공차 검토, CNC 도면 작성, 기계 도면 업체, 도면 외주
+  EN: manufacturing drawing review Korea, engineering drawing service Korea, tolerance optimization Korea, machining drawing Korea, RFQ drawing Korea
+  JA: 加工図面 韓国, 製作図面 韓国, 公差検討 韓国, 図面外注 韓国, RFQ図面 韓国
