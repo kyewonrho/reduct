@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#000000" name="theme-color"/>
-<meta name="reduct-build" content="three-optimization-v3-20260825-2340">
+<meta name="reduct-build" content="real-process-hero-v4-20260825-2355">
 <meta content="제품·산업설비 원가절감, 자동차 선행개발·프로토 부품, CNC 3축·5축 정밀가공, 장비 부품·판금·시제품, OEM 제작, 기구설계, 하드웨어·펌웨어, 금형·지그·역설계까지 기술적으로 최적화합니다." name="description"/>
 <meta content="REDUCT | 원가절감·장비 부품 제작·OEM 최적화" property="og:title"/>
 <meta content="원가절감부터 자동차 선행개발, CNC 3축·5축, 장비 부품, 판금, 시제품, 하드웨어·펌웨어, 금형까지 설계와 제조 구조를 최적화합니다." property="og:description"/>
@@ -221,48 +221,38 @@
 }
 </style>
 
-<style id="reduct-optimization-engine-v3">
-/* REDUCT OPTIMIZATION ENGINE — Three.js progressive hero */
-.hero{background:#030303 !important;isolation:isolate;overflow:hidden}
+<style id="reduct-real-process-hero-v4">
+/* REDUCT REAL PROCESS HERO — authentic footage, restrained technical motion */
+.hero{background:#020202 !important;isolation:isolate;overflow:hidden}
 .hero-media{opacity:0 !important;background:none !important;filter:none !important}
-.hero-overlay{z-index:2 !important;background:
-  linear-gradient(90deg,#030303 0%,rgba(3,3,3,.98) 31%,rgba(3,3,3,.76) 48%,rgba(3,3,3,.22) 76%,rgba(3,3,3,.07) 100%),
-  linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.40)) !important}
-.hero-content{position:relative !important;z-index:5 !important;pointer-events:none}
+.hero-overlay{z-index:3 !important;background:
+  linear-gradient(90deg,#020202 0%,rgba(2,2,2,.96) 28%,rgba(2,2,2,.78) 47%,rgba(2,2,2,.26) 75%,rgba(2,2,2,.10) 100%),
+  linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.48)) !important}
+.hero-content{position:relative !important;z-index:6 !important;pointer-events:none}
 .hero-content a{pointer-events:auto}
-.opt-engine{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;background:
-  radial-gradient(circle at 76% 48%,rgba(255,255,255,.055),transparent 23%),
-  radial-gradient(circle at 78% 52%,rgba(255,255,255,.018),transparent 42%)}
-.opt-engine:before{content:"";position:absolute;right:-6%;top:-22%;width:66%;height:144%;opacity:.18;background-image:
-  linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;transform:perspective(1100px) rotateY(-18deg) rotateX(63deg);transform-origin:center;mask-image:linear-gradient(90deg,transparent,#000 18%,#000 80%,transparent)}
-.opt-engine:after{content:"";position:absolute;right:0;top:0;width:59%;height:100%;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.025) 50%,transparent 62%);animation:optSheen 9s ease-in-out infinite}
-.opt-canvas-wrap{position:absolute;right:0;top:0;width:59%;height:100%;overflow:hidden}
-#optThreeCanvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .8s ease;filter:drop-shadow(0 30px 55px rgba(0,0,0,.55))}
-.opt-engine.three-ready #optThreeCanvas{opacity:1}
-.opt-fallback{position:absolute;left:50%;top:50%;width:min(32vw,510px);aspect-ratio:1.25;transform:translate(-46%,-50%);opacity:.55;transition:opacity .6s ease}
-.opt-engine.three-ready .opt-fallback{opacity:0}
-.opt-fallback-core{position:absolute;inset:22% 15%;border:1px solid rgba(255,255,255,.26);transform:skewY(-7deg);box-shadow:inset 0 0 0 18px rgba(255,255,255,.018),0 0 70px rgba(255,255,255,.04)}
-.opt-fallback-core:before,.opt-fallback-core:after{content:"";position:absolute;left:8%;right:8%;height:22%;border:1px solid rgba(255,255,255,.16)}
-.opt-fallback-core:before{top:-38%}.opt-fallback-core:after{bottom:-38%}
-.opt-orbit{position:absolute;left:50%;top:50%;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotateX(67deg)}
-.opt-orbit.o1{width:77%;height:52%}.opt-orbit.o2{width:96%;height:64%;opacity:.55}.opt-orbit.o3{width:116%;height:76%;opacity:.28}
-.opt-hud{position:absolute;right:4.5vw;top:14vh;width:min(47vw,760px);height:70vh;z-index:3;color:#fff;font-family:var(--font);opacity:.82}
-.opt-frame{position:absolute;inset:0;border:1px solid rgba(255,255,255,.10);clip-path:polygon(0 0,16% 0,16% 1px,84% 1px,84% 0,100% 0,100% 100%,84% 100%,84% calc(100% - 1px),16% calc(100% - 1px),16% 100%,0 100%)}
-.opt-kicker{position:absolute;left:0;top:-28px;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.38)}
-.opt-flow{position:absolute;left:0;bottom:-37px;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.30)}
-.opt-flow span{transition:color .35s ease,text-shadow .35s ease}.opt-flow span.active{color:rgba(255,255,255,.88);text-shadow:0 0 12px rgba(255,255,255,.18)}
-.opt-flow i{width:24px;height:1px;background:rgba(255,255,255,.12);display:block}
-.opt-readout{position:absolute;right:0;top:0;display:grid;gap:8px;min-width:192px}
-.opt-readout div{display:flex;justify-content:space-between;gap:24px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.08);font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.32)}
-.opt-readout b{font-weight:500;color:rgba(255,255,255,.74)}
-.opt-scan{position:absolute;top:8%;bottom:8%;width:1px;left:49%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.75) 18%,rgba(255,255,255,.22) 78%,transparent);box-shadow:0 0 18px rgba(255,255,255,.12);animation:optScan 6.4s ease-in-out infinite}
-.opt-scan:before{content:"ANALYSIS";position:absolute;top:10%;left:10px;font-size:8px;letter-spacing:.2em;color:rgba(255,255,255,.34);writing-mode:vertical-rl}
-@keyframes optScan{0%,100%{left:12%;opacity:.18}50%{left:88%;opacity:.86}}
-@keyframes optSheen{0%,100%{transform:translateX(-35%);opacity:.18}50%{transform:translateX(20%);opacity:.75}}
-@media(max-width:1120px){.opt-canvas-wrap{width:68%;right:-15%}.opt-hud{right:-3vw;width:62vw;opacity:.55}.hero-overlay{background:linear-gradient(90deg,#030303 0%,rgba(3,3,3,.93) 48%,rgba(3,3,3,.54) 100%) !important}}
-@media(max-width:760px){.opt-canvas-wrap{width:108%;right:-48%;opacity:.54}.opt-hud{display:none}.opt-engine:before{right:-45%;width:115%;opacity:.10}.opt-engine:after{width:100%;opacity:.25}.hero-overlay{background:linear-gradient(90deg,rgba(3,3,3,.94),rgba(3,3,3,.78)),linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.55)) !important}}
-@media(prefers-reduced-motion:reduce){.opt-engine:after,.opt-scan{animation:none !important}.opt-flow span{transition:none !important}}
+.hero-film{position:absolute;inset:0;z-index:1;overflow:hidden;background:#090909}
+.hero-film video{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;object-position:center;filter:grayscale(100%) contrast(1.17) brightness(.53);transform:scale(1.02);animation:heroFilmDrift 18s ease-in-out infinite alternate;will-change:transform}
+.hero-film-fallback{position:absolute;inset:0;background:url('https://images.pexels.com/photos/34221997/pexels-photo-34221997.jpeg?auto=compress&cs=tinysrgb&w=2000') center/cover no-repeat;filter:grayscale(100%) contrast(1.12) brightness(.48);z-index:-1}
+.hero-film:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 74% 45%,transparent 0 19%,rgba(0,0,0,.18) 55%,rgba(0,0,0,.52) 100%);pointer-events:none}
+.hero-tech-grid{position:absolute;inset:0;z-index:2;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(90deg,transparent 0 48%,#000 68%,#000 100%);pointer-events:none}
+.hero-scan{position:absolute;top:9%;bottom:9%;left:57%;width:1px;z-index:4;background:linear-gradient(180deg,transparent,rgba(255,255,255,.78) 18%,rgba(255,255,255,.16) 83%,transparent);box-shadow:0 0 14px rgba(255,255,255,.12);animation:realScan 8.5s cubic-bezier(.55,.05,.45,.95) infinite;pointer-events:none}
+.hero-scan span{position:absolute;top:8%;left:10px;font-size:8px;letter-spacing:.22em;color:rgba(255,255,255,.43);writing-mode:vertical-rl}
+.hero-readout{position:absolute;right:4.4vw;top:50%;transform:translateY(-50%);z-index:5;width:min(270px,20vw);display:grid;gap:13px;color:#fff;pointer-events:none}
+.hero-readout:before{content:"PROCESS / LIVE";font-size:9px;letter-spacing:.22em;color:rgba(255,255,255,.42);margin-bottom:4px}
+.hero-readout-row{display:grid;grid-template-columns:1fr auto;align-items:end;gap:18px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.16)}
+.hero-readout-row span{font-size:9px;letter-spacing:.17em;color:rgba(255,255,255,.48)}
+.hero-readout-row b{font-size:11px;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.90);transition:opacity .25s ease,transform .25s ease}
+.hero-process-flow{position:absolute;right:4.4vw;bottom:7.4vh;z-index:5;display:flex;align-items:center;gap:11px;color:#fff;pointer-events:none}
+.hero-process-flow span{font-size:9px;letter-spacing:.15em;color:rgba(255,255,255,.34);transition:color .35s ease,text-shadow .35s ease}
+.hero-process-flow span.active{color:rgba(255,255,255,.92);text-shadow:0 0 12px rgba(255,255,255,.20)}
+.hero-process-flow i{display:block;width:25px;height:1px;background:rgba(255,255,255,.16)}
+.hero-process-caption{position:absolute;right:4.4vw;top:12.5vh;z-index:5;text-align:right;color:rgba(255,255,255,.46);font-size:8px;letter-spacing:.22em;line-height:1.8;pointer-events:none}
+.hero-process-caption strong{display:block;color:rgba(255,255,255,.86);font-weight:500;font-size:10px;letter-spacing:.18em}
+@keyframes heroFilmDrift{0%{transform:scale(1.025) translate3d(-.6%,0,0)}100%{transform:scale(1.085) translate3d(1.3%,-.8%,0)}}
+@keyframes realScan{0%,100%{left:55%;opacity:.16}50%{left:91%;opacity:.82}}
+@media(max-width:1120px){.hero-readout{right:2.5vw;width:225px;opacity:.7}.hero-process-flow{right:2.5vw}.hero-process-caption{right:2.5vw}.hero-overlay{background:linear-gradient(90deg,#020202 0%,rgba(2,2,2,.95) 43%,rgba(2,2,2,.52) 100%) !important}}
+@media(max-width:760px){.hero-film video{inset:0;width:100%;height:100%;object-position:68% center;filter:grayscale(100%) contrast(1.12) brightness(.37);animation-duration:24s}.hero-tech-grid{opacity:.07;mask-image:none}.hero-readout,.hero-process-flow,.hero-process-caption,.hero-scan{display:none}.hero-overlay{background:linear-gradient(90deg,rgba(2,2,2,.93),rgba(2,2,2,.74)),linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.58)) !important}}
+@media(prefers-reduced-motion:reduce){.hero-film video,.hero-scan{animation:none !important}.hero-process-flow span{transition:none !important}}
 </style>
 
 </head>
@@ -297,23 +287,24 @@
 <main>
 <section class="hero" id="home">
 
-<div class="opt-engine" id="optEngine" aria-hidden="true">
-  <div class="opt-canvas-wrap"><canvas id="optThreeCanvas"></canvas></div>
-  <div class="opt-fallback">
-    <div class="opt-orbit o1"></div><div class="opt-orbit o2"></div><div class="opt-orbit o3"></div>
-    <div class="opt-fallback-core"></div>
-  </div>
-  <div class="opt-hud">
-    <div class="opt-frame"></div><div class="opt-kicker">PRODUCT OPTIMIZATION / SIMULATION</div>
-    <div class="opt-readout">
-      <div><span>STRUCTURE</span><b id="optStatusStructure">ANALYZE</b></div>
-      <div><span>PROCESS</span><b id="optStatusProcess">REVIEW</b></div>
-      <div><span>SUPPLY</span><b id="optStatusSupply">MAP</b></div>
-      <div><span>COST</span><b id="optStatusCost">OPTIMIZE</b></div>
-    </div>
-    <div class="opt-scan"></div>
-    <div class="opt-flow"><span data-opt-step="0">ANALYZE</span><i></i><span data-opt-step="1">SIMPLIFY</span><i></i><span data-opt-step="2">INTEGRATE</span><i></i><span data-opt-step="3">OPTIMIZE</span></div>
-  </div>
+<div class="hero-film" aria-hidden="true">
+  <video id="heroProcessVideo" autoplay muted loop playsinline preload="metadata">
+    <source src="https://videos.pexels.com/video-files/9033891/9033891-hd_1920_1080_24fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/9033891/9033891-hd_3840_2160_24fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-film-fallback"></div>
+</div>
+<div class="hero-tech-grid" aria-hidden="true"></div>
+<div class="hero-scan" aria-hidden="true"><span>ANALYSIS</span></div>
+<div class="hero-process-caption" aria-hidden="true"><strong>PRODUCT OPTIMIZATION</strong>REAL PROCESS / REAL ENGINEERING</div>
+<div class="hero-readout" aria-hidden="true">
+  <div class="hero-readout-row"><span>STRUCTURE</span><b id="heroStatusStructure">ANALYZE</b></div>
+  <div class="hero-readout-row"><span>PROCESS</span><b id="heroStatusProcess">REVIEW</b></div>
+  <div class="hero-readout-row"><span>SUPPLY</span><b id="heroStatusSupply">MAP</b></div>
+  <div class="hero-readout-row"><span>COST</span><b id="heroStatusCost">MODEL</b></div>
+</div>
+<div class="hero-process-flow" aria-hidden="true">
+  <span data-real-step="0" class="active">ANALYZE</span><i></i><span data-real-step="1">REDESIGN</span><i></i><span data-real-step="2">SOURCE</span><i></i><span data-real-step="3">VALIDATE</span>
 </div>
 
 <div class="hero-media"></div>
@@ -600,129 +591,28 @@
 </section>
 <script src="./app.js"></script>
 
-<script type="module" id="reduct-threejs-optimization-v3">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js';
-import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/geometries/RoundedBoxGeometry.js';
-
-const host=document.getElementById('optEngine');
-const canvas=document.getElementById('optThreeCanvas');
-if(host&&canvas){
-  const prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile=matchMedia('(max-width: 760px)').matches;
-  let renderer;
-  try{
-    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!isMobile,powerPreference:'high-performance'});
-    renderer.setPixelRatio(Math.min(devicePixelRatio||1,isMobile?1:1.45));
-    renderer.outputColorSpace=THREE.SRGBColorSpace;
-    renderer.toneMapping=THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure=.86;
-  }catch(e){console.warn('REDUCT WebGL fallback',e);}
-  if(renderer){
-    const scene=new THREE.Scene();
-    const camera=new THREE.PerspectiveCamera(34,1,.1,100);
-    camera.position.set(7.2,4.2,8.8);
-    camera.lookAt(0,0,0);
-    const root=new THREE.Group();scene.add(root);
-    const product=new THREE.Group();root.add(product);
-    product.rotation.set(-.12,.34,.02);
-
-    scene.add(new THREE.HemisphereLight(0xffffff,0x080808,1.15));
-    const key=new THREE.DirectionalLight(0xffffff,4.1);key.position.set(5,7,8);scene.add(key);
-    const rim=new THREE.DirectionalLight(0x9b9b9b,2.2);rim.position.set(-7,2,-5);scene.add(rim);
-    const fill=new THREE.PointLight(0xffffff,3.0,18);fill.position.set(2,-3,4);scene.add(fill);
-
-    const matDark=new THREE.MeshStandardMaterial({color:0x0b0b0b,metalness:.92,roughness:.25});
-    const matMid=new THREE.MeshStandardMaterial({color:0x4a4a4a,metalness:.88,roughness:.24});
-    const matLight=new THREE.MeshStandardMaterial({color:0xa9a9a9,metalness:.82,roughness:.22});
-    const matBoard=new THREE.MeshStandardMaterial({color:0x171717,metalness:.58,roughness:.40});
-    const lineMat=new THREE.LineBasicMaterial({color:0xe8e8e8,transparent:true,opacity:.23});
-    const ghostMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.035,side:THREE.DoubleSide,depthWrite:false});
-
-    const parts=[];
-    function edgeify(mesh,opacity=.22){const e=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,24),lineMat.clone());e.material.opacity=opacity;mesh.add(e)}
-    function addPart(geo,mat,compact,exploded,opt={}){
-      const mesh=new THREE.Mesh(geo,mat.clone());
-      mesh.position.copy(exploded);mesh.userData={compact:compact.clone(),exploded:exploded.clone(),drop:!!opt.drop,dropDir:(opt.dropDir||new THREE.Vector3(0,0,0)).clone(),spin:opt.spin||0,baseOpacity:mesh.material.opacity??1};
-      if(opt.rotation) mesh.rotation.set(...opt.rotation);
-      edgeify(mesh,opt.edge??.20);product.add(mesh);parts.push(mesh);return mesh;
-    }
-    const rb=(x,y,z,r=.08)=>new RoundedBoxGeometry(x,y,z,4,r);
-    // Core architecture
-    addPart(rb(3.9,.28,2.72,.11),matMid,new THREE.Vector3(0,-1.10,0),new THREE.Vector3(0,-2.10,0),{edge:.28});
-    addPart(rb(3.25,1.38,2.28,.16),matDark,new THREE.Vector3(0,-.22,0),new THREE.Vector3(0,-.25,0),{edge:.30});
-    addPart(rb(3.52,.24,2.45,.10),matLight,new THREE.Vector3(0,.64,0),new THREE.Vector3(0,1.80,0),{edge:.24});
-    // Side structure / rails
-    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(-1.80,-.34,0),new THREE.Vector3(-2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(-2.2,.8,.2),edge:.18});
-    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(1.80,-.34,0),new THREE.Vector3(2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(2.2,.8,-.2),edge:.18});
-    // PCB / electronics layer
-    const pcb=addPart(rb(2.85,.12,1.76,.04),matBoard,new THREE.Vector3(0,.90,0),new THREE.Vector3(0,2.55,0),{edge:.26});
-    const chipGeo=rb(.38,.16,.32,.035);const smallGeo=rb(.18,.12,.15,.025);
-    [[-.75,.0,-.40],[.1,.0,-.30],[.65,.0,.37],[-.38,.0,.46]].forEach((p,i)=>{const m=new THREE.Mesh(i%2?smallGeo:chipGeo,matMid.clone());m.position.set(p[0],.14,p[2]);edgeify(m,.16);pcb.add(m)});
-    // Central mechanical interface
-    const cylGeo=new THREE.CylinderGeometry(.58,.58,.44,48);const cyl=addPart(cylGeo,matLight,new THREE.Vector3(0,.08,0),new THREE.Vector3(0,-.10,-3.0),{rotation:[Math.PI/2,0,0],edge:.18});
-    const ringGeo=new THREE.TorusGeometry(.82,.08,12,64);addPart(ringGeo,matMid,new THREE.Vector3(0,.12,.02),new THREE.Vector3(0,.15,3.2),{rotation:[Math.PI/2,0,0],edge:.10});
-    // Fasteners - some are deliberately removed in optimization phase
-    const boltGeo=new THREE.CylinderGeometry(.105,.105,.42,20);
-    const boltCompact=[[-1.42,.40,-.88],[1.42,.40,-.88],[-1.42,.40,.88],[1.42,.40,.88],[-1.1,-.72,-.9],[1.1,-.72,.9]];
-    boltCompact.forEach((p,i)=>addPart(boltGeo,i<4?matLight:matMid,new THREE.Vector3(...p),new THREE.Vector3(p[0]*1.55,2.8+(i%2)*.45,p[2]*1.45),{rotation:[0,0,0],drop:i>=4,dropDir:new THREE.Vector3((i===4?-1:1)*2.0,-.8,(i===4?-1:1)*1.4),edge:.10}));
-    // Internal brackets that merge during optimization
-    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(-.92,-.14,0),new THREE.Vector3(-2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(-1.7,-1.4,0),edge:.18});
-    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(.92,-.14,0),new THREE.Vector3(2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(1.7,-1.4,0),edge:.18});
-
-    // Data cloud
-    const count=isMobile?34:78;const pg=new THREE.BufferGeometry();const pa=new Float32Array(count*3);
-    for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,r=3.5+Math.random()*2.8;pa[i*3]=Math.cos(a)*r;pa[i*3+1]=(Math.random()-.5)*5.8;pa[i*3+2]=Math.sin(a)*r*.65}
-    pg.setAttribute('position',new THREE.BufferAttribute(pa,3));const points=new THREE.Points(pg,new THREE.PointsMaterial({color:0xffffff,size:.022,transparent:true,opacity:.35,sizeAttenuation:true}));root.add(points);
-    // Wire orbit rings
-    [3.2,4.15].forEach((r,i)=>{const g=new THREE.TorusGeometry(r,.006,4,160);const m=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:i?.07:.12});const o=new THREE.Mesh(g,m);o.rotation.set(Math.PI/2.55,.30+i*.18,.25);root.add(o)});
-    // Scan plane
-    const scan=new THREE.Mesh(new THREE.PlaneGeometry(5.4,4.6),ghostMat);scan.rotation.y=Math.PI/2;product.add(scan);
-
-    const flows=[...document.querySelectorAll('[data-opt-step]')];
-    const status={
-      structure:document.getElementById('optStatusStructure'),process:document.getElementById('optStatusProcess'),supply:document.getElementById('optStatusSupply'),cost:document.getElementById('optStatusCost')
-    };
-    const statuses=[
-      ['ANALYZE','REVIEW','MAP','BASELINE'],
-      ['SIMPLIFY','REDUCE','COMPARE','REVIEW'],
-      ['INTEGRATE','CONSOLIDATE','SELECT','MODEL'],
-      ['OPTIMIZED','VALIDATE','READY','OPTIMIZE']
-    ];
-    let currentStep=-1;
-    function setStep(n){if(n===currentStep)return;currentStep=n;flows.forEach((x,i)=>x.classList.toggle('active',i===n));const s=statuses[n];if(status.structure)status.structure.textContent=s[0];if(status.process)status.process.textContent=s[1];if(status.supply)status.supply.textContent=s[2];if(status.cost)status.cost.textContent=s[3]}
-    const smooth=t=>t*t*(3-2*t);const clamp=t=>Math.max(0,Math.min(1,t));
-    let pointerX=0,pointerY=0,visible=true,raf=0;
-    if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{pointerX=(e.clientX/innerWidth-.5);pointerY=(e.clientY/innerHeight-.5)},{passive:true})}
-    const obs=new IntersectionObserver(e=>{visible=e[0]?.isIntersecting??true;if(visible&&!prefersReduced)loop(performance.now())},{threshold:.05});obs.observe(document.querySelector('.hero'));
-    document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(visible&&!prefersReduced)loop(performance.now())});
-    function resize(){const wrap=canvas.parentElement;const w=Math.max(1,wrap.clientWidth),h=Math.max(1,wrap.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
-    new ResizeObserver(resize).observe(canvas.parentElement);resize();
-    function loop(now){if(!visible||document.hidden){raf=0;return}if(raf)return;raf=requestAnimationFrame(render)}
-    function render(now){raf=0;const t=(now||performance.now())*.001;const cycle=prefersReduced?.70:(t%14)/14;
-      // 0 analyze/exploded, 1 simplify, 2 integrate, 3 optimized
-      let step=cycle<.25?0:cycle<.48?1:cycle<.72?2:3;setStep(step);
-      const assemble=smooth(clamp((cycle-.10)/.38));
-      const optimize=smooth(clamp((cycle-.49)/.20));
-      const reset=smooth(clamp((cycle-.88)/.12));
-      parts.forEach((m,i)=>{
-        const u=m.userData;const target=u.exploded.clone().lerp(u.compact,assemble);
-        if(u.drop){target.add(u.dropDir.clone().multiplyScalar(optimize));m.material.transparent=true;m.material.opacity=Math.max(.04,1-optimize*.94);m.visible=m.material.opacity>.045}
-        else{m.visible=true;m.material.opacity=1;target.multiplyScalar(1-optimize*.055)}
-        if(reset>0){target.lerp(u.exploded,reset);m.visible=true;m.material.opacity=1}
-        m.position.lerp(target,prefersReduced?1:.105);
-        if(u.spin&&!prefersReduced)m.rotation.y+=u.spin;
-      });
-      scan.position.x=-3.3+((cycle*4)%1)*6.6;scan.material.opacity=.018+.04*Math.sin(cycle*Math.PI*4)**2;
-      product.rotation.y+=( (.34+pointerX*.13)-product.rotation.y)*.035;
-      product.rotation.x+=( (-.12-pointerY*.08)-product.rotation.x)*.035;
-      root.rotation.y=t*.055;points.rotation.y=-t*.018;
-      renderer.render(scene,camera);
-      if(!prefersReduced)raf=requestAnimationFrame(render)
-    }
-    host.classList.add('three-ready');
-    if(prefersReduced){setStep(3);render(performance.now())}else loop(performance.now());
+<script id="reduct-real-process-hero-v4">
+(() => {
+  const video=document.getElementById('heroProcessVideo');
+  const hero=document.querySelector('.hero');
+  if(video&&hero){
+    const io=new IntersectionObserver(([entry])=>{if(entry.isIntersecting){video.play().catch(()=>{});}else{video.pause();}},{threshold:.05});
+    io.observe(hero);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else if(hero.getBoundingClientRect().bottom>0)video.play().catch(()=>{});});
   }
-}
+  const flow=[...document.querySelectorAll('[data-real-step]')];
+  const els={structure:document.getElementById('heroStatusStructure'),process:document.getElementById('heroStatusProcess'),supply:document.getElementById('heroStatusSupply'),cost:document.getElementById('heroStatusCost')};
+  const states=[
+    ['ANALYZE','REVIEW','MAP','BASELINE'],
+    ['SIMPLIFY','COMPARE','SELECT','MODEL'],
+    ['INTEGRATE','VERIFY','SOURCE','REVIEW'],
+    ['VALIDATE','READY','READY','OPTIMIZE']
+  ];
+  let step=0;
+  function paint(){flow.forEach((el,i)=>el.classList.toggle('active',i===step));const s=states[step];[['structure',0],['process',1],['supply',2],['cost',3]].forEach(([k,i])=>{if(els[k]){els[k].style.opacity='0';els[k].style.transform='translateY(4px)';setTimeout(()=>{els[k].textContent=s[i];els[k].style.opacity='1';els[k].style.transform='translateY(0)'},130);}})}
+  paint();
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(()=>{step=(step+1)%4;paint();},3200);
+})();
 </script>
 
 </body>
