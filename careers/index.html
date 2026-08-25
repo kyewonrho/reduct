@@ -165,15 +165,58 @@
 @media(max-width:720px){.role-card{min-height:200px!important}.role-card span{font-size:14px!important}}
 </style>
 
+
+<style id="reduct-careers-apple-glass-compact-final">
+/* Careers: aligned compact glass panels */
+.career-section.gray{background:radial-gradient(900px 420px at 10% 0%,rgba(255,255,255,.94),rgba(255,255,255,0) 62%),linear-gradient(180deg,#f2f4f6 0%,#e9edf1 100%)!important}
+.process-grid,.role-grid,.principle-grid,.path-stack{align-items:stretch!important}
+.process-card,.principle,.path-track{
+  background:linear-gradient(145deg,rgba(255,255,255,.68),rgba(246,248,251,.43))!important;
+  border:1px solid rgba(255,255,255,.86)!important;
+  outline:1px solid rgba(31,39,51,.055);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 14px 34px rgba(39,48,61,.07),0 2px 8px rgba(39,48,61,.03)!important;
+  backdrop-filter:blur(26px) saturate(145%)!important;-webkit-backdrop-filter:blur(26px) saturate(145%)!important;
+}
+.process-card{min-height:190px!important;padding:28px 28px!important;justify-content:flex-start!important}
+.process-card .num{display:block;margin:0 0 32px;font-size:16px!important;font-weight:600!important;letter-spacing:.10em!important;color:#777!important}
+.process-card h3{font-size:25px!important;margin:0 0 10px!important}
+.process-card p{margin:0!important;font-size:16px!important;line-height:1.62!important}
+.process-card:not(:last-child):after{top:50%!important}
+
+.role-card,.role-card:nth-child(2),.role-card:nth-child(5){transform:none!important;min-height:205px!important;padding:30px 32px!important;justify-content:flex-start!important;background:linear-gradient(145deg,rgba(14,15,17,.84),rgba(25,27,30,.72))!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 16px 36px rgba(0,0,0,.14)!important;backdrop-filter:blur(24px) saturate(130%)!important;-webkit-backdrop-filter:blur(24px) saturate(130%)!important}
+.role-card:hover,.role-card:nth-child(2):hover,.role-card:nth-child(5):hover{transform:none!important;border-color:rgba(255,255,255,.26)!important}
+.role-card span{margin:0 0 38px!important;font-size:15px!important;letter-spacing:.10em!important;color:#9a9a9a!important}
+.role-card h3{font-size:31px!important;margin:0 0 12px!important}
+.role-card p{margin:0!important;font-size:17px!important;line-height:1.62!important;color:#bdbdbd!important}
+
+.principle{height:100%;padding:30px 30px!important;border-radius:26px!important;border-top:1px solid rgba(255,255,255,.86)!important}
+.principle strong{font-size:25px!important;margin-bottom:14px!important}.principle p{font-size:17px!important;line-height:1.68!important}
+
+.career-path{margin-top:70px!important;padding-top:58px!important}
+.career-path-head{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;margin-bottom:30px!important}
+.career-path-head h3{font-size:clamp(42px,4vw,62px)!important}.career-path-head p{margin-top:4px!important;font-size:18px!important}
+.path-track{padding:30px 32px 32px!important;border-radius:28px!important}
+.path-track-head{margin-bottom:24px!important}.path-track-title strong{font-size:28px!important}.path-track-title span{font-size:14px!important}.path-track-head p{font-size:16px!important}
+.path-node{min-height:86px!important;background:rgba(255,255,255,.50)!important;border:1px solid rgba(255,255,255,.78)!important;outline:1px solid rgba(31,39,51,.05);font-size:20px!important}
+.path-link{font-size:13px!important;color:#707070!important}
+.path-note{font-size:14px!important;margin-top:20px!important}
+
+@media(max-width:720px){
+  .process-card{min-height:165px!important}.process-card .num{margin-bottom:24px!important;font-size:14px!important}
+  .role-card{min-height:185px!important;padding:26px 24px!important}.role-card span{margin-bottom:28px!important;font-size:14px!important}.role-card h3{font-size:28px!important}
+  .principle{padding:26px 24px!important}.career-path{margin-top:54px!important;padding-top:46px!important}.path-track{padding:24px 20px!important}.path-node{font-size:18px!important}
+}
+</style>
+
 </head><body>
 <header class="career-header"><div class="shell career-header-inner"><a class="career-brand" href="/" aria-label="REDUCT 홈"><svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg></a><nav class="career-nav"><a href="/">COMPANY SITE</a><a class="apply-top" href="/careers/apply/">입사지원하기</a></nav></div></header>
 <main><section class="career-hero"><div class="shell career-hero-content"><div class="career-eyebrow">CAREERS / REDUCT</div><h1>BUILD BETTER.<br>WITH US.</h1><p class="career-hero-copy"><span>복잡한 문제를 구조적으로 보고,</span><span>더 나은 제품과 더 효율적인 방법을 만드는 사람을 찾습니다.</span></p><div class="career-actions"><a class="career-btn primary" href="/careers/apply/">입사지원하기</a><a class="career-btn" href="#process">채용절차 보기</a></div></div></section>
 <section class="career-section gray" id="process"><div class="shell"><div class="section-head"><div><div class="label">RECRUITMENT PROCESS</div></div><div><h2>채용절차</h2><p class="process-intro-copy"><span>지원서 접수부터 최종합격까지 아래 절차로 진행됩니다.</span><span>직무 특성에 따라 면접 과정에서 실무 과제 또는 포트폴리오 검토가 추가될 수 있습니다.</span></p></div></div><div class="process-grid">
-<div class="process-card"><span class="num">01</span><div><h3>입사지원</h3><p>온라인 지원서 작성 및 제출</p></div></div>
-<div class="process-card"><span class="num">02</span><div><h3>서류평가</h3><p>직무역량·경력·지원내용 검토</p></div></div>
-<div class="process-card"><span class="num">03</span><div><h3>1차 면접</h3><p>실무자 면접 / 직무 중심 검토</p></div></div>
-<div class="process-card"><span class="num">04</span><div><h3>2차 면접</h3><p>임원 면접 / 업무방식·협업 검토</p></div></div>
-<div class="process-card"><span class="num">05</span><div><h3>최종합격</h3><p>처우 협의 및 입사 일정 확정</p></div></div>
+<div class="process-card"><span class="num">STEP 01</span><div><h3>입사지원</h3><p>온라인 지원서 작성 및 제출</p></div></div>
+<div class="process-card"><span class="num">STEP 02</span><div><h3>서류평가</h3><p>직무역량·경력·지원내용 검토</p></div></div>
+<div class="process-card"><span class="num">STEP 03</span><div><h3>1차 면접</h3><p>실무자 면접 / 직무 중심 검토</p></div></div>
+<div class="process-card"><span class="num">STEP 04</span><div><h3>2차 면접</h3><p>임원 면접 / 업무방식·협업 검토</p></div></div>
+<div class="process-card"><span class="num">STEP 05</span><div><h3>최종합격</h3><p>처우 협의 및 입사 일정 확정</p></div></div>
 </div></div></section>
 <section class="career-section" id="roles"><div class="shell"><div class="section-head"><div><div class="label">OPEN ROLES</div></div><div><h2>지원 분야</h2><p>지원 직무를 선택하면 지원서에서 해당 직무의 핵심 역량 항목이 자동으로 구성됩니다.</p></div></div><div class="role-grid">
 <div class="role-card"><span>SALES</span><div><h3>영업</h3><p>B2B 고객 발굴, 기술·제조 프로젝트 제안 및 커뮤니케이션</p></div></div>

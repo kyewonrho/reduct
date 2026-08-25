@@ -408,6 +408,103 @@
 }
 </style>
 
+
+<style id="reduct-apple-glass-compact-final">
+/* REDUCT — compact frosted glass UI. No staggered cards, no tiny decorative numbers. */
+#overview,#optimization,#technology,#project,#case{
+  background:
+    radial-gradient(900px 420px at 8% 0%,rgba(255,255,255,.95),rgba(255,255,255,0) 62%),
+    radial-gradient(760px 460px at 94% 22%,rgba(255,255,255,.62),rgba(255,255,255,0) 64%),
+    linear-gradient(180deg,#f3f5f7 0%,#eceff2 100%)!important;
+}
+#overview:before,#optimization:before,#technology:before,#project:before,#case:before{opacity:.18!important}
+
+#overview .overview-grid,
+#optimization .optimization-pillar-grid,
+#technology .final-capability-grid,
+#project .optimization-lens-grid,
+#case .case-grid{align-items:stretch!important}
+
+#overview .info-card,
+#optimization .optimization-pillar,
+#technology .final-capability-grid .technology-card,
+#project .optimization-lens,
+#case .case-card{
+  position:relative;
+  overflow:hidden;
+  transform:none!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.67) 0%,rgba(246,248,251,.43) 100%)!important;
+  border:1px solid rgba(255,255,255,.84)!important;
+  outline:1px solid rgba(31,39,51,.055);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(255,255,255,.30),
+    0 14px 34px rgba(39,48,61,.075),
+    0 2px 8px rgba(39,48,61,.035)!important;
+  backdrop-filter:blur(26px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(145%)!important;
+}
+#overview .info-card:after,
+#optimization .optimization-pillar:after,
+#technology .final-capability-grid .technology-card:after,
+#project .optimization-lens:after,
+#case .case-card:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(125deg,rgba(255,255,255,.38),rgba(255,255,255,0) 30%,rgba(255,255,255,.10) 72%,rgba(255,255,255,0));
+  opacity:.58;
+}
+#overview .info-card>* ,#optimization .optimization-pillar>* ,#technology .technology-card>* ,#project .optimization-lens>* ,#case .case-card>*{position:relative;z-index:1}
+#overview .info-card:hover,#optimization .optimization-pillar:hover,#technology .technology-card:hover,#project .optimization-lens:hover,#case .case-card:hover{
+  transform:none!important;border-color:rgba(255,255,255,.98)!important;outline-color:rgba(31,39,51,.085);
+}
+
+/* equal, compact card metrics */
+#overview .info-card{min-height:238px!important;height:100%;padding:30px 32px 30px!important;margin:0!important;display:flex;flex-direction:column;justify-content:flex-start}
+#overview .card-index{margin:0 0 28px!important;font-size:15px!important;font-weight:600!important;letter-spacing:.115em!important;color:rgba(17,17,17,.52)!important}
+#overview .info-card h3{margin:0 0 16px!important;font-size:clamp(28px,2.1vw,35px)!important;line-height:1.12!important}
+#overview .info-card p{margin:0!important;font-size:18px!important;line-height:1.66!important;color:rgba(17,17,17,.70)!important}
+
+#optimization .optimization-pillar{min-height:252px!important;height:100%;padding:30px 32px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#optimization .optimization-pillar>span{margin:0 0 28px!important;font-size:15px!important;font-weight:600!important;letter-spacing:.105em!important;color:rgba(17,17,17,.52)!important}
+#optimization .optimization-pillar h3{margin:0 0 16px!important;font-size:clamp(28px,2.25vw,34px)!important;line-height:1.13!important}
+#optimization .optimization-pillar p{margin:0!important;font-size:18px!important;line-height:1.66!important;color:rgba(17,17,17,.70)!important}
+
+#technology .final-capability-grid .technology-card{min-height:202px!important;height:100%;padding:30px 32px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#technology .final-capability-grid .technology-card:before{display:none!important}
+#technology .tech-tag{position:static!important;display:block!important;margin:0 0 30px!important;font-size:15px!important;font-weight:600!important;letter-spacing:.115em!important;color:rgba(17,17,17,.52)!important}
+#technology .tech-tag:before{display:none!important}
+#technology .technology-card h3{margin:0 0 14px!important;font-size:28px!important;line-height:1.14!important}
+#technology .technology-card .tech-en{margin:0!important;font-size:18px!important;line-height:1.48!important;color:rgba(17,17,17,.62)!important}
+
+#project .optimization-lens{min-height:222px!important;height:100%;padding:30px 28px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#project .optimization-lens:before{display:none!important}
+#project .optimization-lens h3{margin:0 0 18px!important;font-size:30px!important;line-height:1.08!important}
+#project .optimization-lens p{margin:0!important;font-size:18px!important;line-height:1.68!important;color:rgba(17,17,17,.70)!important}
+
+#case .case-card{height:100%;padding:34px 34px!important}
+#case .case-top span{font-size:15px!important;letter-spacing:.10em!important}
+#case .case-card h3{margin-top:24px!important}
+#case .case-card p,#case .case-card li{font-size:18px!important;line-height:1.68!important}
+
+/* Ordered process: readable step labels instead of tiny decorative numerals */
+.final-process-list li{grid-template-columns:142px 1fr!important;padding:32px 0!important;align-items:start}
+.final-process-list strong{font-size:17px!important;line-height:1.25!important;letter-spacing:.10em!important;font-weight:600!important;color:rgba(255,255,255,.62)!important;padding-top:6px}
+.final-process-list h3{margin-top:0!important;font-size:34px!important}
+.final-process-list p{font-size:18px!important;line-height:1.68!important}
+
+@media(max-width:1100px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{min-height:0!important}
+}
+@media(max-width:760px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{padding:26px 24px!important;border-radius:22px!important}
+  #overview .card-index,#optimization .optimization-pillar>span,#technology .tech-tag{margin-bottom:22px!important;font-size:14px!important}
+  #overview .info-card p,#optimization .optimization-pillar p,#technology .technology-card .tech-en,#project .optimization-lens p{font-size:17px!important}
+  #project .optimization-lens h3{font-size:27px!important}
+  .final-process-list li{grid-template-columns:1fr!important;gap:10px;padding:26px 0!important}
+  .final-process-list strong{font-size:14px!important;padding-top:0}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -534,11 +631,11 @@
 <article class="technology-card reveal"><div class="tech-tag" aria-hidden="true">PRODUCTION</div><h3>Tooling &amp; Production Engineering</h3><p class="tech-en">Mold / Production Structure</p></article>
 </div></div></section>
 <section class="section section-dark process-section" id="process"><div class="shell"><div class="section-intro reveal intro-light"><p class="eyebrow light">HOW WE OPTIMIZE</p><h2>Analyze. Redesign.<br/>Validate.</h2><p>We do not start by manufacturing. We first identify why the cost exists, redesign the structure, and then validate manufacturability, quality, and supply conditions.</p></div><ol class="process-list final-process-list reveal">
-<li><strong>01</strong><div><h3>ANALYZE</h3><p>Review structure, parts, specifications, process, and sourcing conditions as one system.</p></div></li>
-<li><strong>02</strong><div><h3>IDENTIFY</h3><p>Separate overspecification, unnecessary complexity, inefficient processes, and supply-related cost drivers.</p></div></li>
-<li><strong>03</strong><div><h3>REDESIGN</h3><p>Redesign part count, geometry, assembly method, electronic specifications, and manufacturing process while maintaining required performance.</p></div></li>
-<li><strong>04</strong><div><h3>SOURCE</h3><p>Match the design with the right CNC, sheet metal, mold, OEM, or injection-molding supply chain.</p></div></li>
-<li><strong>05</strong><div><h3>VALIDATE</h3><p>Validate cost, quality, productivity, and sourcing conditions before execution.</p></div></li>
+<li><strong>STEP 01</strong><div><h3>ANALYZE</h3><p>Review structure, parts, specifications, process, and sourcing conditions as one system.</p></div></li>
+<li><strong>STEP 02</strong><div><h3>IDENTIFY</h3><p>Separate overspecification, unnecessary complexity, inefficient processes, and supply-related cost drivers.</p></div></li>
+<li><strong>STEP 03</strong><div><h3>REDESIGN</h3><p>Redesign part count, geometry, assembly method, electronic specifications, and manufacturing process while maintaining required performance.</p></div></li>
+<li><strong>STEP 04</strong><div><h3>SOURCE</h3><p>Match the design with the right CNC, sheet metal, mold, OEM, or injection-molding supply chain.</p></div></li>
+<li><strong>STEP 05</strong><div><h3>VALIDATE</h3><p>Validate cost, quality, productivity, and sourcing conditions before execution.</p></div></li>
 </ol></div></section>
 <section class="section section-light" id="project"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">WHERE WE OPTIMIZE</p><h2>Cost Is Hidden<br/>Across the Product.</h2><p>Cost is not determined by purchase price alone. It accumulates across structure, parts, electronics, manufacturing processes, and the supply chain.</p></div><div class="optimization-lens-grid">
 <article class="optimization-lens reveal"><h3>STRUCTURE</h3><p>Simplify architecture, fastening, assembly, and unnecessary geometry.</p></article>
@@ -548,8 +645,8 @@
 <article class="optimization-lens reveal"><h3>SUPPLY CHAIN</h3><p>Compare and restructure OEM, machining, mold, and molding suppliers.</p></article>
 </div></div></section>
 <section class="section section-gray case-section" id="case"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CASE STUDY</p><h2>Optimization<br/>Made Measurable.</h2><p>Project identities remain confidential. Only outcomes that can be disclosed are summarized below.</p></div><div class="case-grid">
-<article class="case-card reveal"><div class="case-top"><span>CASE 01 / COST REDUCTION</span><strong class="case-metric">-15%</strong></div><h3>Company A | Heat-Resistant Glass for Decoction Equipment</h3><p>We reviewed the cost structure and sourcing conditions for heat-resistant glass used in decoction equipment and optimized the specification and supply conditions.</p><div class="case-result"><span>RESULT</span><strong>15% cost reduction achieved</strong></div></article>
-<article class="case-card reveal"><div class="case-top"><span>CASE 02 / DESIGN OPTIMIZATION</span><strong class="case-metric">LESS</strong></div><h3>Company B | Welded &amp; Machined Equipment Structure</h3><p>The design was revised to reduce welding operations and the number of machined parts. Assembly structure and machined geometry were simplified to lower machining cost.</p><div class="case-result-grid"><div><span>WELDING</span><strong>Fewer operations</strong></div><div><span>MACHINED PARTS</span><strong>Fewer parts</strong></div><div><span>MACHINING COST</span><strong>Reduced</strong></div></div></article>
+<article class="case-card reveal"><div class="case-top"><span>COST REDUCTION</span><strong class="case-metric">-15%</strong></div><h3>Company A | Heat-Resistant Glass for Decoction Equipment</h3><p>We reviewed the cost structure and sourcing conditions for heat-resistant glass used in decoction equipment and optimized the specification and supply conditions.</p><div class="case-result"><span>RESULT</span><strong>15% cost reduction achieved</strong></div></article>
+<article class="case-card reveal"><div class="case-top"><span>DESIGN OPTIMIZATION</span><strong class="case-metric">LESS</strong></div><h3>Company B | Welded &amp; Machined Equipment Structure</h3><p>The design was revised to reduce welding operations and the number of machined parts. Assembly structure and machined geometry were simplified to lower machining cost.</p><div class="case-result-grid"><div><span>WELDING</span><strong>Fewer operations</strong></div><div><span>MACHINED PARTS</span><strong>Fewer parts</strong></div><div><span>MACHINING COST</span><strong>Reduced</strong></div></div></article>
 </div></div></section>
 <section class="section section-dark manufacturing-section" id="manufacturing"><div class="shell manufacturing-grid reveal"><div><p class="eyebrow light">MANUFACTURING NETWORK</p><h2>Use the Right Process.<br/>Not Every Process.</h2><p>Rather than owning every process, we select the process and supplier that best fit the product and volume.</p></div><div class="manufacturing-chips"><span>CNC 3-Axis</span><span>CNC 5-Axis</span><span>Sheet Metal</span><span>Welding</span><span>Prototype</span><span>Mold &amp; Tooling</span><span>OEM Parts</span><span>Injection Molding</span></div></div></section>
 <section class="section section-light diagnosis-cta-section" id="cost-check"><div class="shell diagnosis-cta reveal"><div><p class="eyebrow dark">COST OPTIMIZATION CHECK</p><h2>Start with the<br/>current cost structure.</h2><p>Enter current cost, target cost, expected volume, and available drawings or BOM to organize the basic information needed for an initial review.</p></div><button class="btn btn-dark diagnosis-cta-button" id="costCheckOpen" type="button">START COST CHECK</button></div></section>

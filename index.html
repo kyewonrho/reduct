@@ -422,6 +422,103 @@
 }
 </style>
 
+
+<style id="reduct-apple-glass-compact-final">
+/* REDUCT — compact frosted glass UI. No staggered cards, no tiny decorative numbers. */
+#overview,#optimization,#technology,#project,#case{
+  background:
+    radial-gradient(900px 420px at 8% 0%,rgba(255,255,255,.95),rgba(255,255,255,0) 62%),
+    radial-gradient(760px 460px at 94% 22%,rgba(255,255,255,.62),rgba(255,255,255,0) 64%),
+    linear-gradient(180deg,#f3f5f7 0%,#eceff2 100%)!important;
+}
+#overview:before,#optimization:before,#technology:before,#project:before,#case:before{opacity:.18!important}
+
+#overview .overview-grid,
+#optimization .optimization-pillar-grid,
+#technology .final-capability-grid,
+#project .optimization-lens-grid,
+#case .case-grid{align-items:stretch!important}
+
+#overview .info-card,
+#optimization .optimization-pillar,
+#technology .final-capability-grid .technology-card,
+#project .optimization-lens,
+#case .case-card{
+  position:relative;
+  overflow:hidden;
+  transform:none!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.67) 0%,rgba(246,248,251,.43) 100%)!important;
+  border:1px solid rgba(255,255,255,.84)!important;
+  outline:1px solid rgba(31,39,51,.055);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(255,255,255,.30),
+    0 14px 34px rgba(39,48,61,.075),
+    0 2px 8px rgba(39,48,61,.035)!important;
+  backdrop-filter:blur(26px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(145%)!important;
+}
+#overview .info-card:after,
+#optimization .optimization-pillar:after,
+#technology .final-capability-grid .technology-card:after,
+#project .optimization-lens:after,
+#case .case-card:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(125deg,rgba(255,255,255,.38),rgba(255,255,255,0) 30%,rgba(255,255,255,.10) 72%,rgba(255,255,255,0));
+  opacity:.58;
+}
+#overview .info-card>* ,#optimization .optimization-pillar>* ,#technology .technology-card>* ,#project .optimization-lens>* ,#case .case-card>*{position:relative;z-index:1}
+#overview .info-card:hover,#optimization .optimization-pillar:hover,#technology .technology-card:hover,#project .optimization-lens:hover,#case .case-card:hover{
+  transform:none!important;border-color:rgba(255,255,255,.98)!important;outline-color:rgba(31,39,51,.085);
+}
+
+/* equal, compact card metrics */
+#overview .info-card{min-height:238px!important;height:100%;padding:30px 32px 30px!important;margin:0!important;display:flex;flex-direction:column;justify-content:flex-start}
+#overview .card-index{margin:0 0 28px!important;font-size:15px!important;font-weight:600!important;letter-spacing:.115em!important;color:rgba(17,17,17,.52)!important}
+#overview .info-card h3{margin:0 0 16px!important;font-size:clamp(28px,2.1vw,35px)!important;line-height:1.12!important}
+#overview .info-card p{margin:0!important;font-size:18px!important;line-height:1.66!important;color:rgba(17,17,17,.70)!important}
+
+#optimization .optimization-pillar{min-height:252px!important;height:100%;padding:30px 32px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#optimization .optimization-pillar>span{margin:0 0 28px!important;font-size:15px!important;font-weight:600!important;letter-spacing:.105em!important;color:rgba(17,17,17,.52)!important}
+#optimization .optimization-pillar h3{margin:0 0 16px!important;font-size:clamp(28px,2.25vw,34px)!important;line-height:1.13!important}
+#optimization .optimization-pillar p{margin:0!important;font-size:18px!important;line-height:1.66!important;color:rgba(17,17,17,.70)!important}
+
+#technology .final-capability-grid .technology-card{min-height:202px!important;height:100%;padding:30px 32px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#technology .final-capability-grid .technology-card:before{display:none!important}
+#technology .tech-tag{position:static!important;display:block!important;margin:0 0 30px!important;font-size:15px!important;font-weight:600!important;letter-spacing:.115em!important;color:rgba(17,17,17,.52)!important}
+#technology .tech-tag:before{display:none!important}
+#technology .technology-card h3{margin:0 0 14px!important;font-size:28px!important;line-height:1.14!important}
+#technology .technology-card .tech-en{margin:0!important;font-size:18px!important;line-height:1.48!important;color:rgba(17,17,17,.62)!important}
+
+#project .optimization-lens{min-height:222px!important;height:100%;padding:30px 28px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#project .optimization-lens:before{display:none!important}
+#project .optimization-lens h3{margin:0 0 18px!important;font-size:30px!important;line-height:1.08!important}
+#project .optimization-lens p{margin:0!important;font-size:18px!important;line-height:1.68!important;color:rgba(17,17,17,.70)!important}
+
+#case .case-card{height:100%;padding:34px 34px!important}
+#case .case-top span{font-size:15px!important;letter-spacing:.10em!important}
+#case .case-card h3{margin-top:24px!important}
+#case .case-card p,#case .case-card li{font-size:18px!important;line-height:1.68!important}
+
+/* Ordered process: readable step labels instead of tiny decorative numerals */
+.final-process-list li{grid-template-columns:142px 1fr!important;padding:32px 0!important;align-items:start}
+.final-process-list strong{font-size:17px!important;line-height:1.25!important;letter-spacing:.10em!important;font-weight:600!important;color:rgba(255,255,255,.62)!important;padding-top:6px}
+.final-process-list h3{margin-top:0!important;font-size:34px!important}
+.final-process-list p{font-size:18px!important;line-height:1.68!important}
+
+@media(max-width:1100px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{min-height:0!important}
+}
+@media(max-width:760px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{padding:26px 24px!important;border-radius:22px!important}
+  #overview .card-index,#optimization .optimization-pillar>span,#technology .tech-tag{margin-bottom:22px!important;font-size:14px!important}
+  #overview .info-card p,#optimization .optimization-pillar p,#technology .technology-card .tech-en,#project .optimization-lens p{font-size:17px!important}
+  #project .optimization-lens h3{font-size:27px!important}
+  .final-process-list li{grid-template-columns:1fr!important;gap:10px;padding:26px 0!important}
+  .final-process-list strong{font-size:14px!important;padding-top:0}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -582,11 +679,11 @@
 <p>제작부터 시작하지 않습니다. 현재 구조에서 비용이 발생하는 이유를 먼저 찾고, 개선안을 설계한 뒤 제조성과 품질을 검증합니다.</p>
 </div>
 <ol class="process-list final-process-list reveal">
-<li><strong>01</strong><div><h3>ANALYZE</h3><p>제품·장비의 구조, 부품, 사양, 공법, 조달조건을 한 번에 분석합니다.</p></div></li>
-<li><strong>02</strong><div><h3>IDENTIFY</h3><p>과사양, 복잡한 구조, 불필요 공정, 비효율적인 공급조건 등 원가 발생 요인을 구분합니다.</p></div></li>
-<li><strong>03</strong><div><h3>REDESIGN</h3><p>성능과 품질은 유지하면서 부품 수, 형상, 조립방식, 전자사양과 제조공법을 다시 설계합니다.</p></div></li>
-<li><strong>04</strong><div><h3>SOURCE</h3><p>설계에 맞는 CNC, 판금, 금형, OEM, 사출 등 제조공법과 공급망을 비교·구성합니다.</p></div></li>
-<li><strong>05</strong><div><h3>VALIDATE</h3><p>시제품과 제조조건을 기준으로 비용, 품질, 생산성, 조달성을 검증한 뒤 실행합니다.</p></div></li>
+<li><strong>STEP 01</strong><div><h3>ANALYZE</h3><p>제품·장비의 구조, 부품, 사양, 공법, 조달조건을 한 번에 분석합니다.</p></div></li>
+<li><strong>STEP 02</strong><div><h3>IDENTIFY</h3><p>과사양, 복잡한 구조, 불필요 공정, 비효율적인 공급조건 등 원가 발생 요인을 구분합니다.</p></div></li>
+<li><strong>STEP 03</strong><div><h3>REDESIGN</h3><p>성능과 품질은 유지하면서 부품 수, 형상, 조립방식, 전자사양과 제조공법을 다시 설계합니다.</p></div></li>
+<li><strong>STEP 04</strong><div><h3>SOURCE</h3><p>설계에 맞는 CNC, 판금, 금형, OEM, 사출 등 제조공법과 공급망을 비교·구성합니다.</p></div></li>
+<li><strong>STEP 05</strong><div><h3>VALIDATE</h3><p>시제품과 제조조건을 기준으로 비용, 품질, 생산성, 조달성을 검증한 뒤 실행합니다.</p></div></li>
 </ol>
 </div>
 </section>
@@ -615,13 +712,13 @@
 </div>
 <div class="case-grid">
 <article class="case-card reveal">
-<div class="case-top"><span>CASE 01 / COST REDUCTION</span><strong class="case-metric">-15%</strong></div>
+<div class="case-top"><span>COST REDUCTION</span><strong class="case-metric">-15%</strong></div>
 <h3>A기업 | 약탕기 내열 글라스</h3>
 <p>약탕기에 적용되는 내열 글라스의 원가 구조와 조달 조건을 검토하고 사양·공급 조건을 최적화했습니다.</p>
 <div class="case-result"><span>RESULT</span><strong>기존 대비 원가 15% 절감 달성</strong></div>
 </article>
 <article class="case-card reveal">
-<div class="case-top"><span>CASE 02 / DESIGN OPTIMIZATION</span><strong class="case-metric">LESS</strong></div>
+<div class="case-top"><span>DESIGN OPTIMIZATION</span><strong class="case-metric">LESS</strong></div>
 <h3>B기업 | 산업설비 용접·가공 구조</h3>
 <p>설계 개선을 통해 용접 공정을 줄이고 가공부품 수를 축소했습니다. 조립 구조와 가공 형상을 단순화해 가공단가를 낮추는 방향으로 제조 구조를 개선했습니다.</p>
 <div class="case-result-grid"><div><span>WELDING</span><strong>공정 축소</strong></div><div><span>MACHINED PARTS</span><strong>부품 수 축소</strong></div><div><span>MACHINING COST</span><strong>가공단가 절감</strong></div></div>
