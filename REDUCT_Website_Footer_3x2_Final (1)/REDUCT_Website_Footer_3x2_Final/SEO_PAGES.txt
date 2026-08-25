@@ -1,9 +1,0 @@
-검색어별 상세 페이지:
-/cost-reduction/ 제조 원가절감·장비 원가절감
-/equipment-parts/ 장비 부품 제작·산업설비 부품 제작
-/manufacturing-outsourcing/ 장비 제작 외주·제작 외주 업체·OEM 제작
-/mechanical-design/ 기구설계 업체·구조설계·도면 설계 업체
-/mold-design/ 금형 설계·금형 제작 업체
-/hardware-firmware/ 하드웨어·펌웨어 개발 업체
-
-GitHub 루트에 폴더 구조 그대로 업로드 후 sitemap.xml을 Google/Naver에서 다시 제출/갱신하세요.
