@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reduct.co.kr/sitemap.xml
