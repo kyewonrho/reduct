@@ -10,6 +10,8 @@
 
 .apply-hero p,.form-section-head p,.scenario p,.privacy-box,.submit-bar p,.thanks-box p{word-break:keep-all;overflow-wrap:normal;text-wrap:pretty}
 @media(prefers-reduced-motion:reduce){.career-hero:before,.career-hero:after{animation:none}}
+.security-honeypot{position:absolute!important;left:-100000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.security-note{margin-top:8px;color:#888;font-size:11px;line-height:1.55}
 
 
 /* careers application functional/layout hotfix */
@@ -40,14 +42,14 @@
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_url" value="https://reduct.co.kr/careers/apply/">
 <input id="pdfAttachment" name="입사지원서_PDF" type="file" accept="application/pdf" style="display:none">
-<input type="text" name="_honey" style="display:none">
+<div class="security-honeypot" aria-hidden="true"><label>Leave this field empty<input type="text" name="_honey" id="companyWebsite" tabindex="-1" autocomplete="off"></label></div><input type="hidden" id="formLoadedAt" name="form_loaded_at">
 <section class="form-section" id="basic">
 <div class="form-section-head"><div><span>01 / BASIC</span><h2>기본정보</h2><p>지원에 필요한 기본정보를 입력합니다.</p></div></div>
 <div class="basic-profile-layout">
   <div class="photo-column">
     <div class="photo-preview" id="photoPreview">증명사진<br>미리보기</div>
-    <label class="upload-btn">사진 선택<input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp"></label>
-    <small id="photoMeta">JPG / PNG / WEBP, 최대 5MB</small>
+    <label class="upload-btn">사진 선택<input id="photoInput" type="file" accept="image/jpeg,image/png"></label>
+    <small id="photoMeta">JPG / PNG, 최대 5MB</small><div class="security-note">파일 형식과 이미지 크기를 검사한 뒤 새 JPEG로 재생성하여 사용합니다.</div>
   </div>
   <div class="basic-info-fields">
     <div class="field-grid">
@@ -76,7 +78,7 @@
 <div class="form-section-head"><div><span>07 / ROLE QUESTIONS</span><h2>상황질문</h2><p>지원 직무의 실제 업무상황을 기준으로 판단 방식, 스트레스 대응, 협업 방식을 확인합니다.</p></div></div>
 <div class="scenario-list" id="scenarioList"><div class="privacy-box">먼저 기본정보에서 지원 분야를 선택해 주세요.</div></div>
 </section>
-<section class="form-section" id="consent"><div class="form-section-head"><div><span>08 / SUBMIT</span><h2>제출 전 확인</h2></div></div><div class="privacy-box"><strong>개인정보 안내</strong><br>수집 목적: 채용 지원자 확인, 지원서 평가, 면접 및 채용 연락. 수집 항목: 지원서에 직접 입력한 정보와 첨부 사진. 지원서에는 주민등록번호, 가족관계, 종교 등 채용에 불필요한 민감정보를 입력하지 마십시오.<br><br>보유기간은 회사 채용정책에 따라 운영되며, 채용 절차 종료 후 내부 기준에 따라 파기됩니다.</div><label class="consent"><input type="checkbox" id="privacyConsent" required><span>위 개인정보 수집·이용 안내를 확인했으며 채용 절차를 위한 정보 처리에 동의합니다. <span class="req">*</span></span></label><div class="submit-status" id="submitStatus"></div></section>
+<section class="form-section" id="consent"><div class="form-section-head"><div><span>08 / SUBMIT</span><h2>제출 전 확인</h2></div></div><div class="privacy-box"><strong>개인정보 안내</strong><br>수집 목적: 채용 지원자 확인, 지원서 평가, 면접 및 채용 연락. 수집 항목: 지원서에 직접 입력한 정보와 첨부 사진. 증명사진은 브라우저에서 JPEG로 재생성하여 메타데이터를 제거한 뒤 PDF에 포함합니다. 지원서에는 주민등록번호, 가족관계, 종교 등 채용에 불필요한 민감정보를 입력하지 마십시오.<br><br>보유기간은 회사 채용정책에 따라 운영되며, 채용 절차 종료 후 내부 기준에 따라 파기됩니다.</div><label class="consent"><input type="checkbox" id="privacyConsent" required><span>위 개인정보 수집·이용 안내를 확인했으며 채용 절차를 위한 정보 처리에 동의합니다. <span class="req">*</span></span></label><div class="submit-status" id="submitStatus"></div></section>
 <div class="submit-bar"><p>입력 내용은 제출 전까지 이 브라우저에 자동 저장됩니다.</p><button class="submit-btn" id="submitBtn" type="submit">입사지원서 제출</button></div>
 </form></div></main><script>
 (() => {
@@ -85,6 +87,101 @@
   const DRAFT_KEY = 'reductCareerDraftV2';
   const DB_NAME = 'reductCareerFilesV2';
   const DB_STORE = 'files';
+  const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+  const MAX_PHOTO_PIXELS = 25_000_000;
+  const MAX_PHOTO_EDGE = 8000;
+  const OUTPUT_PHOTO_EDGE = 1800;
+  const SUBMIT_COOLDOWN_MS = 60 * 1000;
+  const MIN_FORM_FILL_MS = 5000;
+  const LAST_SUBMIT_KEY = 'reductCareerLastSubmitAt';
+
+  const loadedAt = Date.now();
+  const loadedAtEl = document.getElementById('formLoadedAt');
+  if(loadedAtEl) loadedAtEl.value = String(loadedAt);
+
+  function bytesEqual(a,b,offset=0){
+    if(a.length < offset + b.length) return false;
+    return b.every((v,i)=>a[offset+i]===v);
+  }
+  function detectImageType(bytes){
+    if(bytesEqual(bytes,[0xFF,0xD8,0xFF])) return 'image/jpeg';
+    if(bytesEqual(bytes,[0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A])) return 'image/png';
+    return '';
+  }
+  function readU32BE(bytes,off){return ((bytes[off]<<24)>>>0)+(bytes[off+1]<<16)+(bytes[off+2]<<8)+bytes[off+3]}
+  function getImageDimensions(bytes,type){
+    if(type==='image/png' && bytes.length>=24){
+      return {width:readU32BE(bytes,16),height:readU32BE(bytes,20)};
+    }
+    if(type==='image/jpeg'){
+      let i=2;
+      const sof=new Set([0xC0,0xC1,0xC2,0xC3,0xC5,0xC6,0xC7,0xC9,0xCA,0xCB,0xCD,0xCE,0xCF]);
+      while(i+9<bytes.length){
+        if(bytes[i]!==0xFF){i++;continue}
+        while(i<bytes.length && bytes[i]===0xFF)i++;
+        const marker=bytes[i++];
+        if(marker===0xD8 || marker===0xD9)continue;
+        if(i+1>=bytes.length)break;
+        const len=(bytes[i]<<8)+bytes[i+1];
+        if(len<2 || i+len>bytes.length)break;
+        if(sof.has(marker) && i+7<bytes.length){
+          return {height:(bytes[i+3]<<8)+bytes[i+4],width:(bytes[i+5]<<8)+bytes[i+6]};
+        }
+        i+=len;
+      }
+    }
+    return null;
+  }
+  async function decodeImage(file){
+    if('createImageBitmap' in window){
+      const bitmap=await createImageBitmap(file,{imageOrientation:'from-image'});
+      return {source:bitmap,width:bitmap.width,height:bitmap.height,close:()=>bitmap.close&&bitmap.close()};
+    }
+    const url=URL.createObjectURL(file);
+    try{
+      const img=await new Promise((resolve,reject)=>{const el=new Image();el.onload=()=>resolve(el);el.onerror=()=>reject(new Error('이미지 파일을 디코딩할 수 없습니다.'));el.src=url});
+      return {source:img,width:img.naturalWidth,height:img.naturalHeight,close:()=>{}};
+    } finally {URL.revokeObjectURL(url)}
+  }
+  async function sanitizePhoto(file){
+    if(!file) throw new Error('사진 파일이 없습니다.');
+    if(file.size<=0 || file.size>MAX_PHOTO_BYTES) throw new Error('사진은 5MB 이하의 JPG 또는 PNG 파일만 사용할 수 있습니다.');
+    const header=new Uint8Array(await file.slice(0,Math.min(file.size,512*1024)).arrayBuffer());
+    const actualType=detectImageType(header);
+    if(!actualType) throw new Error('파일 확장자와 관계없이 실제 JPG 또는 PNG 이미지 파일만 허용됩니다.');
+    if(file.type && !['image/jpeg','image/png'].includes(file.type.toLowerCase())) throw new Error('JPG 또는 PNG 이미지 파일만 허용됩니다.');
+    const dims=getImageDimensions(header,actualType);
+    if(dims && (dims.width<=0 || dims.height<=0 || dims.width>MAX_PHOTO_EDGE || dims.height>MAX_PHOTO_EDGE || dims.width*dims.height>MAX_PHOTO_PIXELS)){
+      throw new Error('이미지 해상도가 너무 큽니다. 25MP 이하의 사진을 사용해 주세요.');
+    }
+    const decoded=await decodeImage(file);
+    try{
+      if(decoded.width<=0 || decoded.height<=0 || decoded.width>MAX_PHOTO_EDGE || decoded.height>MAX_PHOTO_EDGE || decoded.width*decoded.height>MAX_PHOTO_PIXELS){
+        throw new Error('이미지 해상도가 너무 큽니다. 25MP 이하의 사진을 사용해 주세요.');
+      }
+      const scale=Math.min(1,OUTPUT_PHOTO_EDGE/Math.max(decoded.width,decoded.height));
+      const width=Math.max(1,Math.round(decoded.width*scale));
+      const height=Math.max(1,Math.round(decoded.height*scale));
+      const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+      const ctx=canvas.getContext('2d',{alpha:false});
+      if(!ctx) throw new Error('이미지 처리 기능을 사용할 수 없습니다.');
+      ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);ctx.drawImage(decoded.source,0,0,width,height);
+      const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('사진을 안전한 형식으로 변환하지 못했습니다.')),'image/jpeg',0.88));
+      if(blob.size>MAX_PHOTO_BYTES) throw new Error('재처리된 사진 용량이 너무 큽니다. 다른 사진을 사용해 주세요.');
+      return new File([blob],'profile-photo-sanitized.jpg',{type:'image/jpeg',lastModified:Date.now()});
+    } finally {decoded.close()}
+  }
+  function checkSubmitSecurity(){
+    const honey=document.getElementById('companyWebsite');
+    if(honey && honey.value.trim()) throw new Error('자동 제출이 감지되었습니다.');
+    if(Date.now()-loadedAt<MIN_FORM_FILL_MS) throw new Error('지원서 제출이 너무 빠릅니다. 잠시 후 다시 제출해 주세요.');
+    const last=Number(localStorage.getItem(LAST_SUBMIT_KEY)||0);
+    if(last && Date.now()-last<SUBMIT_COOLDOWN_MS){
+      const sec=Math.ceil((SUBMIT_COOLDOWN_MS-(Date.now()-last))/1000);
+      throw new Error(`중복 제출 방지를 위해 ${sec}초 후 다시 제출해 주세요.`);
+    }
+  }
+
 
   const form = document.getElementById('applicationForm');
   const roleEl = document.getElementById('role');
@@ -243,17 +340,26 @@
   form.addEventListener('change',scheduleSave);
 
   photoInput.addEventListener('change',async()=>{
-    const f=photoInput.files && photoInput.files[0];
-    if(!f)return;
-    if(f.size>5*1024*1024){alert('사진은 5MB 이하로 선택해 주세요.');photoInput.value='';return}
-    if(!/^image\/(jpeg|png|webp)$/i.test(f.type)){alert('JPG, PNG, WEBP 이미지 파일만 선택해 주세요.');photoInput.value='';return}
-    photoRecord={name:f.name,type:f.type,blob:f};
-    try{await idbSet('photo',photoRecord)}catch(e){}
-    if(previewUrl)URL.revokeObjectURL(previewUrl);
-    previewUrl=URL.createObjectURL(f);
-    photoPreview.innerHTML=`<img src="${previewUrl}" alt="증명사진 미리보기">`;
-    photoMeta.textContent=`${f.name} · ${(f.size/1024/1024).toFixed(1)}MB · 자동 저장됨`;
-    scheduleSave();
+    const raw=photoInput.files && photoInput.files[0];
+    if(!raw)return;
+    photoMeta.textContent='사진 파일을 검사하고 안전한 형식으로 변환 중입니다…';
+    photoInput.disabled=true;
+    try{
+      const safeFile=await sanitizePhoto(raw);
+      const dt=new DataTransfer();dt.items.add(safeFile);photoInput.files=dt.files;
+      photoRecord={name:safeFile.name,type:'image/jpeg',blob:safeFile};
+      try{await idbSet('photo',photoRecord)}catch(e){}
+      if(previewUrl)URL.revokeObjectURL(previewUrl);
+      previewUrl=URL.createObjectURL(safeFile);
+      photoPreview.innerHTML=`<img src="${previewUrl}" alt="증명사진 미리보기">`;
+      photoMeta.textContent=`안전하게 재생성된 JPEG · ${(safeFile.size/1024/1024).toFixed(1)}MB · 자동 저장됨`;
+      scheduleSave();
+    }catch(err){
+      console.error(err);photoInput.value='';photoRecord=null;
+      photoPreview.innerHTML='증명사진<br>미리보기';
+      photoMeta.textContent=err&&err.message?err.message:'사진을 처리하지 못했습니다.';
+      alert(photoMeta.textContent);
+    }finally{photoInput.disabled=false}
   });
 
   function monthsBetween(a,b){if(!a)return 0;const s=new Date(a),e=b?new Date(b):new Date();if(Number.isNaN(s.getTime())||Number.isNaN(e.getTime()))return 0;return Math.max(0,(e.getFullYear()-s.getFullYear())*12+e.getMonth()-s.getMonth())}
@@ -288,7 +394,7 @@
     const fit=suitability();
     const role=roleEl.value;
     const skills=Object.entries(getSkills()).map(([k,v])=>`${k}: ${LEVELS.find(x=>x[0]===v)?.[1]||v}`).join(' / ')||'-';
-    const photoFile=(photoInput.files&&photoInput.files[0])||null;
+    const photoFile=(photoRecord&&photoRecord.blob)?photoRecord.blob:null;
     let photoSrc='';
     try{photoSrc=await imageDataUrl(photoFile)}catch(e){}
     const education=`${document.getElementById('eduLevel').value||'-'} / ${document.getElementById('eduSchool').value||'-'} / ${document.getElementById('eduMajor').value||'-'} / ${document.getElementById('eduStatus').value||'-'} / ${document.getElementById('eduStart').value||'-'} ~ ${document.getElementById('eduEnd').value||'-'}`;
@@ -361,6 +467,7 @@
   form.addEventListener('submit',async e=>{
     e.preventDefault();
     const status=document.getElementById('submitStatus');const btn=document.getElementById('submitBtn');
+    try{checkSubmitSecurity()}catch(err){status.textContent=err.message;status.className='submit-status error';return}
     if(!form.checkValidity()){form.reportValidity();status.textContent='필수 입력 항목을 확인해 주세요.';status.className='submit-status error';return}
     if(!roleEl.value){roleEl.focus();status.textContent='지원 분야를 선택해 주세요.';status.className='submit-status error';return}
     const fit=suitability();
@@ -377,6 +484,7 @@
     try{
       await attachPdf();
       btn.textContent='전송 중…';status.textContent='PDF를 채용 담당 이메일로 전송하고 있습니다.';
+      localStorage.setItem(LAST_SUBMIT_KEY,String(Date.now()));
       sessionStorage.setItem('reductCareerSubmitting','1');
       HTMLFormElement.prototype.submit.call(form);
     }catch(err){
@@ -389,7 +497,7 @@
     Object.entries(d).forEach(([k,v])=>{const el=document.getElementById(k);if(el && typeof v!=='object'){if(el.type==='checkbox')el.checked=!!v;else el.value=v}});
     languages=Array.isArray(d.languages)?d.languages:[];careers=Array.isArray(d.careers)?d.careers:[];restoredSkills=d.skills||{};restoredScenarios=d.scenarios||{};
     renderLanguages();renderCareers();renderSkills(restoredSkills);renderScenarios(restoredScenarios);
-    try{photoRecord=await idbGet('photo');if(photoRecord&&photoRecord.blob){if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=URL.createObjectURL(photoRecord.blob);photoPreview.innerHTML=`<img src="${previewUrl}" alt="증명사진 미리보기">`;photoMeta.textContent=`저장된 사진: ${photoRecord.name}`;try{const f=new File([photoRecord.blob],photoRecord.name,{type:photoRecord.type||photoRecord.blob.type});const dt=new DataTransfer();dt.items.add(f);photoInput.files=dt.files}catch(e){}}}catch(e){}
+    try{photoRecord=await idbGet('photo');if(photoRecord&&photoRecord.blob){let safe=photoRecord.blob;if((safe.type||'').toLowerCase()!=='image/jpeg'){safe=await sanitizePhoto(new File([safe],photoRecord.name||'photo',{type:photoRecord.type||safe.type}));photoRecord={name:'profile-photo-sanitized.jpg',type:'image/jpeg',blob:safe};await idbSet('photo',photoRecord)}if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=URL.createObjectURL(safe);photoPreview.innerHTML=`<img src="${previewUrl}" alt="증명사진 미리보기">`;photoMeta.textContent='저장된 안전 처리 사진을 불러왔습니다.';try{const f=new File([safe],photoRecord.name||'profile-photo-sanitized.jpg',{type:'image/jpeg'});const dt=new DataTransfer();dt.items.add(f);photoInput.files=dt.files}catch(e){}}}catch(e){console.warn('Stored photo restore failed',e)}
     saveIndicator.classList.add('saved');saveText.textContent=localStorage.getItem(DRAFT_KEY)?'저장된 지원서를 불러왔습니다':'자동 저장 준비됨';
   }
 
@@ -399,7 +507,7 @@
       await clearDraftStorage();
       form.reset();languages=[];careers=[];restoredSkills={};restoredScenarios={};photoRecord=null;
       if(previewUrl){try{URL.revokeObjectURL(previewUrl)}catch(e){}previewUrl=''}
-      photoPreview.innerHTML='증명사진<br>미리보기';photoMeta.textContent='JPG / PNG / WEBP, 최대 5MB';
+      photoPreview.innerHTML='증명사진<br>미리보기';photoMeta.textContent='JPG / PNG, 최대 5MB';
       renderLanguages();renderCareers();renderSkills();renderScenarios();saveText.textContent='자동 저장 준비됨';
     }
   });

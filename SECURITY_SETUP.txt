@@ -1,0 +1,25 @@
+REDUCT WEBSITE SECURITY SETUP
+
+[코드에 이미 적용됨]
+- HTTPS HSTS
+- Content-Security-Policy (CSP)
+- X-Content-Type-Options: nosniff
+- Clickjacking 차단 (X-Frame-Options / frame-ancestors)
+- Referrer / Permissions Policy
+- 채용페이지 no-store
+- 지원서 Honeypot
+- 60초 브라우저 중복제출 방지
+- 증명사진 JPG/PNG Magic Byte 검사
+- 최대 5MB / 25MP / 8000px 제한
+- 사진 디코딩 후 새 JPEG로 재인코딩 (메타데이터/부가 데이터 제거)
+- 원본 사진은 FormSubmit에 직접 첨부하지 않고 PDF 내부에만 포함
+- 제출 성공 후 임시 지원서 및 IndexedDB 사진 삭제
+
+[Vercel Dashboard에서 추가 설정 권장]
+1. Project > Firewall / Security에서 System Mitigations가 활성화되어 있는지 확인
+2. /careers/apply 및 Form 제출 트래픽에 Rate Limit 권장: 동일 IP 기준 10분 5회 수준
+3. 비정상 트래픽 발생 시 Attack Mode를 1h~24h 활성화
+4. OWASP Managed Rules가 사용 가능한 플랜이라면 활성화 후 Challenge 모드부터 적용
+5. Vercel/GitHub 계정 2FA 활성화
+
+주의: VPN은 공개 웹사이트 방어 기능이 아닙니다. 관리자 계정 보호와 원격 사내망 접근에는 VPN/Zero Trust가 유효하지만, 공개 홈페이지는 Edge Firewall/WAF, 보안 헤더, 업로드 검증, Rate Limit이 핵심입니다.
