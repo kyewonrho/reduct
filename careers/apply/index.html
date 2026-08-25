@@ -28,21 +28,25 @@
 @media(max-width:900px){.basic-profile-layout{grid-template-columns:170px minmax(0,1fr);gap:22px}.photo-preview{height:225px}}
 @media(max-width:680px){.basic-profile-layout{grid-template-columns:1fr}.photo-column{width:min(220px,100%);margin:0 auto 10px}.photo-preview{height:286px}.field-grid,.field-grid.three{grid-template-columns:1fr}.skill-row{grid-template-columns:1fr}.photo-column small{text-align:left}}
 
-</style></head><body class="apply-page">
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head><body class="apply-page">
 <header class="career-header"><div class="shell career-header-inner"><a class="career-brand" href="/" aria-label="REDUCT 홈"><svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg></a><nav class="career-nav"><a href="/careers/">채용안내</a><a href="/">COMPANY SITE</a></nav></div></header>
 <section class="apply-hero"><div class="shell"><div class="crumb">CAREERS / APPLICATION</div><h1>입사지원</h1><p>지원서는 입력할 때마다 자동 저장됩니다. 사진을 포함한 임시 지원서는 현재 브라우저에만 저장되며, 제출 완료 후 자동으로 삭제됩니다.</p><div class="save-indicator saved" id="saveIndicator"><span class="save-dot"></span><span id="saveText">자동 저장 준비됨</span></div></div></section>
 <main class="apply-wrap"><div class="shell apply-layout"><aside class="apply-sidebar"><strong>지원서 항목</strong><a href="#basic">기본정보</a><a href="#skills">직무역량</a><a href="#education">최종학력</a><a href="#languages">외국어</a><a href="#career">경력</a><a href="#essays">자기소개</a><a href="#questions">상황질문</a><a href="#consent">제출</a></aside>
 <form class="apply-form" id="applicationForm" action="https://formsubmit.co/ceo@reduct.co.kr" method="POST" enctype="multipart/form-data" novalidate>
-<input type="hidden" name="_next" value="https://reduct.co.kr/careers/thanks/">
+<input type="hidden" name="_next" value="https://reduct.co.kr/careers/thanks/?submitted=1">
 <input type="hidden" name="_template" value="table">
-<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_url" value="https://reduct.co.kr/careers/apply/">
+<input id="pdfAttachment" name="입사지원서_PDF" type="file" accept="application/pdf" style="display:none">
 <input type="text" name="_honey" style="display:none">
 <section class="form-section" id="basic">
 <div class="form-section-head"><div><span>01 / BASIC</span><h2>기본정보</h2><p>지원에 필요한 기본정보를 입력합니다.</p></div></div>
 <div class="basic-profile-layout">
   <div class="photo-column">
     <div class="photo-preview" id="photoPreview">증명사진<br>미리보기</div>
-    <label class="upload-btn">사진 선택<input id="photoInput" name="증명사진" type="file" accept="image/jpeg,image/png,image/webp"></label>
+    <label class="upload-btn">사진 선택<input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp"></label>
     <small id="photoMeta">JPG / PNG / WEBP, 최대 5MB</small>
   </div>
   <div class="basic-info-fields">
@@ -270,28 +274,114 @@
     if(!el){el=document.createElement('input');el.type='hidden';el.name=name;el.dataset.generated='1';form.appendChild(el)}el.value=value;
   }
 
-  form.addEventListener('submit',e=>{
+
+  function roleFileCode(role){return({'영업':'Sales','영업관리':'SalesOps','하드웨어 개발':'Hardware','펌웨어 개발':'Firmware','SW 개발':'Software','마케팅':'Marketing'})[role]||'Application'}
+  function nl2br(v){return esc(v||'-').replace(/\n/g,'<br>')}
+  function pdfField(label,value){return `<div style="border-top:1px solid #dedede;padding:10px 0;display:grid;grid-template-columns:150px 1fr;gap:18px"><b style="font-size:12px;color:#666">${esc(label)}</b><div style="font-size:13px;line-height:1.65;color:#111">${nl2br(value)}</div></div>`}
+  function pdfSection(title,body){return `<section style="margin-top:26px;break-inside:avoid"><div style="font-size:10px;letter-spacing:.16em;color:#777;margin-bottom:8px">REDUCT CAREERS</div><h2 style="font-size:22px;margin:0 0 8px;letter-spacing:-.03em">${esc(title)}</h2>${body}</section>`}
+  async function imageDataUrl(file){
+    if(!file)return '';
+    return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});
+  }
+  async function buildApplicationPdf(){
+    if(!window.html2canvas || !window.jspdf || !window.jspdf.jsPDF) throw new Error('PDF 생성 모듈을 불러오지 못했습니다. 네트워크를 확인해 주세요.');
+    const fit=suitability();
+    const role=roleEl.value;
+    const skills=Object.entries(getSkills()).map(([k,v])=>`${k}: ${LEVELS.find(x=>x[0]===v)?.[1]||v}`).join(' / ')||'-';
+    const photoFile=(photoInput.files&&photoInput.files[0])||null;
+    let photoSrc='';
+    try{photoSrc=await imageDataUrl(photoFile)}catch(e){}
+    const education=`${document.getElementById('eduLevel').value||'-'} / ${document.getElementById('eduSchool').value||'-'} / ${document.getElementById('eduMajor').value||'-'} / ${document.getElementById('eduStatus').value||'-'} / ${document.getElementById('eduStart').value||'-'} ~ ${document.getElementById('eduEnd').value||'-'}`;
+    const qHtml=(ROLE_QUESTIONS[role]||[]).map((q,i)=>`<div style="margin:14px 0 0;padding:14px 16px;background:#f5f5f5;border-radius:12px"><b style="font-size:13px">${esc(q[0])}</b><div style="margin-top:5px;color:#666;font-size:12px;line-height:1.55">${esc(q[1])}</div><div style="margin-top:10px;font-size:13px;line-height:1.7">${nl2br(collectScenarios()['q'+(i+1)]||'-')}</div></div>`).join('');
+    const root=document.createElement('div');
+    root.id='resumePdfRender';
+    root.style.cssText="position:fixed;left:-100000px;top:0;width:794px;background:#fff;color:#050505;padding:44px 48px;font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif;font-weight:500;z-index:-9999";
+    root.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #050505;padding-bottom:18px">
+        <div><div style="font-size:28px;font-weight:800;letter-spacing:.06em">REDUCT</div><div style="font-size:10px;letter-spacing:.17em;color:#777;margin-top:5px">RECRUITMENT APPLICATION</div></div>
+        <div style="text-align:right"><div style="font-size:28px;font-weight:800;letter-spacing:-.04em">입사지원서</div><div style="font-size:11px;color:#777;margin-top:5px">${new Date().toLocaleDateString('ko-KR')}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:${photoSrc?'128px ':'0px '}1fr;gap:${photoSrc?'24px':'0'};margin-top:26px;align-items:start">
+        ${photoSrc?`<img src="${photoSrc}" style="width:128px;height:164px;object-fit:cover;border-radius:10px;border:1px solid #ddd">`:''}
+        <div>
+          <div style="font-size:11px;color:#777;letter-spacing:.12em">${esc(role)}</div>
+          <div style="font-size:30px;font-weight:800;margin:5px 0 12px;letter-spacing:-.04em">${esc(document.getElementById('name').value)}</div>
+          ${pdfField('연락처',document.getElementById('phone').value)}
+          ${pdfField('개인 이메일',document.getElementById('email').value)}
+          ${pdfField('희망연봉',document.getElementById('desiredSalary').value||'-')}
+          ${pdfField('입사 가능일',document.getElementById('availableDate').value||'-')}
+        </div>
+      </div>
+      ${pdfSection('기본정보',pdfField('주소',document.getElementById('address').value||'-')+pdfField('최종학력',education))}
+      ${pdfSection('직무역량 자기평가',pdfField('지원 직무',role)+pdfField('역량',skills))}
+      ${pdfSection('외국어',`<div style="font-size:13px;line-height:1.75">${nl2br(langSummary())}</div>`)}
+      ${pdfSection('경력',`<div style="font-size:13px;line-height:1.75">${nl2br(careerSummary())}</div>`)}
+      ${pdfSection('자기소개',`<div style="font-size:13px;line-height:1.8">${nl2br(document.getElementById('selfIntro').value)}</div>`)}
+      ${pdfSection('입사 후 포부',`<div style="font-size:13px;line-height:1.8">${nl2br(document.getElementById('aspiration').value)}</div>`)}
+      ${pdfSection('직무별 상황질문',qHtml)}
+      ${pdfSection('채용 검토 참고',pdfField('사전 직무 적합도',`${fit.total}/100 (${fit.band})`)+pdfField('산정 근거',`직무역량 ${fit.skillScore}/60 · 경력 ${fit.expScore}/20 (${fit.years}년) · 서술응답 완성도 ${fit.narrativeScore}/20 · 상위역량 ${fit.top}`)+`<div style="margin-top:10px;font-size:10px;color:#888;line-height:1.55">※ 지원자가 입력한 직무 관련 역량·경력·서술응답만으로 산출한 서류 검토 참고값입니다. 사진, 주소, 학력연도, 외국어 정보는 점수에 사용하지 않습니다.</div>`)}
+      <div style="margin-top:34px;padding-top:12px;border-top:1px solid #ddd;font-size:9px;color:#999;letter-spacing:.08em">REDUCT Co., Ltd. · Confidential Recruitment Document</div>`;
+    document.body.appendChild(root);
+    try{
+      if(document.fonts&&document.fonts.ready) await document.fonts.ready;
+      const img=root.querySelector('img'); if(img&&img.decode){try{await img.decode()}catch(e){}}
+      const canvas=await html2canvas(root,{backgroundColor:'#ffffff',scale:1.25,useCORS:true,logging:false,windowWidth:794});
+      const {jsPDF}=window.jspdf;
+      const pdf=new jsPDF({orientation:'p',unit:'mm',format:'a4',compress:true});
+      const pageW=210,pageH=297;
+      const pagePx=Math.floor(canvas.width*(pageH/pageW));
+      let y=0,page=0;
+      while(y<canvas.height){
+        const sliceH=Math.min(pagePx,canvas.height-y);
+        const slice=document.createElement('canvas');slice.width=canvas.width;slice.height=sliceH;
+        const ctx=slice.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,slice.width,slice.height);ctx.drawImage(canvas,0,y,canvas.width,sliceH,0,0,canvas.width,sliceH);
+        if(page>0)pdf.addPage();
+        const imgData=slice.toDataURL('image/jpeg',0.78);
+        const renderH=pageW*(sliceH/canvas.width);
+        pdf.addImage(imgData,'JPEG',0,0,pageW,renderH,undefined,'FAST');
+        y+=sliceH;page++;
+      }
+      return pdf.output('blob');
+    }finally{root.remove()}
+  }
+  async function attachPdf(){
+    const status=document.getElementById('submitStatus');
+    status.textContent='입사지원서 PDF를 생성하고 있습니다.';status.className='submit-status';
+    const blob=await buildApplicationPdf();
+    if(blob.size>9*1024*1024) throw new Error('생성된 PDF 용량이 너무 큽니다. 증명사진 용량을 줄인 후 다시 제출해 주세요.');
+    const code=roleFileCode(roleEl.value),name=(document.getElementById('name').value||'Applicant').replace(/[\\/:*?"<>|\s]+/g,'_');
+    const dt=new DataTransfer();dt.items.add(new File([blob],`REDUCT_Application_${code}_${name}_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.pdf`,{type:'application/pdf'}));
+    document.getElementById('pdfAttachment').files=dt.files;
+  }
+  async function clearDraftStorage(){
+    try{localStorage.removeItem(DRAFT_KEY)}catch(e){}
+    try{indexedDB.deleteDatabase(DB_NAME)}catch(e){}
+  }
+
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
     const status=document.getElementById('submitStatus');const btn=document.getElementById('submitBtn');
-    if(!form.checkValidity()){e.preventDefault();form.reportValidity();status.textContent='필수 입력 항목을 확인해 주세요.';status.className='submit-status error';return}
-    if(!roleEl.value){e.preventDefault();roleEl.focus();return}
+    if(!form.checkValidity()){form.reportValidity();status.textContent='필수 입력 항목을 확인해 주세요.';status.className='submit-status error';return}
+    if(!roleEl.value){roleEl.focus();status.textContent='지원 분야를 선택해 주세요.';status.className='submit-status error';return}
     const fit=suitability();
     setHidden('_subject',`[REDUCT 입사지원] ${roleEl.value} / ${document.getElementById('name').value}`);
+    setHidden('_replyto',document.getElementById('email').value);
     setHidden('지원 직무',roleEl.value);
-    setHidden('이름',document.getElementById('name').value);
+    setHidden('지원자',document.getElementById('name').value);
     setHidden('연락처',document.getElementById('phone').value);
     setHidden('개인 이메일',document.getElementById('email').value);
-    setHidden('희망연봉',document.getElementById('desiredSalary').value||'-');
-    setHidden('입사 가능일',document.getElementById('availableDate').value||'-');
-    setHidden('주소',document.getElementById('address').value||'-');
-    setHidden('최종학력',`${document.getElementById('eduLevel').value||'-'} / ${document.getElementById('eduSchool').value||'-'} / ${document.getElementById('eduMajor').value||'-'} / ${document.getElementById('eduStatus').value||'-'} / ${document.getElementById('eduStart').value||'-'} ~ ${document.getElementById('eduEnd').value||'-'}`);
-    setHidden('외국어',langSummary());setHidden('경력',careerSummary());
-    setHidden('직무역량 자기평가',Object.entries(getSkills()).map(([k,v])=>`${k}: ${LEVELS.find(x=>x[0]===v)?.[1]||v}`).join(' / '));
-    setHidden('자기소개',document.getElementById('selfIntro').value);setHidden('입사 후 포부',document.getElementById('aspiration').value);
-    setHidden('직무별 상황질문',questionSummary());
     setHidden('사전 직무 적합도',`${fit.total}/100 (${fit.band})`);
     setHidden('적합도 산정 근거',`직무역량 ${fit.skillScore}/60 · 경력 ${fit.expScore}/20 (${fit.years}년) · 서술응답 완성도 ${fit.narrativeScore}/20 · 자기평가 상위역량: ${fit.top}`);
-    setHidden('평가 안내','지원자가 입력한 직무 관련 역량·경력·서술응답만으로 계산한 사전 참고점수입니다. 사진, 주소, 학력연도, 외국어 등은 점수 산정에 사용하지 않았으며 최종 채용판단은 면접과 별도 검토가 필요합니다.');
-    btn.disabled=true;btn.textContent='제출 중…';status.textContent='지원서를 전송하고 있습니다.';status.className='submit-status';
+    setHidden('첨부 안내','상세 입사지원서는 첨부된 PDF를 확인해 주세요.');
+    btn.disabled=true;btn.textContent='PDF 생성 중…';status.textContent='입사지원서 PDF를 생성하고 있습니다.';status.className='submit-status';
+    try{
+      await attachPdf();
+      btn.textContent='전송 중…';status.textContent='PDF를 채용 담당 이메일로 전송하고 있습니다.';
+      sessionStorage.setItem('reductCareerSubmitting','1');
+      HTMLFormElement.prototype.submit.call(form);
+    }catch(err){
+      console.error(err);btn.disabled=false;btn.textContent='입사지원서 제출';status.textContent=err&&err.message?err.message:'PDF 생성 또는 전송 준비 중 오류가 발생했습니다.';status.className='submit-status error';
+    }
   });
 
   async function restore(){
@@ -303,6 +393,16 @@
     saveIndicator.classList.add('saved');saveText.textContent=localStorage.getItem(DRAFT_KEY)?'저장된 지원서를 불러왔습니다':'자동 저장 준비됨';
   }
 
+  window.addEventListener('pageshow',async()=>{
+    if(sessionStorage.getItem('reductCareerJustSubmitted')==='1'){
+      sessionStorage.removeItem('reductCareerJustSubmitted');
+      await clearDraftStorage();
+      form.reset();languages=[];careers=[];restoredSkills={};restoredScenarios={};photoRecord=null;
+      if(previewUrl){try{URL.revokeObjectURL(previewUrl)}catch(e){}previewUrl=''}
+      photoPreview.innerHTML='증명사진<br>미리보기';photoMeta.textContent='JPG / PNG / WEBP, 최대 5MB';
+      renderLanguages();renderCareers();renderSkills();renderScenarios();saveText.textContent='자동 저장 준비됨';
+    }
+  });
   renderLanguages();renderCareers();renderSkills();renderScenarios();restore();
 })();
 </script></body></html>
