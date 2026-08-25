@@ -73,7 +73,7 @@ body.career-submitting{overflow:hidden}
   <div class="photo-column">
     <div class="photo-preview" id="photoPreview">증명사진<br>미리보기</div>
     <label class="upload-btn">사진 선택<input id="photoInput" type="file" accept="image/jpeg,image/png"></label>
-    <small id="photoMeta">JPG / PNG, 최대 5MB</small><div class="security-note">파일 형식과 이미지 크기를 검사한 뒤 새 JPEG로 재생성하여 사용합니다.</div>
+    <small id="photoMeta">JPG / PNG, 최대 5MB</small><div class="security-note">파일 형식과 이미지 크기를 검사한 뒤 고화질 JPEG로 재생성하여 사용합니다.</div>
   </div>
   <div class="basic-info-fields">
     <div class="field-grid">
@@ -102,7 +102,7 @@ body.career-submitting{overflow:hidden}
 <div class="form-section-head"><div><span>07 / ROLE QUESTIONS</span><h2>상황질문</h2><p>지원 직무의 실제 업무상황을 기준으로 판단 방식, 스트레스 대응, 협업 방식을 확인합니다.</p></div></div>
 <div class="scenario-list" id="scenarioList"><div class="privacy-box">먼저 기본정보에서 지원 분야를 선택해 주세요.</div></div>
 </section>
-<section class="form-section" id="consent"><div class="form-section-head"><div><span>08 / SUBMIT</span><h2>제출 전 확인</h2></div></div><div class="privacy-box"><strong>개인정보 안내</strong><br>수집 목적: 채용 지원자 확인, 지원서 평가, 면접 및 채용 연락. 수집 항목: 지원서에 직접 입력한 정보와 첨부 사진. 증명사진은 브라우저에서 JPEG로 재생성하여 메타데이터를 제거한 뒤 PDF에 포함합니다. 지원서에는 주민등록번호, 가족관계, 종교 등 채용에 불필요한 민감정보를 입력하지 마십시오.<br><br>보유기간은 회사 채용정책에 따라 운영되며, 채용 절차 종료 후 내부 기준에 따라 파기됩니다.</div><label class="consent"><input type="checkbox" id="privacyConsent" required><span>위 개인정보 수집·이용 안내를 확인했으며 채용 절차를 위한 정보 처리에 동의합니다. <span class="req">*</span></span></label><div class="submit-status" id="submitStatus"></div></section>
+<section class="form-section" id="consent"><div class="form-section-head"><div><span>08 / SUBMIT</span><h2>제출 전 확인</h2></div></div><div class="privacy-box"><strong>개인정보 안내</strong><br>수집 목적: 채용 지원자 확인, 지원서 평가, 면접 및 채용 연락. 수집 항목: 지원서에 직접 입력한 정보와 첨부 사진. 증명사진은 브라우저에서 고화질 JPEG로 재생성하여 메타데이터를 제거한 뒤 PDF에 포함합니다. 지원서에는 주민등록번호, 가족관계, 종교 등 채용에 불필요한 민감정보를 입력하지 마십시오.<br><br>보유기간은 회사 채용정책에 따라 운영되며, 채용 절차 종료 후 내부 기준에 따라 파기됩니다.</div><label class="consent"><input type="checkbox" id="privacyConsent" required><span>위 개인정보 수집·이용 안내를 확인했으며 채용 절차를 위한 정보 처리에 동의합니다. <span class="req">*</span></span></label><div class="submit-status" id="submitStatus"></div></section>
 <div class="submit-bar"><p>입력 내용은 제출 전까지 이 브라우저에 자동 저장됩니다.</p><button class="submit-btn" id="submitBtn" type="submit">입사지원서 제출</button></div>
 </form></div></main><script>
 (() => {
@@ -114,7 +114,7 @@ body.career-submitting{overflow:hidden}
   const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
   const MAX_PHOTO_PIXELS = 25_000_000;
   const MAX_PHOTO_EDGE = 8000;
-  const OUTPUT_PHOTO_EDGE = 1800;
+  const OUTPUT_PHOTO_EDGE = 8000;
   const SUBMIT_COOLDOWN_MS = 60 * 1000;
   const MIN_FORM_FILL_MS = 5000;
   const LAST_SUBMIT_KEY = 'reductCareerLastSubmitAt';
@@ -190,8 +190,7 @@ body.career-submitting{overflow:hidden}
       const ctx=canvas.getContext('2d',{alpha:false});
       if(!ctx) throw new Error('이미지 처리 기능을 사용할 수 없습니다.');
       ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);ctx.drawImage(decoded.source,0,0,width,height);
-      const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('사진을 안전한 형식으로 변환하지 못했습니다.')),'image/jpeg',0.88));
-      if(blob.size>MAX_PHOTO_BYTES) throw new Error('재처리된 사진 용량이 너무 큽니다. 다른 사진을 사용해 주세요.');
+      const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('사진을 안전한 형식으로 변환하지 못했습니다.')),'image/jpeg',0.98));
       return new File([blob],'profile-photo-sanitized.jpg',{type:'image/jpeg',lastModified:Date.now()});
     } finally {decoded.close()}
   }
@@ -455,7 +454,7 @@ body.career-submitting{overflow:hidden}
     try{
       if(document.fonts&&document.fonts.ready) await document.fonts.ready;
       const img=root.querySelector('img'); if(img&&img.decode){try{await img.decode()}catch(e){}}
-      const canvas=await html2canvas(root,{backgroundColor:'#ffffff',scale:0.95,useCORS:true,logging:false,windowWidth:794});
+      const canvas=await html2canvas(root,{backgroundColor:'#ffffff',scale:3,useCORS:true,logging:false,windowWidth:794,imageTimeout:15000});
       const {jsPDF}=window.jspdf;
       const pdf=new jsPDF({orientation:'p',unit:'mm',format:'a4',compress:true});
       const pageW=210,pageH=297;
@@ -466,9 +465,9 @@ body.career-submitting{overflow:hidden}
         const slice=document.createElement('canvas');slice.width=canvas.width;slice.height=sliceH;
         const ctx=slice.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,slice.width,slice.height);ctx.drawImage(canvas,0,y,canvas.width,sliceH,0,0,canvas.width,sliceH);
         if(page>0)pdf.addPage();
-        const imgData=slice.toDataURL('image/jpeg',0.60);
+        const imgData=slice.toDataURL('image/png');
         const renderH=pageW*(sliceH/canvas.width);
-        pdf.addImage(imgData,'JPEG',0,0,pageW,renderH,undefined,'FAST');
+        pdf.addImage(imgData,'PNG',0,0,pageW,renderH);
         y+=sliceH;page++;
       }
       return pdf.output('blob');
@@ -479,7 +478,6 @@ body.career-submitting{overflow:hidden}
     status.textContent='입사지원서 PDF를 생성하고 있습니다.';status.className='submit-status';
     const blob=await buildApplicationPdf();
     if(!blob || !blob.size) throw new Error('입사지원서 PDF 생성에 실패했습니다.');
-    if(blob.size>7.5*1024*1024) throw new Error('생성된 PDF 용량이 전송 한도를 초과했습니다. 증명사진을 다시 선택한 후 제출해 주세요.');
     const code=roleFileCode(roleEl.value),name=(document.getElementById('name').value||'Applicant').replace(/[\/:*?"<>|\s]+/g,'_');
     const fileName=`REDUCT_Application_${code}_${name}_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.pdf`;
     return {blob,fileName,size:blob.size};
