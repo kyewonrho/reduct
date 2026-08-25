@@ -218,75 +218,115 @@
 }
 </style>
 
-<style id="reduct-optimization-engine-v3">
-/* REDUCT OPTIMIZATION ENGINE — Three.js progressive hero */
-.hero{background:#030303 !important;isolation:isolate;overflow:hidden}
-.hero-media{opacity:0 !important;background:none !important;filter:none !important}
-.hero-overlay{z-index:2 !important;background:
-  linear-gradient(90deg,#030303 0%,rgba(3,3,3,.98) 31%,rgba(3,3,3,.76) 48%,rgba(3,3,3,.22) 76%,rgba(3,3,3,.07) 100%),
-  linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.40)) !important}
-.hero-content{position:relative !important;z-index:5 !important;pointer-events:none}
-.hero-content a{pointer-events:auto}
-.opt-engine{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;background:
-  radial-gradient(circle at 76% 48%,rgba(255,255,255,.055),transparent 23%),
-  radial-gradient(circle at 78% 52%,rgba(255,255,255,.018),transparent 42%)}
-.opt-engine:before{content:"";position:absolute;right:-6%;top:-22%;width:66%;height:144%;opacity:.18;background-image:
-  linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;transform:perspective(1100px) rotateY(-18deg) rotateX(63deg);transform-origin:center;mask-image:linear-gradient(90deg,transparent,#000 18%,#000 80%,transparent)}
-.opt-engine:after{content:"";position:absolute;right:0;top:0;width:59%;height:100%;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.025) 50%,transparent 62%);animation:optSheen 9s ease-in-out infinite}
-.opt-canvas-wrap{position:absolute;right:0;top:0;width:59%;height:100%;overflow:hidden}
-#optThreeCanvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .8s ease;filter:drop-shadow(0 30px 55px rgba(0,0,0,.55))}
-.opt-engine.three-ready #optThreeCanvas{opacity:1}
-.opt-fallback{position:absolute;left:50%;top:50%;width:min(32vw,510px);aspect-ratio:1.25;transform:translate(-46%,-50%);opacity:.55;transition:opacity .6s ease}
-.opt-engine.three-ready .opt-fallback{opacity:0}
-.opt-fallback-core{position:absolute;inset:22% 15%;border:1px solid rgba(255,255,255,.26);transform:skewY(-7deg);box-shadow:inset 0 0 0 18px rgba(255,255,255,.018),0 0 70px rgba(255,255,255,.04)}
-.opt-fallback-core:before,.opt-fallback-core:after{content:"";position:absolute;left:8%;right:8%;height:22%;border:1px solid rgba(255,255,255,.16)}
-.opt-fallback-core:before{top:-38%}.opt-fallback-core:after{bottom:-38%}
-.opt-orbit{position:absolute;left:50%;top:50%;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotateX(67deg)}
-.opt-orbit.o1{width:77%;height:52%}.opt-orbit.o2{width:96%;height:64%;opacity:.55}.opt-orbit.o3{width:116%;height:76%;opacity:.28}
-.opt-hud{position:absolute;right:4.5vw;top:14vh;width:min(47vw,760px);height:70vh;z-index:3;color:#fff;font-family:var(--font);opacity:.82}
-.opt-frame{position:absolute;inset:0;border:1px solid rgba(255,255,255,.10);clip-path:polygon(0 0,16% 0,16% 1px,84% 1px,84% 0,100% 0,100% 100%,84% 100%,84% calc(100% - 1px),16% calc(100% - 1px),16% 100%,0 100%)}
-.opt-kicker{position:absolute;left:0;top:-28px;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.38)}
-.opt-flow{position:absolute;left:0;bottom:-37px;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.30)}
-.opt-flow span{transition:color .35s ease,text-shadow .35s ease}.opt-flow span.active{color:rgba(255,255,255,.88);text-shadow:0 0 12px rgba(255,255,255,.18)}
-.opt-flow i{width:24px;height:1px;background:rgba(255,255,255,.12);display:block}
-.opt-readout{position:absolute;right:0;top:0;display:grid;gap:8px;min-width:192px}
-.opt-readout div{display:flex;justify-content:space-between;gap:24px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.08);font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.32)}
-.opt-readout b{font-weight:500;color:rgba(255,255,255,.74)}
-.opt-scan{position:absolute;top:8%;bottom:8%;width:1px;left:49%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.75) 18%,rgba(255,255,255,.22) 78%,transparent);box-shadow:0 0 18px rgba(255,255,255,.12);animation:optScan 6.4s ease-in-out infinite}
-.opt-scan:before{content:"ANALYSIS";position:absolute;top:10%;left:10px;font-size:8px;letter-spacing:.2em;color:rgba(255,255,255,.34);writing-mode:vertical-rl}
-@keyframes optScan{0%,100%{left:12%;opacity:.18}50%{left:88%;opacity:.86}}
-@keyframes optSheen{0%,100%{transform:translateX(-35%);opacity:.18}50%{transform:translateX(20%);opacity:.75}}
-@media(max-width:1120px){.opt-canvas-wrap{width:68%;right:-15%}.opt-hud{right:-3vw;width:62vw;opacity:.55}.hero-overlay{background:linear-gradient(90deg,#030303 0%,rgba(3,3,3,.93) 48%,rgba(3,3,3,.54) 100%) !important}}
-@media(max-width:760px){.opt-canvas-wrap{width:108%;right:-48%;opacity:.54}.opt-hud{display:none}.opt-engine:before{right:-45%;width:115%;opacity:.10}.opt-engine:after{width:100%;opacity:.25}.hero-overlay{background:linear-gradient(90deg,rgba(3,3,3,.94),rgba(3,3,3,.78)),linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.55)) !important}}
-@media(prefers-reduced-motion:reduce){.opt-engine:after,.opt-scan{animation:none !important}.opt-flow span{transition:none !important}}
-</style>
 
+
+<style id="reduct-real-process-hero-v4">
+/* REDUCT REAL PROCESS HERO — authentic footage, restrained technical motion */
+.hero{background:#020202 !important;isolation:isolate;overflow:hidden}
+.hero-media{opacity:0 !important;background:none !important;filter:none !important}
+.hero-overlay{z-index:3 !important;background:
+  linear-gradient(90deg,#020202 0%,rgba(2,2,2,.96) 28%,rgba(2,2,2,.78) 47%,rgba(2,2,2,.26) 75%,rgba(2,2,2,.10) 100%),
+  linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.48)) !important}
+.hero-content{position:relative !important;z-index:6 !important;pointer-events:none}
+.hero-content a{pointer-events:auto}
+.hero-film{position:absolute;inset:0;z-index:1;overflow:hidden;background:#090909}
+.hero-film video{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;object-position:center;filter:grayscale(100%) contrast(1.17) brightness(.53);transform:scale(1.02);animation:heroFilmDrift 18s ease-in-out infinite alternate;will-change:transform}
+.hero-film-fallback{position:absolute;inset:0;background:url('https://images.pexels.com/photos/34221997/pexels-photo-34221997.jpeg?auto=compress&cs=tinysrgb&w=2000') center/cover no-repeat;filter:grayscale(100%) contrast(1.12) brightness(.48);z-index:-1}
+.hero-film:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 74% 45%,transparent 0 19%,rgba(0,0,0,.18) 55%,rgba(0,0,0,.52) 100%);pointer-events:none}
+.hero-tech-grid{position:absolute;inset:0;z-index:2;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(90deg,transparent 0 48%,#000 68%,#000 100%);pointer-events:none}
+.hero-scan{position:absolute;top:9%;bottom:9%;left:57%;width:1px;z-index:4;background:linear-gradient(180deg,transparent,rgba(255,255,255,.78) 18%,rgba(255,255,255,.16) 83%,transparent);box-shadow:0 0 14px rgba(255,255,255,.12);animation:realScan 8.5s cubic-bezier(.55,.05,.45,.95) infinite;pointer-events:none}
+.hero-scan span{position:absolute;top:8%;left:10px;font-size:8px;letter-spacing:.22em;color:rgba(255,255,255,.43);writing-mode:vertical-rl}
+.hero-readout{position:absolute;right:4.4vw;top:50%;transform:translateY(-50%);z-index:5;width:min(270px,20vw);display:grid;gap:13px;color:#fff;pointer-events:none}
+.hero-readout:before{content:"PROCESS / LIVE";font-size:9px;letter-spacing:.22em;color:rgba(255,255,255,.42);margin-bottom:4px}
+.hero-readout-row{display:grid;grid-template-columns:1fr auto;align-items:end;gap:18px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.16)}
+.hero-readout-row span{font-size:9px;letter-spacing:.17em;color:rgba(255,255,255,.48)}
+.hero-readout-row b{font-size:11px;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.90);transition:opacity .25s ease,transform .25s ease}
+.hero-process-flow{position:absolute;right:4.4vw;bottom:clamp(116px,14vh,176px);z-index:5;display:flex;align-items:center;gap:14px;color:#fff;pointer-events:none}
+.hero-process-flow span{font-size:13px;letter-spacing:.17em;color:rgba(255,255,255,.42);transition:color .35s ease,text-shadow .35s ease}
+.hero-process-flow span.active{color:rgba(255,255,255,.96);text-shadow:0 0 14px rgba(255,255,255,.24)}
+.hero-process-flow i{display:block;width:34px;height:1px;background:rgba(255,255,255,.18)}
+.hero-process-caption{position:absolute;right:4.4vw;top:12.5vh;z-index:5;text-align:right;color:rgba(255,255,255,.46);font-size:8px;letter-spacing:.22em;line-height:1.8;pointer-events:none}
+.hero-process-caption strong{display:block;color:rgba(255,255,255,.86);font-weight:500;font-size:10px;letter-spacing:.18em}
+@keyframes heroFilmDrift{0%{transform:scale(1.025) translate3d(-.6%,0,0)}100%{transform:scale(1.085) translate3d(1.3%,-.8%,0)}}
+@keyframes realScan{0%,100%{left:55%;opacity:.16}50%{left:91%;opacity:.82}}
+@media(max-width:1120px){.hero-readout{right:2.5vw;width:225px;opacity:.7}.hero-process-flow{right:2.5vw}.hero-process-caption{right:2.5vw}.hero-overlay{background:linear-gradient(90deg,#020202 0%,rgba(2,2,2,.95) 43%,rgba(2,2,2,.52) 100%) !important}}
+@media(max-width:760px){.hero-film video{inset:0;width:100%;height:100%;object-position:68% center;filter:grayscale(100%) contrast(1.12) brightness(.37);animation-duration:24s}.hero-tech-grid{opacity:.07;mask-image:none}.hero-readout,.hero-process-flow,.hero-process-caption,.hero-scan{display:none}.hero-overlay{background:linear-gradient(90deg,rgba(2,2,2,.93),rgba(2,2,2,.74)),linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.58)) !important}}
+@media(prefers-reduced-motion:reduce){.hero-film video,.hero-scan{animation:none !important}.hero-process-flow span{transition:none !important}}
+</style>
+<style id="reduct-final-20260826">
+/* Final content hierarchy */
+.optimization-pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.optimization-pillar{min-height:280px;padding:34px;border-radius:24px;background:#fff;border:1px solid var(--gray-200);display:flex;flex-direction:column}
+.optimization-pillar>span{font-size:11px;letter-spacing:.14em;color:var(--gray-500);margin-bottom:auto}
+.optimization-pillar h3{margin:34px 0 12px;font-size:clamp(25px,2.4vw,34px);letter-spacing:-.035em}
+.optimization-pillar p{margin:0;color:var(--gray-700);line-height:1.72}
+.final-capability-grid{grid-template-columns:repeat(3,1fr)}
+.final-capability-grid .technology-card{position:relative;overflow:hidden;min-height:220px;padding-top:88px}
+.tech-line-art{position:absolute;left:30px;top:28px;width:90px;height:42px;border:1px solid var(--gray-300);border-radius:7px;transform:skewX(-18deg);opacity:.65}
+.tech-line-art:before,.tech-line-art:after{content:"";position:absolute;border:1px solid var(--gray-300);border-radius:5px}
+.tech-line-art:before{width:52px;height:24px;left:18px;top:8px}
+.tech-line-art:after{width:118px;height:1px;border-width:1px 0 0;left:-14px;top:20px;transform:rotate(-12deg)}
+.final-process-list li{grid-template-columns:110px 1fr;padding:34px 0}
+.final-process-list strong{font-size:23px;color:#fff}
+.final-process-list h3{font-size:34px}
+.optimization-lens-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.optimization-lens{min-height:270px;padding:28px 24px;border:1px solid var(--gray-200);border-radius:22px;background:var(--gray-100);display:flex;flex-direction:column}
+.optimization-lens>span{font-size:11px;letter-spacing:.16em;color:var(--gray-500)}
+.optimization-lens h3{margin:auto 0 12px;font-size:25px;letter-spacing:-.025em}
+.optimization-lens p{margin:0;color:var(--gray-700);font-size:15px;line-height:1.65}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.case-card{padding:36px;border-radius:26px;background:#fff;border:1px solid var(--gray-200);min-height:420px;display:flex;flex-direction:column}
+.case-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:52px}
+.case-top>span{font-size:11px;letter-spacing:.14em;color:var(--gray-500)}
+.case-metric{font-size:clamp(38px,5vw,66px);line-height:.9;letter-spacing:-.055em}
+.case-card h3{margin:0 0 16px;font-size:clamp(26px,2.7vw,38px);letter-spacing:-.035em}
+.case-card>p{margin:0 0 30px;color:var(--gray-700);line-height:1.72}
+.case-result{margin-top:auto;padding-top:24px;border-top:1px solid var(--gray-200)}
+.case-result span,.case-result-grid span{display:block;font-size:10px;letter-spacing:.14em;color:var(--gray-500);margin-bottom:7px}
+.case-result strong{font-size:22px}
+.case-result-grid{margin-top:auto;padding-top:24px;border-top:1px solid var(--gray-200);display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.case-result-grid strong{font-size:17px}
+.manufacturing-section{padding:100px 0}
+.manufacturing-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end}
+.manufacturing-grid h2{margin:0 0 18px;font-size:clamp(38px,5vw,70px);line-height:.98;letter-spacing:-.045em}
+.manufacturing-grid p{margin:0;color:var(--gray-300);line-height:1.7;max-width:680px}
+.manufacturing-chips{display:flex;flex-wrap:wrap;gap:10px;align-content:flex-end}
+.manufacturing-chips span{padding:13px 17px;border:1px solid rgba(255,255,255,.20);border-radius:999px;font-size:13px;color:var(--gray-300)}
+.diagnosis-cta-section{padding:100px 0}
+.diagnosis-cta{border:1px solid var(--gray-200);border-radius:30px;background:var(--gray-100);padding:46px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end}
+.diagnosis-cta h2{margin:0 0 18px;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.045em}
+.diagnosis-cta p{margin:0;max-width:760px;color:var(--gray-700);line-height:1.72}
+.diagnosis-cta-button{min-width:220px}
+/* clearer footer menu */
+@media(min-width:1201px){.site-footer .footer-nav{display:grid!important;grid-template-columns:repeat(3,max-content)!important;grid-template-rows:repeat(2,auto)!important;gap:26px 42px!important;justify-content:center!important;align-content:center!important;align-self:stretch!important;padding:0!important}.site-footer .footer-nav a{font-size:19px!important;font-weight:600!important}}
+@media(max-width:1100px){.optimization-pillar-grid{grid-template-columns:1fr}.optimization-lens-grid{grid-template-columns:repeat(2,1fr)}.final-capability-grid{grid-template-columns:repeat(2,1fr)}.manufacturing-grid{grid-template-columns:1fr}.diagnosis-cta{grid-template-columns:1fr;align-items:start}}
+@media(max-width:760px){.optimization-lens-grid,.final-capability-grid,.case-grid{grid-template-columns:1fr}.case-card{min-height:auto}.case-result-grid{grid-template-columns:1fr 1fr}.final-process-list li{grid-template-columns:48px minmax(0,1fr);padding:26px 0}.final-process-list strong{font-size:13px}.final-process-list h3{font-size:26px}.diagnosis-cta{padding:28px}.diagnosis-cta-button{width:100%;min-width:0}.manufacturing-section{padding:84px 0}}
+</style>
 </head>
 <body>
 <header class="site-header" id="siteHeader">
 <div class="shell header-inner">
-<a aria-label="REDUCT ホーム" class="brand" href="/#home">
+<a aria-label="REDUCT ホーム" class="brand" href="/ja/#home">
 <svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg>
 </a>
 <div class="header-actions"><nav aria-label="メインメニュー" class="desktop-nav">
-<a href="/#home">ホーム</a>
-<a href="/#about">会社紹介</a>
-<a href="/#business">事業領域</a>
-<a href="/#technology">技術力</a>
-<a href="#project">最適化領域</a>
-<a href="/#contact">アクセス</a>
+<a href="/ja/#about">会社情報</a>
+<a href="/ja/#optimization">最適化</a>
+<a href="/ja/#technology">技術力</a>
+<a href="/ja/#process">プロセス</a>
+<a href="/ja/#case">事例</a>
+<a href="/ja/#contact">アクセス</a>
 </nav><div aria-label="言語選択" class="language-switcher"><a data-lang-code="ko" href="/">한국어</a><span>/</span><a data-lang-code="en" href="/en/">EN</a><span>/</span><a class="active" data-lang-code="ja" href="/ja/">日本語</a></div><button aria-expanded="false" aria-label="メニューを開く" class="menu-toggle" id="menuToggle">
 <span></span><span></span>
 </button></div></div>
 <div aria-hidden="true" class="mobile-menu" id="mobileMenu">
 <nav>
-<a href="/#home">ホーム</a>
-<a href="/#about">会社紹介</a>
-<a href="/#business">事業領域</a>
-<a href="/#technology">技術力</a>
-<a href="#project">最適化領域</a>
-<a href="/#contact">アクセス</a>
+<a href="/ja/#about">会社情報</a>
+<a href="/ja/#optimization">最適化</a>
+<a href="/ja/#technology">技術力</a>
+<a href="/ja/#process">プロセス</a>
+<a href="/ja/#case">事例</a>
+<a href="/ja/#contact">アクセス</a>
 </nav>
 <p class="mobile-menu-meta">REDUCE PRODUCT TECHNOLOGY</p>
 </div>
@@ -294,23 +334,24 @@
 <main>
 <section class="hero" id="home">
 
-<div class="opt-engine" id="optEngine" aria-hidden="true">
-  <div class="opt-canvas-wrap"><canvas id="optThreeCanvas"></canvas></div>
-  <div class="opt-fallback">
-    <div class="opt-orbit o1"></div><div class="opt-orbit o2"></div><div class="opt-orbit o3"></div>
-    <div class="opt-fallback-core"></div>
-  </div>
-  <div class="opt-hud">
-    <div class="opt-frame"></div><div class="opt-kicker">PRODUCT OPTIMIZATION / SIMULATION</div>
-    <div class="opt-readout">
-      <div><span>STRUCTURE</span><b id="optStatusStructure">ANALYZE</b></div>
-      <div><span>PROCESS</span><b id="optStatusProcess">REVIEW</b></div>
-      <div><span>SUPPLY</span><b id="optStatusSupply">MAP</b></div>
-      <div><span>COST</span><b id="optStatusCost">OPTIMIZE</b></div>
-    </div>
-    <div class="opt-scan"></div>
-    <div class="opt-flow"><span data-opt-step="0">ANALYZE</span><i></i><span data-opt-step="1">SIMPLIFY</span><i></i><span data-opt-step="2">INTEGRATE</span><i></i><span data-opt-step="3">OPTIMIZE</span></div>
-  </div>
+<div class="hero-film" aria-hidden="true">
+  <video id="heroProcessVideo" autoplay muted loop playsinline preload="metadata">
+    <source src="https://videos.pexels.com/video-files/9033891/9033891-hd_1920_1080_24fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/9033891/9033891-hd_3840_2160_24fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-film-fallback"></div>
+</div>
+<div class="hero-tech-grid" aria-hidden="true"></div>
+<div class="hero-scan" aria-hidden="true"><span>ANALYSIS</span></div>
+<div class="hero-process-caption" aria-hidden="true"><strong>PRODUCT OPTIMIZATION</strong>REAL PROCESS / REAL ENGINEERING</div>
+<div class="hero-readout" aria-hidden="true">
+  <div class="hero-readout-row"><span>STRUCTURE</span><b id="heroStatusStructure">ANALYZE</b></div>
+  <div class="hero-readout-row"><span>PROCESS</span><b id="heroStatusProcess">REVIEW</b></div>
+  <div class="hero-readout-row"><span>SUPPLY</span><b id="heroStatusSupply">MAP</b></div>
+  <div class="hero-readout-row"><span>COST</span><b id="heroStatusCost">MODEL</b></div>
+</div>
+<div class="hero-process-flow" aria-hidden="true">
+  <span data-real-step="0" class="active">ANALYZE</span><i></i><span data-real-step="1">IDENTIFY</span><i></i><span data-real-step="2">REDESIGN</span><i></i><span data-real-step="3">SOURCE</span><i></i><span data-real-step="4">VALIDATE</span>
 </div>
 
 <div class="hero-media"></div>
@@ -321,8 +362,8 @@
 <p class="hero-kicker"><span>製品を作る会社は数多くあります。</span><span>重要なのは、どれだけ効率よく作れるかです。</span></p>
 <p class="hero-copy"><span>開発会社、製造会社、OEMサプライヤーは数多く存在します。</span><span>しかし、製品の構造・部品・仕様・製造工法・サプライチェーンを一体で分析し、原価を下げながら製造効率を高める役割を担う会社は多くありません。</span><span class="hero-copy-final">単に製品を作るのではなく、同じ目的と性能をより合理的なコストで実現できるよう技術的に最適化します。</span></p>
 <div class="hero-actions">
-<a class="btn btn-light" href="#about">詳しく見る</a>
-<a class="btn btn-ghost" href="#contact">アクセス</a>
+<a class="btn btn-light" href="#process">最適化プロセス</a>
+<a class="btn btn-ghost" href="#cost-check">原価最適化診断</a>
 </div>
 </div>
 <a aria-label="次のセクションへ" class="scroll-cue" href="#overview">スクロール <span>↓</span></a>
@@ -368,164 +409,39 @@
 </div>
 </div>
 </section>
-<section class="section section-light vision-org">
-<div class="shell vision-org-grid">
-<div class="vision-box reveal">
-<p class="eyebrow dark">最適化の原則</p>
-<h2>同じ目的。<br/>より高い効率。</h2>
-<p class="lead dark-text">原価低減は、単に安い部品を使うことではありません。</p>
-<p>過剰仕様を減らし、構造を単純化し、より適した製造工法と供給先を選び、製品の目的と品質を維持しながら総コストを下げます。これが私たちの考える最適化です。</p>
-</div>
-<div class="org-box reveal">
-<p class="eyebrow dark">組織</p>
-<h2>最適化を中心とした組織。</h2>
-<div class="org-chart">
-<div class="org-ceo">代表取締役</div>
-<div class="org-tree-line"></div>
-<div class="org-row top-row">
-<div class="org-node">企画</div>
-<div class="org-node">人事・総務</div>
-<div class="org-node">開発</div>
-<div class="org-node">設計</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="section section-gray" id="business">
-<div class="shell">
-<div class="section-intro reveal">
-<p class="eyebrow dark">実行方法</p>
-<h2>最適化してから、<br/>実行する。</h2>
-<p>最適化方針が決まったら、社内の設計・開発力と外部製造ネットワークを組み合わせ、実際の製品や設備に反映します。</p>
-</div>
-<div class="business-grid">
-<article class="business-card reveal">
-<div class="business-photo wearable-bg"></div>
-<div class="business-body">
-<h3>産業設備・OEM最適化</h3>
-<p>国内製作の産業設備部品を分析し、代替・改善設計を行い、適切なOEMメーカーを比較・連携して部品製作費と調達原価を削減します。</p>
-</div>
-</article>
-<article class="business-card reveal">
-<div class="business-photo iot-bg"></div>
-<div class="business-body">
-<h3>ハードウェア・ファームウェア開発</h3>
-<p>回路・PCB、MCU Firmware、センサー・モーター・通信制御を製品目的に必要なレベルで開発し、電子仕様と制御構成を最適化して過剰設計と不要なBOMコストを削減します。</p>
-<div class="detail-links"><a href="#contact">ハードウェア・ファームウェア開発</a></div>
-</div>
-</article>
-<article class="business-card reveal">
-<div class="business-photo mold-bg"></div>
-<div class="business-body">
-<h3>金型・製造最適化</h3>
-<p>製品構造、目標数量、目標原価を基準に金型構造を検討し、金型を設計・製作します。射出成形量産はプロジェクト条件に合う協力工場と連携します。</p>
-<div class="detail-links"><a href="#contact">金型設計・製作</a></div>
-</div>
-</article>
-<article class="business-card reveal">
-<div class="business-photo engineering-bg"></div>
-<div class="business-body">
-<h3>製品エンジニアリング</h3>
-<p>構造設計、機構設計（3D設計：Fusion 360）、インダストリアルデザインを技術サービスとして提供し、新規開発だけでなく既存設備・部品の改善設計や原価低減設計にも適用します。</p>
-<div class="detail-links"><a href="#contact">機構・構造・図面設計</a><a href="#contact">原価低減・最適化</a></div>
-</div>
-</article>
-</div>
-</div>
-</section>
-<section class="section section-light" id="technology">
-<div class="shell">
-<div class="section-intro reveal">
-<p class="eyebrow dark">最適化技術</p>
-<h2>コスト要因を見つけ、<br/>仕組みを再設計する。</h2>
-<p>原価を一つの項目だけで見ず、製品全体の構造・仕様・工法・サプライチェーンからコスト要因を見つけ、技術的に再設計します。</p>
-</div>
-<div class="technology-grid">
-<article class="technology-card reveal"><h3>原価・構造分析</h3><p class="tech-en">Cost &amp; Structure Analysis</p></article>
-<article class="technology-card reveal"><h3>構造・機構設計</h3><p class="tech-en">Structural / Mechanical Engineering</p></article>
-<article class="technology-card reveal"><h3>インダストリアルデザイン</h3><p class="tech-en">Industrial Design</p></article>
-<article class="technology-card reveal"><h3>ハードウェア設計</h3><p class="tech-en">Hardware Engineering</p></article>
-<article class="technology-card reveal"><h3>ファームウェア開発</h3><p class="tech-en">Firmware</p></article>
-<article class="technology-card reveal"><h3>試作・製造レビュー</h3><p class="tech-en">Prototype &amp; Manufacturing Review</p></article>
-<article class="technology-card reveal"><h3>製造ネットワーク</h3><p class="tech-en">Manufacturing Network</p></article>
-</div>
-</div>
-</section>
-<section class="section section-dark process-section">
-<div class="shell">
-<div class="section-intro reveal intro-light">
-<p class="eyebrow light">製品最適化プロセス</p>
-<h2>まず分析し、<br/>その後に作る。</h2>
-<p>製造から始めません。まずコストが発生する理由を分析し、最適化方針を決めたうえで必要な設計・開発・製造だけを実行します。</p>
-</div>
-<ol class="process-list reveal">
-<li><strong>01</strong><div><h3>目標</h3><p>製品目標・性能条件・目標原価を定義</p></div></li>
-<li><strong>02</strong><div><h3>分析</h3><p>構造・部品・仕様・工法・調達構造を分析</p></div></li>
-<li><strong>03</strong><div><h3>最適化</h3><p>原価・性能・製造性を考慮した改善案を策定</p></div></li>
-<li><strong>04</strong><div><h3>設計開発</h3><p>機構・構造・Hardware・Firmware設計開発</p></div></li>
-<li><strong>05</strong><div><h3>製造計画</h3><p>加工工法とOEMメーカーを比較・選定</p></div></li>
-<li><strong>06</strong><div><h3>試作</h3><p>試作品・サンプル製作と検証</p></div></li>
-<li><strong>07</strong><div><h3>金型</h3><p>必要に応じて金型設計・製作</p></div></li>
-<li><strong>08</strong><div><h3>実行</h3><p>OEM製作・射出成形連携と最終製造条件の最適化</p></div></li>
-</ol>
-</div>
-</section>
-<section class="section section-light" id="project">
-<div class="shell">
-<div class="section-intro reveal">
-<p class="eyebrow dark">最適化ポイント</p>
-<h2>コストは製品全体に<br/>潜んでいる。</h2>
-<p>原価は購入単価だけで決まりません。構造、部品点数、電子仕様、加工工程、金型、組立性、サプライチェーン全体で積み上がります。</p>
-</div>
-<div class="project-grid">
-<article class="project-card reveal">
-<div class="project-photo wearable-bg"></div>
-<div class="project-body">
-<span>01 / 設備最適化</span>
-<h3>設備コスト低減</h3>
-<p>設備部品とモジュールを再設計し、製造工法とOEM供給先を最適化して設備製作費と維持調達費を下げます。</p>
-</div>
-</article>
-<article class="project-card reveal">
-<div class="project-photo engineering-bg"></div>
-<div class="project-body">
-<span>02 / 製品最適化</span>
-<h3>ハードウェア仕様最適化</h3>
-<p>機構・電子・Firmware仕様を必要機能に合わせて再構成し、過剰設計と不要な部品コストを削減します。</p>
-</div>
-</article>
-<article class="project-card reveal">
-<div class="project-photo mold-bg"></div>
-<div class="project-body">
-<span>03 / 製造最適化</span>
-<h3>金型・製造コスト</h3>
-<p>製品構造と生産数量に適した金型・製造工法を選定し、協力製造ネットワークを通じて適切な生産条件を構成します。</p>
-</div>
-</article>
-</div>
-</div>
-</section>
-<section class="section section-gray capability-section">
-<div class="shell capability-grid">
-<div class="copy-block reveal">
-<p class="eyebrow dark">私たちの違い</p>
-<h2>もう一つの<br/>ワンストップ業者ではない。</h2>
-<p class="lead dark-text">製造会社をさらに探す前に、なぜ製造コストが高いのかを見直します。</p>
-<p>すべての工程を社内保有するワンストップ企業を目指していません。目標原価と性能を基準に必要な技術と製造会社を選び、製品全体を最適化する役割に集中します。</p>
-</div>
-<div class="scope-box reveal">
-<div class="scope-item">
-<span>最適化対応範囲</span>
-<p>Cost Analysis · Equipment Parts Optimization · Structural / Mechanical Engineering · Industrial Design · Hardware · Firmware · Prototype · Mold Design · Mold Manufacturing</p>
-</div>
-<div class="scope-item partner">
-<span>最適化製造ネットワーク</span>
-<p>CNC Machining · Sheet Metal · OEM Parts Production · Injection Molding Production</p>
-</div>
-</div>
-</div>
-</section>
+<section class="section section-gray" id="optimization"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">WHAT WE OPTIMIZE</p><h2>Optimization First.<br/>Execution Second.</h2><p>目的は最適化であり、設計・開発・製造はその結果を実現するための手段です。まずコスト構造を分析し、必要な技術だけを選択して実行します。</p></div><div class="optimization-pillar-grid">
+<article class="optimization-pillar reveal"><span>01 / PRODUCT COST OPTIMIZATION</span><h3>製品・設備の原価最適化</h3><p>構造、部品点数、仕様、製造工法、サプライチェーンを一体で分析し、コスト要因と改善方向を特定します。</p></article>
+<article class="optimization-pillar reveal"><span>02 / ENGINEERING</span><h3>設計・開発</h3><p>構造・機構設計、インダストリアルデザイン、Hardware・Firmware、金型設計を目標性能と目標原価に合わせて行います。</p></article>
+<article class="optimization-pillar reveal"><span>03 / MANUFACTURING SOLUTION</span><h3>製造実行</h3><p>CNC加工、板金・溶接、試作、金型製作、OEM、射出成形をプロジェクト条件に適した製造ネットワークへ接続します。</p></article>
+</div></div></section>
+<section class="section section-light" id="technology"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CAPABILITY</p><h2>Engineering Built<br/>Around Optimization.</h2><p>各技術を別々のサービスとして扱うのではなく、製品をよりシンプルに、より作りやすく、より合理的なコストにするために必要な技術を統合します。</p></div><div class="technology-grid final-capability-grid">
+<article class="technology-card reveal"><div class="tech-line-art" aria-hidden="true"></div><h3>原価・構造分析</h3><p class="tech-en">Cost &amp; Structure Analysis</p></article>
+<article class="technology-card reveal"><div class="tech-line-art" aria-hidden="true"></div><h3>構造・機構設計</h3><p class="tech-en">Structural / Mechanical Engineering</p></article>
+<article class="technology-card reveal"><div class="tech-line-art" aria-hidden="true"></div><h3>インダストリアルデザイン</h3><p class="tech-en">Industrial Design</p></article>
+<article class="technology-card reveal"><div class="tech-line-art" aria-hidden="true"></div><h3>Hardware · Firmware</h3><p class="tech-en">Electronics &amp; Device Control</p></article>
+<article class="technology-card reveal"><div class="tech-line-art" aria-hidden="true"></div><h3>試作・製造レビュー</h3><p class="tech-en">Prototype &amp; Manufacturing Review</p></article>
+<article class="technology-card reveal"><div class="tech-line-art" aria-hidden="true"></div><h3>金型・量産設計</h3><p class="tech-en">Tooling &amp; Production Engineering</p></article>
+</div></div></section>
+<section class="section section-dark process-section" id="process"><div class="shell"><div class="section-intro reveal intro-light"><p class="eyebrow light">HOW WE OPTIMIZE</p><h2>Analyze. Redesign.<br/>Validate.</h2><p>製作から始めるのではなく、まずコストが発生する理由を特定し、構造を再設計したうえで製造性・品質・調達条件を検証します。</p></div><ol class="process-list final-process-list reveal">
+<li><strong>01</strong><div><h3>ANALYZE</h3><p>構造、部品、仕様、工法、調達条件を一つのシステムとして分析します。</p></div></li>
+<li><strong>02</strong><div><h3>IDENTIFY</h3><p>過剰仕様、複雑な構造、不要な工程、非効率な調達条件などコスト要因を特定します。</p></div></li>
+<li><strong>03</strong><div><h3>REDESIGN</h3><p>必要性能を維持しながら部品点数、形状、組立方法、電子仕様、製造工法を再設計します。</p></div></li>
+<li><strong>04</strong><div><h3>SOURCE</h3><p>CNC、板金、金型、OEM、射出成形など設計に適した製造工法と供給網を構成します。</p></div></li>
+<li><strong>05</strong><div><h3>VALIDATE</h3><p>コスト、品質、生産性、調達性を検証したうえで実行します。</p></div></li>
+</ol></div></section>
+<section class="section section-light" id="project"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">WHERE WE OPTIMIZE</p><h2>Cost Is Hidden<br/>Across the Product.</h2><p>原価は購入単価だけで決まりません。構造、部品、電子仕様、製造工程、サプライチェーン全体で積み上がります。</p></div><div class="optimization-lens-grid">
+<article class="optimization-lens reveal"><span>01</span><h3>STRUCTURE</h3><p>構造の簡素化、締結・組立方式の改善、不要形状の削減</p></article>
+<article class="optimization-lens reveal"><span>02</span><h3>PARTS</h3><p>部品点数削減、共通化、代替部品、加工難易度の改善</p></article>
+<article class="optimization-lens reveal"><span>03</span><h3>ELECTRONICS</h3><p>必要機能を基準にPCB、センサー、モーター、電源、通信仕様を最適化</p></article>
+<article class="optimization-lens reveal"><span>04</span><h3>PROCESS</h3><p>CNC、板金、溶接、金型、射出成形など製造工法を再検討</p></article>
+<article class="optimization-lens reveal"><span>05</span><h3>SUPPLY CHAIN</h3><p>OEM、加工、金型・射出成形の供給条件を比較・再構成</p></article>
+</div></div></section>
+<section class="section section-gray case-section" id="case"><div class="shell"><div class="section-intro reveal"><p class="eyebrow dark">CASE STUDY</p><h2>Optimization<br/>Made Measurable.</h2><p>プロジェクト名は非公開とし、公開可能な範囲で最適化結果のみを要約しています。</p></div><div class="case-grid">
+<article class="case-card reveal"><div class="case-top"><span>CASE 01 / COST REDUCTION</span><strong class="case-metric">-15%</strong></div><h3>A社 | 煎じ器用耐熱ガラス</h3><p>煎じ器に使用される耐熱ガラスのコスト構造と調達条件を見直し、仕様・供給条件を最適化しました。</p><div class="case-result"><span>RESULT</span><strong>従来比15%の原価低減を達成</strong></div></article>
+<article class="case-card reveal"><div class="case-top"><span>CASE 02 / DESIGN OPTIMIZATION</span><strong class="case-metric">LESS</strong></div><h3>B社 | 産業設備の溶接・加工構造</h3><p>設計改善により溶接工程と加工部品点数を削減しました。組立構造と加工形状を簡素化し、加工単価を抑える方向へ製造構造を改善しました。</p><div class="case-result-grid"><div><span>WELDING</span><strong>工程削減</strong></div><div><span>MACHINED PARTS</span><strong>部品点数削減</strong></div><div><span>MACHINING COST</span><strong>加工単価低減</strong></div></div></article>
+</div></div></section>
+<section class="section section-dark manufacturing-section" id="manufacturing"><div class="shell manufacturing-grid reveal"><div><p class="eyebrow light">MANUFACTURING NETWORK</p><h2>Use the Right Process.<br/>Not Every Process.</h2><p>すべての工程を自社保有するのではなく、製品と数量に最も適した工法と製造会社を選定します。</p></div><div class="manufacturing-chips"><span>CNC 3-Axis</span><span>CNC 5-Axis</span><span>Sheet Metal</span><span>Welding</span><span>Prototype</span><span>Mold &amp; Tooling</span><span>OEM Parts</span><span>Injection Molding</span></div></div></section>
+<section class="section section-light diagnosis-cta-section" id="cost-check"><div class="shell diagnosis-cta reveal"><div><p class="eyebrow dark">COST OPTIMIZATION CHECK</p><h2>現在のコスト構造から<br/>確認してください。</h2><p>現在コスト、目標コスト、想定数量、図面・BOMの有無を入力すると、初期検討に必要な情報をすばやく整理できます。</p></div><button class="btn btn-dark diagnosis-cta-button" id="costCheckOpen" type="button">原価最適化診断を開始</button></div></section>
 <section class="section section-light" id="contact">
 <div class="shell contact-grid location-grid">
 <div class="contact-copy reveal">
@@ -565,11 +481,12 @@
 <p>事業者登録番号：追って掲載</p>
 </div></div>
 <nav class="footer-nav">
-<a href="/#about">会社紹介</a>
-<a href="/#business">事業領域</a>
-<a href="/#technology">技術力</a>
-<a href="#project">最適化領域</a>
-<a href="/#contact">アクセス</a>
+<a href="/ja/#about">会社情報</a>
+<a href="/ja/#optimization">最適化</a>
+<a href="/ja/#technology">技術力</a>
+<a href="/ja/#process">プロセス</a>
+<a href="/ja/#case">事例</a>
+<a href="/ja/#contact">アクセス</a>
 </nav>
 </div>
 <div class="shell footer-bottom">Copyright © REDUCT Co., Ltd. All Rights Reserved.</div>
@@ -595,131 +512,33 @@
 </div>
 </section>
 <script src="../app.js"></script>
+<script id="cost-check-launcher-hook">document.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('costCheckOpen');const l=document.getElementById('diagnosisLauncher');if(b&&l)b.addEventListener('click',()=>l.click());});</script>
 
-<script type="module" id="reduct-threejs-optimization-v3">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js';
-import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/geometries/RoundedBoxGeometry.js';
 
-const host=document.getElementById('optEngine');
-const canvas=document.getElementById('optThreeCanvas');
-if(host&&canvas){
-  const prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile=matchMedia('(max-width: 760px)').matches;
-  let renderer;
-  try{
-    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!isMobile,powerPreference:'high-performance'});
-    renderer.setPixelRatio(Math.min(devicePixelRatio||1,isMobile?1:1.45));
-    renderer.outputColorSpace=THREE.SRGBColorSpace;
-    renderer.toneMapping=THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure=.86;
-  }catch(e){console.warn('REDUCT WebGL fallback',e);}
-  if(renderer){
-    const scene=new THREE.Scene();
-    const camera=new THREE.PerspectiveCamera(34,1,.1,100);
-    camera.position.set(7.2,4.2,8.8);
-    camera.lookAt(0,0,0);
-    const root=new THREE.Group();scene.add(root);
-    const product=new THREE.Group();root.add(product);
-    product.rotation.set(-.12,.34,.02);
 
-    scene.add(new THREE.HemisphereLight(0xffffff,0x080808,1.15));
-    const key=new THREE.DirectionalLight(0xffffff,4.1);key.position.set(5,7,8);scene.add(key);
-    const rim=new THREE.DirectionalLight(0x9b9b9b,2.2);rim.position.set(-7,2,-5);scene.add(rim);
-    const fill=new THREE.PointLight(0xffffff,3.0,18);fill.position.set(2,-3,4);scene.add(fill);
-
-    const matDark=new THREE.MeshStandardMaterial({color:0x0b0b0b,metalness:.92,roughness:.25});
-    const matMid=new THREE.MeshStandardMaterial({color:0x4a4a4a,metalness:.88,roughness:.24});
-    const matLight=new THREE.MeshStandardMaterial({color:0xa9a9a9,metalness:.82,roughness:.22});
-    const matBoard=new THREE.MeshStandardMaterial({color:0x171717,metalness:.58,roughness:.40});
-    const lineMat=new THREE.LineBasicMaterial({color:0xe8e8e8,transparent:true,opacity:.23});
-    const ghostMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.035,side:THREE.DoubleSide,depthWrite:false});
-
-    const parts=[];
-    function edgeify(mesh,opacity=.22){const e=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,24),lineMat.clone());e.material.opacity=opacity;mesh.add(e)}
-    function addPart(geo,mat,compact,exploded,opt={}){
-      const mesh=new THREE.Mesh(geo,mat.clone());
-      mesh.position.copy(exploded);mesh.userData={compact:compact.clone(),exploded:exploded.clone(),drop:!!opt.drop,dropDir:(opt.dropDir||new THREE.Vector3(0,0,0)).clone(),spin:opt.spin||0,baseOpacity:mesh.material.opacity??1};
-      if(opt.rotation) mesh.rotation.set(...opt.rotation);
-      edgeify(mesh,opt.edge??.20);product.add(mesh);parts.push(mesh);return mesh;
-    }
-    const rb=(x,y,z,r=.08)=>new RoundedBoxGeometry(x,y,z,4,r);
-    // Core architecture
-    addPart(rb(3.9,.28,2.72,.11),matMid,new THREE.Vector3(0,-1.10,0),new THREE.Vector3(0,-2.10,0),{edge:.28});
-    addPart(rb(3.25,1.38,2.28,.16),matDark,new THREE.Vector3(0,-.22,0),new THREE.Vector3(0,-.25,0),{edge:.30});
-    addPart(rb(3.52,.24,2.45,.10),matLight,new THREE.Vector3(0,.64,0),new THREE.Vector3(0,1.80,0),{edge:.24});
-    // Side structure / rails
-    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(-1.80,-.34,0),new THREE.Vector3(-2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(-2.2,.8,.2),edge:.18});
-    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(1.80,-.34,0),new THREE.Vector3(2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(2.2,.8,-.2),edge:.18});
-    // PCB / electronics layer
-    const pcb=addPart(rb(2.85,.12,1.76,.04),matBoard,new THREE.Vector3(0,.90,0),new THREE.Vector3(0,2.55,0),{edge:.26});
-    const chipGeo=rb(.38,.16,.32,.035);const smallGeo=rb(.18,.12,.15,.025);
-    [[-.75,.0,-.40],[.1,.0,-.30],[.65,.0,.37],[-.38,.0,.46]].forEach((p,i)=>{const m=new THREE.Mesh(i%2?smallGeo:chipGeo,matMid.clone());m.position.set(p[0],.14,p[2]);edgeify(m,.16);pcb.add(m)});
-    // Central mechanical interface
-    const cylGeo=new THREE.CylinderGeometry(.58,.58,.44,48);const cyl=addPart(cylGeo,matLight,new THREE.Vector3(0,.08,0),new THREE.Vector3(0,-.10,-3.0),{rotation:[Math.PI/2,0,0],edge:.18});
-    const ringGeo=new THREE.TorusGeometry(.82,.08,12,64);addPart(ringGeo,matMid,new THREE.Vector3(0,.12,.02),new THREE.Vector3(0,.15,3.2),{rotation:[Math.PI/2,0,0],edge:.10});
-    // Fasteners - some are deliberately removed in optimization phase
-    const boltGeo=new THREE.CylinderGeometry(.105,.105,.42,20);
-    const boltCompact=[[-1.42,.40,-.88],[1.42,.40,-.88],[-1.42,.40,.88],[1.42,.40,.88],[-1.1,-.72,-.9],[1.1,-.72,.9]];
-    boltCompact.forEach((p,i)=>addPart(boltGeo,i<4?matLight:matMid,new THREE.Vector3(...p),new THREE.Vector3(p[0]*1.55,2.8+(i%2)*.45,p[2]*1.45),{rotation:[0,0,0],drop:i>=4,dropDir:new THREE.Vector3((i===4?-1:1)*2.0,-.8,(i===4?-1:1)*1.4),edge:.10}));
-    // Internal brackets that merge during optimization
-    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(-.92,-.14,0),new THREE.Vector3(-2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(-1.7,-1.4,0),edge:.18});
-    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(.92,-.14,0),new THREE.Vector3(2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(1.7,-1.4,0),edge:.18});
-
-    // Data cloud
-    const count=isMobile?34:78;const pg=new THREE.BufferGeometry();const pa=new Float32Array(count*3);
-    for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,r=3.5+Math.random()*2.8;pa[i*3]=Math.cos(a)*r;pa[i*3+1]=(Math.random()-.5)*5.8;pa[i*3+2]=Math.sin(a)*r*.65}
-    pg.setAttribute('position',new THREE.BufferAttribute(pa,3));const points=new THREE.Points(pg,new THREE.PointsMaterial({color:0xffffff,size:.022,transparent:true,opacity:.35,sizeAttenuation:true}));root.add(points);
-    // Wire orbit rings
-    [3.2,4.15].forEach((r,i)=>{const g=new THREE.TorusGeometry(r,.006,4,160);const m=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:i?.07:.12});const o=new THREE.Mesh(g,m);o.rotation.set(Math.PI/2.55,.30+i*.18,.25);root.add(o)});
-    // Scan plane
-    const scan=new THREE.Mesh(new THREE.PlaneGeometry(5.4,4.6),ghostMat);scan.rotation.y=Math.PI/2;product.add(scan);
-
-    const flows=[...document.querySelectorAll('[data-opt-step]')];
-    const status={
-      structure:document.getElementById('optStatusStructure'),process:document.getElementById('optStatusProcess'),supply:document.getElementById('optStatusSupply'),cost:document.getElementById('optStatusCost')
-    };
-    const statuses=[
-      ['ANALYZE','REVIEW','MAP','BASELINE'],
-      ['SIMPLIFY','REDUCE','COMPARE','REVIEW'],
-      ['INTEGRATE','CONSOLIDATE','SELECT','MODEL'],
-      ['OPTIMIZED','VALIDATE','READY','OPTIMIZE']
-    ];
-    let currentStep=-1;
-    function setStep(n){if(n===currentStep)return;currentStep=n;flows.forEach((x,i)=>x.classList.toggle('active',i===n));const s=statuses[n];if(status.structure)status.structure.textContent=s[0];if(status.process)status.process.textContent=s[1];if(status.supply)status.supply.textContent=s[2];if(status.cost)status.cost.textContent=s[3]}
-    const smooth=t=>t*t*(3-2*t);const clamp=t=>Math.max(0,Math.min(1,t));
-    let pointerX=0,pointerY=0,visible=true,raf=0;
-    if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{pointerX=(e.clientX/innerWidth-.5);pointerY=(e.clientY/innerHeight-.5)},{passive:true})}
-    const obs=new IntersectionObserver(e=>{visible=e[0]?.isIntersecting??true;if(visible&&!prefersReduced)loop(performance.now())},{threshold:.05});obs.observe(document.querySelector('.hero'));
-    document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(visible&&!prefersReduced)loop(performance.now())});
-    function resize(){const wrap=canvas.parentElement;const w=Math.max(1,wrap.clientWidth),h=Math.max(1,wrap.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
-    new ResizeObserver(resize).observe(canvas.parentElement);resize();
-    function loop(now){if(!visible||document.hidden){raf=0;return}if(raf)return;raf=requestAnimationFrame(render)}
-    function render(now){raf=0;const t=(now||performance.now())*.001;const cycle=prefersReduced?.70:(t%14)/14;
-      // 0 analyze/exploded, 1 simplify, 2 integrate, 3 optimized
-      let step=cycle<.25?0:cycle<.48?1:cycle<.72?2:3;setStep(step);
-      const assemble=smooth(clamp((cycle-.10)/.38));
-      const optimize=smooth(clamp((cycle-.49)/.20));
-      const reset=smooth(clamp((cycle-.88)/.12));
-      parts.forEach((m,i)=>{
-        const u=m.userData;const target=u.exploded.clone().lerp(u.compact,assemble);
-        if(u.drop){target.add(u.dropDir.clone().multiplyScalar(optimize));m.material.transparent=true;m.material.opacity=Math.max(.04,1-optimize*.94);m.visible=m.material.opacity>.045}
-        else{m.visible=true;m.material.opacity=1;target.multiplyScalar(1-optimize*.055)}
-        if(reset>0){target.lerp(u.exploded,reset);m.visible=true;m.material.opacity=1}
-        m.position.lerp(target,prefersReduced?1:.105);
-        if(u.spin&&!prefersReduced)m.rotation.y+=u.spin;
-      });
-      scan.position.x=-3.3+((cycle*4)%1)*6.6;scan.material.opacity=.018+.04*Math.sin(cycle*Math.PI*4)**2;
-      product.rotation.y+=( (.34+pointerX*.13)-product.rotation.y)*.035;
-      product.rotation.x+=( (-.12-pointerY*.08)-product.rotation.x)*.035;
-      root.rotation.y=t*.055;points.rotation.y=-t*.018;
-      renderer.render(scene,camera);
-      if(!prefersReduced)raf=requestAnimationFrame(render)
-    }
-    host.classList.add('three-ready');
-    if(prefersReduced){setStep(3);render(performance.now())}else loop(performance.now());
+<script id="reduct-real-process-hero-v4-script">
+(() => {
+  const video=document.getElementById('heroProcessVideo');
+  const hero=document.querySelector('.hero');
+  if(video&&hero){
+    const io=new IntersectionObserver(([entry])=>{if(entry.isIntersecting){video.play().catch(()=>{});}else{video.pause();}},{threshold:.05});
+    io.observe(hero);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else if(hero.getBoundingClientRect().bottom>0)video.play().catch(()=>{});});
   }
-}
+  const flow=[...document.querySelectorAll('[data-real-step]')];
+  const els={structure:document.getElementById('heroStatusStructure'),process:document.getElementById('heroStatusProcess'),supply:document.getElementById('heroStatusSupply'),cost:document.getElementById('heroStatusCost')};
+  const states=[
+    ['ANALYZE','REVIEW','MAP','BASELINE'],
+    ['IDENTIFY','TRACE','COMPARE','DRIVERS'],
+    ['REDESIGN','SIMPLIFY','SELECT','MODEL'],
+    ['SOURCE','VERIFY','MATCH','REVIEW'],
+    ['VALIDATE','READY','READY','OPTIMIZE']
+  ];
+  let step=0;
+  function paint(){flow.forEach((el,i)=>el.classList.toggle('active',i===step));const s=states[step];[['structure',0],['process',1],['supply',2],['cost',3]].forEach(([k,i])=>{if(els[k]){els[k].style.opacity='0';els[k].style.transform='translateY(4px)';setTimeout(()=>{els[k].textContent=s[i];els[k].style.opacity='1';els[k].style.transform='translateY(0)'},130);}})}
+  paint();
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(()=>{step=(step+1)%5;paint();},3200);
+})();
 </script>
-
 </body>
 </html>
