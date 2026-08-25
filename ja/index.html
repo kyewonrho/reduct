@@ -2,6 +2,7 @@
 
 <html lang="ja">
 <head>
+<meta name="reduct-build" content="three-optimization-v3-20260825-2340">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#000000" name="theme-color"/>
@@ -21,7 +22,7 @@
 <title>REDUCT | 製品・製造コスト最適化</title>
 <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
 <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet"/>
-<link href="../style.css" rel="stylesheet"/>
+<link href="../style-v5.css" rel="stylesheet"/>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -93,37 +94,225 @@
     }
   ]
 }</script>
-<link href="https://reduct.co.kr/" hreflang="ko-KR" rel="alternate"/><link href="https://reduct.co.kr/en/" hreflang="en" rel="alternate"/><link href="https://reduct.co.kr/ja/" hreflang="ja" rel="alternate"/><link href="https://reduct.co.kr/" hreflang="x-default" rel="alternate"/></head>
+<link href="https://reduct.co.kr/" hreflang="ko-KR" rel="alternate"/><link href="https://reduct.co.kr/en/" hreflang="en" rel="alternate"/><link href="https://reduct.co.kr/ja/" hreflang="ja" rel="alternate"/><link href="https://reduct.co.kr/" hreflang="x-default" rel="alternate"/><style id="footer-force-20260825-final">
+/* FINAL FOOTER: company info under logo + centered 3x2 navigation */
+.site-footer .footer-grid{
+  display:grid !important;
+  grid-template-columns:minmax(0,1.2fr) minmax(520px,1fr) !important;
+  column-gap:80px !important;
+  align-items:stretch !important;
+}
+.site-footer .footer-brand{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  min-width:0 !important;
+}
+.site-footer .footer-logo{
+  display:block !important;
+  width:260px !important;
+  height:auto !important;
+  margin:0 0 14px 0 !important;
+}
+.site-footer .footer-brand>p{
+  margin:0 !important;
+  font-size:15px !important;
+  line-height:1.5 !important;
+}
+.site-footer .footer-brand .footer-info{
+  display:grid !important;
+  position:static !important;
+  grid-template-columns:1fr !important;
+  grid-template-rows:none !important;
+  gap:8px !important;
+  width:auto !important;
+  max-width:760px !important;
+  margin:28px 0 0 0 !important;
+  padding:0 !important;
+  transform:none !important;
+}
+.site-footer .footer-brand .footer-info p{
+  display:block !important;
+  position:static !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  font-size:14px !important;
+  line-height:1.55 !important;
+  white-space:normal !important;
+  transform:none !important;
+}
+.site-footer .footer-nav{
+  display:grid !important;
+  grid-template-columns:repeat(3,max-content) !important;
+  grid-template-rows:repeat(2,auto) !important;
+  column-gap:48px !important;
+  row-gap:28px !important;
+  justify-content:center !important;
+  align-content:center !important;
+  justify-self:stretch !important;
+  align-self:stretch !important;
+  min-height:260px !important;
+  margin:0 !important;
+  padding:0 !important;
+  transform:none !important;
+}
+.site-footer .footer-nav a{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:4px 0 !important;
+  font-size:19px !important;
+  line-height:1.25 !important;
+  font-weight:600 !important;
+  letter-spacing:.01em !important;
+  white-space:nowrap !important;
+}
+/* Keep WHERE WE OPTIMIZE left guide exact */
+#project .section-intro,
+#project .section-intro .eyebrow,
+#project .section-intro h2,
+#project .section-intro>p{
+  margin-left:0 !important;
+  padding-left:0 !important;
+  text-indent:0 !important;
+  transform:none !important;
+}
+@media (max-width:1280px){
+  .site-footer .footer-grid{
+    grid-template-columns:minmax(0,1fr) minmax(420px,.9fr) !important;
+    column-gap:48px !important;
+  }
+  .site-footer .footer-nav{
+    column-gap:32px !important;
+    row-gap:24px !important;
+  }
+  .site-footer .footer-nav a{font-size:17px !important;}
+}
+@media (max-width:980px){
+  .site-footer .footer-grid{
+    grid-template-columns:1fr !important;
+    gap:42px !important;
+  }
+  .site-footer .footer-nav{
+    grid-template-columns:repeat(3,max-content) !important;
+    min-height:0 !important;
+    justify-content:start !important;
+    align-content:start !important;
+  }
+}
+@media (max-width:640px){
+  .site-footer .footer-logo{width:220px !important;}
+  .site-footer .footer-nav{
+    grid-template-columns:repeat(2,max-content) !important;
+    column-gap:26px !important;
+    row-gap:16px !important;
+  }
+  .site-footer .footer-nav a{font-size:16px !important;}
+}
+</style>
+
+<style id="reduct-optimization-engine-v3">
+/* REDUCT OPTIMIZATION ENGINE — Three.js progressive hero */
+.hero{background:#030303 !important;isolation:isolate;overflow:hidden}
+.hero-media{opacity:0 !important;background:none !important;filter:none !important}
+.hero-overlay{z-index:2 !important;background:
+  linear-gradient(90deg,#030303 0%,rgba(3,3,3,.98) 31%,rgba(3,3,3,.76) 48%,rgba(3,3,3,.22) 76%,rgba(3,3,3,.07) 100%),
+  linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.40)) !important}
+.hero-content{position:relative !important;z-index:5 !important;pointer-events:none}
+.hero-content a{pointer-events:auto}
+.opt-engine{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;background:
+  radial-gradient(circle at 76% 48%,rgba(255,255,255,.055),transparent 23%),
+  radial-gradient(circle at 78% 52%,rgba(255,255,255,.018),transparent 42%)}
+.opt-engine:before{content:"";position:absolute;right:-6%;top:-22%;width:66%;height:144%;opacity:.18;background-image:
+  linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;transform:perspective(1100px) rotateY(-18deg) rotateX(63deg);transform-origin:center;mask-image:linear-gradient(90deg,transparent,#000 18%,#000 80%,transparent)}
+.opt-engine:after{content:"";position:absolute;right:0;top:0;width:59%;height:100%;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.025) 50%,transparent 62%);animation:optSheen 9s ease-in-out infinite}
+.opt-canvas-wrap{position:absolute;right:0;top:0;width:59%;height:100%;overflow:hidden}
+#optThreeCanvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .8s ease;filter:drop-shadow(0 30px 55px rgba(0,0,0,.55))}
+.opt-engine.three-ready #optThreeCanvas{opacity:1}
+.opt-fallback{position:absolute;left:50%;top:50%;width:min(32vw,510px);aspect-ratio:1.25;transform:translate(-46%,-50%);opacity:.55;transition:opacity .6s ease}
+.opt-engine.three-ready .opt-fallback{opacity:0}
+.opt-fallback-core{position:absolute;inset:22% 15%;border:1px solid rgba(255,255,255,.26);transform:skewY(-7deg);box-shadow:inset 0 0 0 18px rgba(255,255,255,.018),0 0 70px rgba(255,255,255,.04)}
+.opt-fallback-core:before,.opt-fallback-core:after{content:"";position:absolute;left:8%;right:8%;height:22%;border:1px solid rgba(255,255,255,.16)}
+.opt-fallback-core:before{top:-38%}.opt-fallback-core:after{bottom:-38%}
+.opt-orbit{position:absolute;left:50%;top:50%;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotateX(67deg)}
+.opt-orbit.o1{width:77%;height:52%}.opt-orbit.o2{width:96%;height:64%;opacity:.55}.opt-orbit.o3{width:116%;height:76%;opacity:.28}
+.opt-hud{position:absolute;right:4.5vw;top:14vh;width:min(47vw,760px);height:70vh;z-index:3;color:#fff;font-family:var(--font);opacity:.82}
+.opt-frame{position:absolute;inset:0;border:1px solid rgba(255,255,255,.10);clip-path:polygon(0 0,16% 0,16% 1px,84% 1px,84% 0,100% 0,100% 100%,84% 100%,84% calc(100% - 1px),16% calc(100% - 1px),16% 100%,0 100%)}
+.opt-kicker{position:absolute;left:0;top:-28px;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.38)}
+.opt-flow{position:absolute;left:0;bottom:-37px;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.30)}
+.opt-flow span{transition:color .35s ease,text-shadow .35s ease}.opt-flow span.active{color:rgba(255,255,255,.88);text-shadow:0 0 12px rgba(255,255,255,.18)}
+.opt-flow i{width:24px;height:1px;background:rgba(255,255,255,.12);display:block}
+.opt-readout{position:absolute;right:0;top:0;display:grid;gap:8px;min-width:192px}
+.opt-readout div{display:flex;justify-content:space-between;gap:24px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.08);font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.32)}
+.opt-readout b{font-weight:500;color:rgba(255,255,255,.74)}
+.opt-scan{position:absolute;top:8%;bottom:8%;width:1px;left:49%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.75) 18%,rgba(255,255,255,.22) 78%,transparent);box-shadow:0 0 18px rgba(255,255,255,.12);animation:optScan 6.4s ease-in-out infinite}
+.opt-scan:before{content:"ANALYSIS";position:absolute;top:10%;left:10px;font-size:8px;letter-spacing:.2em;color:rgba(255,255,255,.34);writing-mode:vertical-rl}
+@keyframes optScan{0%,100%{left:12%;opacity:.18}50%{left:88%;opacity:.86}}
+@keyframes optSheen{0%,100%{transform:translateX(-35%);opacity:.18}50%{transform:translateX(20%);opacity:.75}}
+@media(max-width:1120px){.opt-canvas-wrap{width:68%;right:-15%}.opt-hud{right:-3vw;width:62vw;opacity:.55}.hero-overlay{background:linear-gradient(90deg,#030303 0%,rgba(3,3,3,.93) 48%,rgba(3,3,3,.54) 100%) !important}}
+@media(max-width:760px){.opt-canvas-wrap{width:108%;right:-48%;opacity:.54}.opt-hud{display:none}.opt-engine:before{right:-45%;width:115%;opacity:.10}.opt-engine:after{width:100%;opacity:.25}.hero-overlay{background:linear-gradient(90deg,rgba(3,3,3,.94),rgba(3,3,3,.78)),linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.55)) !important}}
+@media(prefers-reduced-motion:reduce){.opt-engine:after,.opt-scan{animation:none !important}.opt-flow span{transition:none !important}}
+</style>
+
+</head>
 <body>
 <header class="site-header" id="siteHeader">
 <div class="shell header-inner">
-<a aria-label="REDUCT ホーム" class="brand" href="#home">
+<a aria-label="REDUCT ホーム" class="brand" href="/#home">
 <svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg>
 </a>
 <div class="header-actions"><nav aria-label="メインメニュー" class="desktop-nav">
-<a href="#home">ホーム</a>
-<a href="#about">会社紹介</a>
-<a href="#business">事業領域</a>
-<a href="#technology">技術力</a>
+<a href="/#home">ホーム</a>
+<a href="/#about">会社紹介</a>
+<a href="/#business">事業領域</a>
+<a href="/#technology">技術力</a>
 <a href="#project">最適化領域</a>
-<a href="#contact">アクセス</a>
+<a href="/#contact">アクセス</a>
 </nav><div aria-label="言語選択" class="language-switcher"><a data-lang-code="ko" href="/">한국어</a><span>/</span><a data-lang-code="en" href="/en/">EN</a><span>/</span><a class="active" data-lang-code="ja" href="/ja/">日本語</a></div><button aria-expanded="false" aria-label="メニューを開く" class="menu-toggle" id="menuToggle">
 <span></span><span></span>
 </button></div></div>
 <div aria-hidden="true" class="mobile-menu" id="mobileMenu">
 <nav>
-<a href="#home">ホーム</a>
-<a href="#about">会社紹介</a>
-<a href="#business">事業領域</a>
-<a href="#technology">技術力</a>
+<a href="/#home">ホーム</a>
+<a href="/#about">会社紹介</a>
+<a href="/#business">事業領域</a>
+<a href="/#technology">技術力</a>
 <a href="#project">最適化領域</a>
-<a href="#contact">アクセス</a>
+<a href="/#contact">アクセス</a>
 </nav>
 <p class="mobile-menu-meta">REDUCE PRODUCT TECHNOLOGY</p>
 </div>
 </header>
 <main>
 <section class="hero" id="home">
+
+<div class="opt-engine" id="optEngine" aria-hidden="true">
+  <div class="opt-canvas-wrap"><canvas id="optThreeCanvas"></canvas></div>
+  <div class="opt-fallback">
+    <div class="opt-orbit o1"></div><div class="opt-orbit o2"></div><div class="opt-orbit o3"></div>
+    <div class="opt-fallback-core"></div>
+  </div>
+  <div class="opt-hud">
+    <div class="opt-frame"></div><div class="opt-kicker">PRODUCT OPTIMIZATION / SIMULATION</div>
+    <div class="opt-readout">
+      <div><span>STRUCTURE</span><b id="optStatusStructure">ANALYZE</b></div>
+      <div><span>PROCESS</span><b id="optStatusProcess">REVIEW</b></div>
+      <div><span>SUPPLY</span><b id="optStatusSupply">MAP</b></div>
+      <div><span>COST</span><b id="optStatusCost">OPTIMIZE</b></div>
+    </div>
+    <div class="opt-scan"></div>
+    <div class="opt-flow"><span data-opt-step="0">ANALYZE</span><i></i><span data-opt-step="1">SIMPLIFY</span><i></i><span data-opt-step="2">INTEGRATE</span><i></i><span data-opt-step="3">OPTIMIZE</span></div>
+  </div>
+</div>
+
 <div class="hero-media"></div>
 <div class="hero-overlay"></div>
 <div class="shell hero-content reveal">
@@ -364,17 +553,9 @@
 </main>
 <footer class="site-footer section-dark">
 <div class="shell footer-grid">
-<div>
+<div class="footer-brand">
 <svg aria-label="REDUCT" class="footer-logo" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg>
 <p>REDUCE PRODUCT TECHNOLOGY</p>
-</div>
-<nav>
-<a href="#about">会社紹介</a>
-<a href="#business">事業領域</a>
-<a href="#technology">技術力</a>
-<a href="#project">最適化領域</a>
-<a href="#contact">アクセス</a>
-</nav>
 <div class="footer-info">
 <p>REDUCT Co., Ltd.</p>
 <p>代表取締役 ノ・ゲウォン</p>
@@ -382,7 +563,14 @@
 <p>ceo@reduct.co.kr</p>
 <p>相談・打ち合わせ +82 70-4575-0014</p>
 <p>事業者登録番号：追って掲載</p>
-</div>
+</div></div>
+<nav class="footer-nav">
+<a href="/#about">会社紹介</a>
+<a href="/#business">事業領域</a>
+<a href="/#technology">技術力</a>
+<a href="#project">最適化領域</a>
+<a href="/#contact">アクセス</a>
+</nav>
 </div>
 <div class="shell footer-bottom">Copyright © REDUCT Co., Ltd. All Rights Reserved.</div>
 </footer>
@@ -407,5 +595,131 @@
 </div>
 </section>
 <script src="../app.js"></script>
+
+<script type="module" id="reduct-threejs-optimization-v3">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js';
+import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/geometries/RoundedBoxGeometry.js';
+
+const host=document.getElementById('optEngine');
+const canvas=document.getElementById('optThreeCanvas');
+if(host&&canvas){
+  const prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile=matchMedia('(max-width: 760px)').matches;
+  let renderer;
+  try{
+    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!isMobile,powerPreference:'high-performance'});
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1,isMobile?1:1.45));
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure=.86;
+  }catch(e){console.warn('REDUCT WebGL fallback',e);}
+  if(renderer){
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(34,1,.1,100);
+    camera.position.set(7.2,4.2,8.8);
+    camera.lookAt(0,0,0);
+    const root=new THREE.Group();scene.add(root);
+    const product=new THREE.Group();root.add(product);
+    product.rotation.set(-.12,.34,.02);
+
+    scene.add(new THREE.HemisphereLight(0xffffff,0x080808,1.15));
+    const key=new THREE.DirectionalLight(0xffffff,4.1);key.position.set(5,7,8);scene.add(key);
+    const rim=new THREE.DirectionalLight(0x9b9b9b,2.2);rim.position.set(-7,2,-5);scene.add(rim);
+    const fill=new THREE.PointLight(0xffffff,3.0,18);fill.position.set(2,-3,4);scene.add(fill);
+
+    const matDark=new THREE.MeshStandardMaterial({color:0x0b0b0b,metalness:.92,roughness:.25});
+    const matMid=new THREE.MeshStandardMaterial({color:0x4a4a4a,metalness:.88,roughness:.24});
+    const matLight=new THREE.MeshStandardMaterial({color:0xa9a9a9,metalness:.82,roughness:.22});
+    const matBoard=new THREE.MeshStandardMaterial({color:0x171717,metalness:.58,roughness:.40});
+    const lineMat=new THREE.LineBasicMaterial({color:0xe8e8e8,transparent:true,opacity:.23});
+    const ghostMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.035,side:THREE.DoubleSide,depthWrite:false});
+
+    const parts=[];
+    function edgeify(mesh,opacity=.22){const e=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,24),lineMat.clone());e.material.opacity=opacity;mesh.add(e)}
+    function addPart(geo,mat,compact,exploded,opt={}){
+      const mesh=new THREE.Mesh(geo,mat.clone());
+      mesh.position.copy(exploded);mesh.userData={compact:compact.clone(),exploded:exploded.clone(),drop:!!opt.drop,dropDir:(opt.dropDir||new THREE.Vector3(0,0,0)).clone(),spin:opt.spin||0,baseOpacity:mesh.material.opacity??1};
+      if(opt.rotation) mesh.rotation.set(...opt.rotation);
+      edgeify(mesh,opt.edge??.20);product.add(mesh);parts.push(mesh);return mesh;
+    }
+    const rb=(x,y,z,r=.08)=>new RoundedBoxGeometry(x,y,z,4,r);
+    // Core architecture
+    addPart(rb(3.9,.28,2.72,.11),matMid,new THREE.Vector3(0,-1.10,0),new THREE.Vector3(0,-2.10,0),{edge:.28});
+    addPart(rb(3.25,1.38,2.28,.16),matDark,new THREE.Vector3(0,-.22,0),new THREE.Vector3(0,-.25,0),{edge:.30});
+    addPart(rb(3.52,.24,2.45,.10),matLight,new THREE.Vector3(0,.64,0),new THREE.Vector3(0,1.80,0),{edge:.24});
+    // Side structure / rails
+    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(-1.80,-.34,0),new THREE.Vector3(-2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(-2.2,.8,.2),edge:.18});
+    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(1.80,-.34,0),new THREE.Vector3(2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(2.2,.8,-.2),edge:.18});
+    // PCB / electronics layer
+    const pcb=addPart(rb(2.85,.12,1.76,.04),matBoard,new THREE.Vector3(0,.90,0),new THREE.Vector3(0,2.55,0),{edge:.26});
+    const chipGeo=rb(.38,.16,.32,.035);const smallGeo=rb(.18,.12,.15,.025);
+    [[-.75,.0,-.40],[.1,.0,-.30],[.65,.0,.37],[-.38,.0,.46]].forEach((p,i)=>{const m=new THREE.Mesh(i%2?smallGeo:chipGeo,matMid.clone());m.position.set(p[0],.14,p[2]);edgeify(m,.16);pcb.add(m)});
+    // Central mechanical interface
+    const cylGeo=new THREE.CylinderGeometry(.58,.58,.44,48);const cyl=addPart(cylGeo,matLight,new THREE.Vector3(0,.08,0),new THREE.Vector3(0,-.10,-3.0),{rotation:[Math.PI/2,0,0],edge:.18});
+    const ringGeo=new THREE.TorusGeometry(.82,.08,12,64);addPart(ringGeo,matMid,new THREE.Vector3(0,.12,.02),new THREE.Vector3(0,.15,3.2),{rotation:[Math.PI/2,0,0],edge:.10});
+    // Fasteners - some are deliberately removed in optimization phase
+    const boltGeo=new THREE.CylinderGeometry(.105,.105,.42,20);
+    const boltCompact=[[-1.42,.40,-.88],[1.42,.40,-.88],[-1.42,.40,.88],[1.42,.40,.88],[-1.1,-.72,-.9],[1.1,-.72,.9]];
+    boltCompact.forEach((p,i)=>addPart(boltGeo,i<4?matLight:matMid,new THREE.Vector3(...p),new THREE.Vector3(p[0]*1.55,2.8+(i%2)*.45,p[2]*1.45),{rotation:[0,0,0],drop:i>=4,dropDir:new THREE.Vector3((i===4?-1:1)*2.0,-.8,(i===4?-1:1)*1.4),edge:.10}));
+    // Internal brackets that merge during optimization
+    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(-.92,-.14,0),new THREE.Vector3(-2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(-1.7,-1.4,0),edge:.18});
+    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(.92,-.14,0),new THREE.Vector3(2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(1.7,-1.4,0),edge:.18});
+
+    // Data cloud
+    const count=isMobile?34:78;const pg=new THREE.BufferGeometry();const pa=new Float32Array(count*3);
+    for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,r=3.5+Math.random()*2.8;pa[i*3]=Math.cos(a)*r;pa[i*3+1]=(Math.random()-.5)*5.8;pa[i*3+2]=Math.sin(a)*r*.65}
+    pg.setAttribute('position',new THREE.BufferAttribute(pa,3));const points=new THREE.Points(pg,new THREE.PointsMaterial({color:0xffffff,size:.022,transparent:true,opacity:.35,sizeAttenuation:true}));root.add(points);
+    // Wire orbit rings
+    [3.2,4.15].forEach((r,i)=>{const g=new THREE.TorusGeometry(r,.006,4,160);const m=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:i?.07:.12});const o=new THREE.Mesh(g,m);o.rotation.set(Math.PI/2.55,.30+i*.18,.25);root.add(o)});
+    // Scan plane
+    const scan=new THREE.Mesh(new THREE.PlaneGeometry(5.4,4.6),ghostMat);scan.rotation.y=Math.PI/2;product.add(scan);
+
+    const flows=[...document.querySelectorAll('[data-opt-step]')];
+    const status={
+      structure:document.getElementById('optStatusStructure'),process:document.getElementById('optStatusProcess'),supply:document.getElementById('optStatusSupply'),cost:document.getElementById('optStatusCost')
+    };
+    const statuses=[
+      ['ANALYZE','REVIEW','MAP','BASELINE'],
+      ['SIMPLIFY','REDUCE','COMPARE','REVIEW'],
+      ['INTEGRATE','CONSOLIDATE','SELECT','MODEL'],
+      ['OPTIMIZED','VALIDATE','READY','OPTIMIZE']
+    ];
+    let currentStep=-1;
+    function setStep(n){if(n===currentStep)return;currentStep=n;flows.forEach((x,i)=>x.classList.toggle('active',i===n));const s=statuses[n];if(status.structure)status.structure.textContent=s[0];if(status.process)status.process.textContent=s[1];if(status.supply)status.supply.textContent=s[2];if(status.cost)status.cost.textContent=s[3]}
+    const smooth=t=>t*t*(3-2*t);const clamp=t=>Math.max(0,Math.min(1,t));
+    let pointerX=0,pointerY=0,visible=true,raf=0;
+    if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{pointerX=(e.clientX/innerWidth-.5);pointerY=(e.clientY/innerHeight-.5)},{passive:true})}
+    const obs=new IntersectionObserver(e=>{visible=e[0]?.isIntersecting??true;if(visible&&!prefersReduced)loop(performance.now())},{threshold:.05});obs.observe(document.querySelector('.hero'));
+    document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(visible&&!prefersReduced)loop(performance.now())});
+    function resize(){const wrap=canvas.parentElement;const w=Math.max(1,wrap.clientWidth),h=Math.max(1,wrap.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+    new ResizeObserver(resize).observe(canvas.parentElement);resize();
+    function loop(now){if(!visible||document.hidden){raf=0;return}if(raf)return;raf=requestAnimationFrame(render)}
+    function render(now){raf=0;const t=(now||performance.now())*.001;const cycle=prefersReduced?.70:(t%14)/14;
+      // 0 analyze/exploded, 1 simplify, 2 integrate, 3 optimized
+      let step=cycle<.25?0:cycle<.48?1:cycle<.72?2:3;setStep(step);
+      const assemble=smooth(clamp((cycle-.10)/.38));
+      const optimize=smooth(clamp((cycle-.49)/.20));
+      const reset=smooth(clamp((cycle-.88)/.12));
+      parts.forEach((m,i)=>{
+        const u=m.userData;const target=u.exploded.clone().lerp(u.compact,assemble);
+        if(u.drop){target.add(u.dropDir.clone().multiplyScalar(optimize));m.material.transparent=true;m.material.opacity=Math.max(.04,1-optimize*.94);m.visible=m.material.opacity>.045}
+        else{m.visible=true;m.material.opacity=1;target.multiplyScalar(1-optimize*.055)}
+        if(reset>0){target.lerp(u.exploded,reset);m.visible=true;m.material.opacity=1}
+        m.position.lerp(target,prefersReduced?1:.105);
+        if(u.spin&&!prefersReduced)m.rotation.y+=u.spin;
+      });
+      scan.position.x=-3.3+((cycle*4)%1)*6.6;scan.material.opacity=.018+.04*Math.sin(cycle*Math.PI*4)**2;
+      product.rotation.y+=( (.34+pointerX*.13)-product.rotation.y)*.035;
+      product.rotation.x+=( (-.12-pointerY*.08)-product.rotation.x)*.035;
+      root.rotation.y=t*.055;points.rotation.y=-t*.018;
+      renderer.render(scene,camera);
+      if(!prefersReduced)raf=requestAnimationFrame(render)
+    }
+    host.classList.add('three-ready');
+    if(prefersReduced){setStep(3);render(performance.now())}else loop(performance.now());
+  }
+}
+</script>
+
 </body>
 </html>

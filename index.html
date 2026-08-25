@@ -2,11 +2,10 @@
 
 <html lang="ko">
 <head>
-<!-- REDUCT BUILD: HERO-MOTION-V2 -->
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#000000" name="theme-color"/>
-<meta name="reduct-build" content="footer-under-logo-20260825-2315"/>
+<meta name="reduct-build" content="three-optimization-v3-20260825-2340">
 <meta content="제품·산업설비 원가절감, 자동차 선행개발·프로토 부품, CNC 3축·5축 정밀가공, 장비 부품·판금·시제품, OEM 제작, 기구설계, 하드웨어·펌웨어, 금형·지그·역설계까지 기술적으로 최적화합니다." name="description"/>
 <meta content="REDUCT | 원가절감·장비 부품 제작·OEM 최적화" property="og:title"/>
 <meta content="원가절감부터 자동차 선행개발, CNC 3축·5축, 장비 부품, 판금, 시제품, 하드웨어·펌웨어, 금형까지 설계와 제조 구조를 최적화합니다." property="og:description"/>
@@ -222,96 +221,101 @@
 }
 </style>
 
-<style id="reduct-motion-hero-v1">
-/* REDUCT MOTION HERO — monochrome optimization scanner */
-.hero{background:#050505 !important;isolation:isolate}
-.hero-media{background:none !important;filter:none !important;opacity:0 !important}
-.hero-overlay{z-index:1 !important;background:
-  linear-gradient(90deg,#050505 0%,rgba(5,5,5,.96) 34%,rgba(5,5,5,.52) 58%,rgba(5,5,5,.18) 100%),
-  linear-gradient(180deg,rgba(5,5,5,.05) 0%,rgba(5,5,5,.45) 100%) !important}
-.hero-content{z-index:4 !important;position:relative !important;pointer-events:none}
+<style id="reduct-optimization-engine-v3">
+/* REDUCT OPTIMIZATION ENGINE — Three.js progressive hero */
+.hero{background:#030303 !important;isolation:isolate;overflow:hidden}
+.hero-media{opacity:0 !important;background:none !important;filter:none !important}
+.hero-overlay{z-index:2 !important;background:
+  linear-gradient(90deg,#030303 0%,rgba(3,3,3,.98) 31%,rgba(3,3,3,.76) 48%,rgba(3,3,3,.22) 76%,rgba(3,3,3,.07) 100%),
+  linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.40)) !important}
+.hero-content{position:relative !important;z-index:5 !important;pointer-events:none}
 .hero-content a{pointer-events:auto}
-.hero-tech-stage{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:
-  radial-gradient(circle at 78% 44%,rgba(255,255,255,.08),transparent 25%),
-  linear-gradient(135deg,#050505 0%,#0b0b0b 58%,#020202 100%)}
-.hero-tech-stage:before{content:"";position:absolute;inset:-10%;opacity:.26;background-image:
+.opt-engine{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;background:
+  radial-gradient(circle at 76% 48%,rgba(255,255,255,.055),transparent 23%),
+  radial-gradient(circle at 78% 52%,rgba(255,255,255,.018),transparent 42%)}
+.opt-engine:before{content:"";position:absolute;right:-6%;top:-22%;width:66%;height:144%;opacity:.18;background-image:
   linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:52px 52px;transform:perspective(900px) rotateX(68deg) translateY(15%);transform-origin:center bottom;animation:gridDrift 14s linear infinite}
-.hero-tech-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 0 55%,rgba(255,255,255,.035) 61%,transparent 67%);animation:heroSweep 8s ease-in-out infinite}
-.hero-tech-canvas{position:absolute;right:-2vw;top:7vh;width:min(58vw,980px);height:86vh;opacity:.92;filter:drop-shadow(0 0 22px rgba(255,255,255,.055))}
-.hero-tech-hud{position:absolute;right:5vw;top:18vh;width:min(46vw,760px);height:62vh;z-index:2}
-.hero-tech-hud .corner{position:absolute;width:54px;height:54px;border-color:rgba(255,255,255,.26);border-style:solid}
-.hero-tech-hud .c1{left:0;top:0;border-width:1px 0 0 1px}.hero-tech-hud .c2{right:0;top:0;border-width:1px 1px 0 0}.hero-tech-hud .c3{left:0;bottom:0;border-width:0 0 1px 1px}.hero-tech-hud .c4{right:0;bottom:0;border-width:0 1px 1px 0}
-.hero-tech-hud .axis{position:absolute;background:rgba(255,255,255,.12)}
-.hero-tech-hud .axis-x{left:7%;right:7%;top:50%;height:1px}.hero-tech-hud .axis-y{top:7%;bottom:7%;left:50%;width:1px}
-.hero-tech-label{position:absolute;padding:8px 11px;border:1px solid rgba(255,255,255,.18);background:rgba(5,5,5,.38);backdrop-filter:blur(7px);font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.62);text-transform:uppercase;white-space:nowrap;animation:hudFloat 6s ease-in-out infinite}
-.hero-tech-label:before{content:"";position:absolute;top:50%;width:52px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.32),transparent)}
-.hero-tech-label.l1{left:5%;top:20%}.hero-tech-label.l1:before{left:100%}
-.hero-tech-label.l2{right:2%;top:34%;animation-delay:-1.2s}.hero-tech-label.l2:before{right:100%;transform:rotate(180deg)}
-.hero-tech-label.l3{left:4%;bottom:22%;animation-delay:-2.4s}.hero-tech-label.l3:before{left:100%}
-.hero-tech-label.l4{right:4%;bottom:13%;animation-delay:-3.6s}.hero-tech-label.l4:before{right:100%;transform:rotate(180deg)}
-.hero-scanline{position:absolute;left:42%;right:3%;height:1px;top:24%;z-index:3;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8) 22%,rgba(255,255,255,.18) 70%,transparent);box-shadow:0 0 18px rgba(255,255,255,.18);animation:scanVertical 6.8s ease-in-out infinite}
-.hero-scanline:after{content:"SCAN / OPTIMIZE";position:absolute;right:4%;bottom:8px;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.45)}
-@keyframes gridDrift{to{background-position:52px 52px,52px 52px}}
-@keyframes heroSweep{0%,100%{transform:translateX(-22%);opacity:.25}50%{transform:translateX(24%);opacity:.75}}
-@keyframes scanVertical{0%,100%{top:21%;opacity:.25}50%{top:75%;opacity:.9}}
-@keyframes hudFloat{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-7px);opacity:.95}}
-@media(max-width:980px){
-  .hero-tech-canvas{right:-22vw;width:92vw;height:72vh;top:12vh;opacity:.54}
-  .hero-tech-hud{right:-12vw;width:72vw;opacity:.46}
-  .hero-overlay{background:linear-gradient(90deg,rgba(5,5,5,.96),rgba(5,5,5,.72)),linear-gradient(180deg,rgba(5,5,5,.18),rgba(5,5,5,.68)) !important}
-}
-@media(max-width:760px){
-  .hero-tech-canvas{right:-42vw;top:7vh;width:126vw;height:70vh;opacity:.34}
-  .hero-tech-hud{display:none}.hero-scanline{left:0;right:0;opacity:.35}
-  .hero-tech-stage:before{background-size:38px 38px}
-}
-@media(prefers-reduced-motion:reduce){.hero-tech-stage:before,.hero-tech-stage:after,.hero-tech-label,.hero-scanline{animation:none !important}}
+  linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;transform:perspective(1100px) rotateY(-18deg) rotateX(63deg);transform-origin:center;mask-image:linear-gradient(90deg,transparent,#000 18%,#000 80%,transparent)}
+.opt-engine:after{content:"";position:absolute;right:0;top:0;width:59%;height:100%;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.025) 50%,transparent 62%);animation:optSheen 9s ease-in-out infinite}
+.opt-canvas-wrap{position:absolute;right:0;top:0;width:59%;height:100%;overflow:hidden}
+#optThreeCanvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .8s ease;filter:drop-shadow(0 30px 55px rgba(0,0,0,.55))}
+.opt-engine.three-ready #optThreeCanvas{opacity:1}
+.opt-fallback{position:absolute;left:50%;top:50%;width:min(32vw,510px);aspect-ratio:1.25;transform:translate(-46%,-50%);opacity:.55;transition:opacity .6s ease}
+.opt-engine.three-ready .opt-fallback{opacity:0}
+.opt-fallback-core{position:absolute;inset:22% 15%;border:1px solid rgba(255,255,255,.26);transform:skewY(-7deg);box-shadow:inset 0 0 0 18px rgba(255,255,255,.018),0 0 70px rgba(255,255,255,.04)}
+.opt-fallback-core:before,.opt-fallback-core:after{content:"";position:absolute;left:8%;right:8%;height:22%;border:1px solid rgba(255,255,255,.16)}
+.opt-fallback-core:before{top:-38%}.opt-fallback-core:after{bottom:-38%}
+.opt-orbit{position:absolute;left:50%;top:50%;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotateX(67deg)}
+.opt-orbit.o1{width:77%;height:52%}.opt-orbit.o2{width:96%;height:64%;opacity:.55}.opt-orbit.o3{width:116%;height:76%;opacity:.28}
+.opt-hud{position:absolute;right:4.5vw;top:14vh;width:min(47vw,760px);height:70vh;z-index:3;color:#fff;font-family:var(--font);opacity:.82}
+.opt-frame{position:absolute;inset:0;border:1px solid rgba(255,255,255,.10);clip-path:polygon(0 0,16% 0,16% 1px,84% 1px,84% 0,100% 0,100% 100%,84% 100%,84% calc(100% - 1px),16% calc(100% - 1px),16% 100%,0 100%)}
+.opt-kicker{position:absolute;left:0;top:-28px;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.38)}
+.opt-flow{position:absolute;left:0;bottom:-37px;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.30)}
+.opt-flow span{transition:color .35s ease,text-shadow .35s ease}.opt-flow span.active{color:rgba(255,255,255,.88);text-shadow:0 0 12px rgba(255,255,255,.18)}
+.opt-flow i{width:24px;height:1px;background:rgba(255,255,255,.12);display:block}
+.opt-readout{position:absolute;right:0;top:0;display:grid;gap:8px;min-width:192px}
+.opt-readout div{display:flex;justify-content:space-between;gap:24px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.08);font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.32)}
+.opt-readout b{font-weight:500;color:rgba(255,255,255,.74)}
+.opt-scan{position:absolute;top:8%;bottom:8%;width:1px;left:49%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.75) 18%,rgba(255,255,255,.22) 78%,transparent);box-shadow:0 0 18px rgba(255,255,255,.12);animation:optScan 6.4s ease-in-out infinite}
+.opt-scan:before{content:"ANALYSIS";position:absolute;top:10%;left:10px;font-size:8px;letter-spacing:.2em;color:rgba(255,255,255,.34);writing-mode:vertical-rl}
+@keyframes optScan{0%,100%{left:12%;opacity:.18}50%{left:88%;opacity:.86}}
+@keyframes optSheen{0%,100%{transform:translateX(-35%);opacity:.18}50%{transform:translateX(20%);opacity:.75}}
+@media(max-width:1120px){.opt-canvas-wrap{width:68%;right:-15%}.opt-hud{right:-3vw;width:62vw;opacity:.55}.hero-overlay{background:linear-gradient(90deg,#030303 0%,rgba(3,3,3,.93) 48%,rgba(3,3,3,.54) 100%) !important}}
+@media(max-width:760px){.opt-canvas-wrap{width:108%;right:-48%;opacity:.54}.opt-hud{display:none}.opt-engine:before{right:-45%;width:115%;opacity:.10}.opt-engine:after{width:100%;opacity:.25}.hero-overlay{background:linear-gradient(90deg,rgba(3,3,3,.94),rgba(3,3,3,.78)),linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.55)) !important}}
+@media(prefers-reduced-motion:reduce){.opt-engine:after,.opt-scan{animation:none !important}.opt-flow span{transition:none !important}}
 </style>
 
 </head>
 <body>
 <header class="site-header" id="siteHeader">
 <div class="shell header-inner">
-<a aria-label="REDUCT 홈" class="brand" href="#home">
+<a aria-label="REDUCT 홈" class="brand" href="/#home">
 <svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg>
 </a>
 <div class="header-actions"><nav aria-label="주요 메뉴" class="desktop-nav">
-<a href="#home">홈</a>
-<a href="#about">회사소개</a>
-<a href="#business">사업영역</a>
-<a href="#technology">기술역량</a>
-<a href="#project">최적화 범위</a>
-<a href="#contact">오시는 길</a>
+<a href="/#home">홈</a>
+<a href="/#about">회사소개</a>
+<a href="/#business">사업영역</a>
+<a href="/#technology">기술역량</a>
+<a href="/#project">최적화 범위</a>
+<a href="/#contact">오시는 길</a>
 </nav><div aria-label="언어 선택" class="language-switcher"><a class="active" data-lang-code="ko" href="/">한국어</a><span>/</span><a data-lang-code="en" href="/en/">EN</a><span>/</span><a data-lang-code="ja" href="/ja/">日本語</a></div><button aria-expanded="false" aria-label="메뉴 열기" class="menu-toggle" id="menuToggle">
 <span></span><span></span>
 </button></div></div>
 <div aria-hidden="true" class="mobile-menu" id="mobileMenu">
 <nav>
-<a href="#home">홈</a>
-<a href="#about">회사소개</a>
-<a href="#business">사업영역</a>
-<a href="#technology">기술역량</a>
-<a href="#project">최적화 범위</a>
-<a href="#contact">오시는 길</a>
+<a href="/#home">홈</a>
+<a href="/#about">회사소개</a>
+<a href="/#business">사업영역</a>
+<a href="/#technology">기술역량</a>
+<a href="/#project">최적화 범위</a>
+<a href="/#contact">오시는 길</a>
 </nav>
 <p class="mobile-menu-meta">REDUCE PRODUCT TECHNOLOGY</p>
 </div>
 </header>
 <main>
 <section class="hero" id="home">
-<div class="hero-tech-stage" aria-hidden="true">
-<canvas class="hero-tech-canvas" id="heroTechCanvas"></canvas>
-<div class="hero-tech-hud">
-<span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-<span class="axis axis-x"></span><span class="axis axis-y"></span>
-<span class="hero-tech-label l1">STRUCTURE</span>
-<span class="hero-tech-label l2">ELECTRONICS</span>
-<span class="hero-tech-label l3">PROCESS</span>
-<span class="hero-tech-label l4">COST</span>
+
+<div class="opt-engine" id="optEngine" aria-hidden="true">
+  <div class="opt-canvas-wrap"><canvas id="optThreeCanvas"></canvas></div>
+  <div class="opt-fallback">
+    <div class="opt-orbit o1"></div><div class="opt-orbit o2"></div><div class="opt-orbit o3"></div>
+    <div class="opt-fallback-core"></div>
+  </div>
+  <div class="opt-hud">
+    <div class="opt-frame"></div><div class="opt-kicker">PRODUCT OPTIMIZATION / SIMULATION</div>
+    <div class="opt-readout">
+      <div><span>STRUCTURE</span><b id="optStatusStructure">ANALYZE</b></div>
+      <div><span>PROCESS</span><b id="optStatusProcess">REVIEW</b></div>
+      <div><span>SUPPLY</span><b id="optStatusSupply">MAP</b></div>
+      <div><span>COST</span><b id="optStatusCost">OPTIMIZE</b></div>
+    </div>
+    <div class="opt-scan"></div>
+    <div class="opt-flow"><span data-opt-step="0">ANALYZE</span><i></i><span data-opt-step="1">SIMPLIFY</span><i></i><span data-opt-step="2">INTEGRATE</span><i></i><span data-opt-step="3">OPTIMIZE</span></div>
+  </div>
 </div>
-<div class="hero-scanline"></div>
-</div>
+
 <div class="hero-media"></div>
 <div class="hero-overlay"></div>
 <div class="shell hero-content reveal">
@@ -564,14 +568,13 @@
 <p>사업자등록번호 : 추후 입력</p>
 </div></div>
 <nav class="footer-nav">
-<a href="/services/">SERVICES</a>
-<a href="#about">ABOUT</a>
-<a href="#business">BUSINESS</a>
-<a href="#technology">TECHNOLOGY</a>
-<a href="#project">SCOPE</a>
-<a href="#contact">CONTACT</a>
+<a href="/#home">SERVICES</a>
+<a href="/#about">ABOUT</a>
+<a href="/#business">BUSINESS</a>
+<a href="/#technology">TECHNOLOGY</a>
+<a href="/#project">SCOPE</a>
+<a href="/#contact">CONTACT</a>
 </nav>
-
 </div>
 <div class="shell footer-bottom">Copyright © REDUCT Co., Ltd. All Rights Reserved.</div>
 </footer>
@@ -597,51 +600,129 @@
 </section>
 <script src="./app.js"></script>
 
-<script id="reduct-hero-3d-v1">
-(()=>{
-  const c=document.getElementById('heroTechCanvas'); if(!c) return;
-  const ctx=c.getContext('2d');
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let w=0,h=0,dpr=1,t0=performance.now();
-  const edges=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
-  const faces=[[0,1,2,3],[4,5,6,7],[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7]];
-  function resize(){const r=c.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);w=Math.max(1,r.width);h=Math.max(1,r.height);c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
-  addEventListener('resize',resize,{passive:true});resize();
-  function rot(p,ay,ax){let [x,y,z]=p;let ca=Math.cos(ay),sa=Math.sin(ay);[x,z]=[x*ca-z*sa,x*sa+z*ca];let cb=Math.cos(ax),sb=Math.sin(ax);[y,z]=[y*cb-z*sb,y*sb+z*cb];return [x,y,z]}
-  function proj(p){const f=720/(720+p[2]);return [w*.58+p[0]*f,h*.48+p[1]*f,f]}
-  function cuboid(cx,cy,cz,sx,sy,sz,ay,ax,alpha){
-    const pts=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(q=>rot([cx+q[0]*sx,cy+q[1]*sy,cz+q[2]*sz],ay,ax));
-    const pp=pts.map(proj);
-    const order=faces.map((f,i)=>({i,z:f.reduce((s,k)=>s+pts[k][2],0)/4})).sort((a,b)=>b.z-a.z);
-    order.forEach(({i})=>{const f=faces[i],shade=.025+Math.max(0,(i%3)*.012);ctx.beginPath();ctx.moveTo(pp[f[0]][0],pp[f[0]][1]);for(let j=1;j<f.length;j++)ctx.lineTo(pp[f[j]][0],pp[f[j]][1]);ctx.closePath();ctx.fillStyle=`rgba(255,255,255,${shade*alpha})`;ctx.fill()});
-    ctx.strokeStyle=`rgba(255,255,255,${.27*alpha})`;ctx.lineWidth=1;edges.forEach(e=>{ctx.beginPath();ctx.moveTo(pp[e[0]][0],pp[e[0]][1]);ctx.lineTo(pp[e[1]][0],pp[e[1]][1]);ctx.stroke()});
-    return pp;
+<script type="module" id="reduct-threejs-optimization-v3">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js';
+import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/geometries/RoundedBoxGeometry.js';
+
+const host=document.getElementById('optEngine');
+const canvas=document.getElementById('optThreeCanvas');
+if(host&&canvas){
+  const prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile=matchMedia('(max-width: 760px)').matches;
+  let renderer;
+  try{
+    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!isMobile,powerPreference:'high-performance'});
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1,isMobile?1:1.45));
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure=.86;
+  }catch(e){console.warn('REDUCT WebGL fallback',e);}
+  if(renderer){
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(34,1,.1,100);
+    camera.position.set(7.2,4.2,8.8);
+    camera.lookAt(0,0,0);
+    const root=new THREE.Group();scene.add(root);
+    const product=new THREE.Group();root.add(product);
+    product.rotation.set(-.12,.34,.02);
+
+    scene.add(new THREE.HemisphereLight(0xffffff,0x080808,1.15));
+    const key=new THREE.DirectionalLight(0xffffff,4.1);key.position.set(5,7,8);scene.add(key);
+    const rim=new THREE.DirectionalLight(0x9b9b9b,2.2);rim.position.set(-7,2,-5);scene.add(rim);
+    const fill=new THREE.PointLight(0xffffff,3.0,18);fill.position.set(2,-3,4);scene.add(fill);
+
+    const matDark=new THREE.MeshStandardMaterial({color:0x0b0b0b,metalness:.92,roughness:.25});
+    const matMid=new THREE.MeshStandardMaterial({color:0x4a4a4a,metalness:.88,roughness:.24});
+    const matLight=new THREE.MeshStandardMaterial({color:0xa9a9a9,metalness:.82,roughness:.22});
+    const matBoard=new THREE.MeshStandardMaterial({color:0x171717,metalness:.58,roughness:.40});
+    const lineMat=new THREE.LineBasicMaterial({color:0xe8e8e8,transparent:true,opacity:.23});
+    const ghostMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.035,side:THREE.DoubleSide,depthWrite:false});
+
+    const parts=[];
+    function edgeify(mesh,opacity=.22){const e=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,24),lineMat.clone());e.material.opacity=opacity;mesh.add(e)}
+    function addPart(geo,mat,compact,exploded,opt={}){
+      const mesh=new THREE.Mesh(geo,mat.clone());
+      mesh.position.copy(exploded);mesh.userData={compact:compact.clone(),exploded:exploded.clone(),drop:!!opt.drop,dropDir:(opt.dropDir||new THREE.Vector3(0,0,0)).clone(),spin:opt.spin||0,baseOpacity:mesh.material.opacity??1};
+      if(opt.rotation) mesh.rotation.set(...opt.rotation);
+      edgeify(mesh,opt.edge??.20);product.add(mesh);parts.push(mesh);return mesh;
+    }
+    const rb=(x,y,z,r=.08)=>new RoundedBoxGeometry(x,y,z,4,r);
+    // Core architecture
+    addPart(rb(3.9,.28,2.72,.11),matMid,new THREE.Vector3(0,-1.10,0),new THREE.Vector3(0,-2.10,0),{edge:.28});
+    addPart(rb(3.25,1.38,2.28,.16),matDark,new THREE.Vector3(0,-.22,0),new THREE.Vector3(0,-.25,0),{edge:.30});
+    addPart(rb(3.52,.24,2.45,.10),matLight,new THREE.Vector3(0,.64,0),new THREE.Vector3(0,1.80,0),{edge:.24});
+    // Side structure / rails
+    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(-1.80,-.34,0),new THREE.Vector3(-2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(-2.2,.8,.2),edge:.18});
+    addPart(rb(.30,.74,2.50,.06),matMid,new THREE.Vector3(1.80,-.34,0),new THREE.Vector3(2.85,.08,0),{drop:true,dropDir:new THREE.Vector3(2.2,.8,-.2),edge:.18});
+    // PCB / electronics layer
+    const pcb=addPart(rb(2.85,.12,1.76,.04),matBoard,new THREE.Vector3(0,.90,0),new THREE.Vector3(0,2.55,0),{edge:.26});
+    const chipGeo=rb(.38,.16,.32,.035);const smallGeo=rb(.18,.12,.15,.025);
+    [[-.75,.0,-.40],[.1,.0,-.30],[.65,.0,.37],[-.38,.0,.46]].forEach((p,i)=>{const m=new THREE.Mesh(i%2?smallGeo:chipGeo,matMid.clone());m.position.set(p[0],.14,p[2]);edgeify(m,.16);pcb.add(m)});
+    // Central mechanical interface
+    const cylGeo=new THREE.CylinderGeometry(.58,.58,.44,48);const cyl=addPart(cylGeo,matLight,new THREE.Vector3(0,.08,0),new THREE.Vector3(0,-.10,-3.0),{rotation:[Math.PI/2,0,0],edge:.18});
+    const ringGeo=new THREE.TorusGeometry(.82,.08,12,64);addPart(ringGeo,matMid,new THREE.Vector3(0,.12,.02),new THREE.Vector3(0,.15,3.2),{rotation:[Math.PI/2,0,0],edge:.10});
+    // Fasteners - some are deliberately removed in optimization phase
+    const boltGeo=new THREE.CylinderGeometry(.105,.105,.42,20);
+    const boltCompact=[[-1.42,.40,-.88],[1.42,.40,-.88],[-1.42,.40,.88],[1.42,.40,.88],[-1.1,-.72,-.9],[1.1,-.72,.9]];
+    boltCompact.forEach((p,i)=>addPart(boltGeo,i<4?matLight:matMid,new THREE.Vector3(...p),new THREE.Vector3(p[0]*1.55,2.8+(i%2)*.45,p[2]*1.45),{rotation:[0,0,0],drop:i>=4,dropDir:new THREE.Vector3((i===4?-1:1)*2.0,-.8,(i===4?-1:1)*1.4),edge:.10}));
+    // Internal brackets that merge during optimization
+    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(-.92,-.14,0),new THREE.Vector3(-2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(-1.7,-1.4,0),edge:.18});
+    addPart(rb(.34,.62,1.72,.06),matMid,new THREE.Vector3(.92,-.14,0),new THREE.Vector3(2.15,-.30,0),{drop:true,dropDir:new THREE.Vector3(1.7,-1.4,0),edge:.18});
+
+    // Data cloud
+    const count=isMobile?34:78;const pg=new THREE.BufferGeometry();const pa=new Float32Array(count*3);
+    for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,r=3.5+Math.random()*2.8;pa[i*3]=Math.cos(a)*r;pa[i*3+1]=(Math.random()-.5)*5.8;pa[i*3+2]=Math.sin(a)*r*.65}
+    pg.setAttribute('position',new THREE.BufferAttribute(pa,3));const points=new THREE.Points(pg,new THREE.PointsMaterial({color:0xffffff,size:.022,transparent:true,opacity:.35,sizeAttenuation:true}));root.add(points);
+    // Wire orbit rings
+    [3.2,4.15].forEach((r,i)=>{const g=new THREE.TorusGeometry(r,.006,4,160);const m=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:i?.07:.12});const o=new THREE.Mesh(g,m);o.rotation.set(Math.PI/2.55,.30+i*.18,.25);root.add(o)});
+    // Scan plane
+    const scan=new THREE.Mesh(new THREE.PlaneGeometry(5.4,4.6),ghostMat);scan.rotation.y=Math.PI/2;product.add(scan);
+
+    const flows=[...document.querySelectorAll('[data-opt-step]')];
+    const status={
+      structure:document.getElementById('optStatusStructure'),process:document.getElementById('optStatusProcess'),supply:document.getElementById('optStatusSupply'),cost:document.getElementById('optStatusCost')
+    };
+    const statuses=[
+      ['ANALYZE','REVIEW','MAP','BASELINE'],
+      ['SIMPLIFY','REDUCE','COMPARE','REVIEW'],
+      ['INTEGRATE','CONSOLIDATE','SELECT','MODEL'],
+      ['OPTIMIZED','VALIDATE','READY','OPTIMIZE']
+    ];
+    let currentStep=-1;
+    function setStep(n){if(n===currentStep)return;currentStep=n;flows.forEach((x,i)=>x.classList.toggle('active',i===n));const s=statuses[n];if(status.structure)status.structure.textContent=s[0];if(status.process)status.process.textContent=s[1];if(status.supply)status.supply.textContent=s[2];if(status.cost)status.cost.textContent=s[3]}
+    const smooth=t=>t*t*(3-2*t);const clamp=t=>Math.max(0,Math.min(1,t));
+    let pointerX=0,pointerY=0,visible=true,raf=0;
+    if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{pointerX=(e.clientX/innerWidth-.5);pointerY=(e.clientY/innerHeight-.5)},{passive:true})}
+    const obs=new IntersectionObserver(e=>{visible=e[0]?.isIntersecting??true;if(visible&&!prefersReduced)loop(performance.now())},{threshold:.05});obs.observe(document.querySelector('.hero'));
+    document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(visible&&!prefersReduced)loop(performance.now())});
+    function resize(){const wrap=canvas.parentElement;const w=Math.max(1,wrap.clientWidth),h=Math.max(1,wrap.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+    new ResizeObserver(resize).observe(canvas.parentElement);resize();
+    function loop(now){if(!visible||document.hidden){raf=0;return}if(raf)return;raf=requestAnimationFrame(render)}
+    function render(now){raf=0;const t=(now||performance.now())*.001;const cycle=prefersReduced?.70:(t%14)/14;
+      // 0 analyze/exploded, 1 simplify, 2 integrate, 3 optimized
+      let step=cycle<.25?0:cycle<.48?1:cycle<.72?2:3;setStep(step);
+      const assemble=smooth(clamp((cycle-.10)/.38));
+      const optimize=smooth(clamp((cycle-.49)/.20));
+      const reset=smooth(clamp((cycle-.88)/.12));
+      parts.forEach((m,i)=>{
+        const u=m.userData;const target=u.exploded.clone().lerp(u.compact,assemble);
+        if(u.drop){target.add(u.dropDir.clone().multiplyScalar(optimize));m.material.transparent=true;m.material.opacity=Math.max(.04,1-optimize*.94);m.visible=m.material.opacity>.045}
+        else{m.visible=true;m.material.opacity=1;target.multiplyScalar(1-optimize*.055)}
+        if(reset>0){target.lerp(u.exploded,reset);m.visible=true;m.material.opacity=1}
+        m.position.lerp(target,prefersReduced?1:.105);
+        if(u.spin&&!prefersReduced)m.rotation.y+=u.spin;
+      });
+      scan.position.x=-3.3+((cycle*4)%1)*6.6;scan.material.opacity=.018+.04*Math.sin(cycle*Math.PI*4)**2;
+      product.rotation.y+=( (.34+pointerX*.13)-product.rotation.y)*.035;
+      product.rotation.x+=( (-.12-pointerY*.08)-product.rotation.x)*.035;
+      root.rotation.y=t*.055;points.rotation.y=-t*.018;
+      renderer.render(scene,camera);
+      if(!prefersReduced)raf=requestAnimationFrame(render)
+    }
+    host.classList.add('three-ready');
+    if(prefersReduced){setStep(3);render(performance.now())}else loop(performance.now());
   }
-  function ring(cx,cy,cz,r,ay,ax,a){ctx.beginPath();for(let i=0;i<=96;i++){let th=i/96*Math.PI*2;let p=rot([cx+Math.cos(th)*r,cy+Math.sin(th)*r*.46,cz],ay,ax),q=proj(p);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.strokeStyle=`rgba(255,255,255,${a})`;ctx.lineWidth=1;ctx.stroke()}
-  function draw(now){
-    const t=(now-t0)/1000, ay=(reduced?0.55:0.45+t*.09), ax=-.22+Math.sin(t*.22)*.035;
-    ctx.clearRect(0,0,w,h);
-    ctx.globalCompositeOperation='source-over';
-    // faint orbit geometry
-    for(let k=0;k<3;k++) ring(40,0,60,185+k*38,ay*.55+k*.12,ax-.05,.07-k*.012);
-    const e=reduced?1:1+Math.sin(t*.7)*.08;
-    // exploded engineering assembly
-    cuboid(0,-118*e,0,118,18,92,ay,ax,.74);      // top cover
-    cuboid(0,-55*e,0,148,12,108,ay,ax,.9);       // interface plate
-    cuboid(0,4,0,128,56,96,ay,ax,1);             // main housing
-    cuboid(0,82*e,0,105,13,78,ay,ax,.82);         // electronics / base plate
-    cuboid(-48,127*e,0,28,18,28,ay,ax,.62);       // module
-    cuboid(48,127*e,0,28,18,28,ay,ax,.62);
-    ring(0,4,0,62,ay,ax,.36); ring(0,4,0,33,ay,ax,.28);
-    // technical center guides
-    const p1=proj(rot([0,-210,0],ay,ax)),p2=proj(rot([0,190,0],ay,ax));
-    ctx.setLineDash([4,7]);ctx.strokeStyle='rgba(255,255,255,.18)';ctx.beginPath();ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);ctx.stroke();ctx.setLineDash([]);
-    // nodes
-    [[-148,-55,0],[148,-55,0],[-128,82,0],[128,82,0]].forEach((p,i)=>{let q=proj(rot(p,ay,ax));ctx.beginPath();ctx.arc(q[0],q[1],2.4,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.75)';ctx.fill();ctx.beginPath();ctx.arc(q[0],q[1],8+i%2*3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,.12)';ctx.stroke()});
-    if(!reduced) requestAnimationFrame(draw)
-  }
-  draw(performance.now());
-})();
+}
 </script>
 
 </body>

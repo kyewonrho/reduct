@@ -632,17 +632,3 @@ html[lang="ja"] .why-intro{max-width:1120px}
 #project .section-intro{margin-left:0;padding-left:0;}
 #project .section-intro .eyebrow,#project .section-intro h2,#project .section-intro>p{margin-left:0;padding-left:0;text-indent:0;}
 #project .section-intro h2{transform:translateX(-2px);}
-
-
-/* Footer 3x2 desktop navigation fallback */
-@media (min-width:981px){
-  .site-footer .footer-nav{
-    display:grid;
-    grid-template-columns:repeat(3,max-content);
-    grid-template-rows:repeat(2,auto);
-    justify-content:center;
-    align-content:center;
-    gap:28px 48px;
-  }
-  .site-footer .footer-nav a{font-size:19px;font-weight:600;}
-}
