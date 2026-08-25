@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#000000" name="theme-color"/>
+<meta name="reduct-build" content="footer-under-logo-20260825-2315"/>
 <meta content="제품·산업설비 원가절감, 자동차 선행개발·프로토 부품, CNC 3축·5축 정밀가공, 장비 부품·판금·시제품, OEM 제작, 기구설계, 하드웨어·펌웨어, 금형·지그·역설계까지 기술적으로 최적화합니다." name="description"/>
 <meta content="REDUCT | 원가절감·장비 부품 제작·OEM 최적화" property="og:title"/>
 <meta content="원가절감부터 자동차 선행개발, CNC 3축·5축, 장비 부품, 판금, 시제품, 하드웨어·펌웨어, 금형까지 설계와 제조 구조를 최적화합니다." property="og:description"/>
@@ -21,7 +22,7 @@
 <title>REDUCT | 원가절감·장비 부품 제작·OEM 최적화</title>
 <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
 <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet"/>
-<link href="./style.css" rel="stylesheet"/>
+<link href="./style.css?v=20260825-2315" rel="stylesheet"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -95,7 +96,102 @@
   ]
 }
 </script>
-<link href="https://reduct.co.kr/" hreflang="ko-KR" rel="alternate"/><link href="https://reduct.co.kr/en/" hreflang="en" rel="alternate"/><link href="https://reduct.co.kr/ja/" hreflang="ja" rel="alternate"/><link href="https://reduct.co.kr/" hreflang="x-default" rel="alternate"/></head>
+<link href="https://reduct.co.kr/" hreflang="ko-KR" rel="alternate"/><link href="https://reduct.co.kr/en/" hreflang="en" rel="alternate"/><link href="https://reduct.co.kr/ja/" hreflang="ja" rel="alternate"/><link href="https://reduct.co.kr/" hreflang="x-default" rel="alternate"/>
+<style id="footer-force-20260825">
+/* FORCE OVERRIDE: company info must stay directly below REDUCT logo */
+.site-footer .footer-grid{
+  display:grid !important;
+  grid-template-columns:minmax(0,1.55fr) minmax(420px,.85fr) !important;
+  gap:72px !important;
+  align-items:start !important;
+}
+.site-footer .footer-brand{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  min-width:0 !important;
+}
+.site-footer .footer-logo{
+  display:block !important;
+  width:260px !important;
+  height:auto !important;
+  margin:0 0 14px 0 !important;
+}
+.site-footer .footer-brand>p{
+  margin:0 !important;
+  font-size:15px !important;
+  line-height:1.5 !important;
+}
+.site-footer .footer-brand .footer-info{
+  display:grid !important;
+  position:static !important;
+  width:auto !important;
+  max-width:760px !important;
+  grid-template-columns:1fr !important;
+  grid-template-rows:none !important;
+  gap:8px !important;
+  margin:28px 0 0 0 !important;
+  padding:0 !important;
+  transform:none !important;
+}
+.site-footer .footer-brand .footer-info p{
+  display:block !important;
+  position:static !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  font-size:14px !important;
+  line-height:1.55 !important;
+  white-space:normal !important;
+  transform:none !important;
+}
+.site-footer .footer-nav{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  flex-direction:row !important;
+  justify-content:flex-end !important;
+  align-items:flex-start !important;
+  align-content:flex-start !important;
+  gap:16px 26px !important;
+  margin:0 !important;
+  padding:0 !important;
+  grid-template-columns:none !important;
+  grid-template-rows:none !important;
+  transform:translateY(-1px) !important;
+}
+.site-footer .footer-nav a{
+  display:inline-flex !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  font-size:14px !important;
+  line-height:1.45 !important;
+  white-space:nowrap !important;
+}
+/* Keep the WHERE WE OPTIMIZE intro on one exact left guide */
+#project .section-intro,
+#project .section-intro .eyebrow,
+#project .section-intro h2,
+#project .section-intro>p{
+  margin-left:0 !important;
+  padding-left:0 !important;
+  text-indent:0 !important;
+  transform:none !important;
+}
+@media (max-width:1100px){
+  .site-footer .footer-grid{grid-template-columns:1fr !important;gap:34px !important;}
+  .site-footer .footer-nav{justify-content:flex-start !important;transform:none !important;}
+}
+@media (max-width:760px){
+  .site-footer .footer-logo{width:220px !important;}
+  .site-footer .footer-nav{display:grid !important;grid-template-columns:1fr 1fr !important;gap:14px 20px !important;}
+}
+</style>
+</head>
 <body>
 <header class="site-header" id="siteHeader">
 <div class="shell header-inner">
@@ -364,20 +460,11 @@
 </div>
 </section>
 </main>
-<footer class="site-footer section-dark">
+<footer class="site-footer section-dark" data-build="footer-under-logo-20260825-2315">
 <div class="shell footer-grid">
-<div>
+<div class="footer-brand">
 <svg aria-label="REDUCT" class="footer-logo" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg>
 <p>REDUCE PRODUCT TECHNOLOGY</p>
-</div>
-<nav>
-<a href="/services/">SERVICES</a>
-<a href="#about">ABOUT</a>
-<a href="#business">BUSINESS</a>
-<a href="#technology">TECHNOLOGY</a>
-<a href="#project">SCOPE</a>
-<a href="#contact">CONTACT</a>
-</nav>
 <div class="footer-info">
 <p>REDUCT Co., Ltd.</p>
 <p>대표이사 노계원</p>
@@ -385,7 +472,16 @@
 <p>ceo@reduct.co.kr</p>
 <p>상담·미팅 문의 070-4575-0014</p>
 <p>사업자등록번호 : 추후 입력</p>
-</div>
+</div></div>
+<nav class="footer-nav">
+<a href="/services/">SERVICES</a>
+<a href="#about">ABOUT</a>
+<a href="#business">BUSINESS</a>
+<a href="#technology">TECHNOLOGY</a>
+<a href="#project">SCOPE</a>
+<a href="#contact">CONTACT</a>
+</nav>
+
 </div>
 <div class="shell footer-bottom">Copyright © REDUCT Co., Ltd. All Rights Reserved.</div>
 </footer>
