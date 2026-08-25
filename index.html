@@ -519,6 +519,74 @@
 }
 </style>
 
+
+<style id="reduct-homepage-glass-polish-20260826">
+/* Homepage glass polish — white bg => gray translucent glass, dark bg => white translucent glass */
+:root{--glass-light-bg:linear-gradient(145deg,rgba(242,245,248,.86) 0%,rgba(232,236,241,.70) 100%);--glass-light-border:rgba(255,255,255,.78);--glass-light-outline:rgba(81,92,107,.10);--glass-light-shadow:0 20px 44px rgba(36,43,55,.08),0 2px 10px rgba(36,43,55,.03),inset 0 1px 0 rgba(255,255,255,.96),inset 0 -1px 0 rgba(255,255,255,.36);--glass-dark-bg:linear-gradient(145deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.08) 100%);--glass-dark-border:rgba(255,255,255,.22);--glass-dark-shadow:0 20px 48px rgba(0,0,0,.18),0 2px 10px rgba(0,0,0,.10),inset 0 1px 0 rgba(255,255,255,.20),inset 0 -1px 0 rgba(255,255,255,.05)}
+#overview,#optimization,#technology,#project,#case,#cost-check{background:radial-gradient(980px 460px at 8% 0%,rgba(255,255,255,.92),rgba(255,255,255,0) 60%),radial-gradient(860px 560px at 96% 18%,rgba(255,255,255,.54),rgba(255,255,255,0) 62%),linear-gradient(180deg,#eef1f4 0%,#e8ecf0 100%)!important}
+#overview .overview-grid,#optimization .optimization-pillar-grid,#technology .final-capability-grid,#project .optimization-lens-grid,#case .case-grid{gap:20px!important;align-items:stretch!important}
+#overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens,#case .case-card,.diagnosis-cta{position:relative;overflow:hidden;transform:none!important;background:var(--glass-light-bg)!important;border:1px solid var(--glass-light-border)!important;outline:1px solid var(--glass-light-outline);box-shadow:var(--glass-light-shadow)!important;backdrop-filter:blur(24px) saturate(140%)!important;-webkit-backdrop-filter:blur(24px) saturate(140%)!important}
+#overview .info-card::after,#optimization .optimization-pillar::after,#technology .technology-card::after,#project .optimization-lens::after,#case .case-card::after,.diagnosis-cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(130deg,rgba(255,255,255,.44),rgba(255,255,255,0) 28%,rgba(255,255,255,.12) 72%,rgba(255,255,255,0));opacity:.72}
+#overview .info-card > *,#optimization .optimization-pillar > *,#technology .technology-card > *,#project .optimization-lens > *,#case .case-card > *,.diagnosis-cta > *{position:relative;z-index:1}
+#overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{border-radius:30px!important}
+#case .case-card,.diagnosis-cta{border-radius:34px!important}
+#overview .info-card{min-height:230px!important;padding:30px 30px 28px!important;justify-content:flex-start!important}
+#overview .card-index{margin:0 0 20px!important;font-size:14px!important;font-weight:700!important;letter-spacing:.11em!important;color:rgba(17,17,17,.50)!important}
+#overview .info-card h3{margin:0 0 14px!important;font-size:clamp(28px,2.2vw,40px)!important;line-height:1.08!important;letter-spacing:-.04em!important}
+#overview .info-card p{margin:0!important;font-size:19px!important;line-height:1.62!important;color:rgba(17,17,17,.72)!important}
+#optimization .optimization-pillar{min-height:238px!important;padding:30px 30px 28px!important;justify-content:flex-start!important}
+#optimization .optimization-pillar>span{margin:0 0 20px!important;font-size:14px!important;font-weight:700!important;letter-spacing:.11em!important;color:rgba(17,17,17,.50)!important}
+#optimization .optimization-pillar h3{margin:0 0 14px!important;font-size:clamp(28px,2.25vw,40px)!important;line-height:1.08!important}
+#optimization .optimization-pillar p{margin:0!important;font-size:19px!important;line-height:1.62!important;color:rgba(17,17,17,.72)!important}
+#technology .final-capability-grid .technology-card{min-height:206px!important;padding:28px 30px 26px!important}
+#technology .final-capability-grid .technology-card:before{display:none!important}
+#technology .tech-tag{position:static!important;display:block!important;margin:0 0 18px!important;font-size:14px!important;font-weight:700!important;letter-spacing:.11em!important;color:rgba(17,17,17,.48)!important}
+#technology .tech-tag:before{display:none!important}
+#technology .technology-card h3{margin:0 0 10px!important;font-size:clamp(28px,2.2vw,39px)!important;line-height:1.1!important}
+#technology .technology-card .tech-en{margin:0!important;font-size:19px!important;line-height:1.55!important;color:rgba(17,17,17,.62)!important}
+#project .optimization-lens{min-height:236px!important;padding:28px 28px 26px!important}
+#project .optimization-lens:before{display:none!important}
+#project .optimization-lens>span{display:none!important}
+#project .optimization-lens h3{margin:0 0 14px!important;font-size:clamp(30px,2.4vw,43px)!important;line-height:1.02!important;letter-spacing:-.04em!important}
+#project .optimization-lens p{margin:0!important;font-size:19px!important;line-height:1.64!important;color:rgba(17,17,17,.72)!important}
+#case .case-card{min-height:0!important;padding:34px 34px 30px!important}
+#case .case-top{margin-bottom:32px!important}
+#case .case-top>span,#case .case-result span,#case .case-result-grid span{font-size:13px!important;font-weight:700!important;letter-spacing:.11em!important;color:rgba(17,17,17,.50)!important}
+#case .case-metric{font-size:clamp(48px,5vw,74px)!important}
+#case .case-card h3{font-size:clamp(28px,2.4vw,42px)!important;line-height:1.1!important}
+#case .case-card>p{font-size:19px!important;line-height:1.7!important;color:rgba(17,17,17,.72)!important}
+#case .case-result strong,#case .case-result-grid strong{font-size:22px!important;line-height:1.35!important}
+.diagnosis-cta{padding:34px 36px!important;gap:28px!important}
+.diagnosis-cta h2{font-size:clamp(36px,4.3vw,62px)!important;line-height:.98!important}
+.diagnosis-cta p{font-size:18px!important;line-height:1.7!important;color:rgba(17,17,17,.72)!important}
+.section-intro p,.section-copy-clean,.why-lead-inline,.why-question{font-size:19px!important;line-height:1.68!important}
+.eyebrow.dark,.eyebrow.light{font-size:14px!important;font-weight:700!important;letter-spacing:.14em!important}
+.process-section .final-process-list li{padding:28px 0!important;grid-template-columns:132px 1fr!important}
+.process-section .final-process-list strong{font-size:16px!important;font-weight:700!important;letter-spacing:.1em!important;color:rgba(255,255,255,.60)!important}
+.process-section .final-process-list h3{font-size:34px!important;line-height:1.05!important}
+.process-section .final-process-list p{font-size:19px!important;line-height:1.7!important;color:rgba(255,255,255,.72)!important}
+.manufacturing-chips span{background:var(--glass-dark-bg)!important;border:1px solid var(--glass-dark-border)!important;box-shadow:var(--glass-dark-shadow)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;color:#f0f0f0!important}
+@media (max-width:1100px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{min-height:0!important}
+}
+@media (max-width:760px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens,#case .case-card,.diagnosis-cta{padding:24px!important;border-radius:24px!important}
+  #overview .card-index,#optimization .optimization-pillar>span,#technology .tech-tag,#case .case-top>span{margin-bottom:16px!important;font-size:13px!important}
+  #overview .info-card p,#optimization .optimization-pillar p,#technology .technology-card .tech-en,#project .optimization-lens p,#case .case-card>p,.diagnosis-cta p,.process-section .final-process-list p{font-size:17px!important}
+  #project .optimization-lens h3{font-size:28px!important}
+  .process-section .final-process-list li{grid-template-columns:1fr!important;gap:10px!important}
+  .process-section .final-process-list strong{padding-top:0!important}
+}
+</style>
+
+
+<style id="reduct-proximity-glass-20260826">
+.proximity-card{--prox:0;--prox-x:50%;--prox-y:50%;position:relative!important;isolation:isolate}
+.proximity-glow{position:absolute!important;z-index:3!important;inset:-1px!important;border-radius:inherit!important;pointer-events:none!important;opacity:var(--prox)!important;transition:opacity .16s ease!important;background:radial-gradient(190px circle at var(--prox-x) var(--prox-y),rgba(255,255,255,.52) 0%,rgba(255,255,255,.17) 30%,rgba(255,255,255,.035) 52%,transparent 72%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.46),0 0 30px rgba(255,255,255,.065)!important}
+.proximity-card.proximity-dark .proximity-glow{background:radial-gradient(210px circle at var(--prox-x) var(--prox-y),rgba(255,255,255,.30) 0%,rgba(255,255,255,.105) 34%,rgba(255,255,255,.025) 58%,transparent 74%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.30),0 0 34px rgba(255,255,255,.08)!important}
+.proximity-card>*:not(.proximity-glow){position:relative;z-index:4}
+@media(pointer:coarse){.proximity-glow{display:none!important}}
+</style>
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -860,6 +928,46 @@ document.addEventListener('DOMContentLoaded',()=>{const b=document.getElementByI
     history.replaceState(null,'','/#home');
     requestAnimationFrame(()=>{const home=document.getElementById('home');if(home)home.scrollIntoView({block:'start'});else window.scrollTo(0,0);});
   }catch(e){}
+})();
+</script>
+
+<script id="reduct-proximity-glass-script-20260826">
+(()=>{
+  if(!window.matchMedia('(pointer:fine)').matches)return;
+  const selectors=[
+    '#overview .info-card','#optimization .optimization-pillar','#technology .technology-card',
+    '#project .optimization-lens','#case .case-card','.diagnosis-cta',
+    '.process-card','.role-card','.principle','.path-track','.path-node'
+  ];
+  const cards=[...document.querySelectorAll(selectors.join(','))];
+  if(!cards.length)return;
+  for(const card of cards){
+    card.classList.add('proximity-card');
+    if(card.matches('.role-card'))card.classList.add('proximity-dark');
+    const glow=document.createElement('i');
+    glow.className='proximity-glow';
+    glow.setAttribute('aria-hidden','true');
+    card.appendChild(glow);
+  }
+  let px=-9999,py=-9999,raf=0;
+  const radius=190;
+  function update(){
+    raf=0;
+    for(const card of cards){
+      const r=card.getBoundingClientRect();
+      const cx=Math.max(r.left,Math.min(px,r.right));
+      const cy=Math.max(r.top,Math.min(py,r.bottom));
+      const dist=Math.hypot(px-cx,py-cy);
+      const near=Math.max(0,Math.min(1,1-dist/radius));
+      if(near<=0){card.style.setProperty('--prox','0');continue;}
+      card.style.setProperty('--prox',String((0.20+near*0.80).toFixed(3)));
+      card.style.setProperty('--prox-x',`${px-r.left}px`);
+      card.style.setProperty('--prox-y',`${py-r.top}px`);
+    }
+  }
+  document.addEventListener('pointermove',e=>{px=e.clientX;py=e.clientY;if(!raf)raf=requestAnimationFrame(update)},{passive:true});
+  document.addEventListener('pointerleave',()=>{px=-9999;py=-9999;if(!raf)raf=requestAnimationFrame(update)},{passive:true});
+  window.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(update)},{passive:true});
 })();
 </script>
 </body>

@@ -505,6 +505,14 @@
 }
 </style>
 
+
+<style id="reduct-proximity-glass-20260826">
+.proximity-card{--prox:0;--prox-x:50%;--prox-y:50%;position:relative!important;isolation:isolate}
+.proximity-glow{position:absolute!important;z-index:3!important;inset:-1px!important;border-radius:inherit!important;pointer-events:none!important;opacity:var(--prox)!important;transition:opacity .16s ease!important;background:radial-gradient(190px circle at var(--prox-x) var(--prox-y),rgba(255,255,255,.52) 0%,rgba(255,255,255,.17) 30%,rgba(255,255,255,.035) 52%,transparent 72%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.46),0 0 30px rgba(255,255,255,.065)!important}
+.proximity-card.proximity-dark .proximity-glow{background:radial-gradient(210px circle at var(--prox-x) var(--prox-y),rgba(255,255,255,.30) 0%,rgba(255,255,255,.105) 34%,rgba(255,255,255,.025) 58%,transparent 74%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.30),0 0 34px rgba(255,255,255,.08)!important}
+.proximity-card>*:not(.proximity-glow){position:relative;z-index:4}
+@media(pointer:coarse){.proximity-glow{display:none!important}}
+</style>
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -741,6 +749,46 @@
   function paint(){flow.forEach((el,i)=>el.classList.toggle('active',i===step));const s=states[step];[['structure',0],['process',1],['supply',2],['cost',3]].forEach(([k,i])=>{if(els[k]){els[k].style.opacity='0';els[k].style.transform='translateY(4px)';setTimeout(()=>{els[k].textContent=s[i];els[k].style.opacity='1';els[k].style.transform='translateY(0)'},130);}})}
   paint();
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(()=>{step=(step+1)%5;paint();},3200);
+})();
+</script>
+
+<script id="reduct-proximity-glass-script-20260826">
+(()=>{
+  if(!window.matchMedia('(pointer:fine)').matches)return;
+  const selectors=[
+    '#overview .info-card','#optimization .optimization-pillar','#technology .technology-card',
+    '#project .optimization-lens','#case .case-card','.diagnosis-cta',
+    '.process-card','.role-card','.principle','.path-track','.path-node'
+  ];
+  const cards=[...document.querySelectorAll(selectors.join(','))];
+  if(!cards.length)return;
+  for(const card of cards){
+    card.classList.add('proximity-card');
+    if(card.matches('.role-card'))card.classList.add('proximity-dark');
+    const glow=document.createElement('i');
+    glow.className='proximity-glow';
+    glow.setAttribute('aria-hidden','true');
+    card.appendChild(glow);
+  }
+  let px=-9999,py=-9999,raf=0;
+  const radius=190;
+  function update(){
+    raf=0;
+    for(const card of cards){
+      const r=card.getBoundingClientRect();
+      const cx=Math.max(r.left,Math.min(px,r.right));
+      const cy=Math.max(r.top,Math.min(py,r.bottom));
+      const dist=Math.hypot(px-cx,py-cy);
+      const near=Math.max(0,Math.min(1,1-dist/radius));
+      if(near<=0){card.style.setProperty('--prox','0');continue;}
+      card.style.setProperty('--prox',String((0.20+near*0.80).toFixed(3)));
+      card.style.setProperty('--prox-x',`${px-r.left}px`);
+      card.style.setProperty('--prox-y',`${py-r.top}px`);
+    }
+  }
+  document.addEventListener('pointermove',e=>{px=e.clientX;py=e.clientY;if(!raf)raf=requestAnimationFrame(update)},{passive:true});
+  document.addEventListener('pointerleave',()=>{px=-9999;py=-9999;if(!raf)raf=requestAnimationFrame(update)},{passive:true});
+  window.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(update)},{passive:true});
 })();
 </script>
 </body>
