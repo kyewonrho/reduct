@@ -513,6 +513,174 @@
 .proximity-card>*:not(.proximity-glow){position:relative;z-index:4}
 @media(pointer:coarse){.proximity-glow{display:none!important}}
 </style>
+
+<style id="reduct-card-typography-balance-20260826">
+/* Unified REDUCT card type scale — keep section headlines large, normalize content cards */
+:root{
+  --card-label-size:13px;
+  --card-title-size:30px;
+  --card-body-size:17px;
+  --card-title-lh:1.14;
+  --card-body-lh:1.68;
+}
+
+/* Shared card labels / titles / body */
+#overview .card-index,
+#optimization .optimization-pillar>span,
+#technology .tech-tag,
+#case .case-top>span,
+#case .case-result span,
+#case .case-result-grid span{
+  font-size:var(--card-label-size)!important;
+  font-weight:600!important;
+  line-height:1.25!important;
+  letter-spacing:.10em!important;
+}
+#overview .info-card h3,
+#optimization .optimization-pillar h3,
+#technology .technology-card h3{
+  font-size:var(--card-title-size)!important;
+  line-height:var(--card-title-lh)!important;
+  letter-spacing:-.035em!important;
+}
+#overview .info-card p,
+#optimization .optimization-pillar p,
+#technology .technology-card .tech-en{
+  font-size:var(--card-body-size)!important;
+  line-height:var(--card-body-lh)!important;
+}
+
+/* Compact and align card internals */
+#overview .info-card{min-height:222px!important;padding:28px 30px 26px!important}
+#overview .card-index{margin:0 0 18px!important}
+#overview .info-card h3{margin:0 0 12px!important}
+
+#optimization .optimization-pillar{min-height:230px!important;padding:28px 30px 26px!important}
+#optimization .optimization-pillar>span{margin:0 0 18px!important}
+#optimization .optimization-pillar h3{margin:0 0 12px!important}
+
+#technology .final-capability-grid .technology-card{min-height:194px!important;padding:27px 30px 25px!important}
+#technology .tech-tag{margin:0 0 18px!important}
+#technology .technology-card h3{margin:0 0 10px!important}
+
+/* WHERE WE OPTIMIZE: five-column cards need a smaller, fixed title scale */
+#project .optimization-lens-grid{gap:18px!important}
+#project .optimization-lens{
+  min-width:0!important;
+  min-height:220px!important;
+  padding:27px 26px 25px!important;
+  justify-content:flex-start!important;
+}
+#project .optimization-lens h3{
+  min-width:0!important;
+  margin:0 0 14px!important;
+  font-size:clamp(22px,1.5vw,26px)!important;
+  line-height:1.08!important;
+  letter-spacing:-.032em!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+#project .optimization-lens p{
+  margin:0!important;
+  font-size:16px!important;
+  line-height:1.68!important;
+  color:rgba(17,17,17,.70)!important;
+}
+
+/* CASE: keep result prominent without overpowering the content */
+#case .case-grid{gap:20px!important;align-items:stretch!important}
+#case .case-card{
+  min-height:370px!important;
+  padding:30px 32px 28px!important;
+}
+#case .case-top{
+  margin-bottom:26px!important;
+  align-items:flex-start!important;
+}
+#case .case-metric{
+  font-size:clamp(44px,3.4vw,58px)!important;
+  line-height:.92!important;
+  letter-spacing:-.05em!important;
+}
+#case .case-card h3{
+  margin:0 0 14px!important;
+  font-size:clamp(27px,2vw,32px)!important;
+  line-height:1.14!important;
+  letter-spacing:-.035em!important;
+}
+#case .case-card>p{
+  margin:0 0 24px!important;
+  font-size:17px!important;
+  line-height:1.72!important;
+}
+#case .case-result,
+#case .case-result-grid{
+  padding-top:20px!important;
+}
+#case .case-result strong,
+#case .case-result-grid strong{
+  font-size:19px!important;
+  line-height:1.38!important;
+}
+
+/* Cost-check CTA: this is a card title, not a full section headline */
+.diagnosis-cta{
+  padding:34px 38px!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:36px!important;
+  align-items:center!important;
+}
+.diagnosis-cta .eyebrow{margin-bottom:12px!important;font-size:13px!important}
+.diagnosis-cta h2{
+  margin:0 0 16px!important;
+  max-width:780px!important;
+  font-size:clamp(34px,3vw,48px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.04em!important;
+}
+.diagnosis-cta p{
+  max-width:980px!important;
+  font-size:17px!important;
+  line-height:1.68!important;
+}
+.diagnosis-cta-button{
+  min-width:220px!important;
+  min-height:58px!important;
+  font-size:15px!important;
+}
+
+/* Preserve section-heading hierarchy without allowing supporting copy to become tiny */
+.section-intro>p:not(.eyebrow),
+.section-copy-clean{
+  font-size:18px!important;
+  line-height:1.7!important;
+}
+
+@media(max-width:1200px){
+  #project .optimization-lens-grid{grid-template-columns:repeat(3,1fr)!important}
+  #project .optimization-lens h3{font-size:25px!important}
+}
+@media(max-width:900px){
+  #project .optimization-lens-grid{grid-template-columns:repeat(2,1fr)!important}
+  .diagnosis-cta{grid-template-columns:1fr!important;align-items:start!important}
+}
+@media(max-width:760px){
+  :root{--card-label-size:12px;--card-title-size:27px;--card-body-size:16px}
+  #project .optimization-lens-grid{grid-template-columns:1fr!important}
+  #project .optimization-lens{min-height:0!important;padding:24px!important}
+  #project .optimization-lens h3{font-size:27px!important}
+  #project .optimization-lens p{font-size:16px!important}
+  #case .case-card{min-height:0!important;padding:26px 24px!important}
+  #case .case-metric{font-size:44px!important}
+  #case .case-card h3{font-size:27px!important}
+  #case .case-card>p{font-size:16px!important}
+  .diagnosis-cta{padding:26px 24px!important}
+  .diagnosis-cta h2{font-size:34px!important}
+  .diagnosis-cta p{font-size:16px!important}
+  .diagnosis-cta-button{width:100%!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header" id="siteHeader">
