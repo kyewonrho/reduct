@@ -1,3 +1,32 @@
+// REDUCT Careers: FormSubmit native file upload redirects here only after submission handling.
+(async function clearCareerDraftAfterSuccessfulSubmit(){
+  try{
+    const url=new URL(window.location.href);
+    if(url.searchParams.get('career_submitted')!=='1') return;
+    try{localStorage.removeItem('reductCareerDraftV2')}catch(e){}
+    try{localStorage.removeItem('reductCareerLastSubmitAt')}catch(e){}
+    try{sessionStorage.removeItem('reductCareerNativeSubmit')}catch(e){}
+    try{
+      await new Promise((resolve)=>{
+        const req=indexedDB.open('reductCareerFilesV2',1);
+        req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('files'))req.result.createObjectStore('files')};
+        req.onerror=()=>resolve();
+        req.onsuccess=()=>{
+          const db=req.result;
+          try{
+            const tx=db.transaction('files','readwrite');
+            tx.objectStore('files').delete('photo');
+            tx.oncomplete=()=>{try{db.close()}catch(e){} resolve()};
+            tx.onerror=()=>{try{db.close()}catch(e){} resolve()};
+            tx.onabort=()=>{try{db.close()}catch(e){} resolve()};
+          }catch(e){try{db.close()}catch(x){} resolve()}
+        };
+      });
+    }catch(e){}
+    history.replaceState(null,'','/#home');
+  }catch(e){console.warn('Career draft cleanup skipped',e)}
+})();
+
 const header = document.getElementById('siteHeader');
 const toggle = document.getElementById('menuToggle');
 const mobileMenu = document.getElementById('mobileMenu');
