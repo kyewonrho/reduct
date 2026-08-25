@@ -38,10 +38,10 @@
 <section class="apply-hero"><div class="shell"><div class="crumb">CAREERS / APPLICATION</div><h1>입사지원</h1><p>지원서는 입력할 때마다 자동 저장됩니다. 사진을 포함한 임시 지원서는 현재 브라우저에만 저장되며, 제출 완료 후 자동으로 삭제됩니다.</p><div class="save-indicator saved" id="saveIndicator"><span class="save-dot"></span><span id="saveText">자동 저장 준비됨</span></div></div></section>
 <main class="apply-wrap"><div class="shell apply-layout"><aside class="apply-sidebar"><strong>지원서 항목</strong><a href="#basic">기본정보</a><a href="#skills">직무역량</a><a href="#education">최종학력</a><a href="#languages">외국어</a><a href="#career">경력</a><a href="#essays">자기소개</a><a href="#questions">상황질문</a><a href="#consent">제출</a></aside>
 <form class="apply-form" id="applicationForm" action="https://formsubmit.co/ceo@reduct.co.kr" method="POST" enctype="multipart/form-data" novalidate>
-<input type="hidden" name="_next" value="https://reduct.co.kr/careers/thanks/?submitted=1">
+<input type="hidden" name="_next" value="https://reduct.co.kr/?career=submitted#home">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_url" value="https://reduct.co.kr/careers/apply/">
-<input id="pdfAttachment" name="입사지원서_PDF" type="file" accept="application/pdf" style="display:none">
+<input id="pdfAttachment" name="attachment" type="file" accept="application/pdf" style="display:none">
 <div class="security-honeypot" aria-hidden="true"><label>Leave this field empty<input type="text" name="_honey" id="companyWebsite" tabindex="-1" autocomplete="off"></label></div><input type="hidden" id="formLoadedAt" name="form_loaded_at">
 <section class="form-section" id="basic">
 <div class="form-section-head"><div><span>01 / BASIC</span><h2>기본정보</h2><p>지원에 필요한 기본정보를 입력합니다.</p></div></div>
@@ -455,9 +455,14 @@
     status.textContent='입사지원서 PDF를 생성하고 있습니다.';status.className='submit-status';
     const blob=await buildApplicationPdf();
     if(blob.size>9*1024*1024) throw new Error('생성된 PDF 용량이 너무 큽니다. 증명사진 용량을 줄인 후 다시 제출해 주세요.');
-    const code=roleFileCode(roleEl.value),name=(document.getElementById('name').value||'Applicant').replace(/[\\/:*?"<>|\s]+/g,'_');
-    const dt=new DataTransfer();dt.items.add(new File([blob],`REDUCT_Application_${code}_${name}_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.pdf`,{type:'application/pdf'}));
-    document.getElementById('pdfAttachment').files=dt.files;
+    const code=roleFileCode(roleEl.value),name=(document.getElementById('name').value||'Applicant').replace(/[\/:*?"<>|\s]+/g,'_');
+    const fileName=`REDUCT_Application_${code}_${name}_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.pdf`;
+    const pdfFile=new File([blob],fileName,{type:'application/pdf',lastModified:Date.now()});
+    const input=document.getElementById('pdfAttachment');
+    const dt=new DataTransfer();dt.items.add(pdfFile);
+    input.files=dt.files;
+    if(!input.files || input.files.length!==1 || input.files[0].size===0) throw new Error('PDF 첨부 준비에 실패했습니다. 브라우저를 새로고침한 후 다시 제출해 주세요.');
+    return {fileName,size:pdfFile.size};
   }
   async function clearDraftStorage(){
     try{localStorage.removeItem(DRAFT_KEY)}catch(e){}
@@ -482,10 +487,14 @@
     setHidden('첨부 안내','상세 입사지원서는 첨부된 PDF를 확인해 주세요.');
     btn.disabled=true;btn.textContent='PDF 생성 중…';status.textContent='입사지원서 PDF를 생성하고 있습니다.';status.className='submit-status';
     try{
-      await attachPdf();
-      btn.textContent='전송 중…';status.textContent='PDF를 채용 담당 이메일로 전송하고 있습니다.';
+      const pdfInfo=await attachPdf();
+      setHidden('PDF 첨부파일',`${pdfInfo.fileName} (${Math.ceil(pdfInfo.size/1024)} KB)`);
+      btn.textContent='전송 중…';status.textContent='PDF 입사지원서를 ceo@reduct.co.kr로 전송하고 있습니다.';
       localStorage.setItem(LAST_SUBMIT_KEY,String(Date.now()));
       sessionStorage.setItem('reductCareerSubmitting','1');
+      form.action='https://formsubmit.co/ceo@reduct.co.kr';
+      form.method='POST';
+      form.enctype='multipart/form-data';
       HTMLFormElement.prototype.submit.call(form);
     }catch(err){
       console.error(err);btn.disabled=false;btn.textContent='입사지원서 제출';status.textContent=err&&err.message?err.message:'PDF 생성 또는 전송 준비 중 오류가 발생했습니다.';status.className='submit-status error';

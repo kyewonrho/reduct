@@ -645,5 +645,19 @@ document.addEventListener('DOMContentLoaded',()=>{const b=document.getElementByI
 })();
 </script>
 
+
+<script id="career-submit-cleanup">
+(()=>{
+  try{
+    const u=new URL(location.href);
+    if(u.searchParams.get('career')!=='submitted') return;
+    try{localStorage.removeItem('reductCareerDraftV1');localStorage.removeItem('reductCareerDraftV2');}catch(e){}
+    try{sessionStorage.removeItem('reductCareerSubmitting');sessionStorage.removeItem('reductCareerJustSubmitted');}catch(e){}
+    try{indexedDB.deleteDatabase('reductCareerFiles');indexedDB.deleteDatabase('reductCareerFilesV2');}catch(e){}
+    history.replaceState(null,'','/#home');
+    requestAnimationFrame(()=>{const home=document.getElementById('home');if(home)home.scrollIntoView({block:'start'});else window.scrollTo(0,0);});
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
