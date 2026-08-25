@@ -643,3 +643,15 @@ html[lang="ja"] .why-intro{max-width:1120px}
   .diagnosis-cta p{max-width:920px!important;}
   .manufacturing-grid>div>p{max-width:900px;}
 }
+
+
+/* ===== REDUCT TYPOGRAPHY SYSTEM =====
+   Pretendard webfont: 400 Regular / 500 Medium / 600 SemiBold / 700 Bold
+*/
+html,body,button,input,select,textarea{font-family:var(--font);}
+body,p,li,input,select,textarea{font-weight:500;}
+h1,h2{font-weight:700;}
+h3,strong,b{font-weight:600;}
+button,.btn,.desktop-nav a,.mobile-menu a,.language-switcher,.eyebrow,
+.card-index,.service-point strong,.footer-nav a,.diagnosis-next,.diagnosis-launcher{font-weight:600;}
+small,.form-note,.footer-bottom{font-weight:400;}

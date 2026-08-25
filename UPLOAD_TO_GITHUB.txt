@@ -17,3 +17,6 @@ REDUCT GitHub 최종 업로드본
    ...
 4. 기존에 잘못 올린 REDUCT_... 임시 폴더들은 삭제해도 됩니다.
 5. /careers/ 채용안내, /careers/apply/ 입사지원, /careers/thanks/ 제출완료 페이지가 포함되어 있습니다.
+
+
+FONT: Pretendard webfont (400/500/600/700) is loaded from pinned jsDelivr v1.3.9.
