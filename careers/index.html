@@ -51,6 +51,55 @@
 
 @media(prefers-reduced-motion:reduce){.career-hero:before,.career-hero:after{animation:none}}
 
+
+
+/* REDUCT careers editorial glass system — 2026-08-26 */
+.career-section.gray{position:relative;overflow:hidden;background:#f3f3f2}
+.career-section.gray:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 8% 14%,rgba(0,0,0,.04),transparent 30%),radial-gradient(circle at 92% 78%,rgba(0,0,0,.025),transparent 32%)}
+.career-section.gray>.shell{position:relative;z-index:1}
+.section-head .label{font-size:14px;letter-spacing:.16em;font-weight:600;color:#777}
+.section-head p{font-size:17px;line-height:1.72}
+
+.process-grid{gap:14px}
+.process-card{min-height:230px;padding:30px 28px;border-radius:26px;background:rgba(255,255,255,.62);border:1px solid rgba(5,5,5,.09);box-shadow:0 16px 42px rgba(0,0,0,.028),inset 0 1px 0 rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.process-card .num{font-size:14px;font-weight:600;letter-spacing:.14em;color:#888}
+.process-card h3{font-size:25px}
+.process-card p{font-size:16px;line-height:1.62;color:#666}
+
+.role-grid{gap:18px}
+.role-card{min-height:226px;padding:32px 34px;border-radius:28px;background:linear-gradient(145deg,rgba(6,6,6,.93),rgba(16,16,16,.86));border:1px solid rgba(255,255,255,.11);box-shadow:0 18px 48px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.055);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.role-card:nth-child(2),.role-card:nth-child(5){transform:translateY(12px)}
+.role-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.26)}
+.role-card:nth-child(2):hover,.role-card:nth-child(5):hover{transform:translateY(8px)}
+.role-card span{font-size:14px;font-weight:600;letter-spacing:.14em;color:#8f8f8f}
+.role-card h3{font-size:32px;line-height:1.08;font-weight:700}
+.role-card p{font-size:17px;line-height:1.66;color:#b7b7b7}
+
+.principle-grid{gap:18px}
+.principle{min-height:190px;padding:32px 32px 30px;border:1px solid rgba(5,5,5,.075);border-radius:24px;background:rgba(255,255,255,.5);box-shadow:0 14px 38px rgba(0,0,0,.025);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
+.principle strong{font-size:26px;line-height:1.18;margin-bottom:16px}
+.principle p{font-size:17px;line-height:1.72;color:#606060}
+
+.career-path-head .label{font-size:14px;font-weight:600}
+.career-path-head p{font-size:17px;line-height:1.72}
+.path-stack{gap:22px}
+.path-track{padding:32px 34px 34px;border:1px solid rgba(5,5,5,.085);border-radius:28px;background:rgba(255,255,255,.58);box-shadow:0 18px 48px rgba(0,0,0,.026),inset 0 1px 0 rgba(255,255,255,.86);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+.path-track-title strong{font-size:25px}
+.path-track-title span{font-size:14px;font-weight:600;letter-spacing:.14em;color:#858585}
+.path-track-head p{font-size:15px;color:#777}
+.path-node{min-height:88px;border-color:rgba(5,5,5,.1);background:rgba(248,248,248,.72);font-size:18px;font-weight:700}
+.path-link{font-size:13px;font-weight:600;color:#777}
+.path-note{font-size:14px;line-height:1.7;color:#707070}
+.career-footer p{font-size:14px}
+
+@media(max-width:1100px){.role-card:nth-child(2),.role-card:nth-child(5),.role-card:nth-child(2):hover,.role-card:nth-child(5):hover{transform:none}}
+@media(max-width:720px){
+  .process-card,.role-card,.principle,.path-track{border-radius:22px}
+  .role-card{min-height:200px;padding:26px}
+  .role-card h3{font-size:28px}.role-card p{font-size:16px}
+  .principle strong{font-size:23px}.principle p{font-size:16px}
+  .path-track-title span{font-size:13px}.path-track-head p{font-size:14px}.path-node{font-size:17px}.path-link{font-size:12px}.path-note{font-size:13px}
+}
 </style></head><body>
 <header class="career-header"><div class="shell career-header-inner"><a class="career-brand" href="/" aria-label="REDUCT 홈"><svg aria-label="REDUCT" viewbox="0 0 480 63" xmlns="http://www.w3.org/2000/svg"><path d="M 82 62 L 146 62 L 158 50 L 158 48 L 92 48 L 82 59 Z M 81 37 L 142 37 L 153 25 L 152 24 L 91 24 L 81 35 Z M 410 0 L 409 1 L 409 13 L 410 14 L 434 14 L 435 15 L 435 61 L 436 62 L 452 62 L 452 16 L 454 14 L 478 14 L 479 13 L 479 0 Z M 333 8 L 329 14 L 327 22 L 327 40 L 331 51 L 337 57 L 342 60 L 349 62 L 402 62 L 403 61 L 397 53 L 391 48 L 347 48 L 343 44 L 343 20 L 347 15 L 349 14 L 390 14 L 402 2 L 402 0 L 347 0 L 338 4 Z M 246 1 L 246 42 L 249 51 L 256 58 L 266 62 L 301 62 L 311 58 L 317 52 L 320 46 L 320 0 L 305 0 L 304 1 L 304 43 L 298 49 L 269 49 L 263 44 L 263 1 L 262 0 L 247 0 Z M 166 0 L 166 10 L 165 11 L 165 61 L 166 62 L 220 62 L 228 59 L 233 55 L 236 51 L 239 43 L 239 18 L 237 11 L 230 3 L 223 0 Z M 181 16 L 183 14 L 216 14 L 222 19 L 222 43 L 217 48 L 213 49 L 183 49 L 181 47 Z M 94 13 L 95 14 L 148 14 L 157 5 L 159 0 L 105 0 Z M 1 5 L 0 14 L 58 14 L 63 18 L 63 23 L 59 27 L 0 27 L 0 62 L 14 62 L 15 61 L 15 38 L 17 36 L 29 37 L 55 61 L 76 61 L 53 40 L 54 39 L 66 38 L 70 36 L 77 28 L 78 15 L 76 10 L 69 3 L 62 0 L 8 0 L 5 1 Z" fill="currentColor" fill-rule="evenodd"></path></svg></a><nav class="career-nav"><a href="/">COMPANY SITE</a><a class="apply-top" href="/careers/apply/">입사지원하기</a></nav></div></header>
 <main><section class="career-hero"><div class="shell career-hero-content"><div class="career-eyebrow">CAREERS / REDUCT</div><h1>BUILD BETTER.<br>WITH US.</h1><p class="career-hero-copy"><span>복잡한 문제를 구조적으로 보고,</span><span>더 나은 제품과 더 효율적인 방법을 만드는 사람을 찾습니다.</span></p><div class="career-actions"><a class="career-btn primary" href="/careers/apply/">입사지원하기</a><a class="career-btn" href="#process">채용절차 보기</a></div></div></section>

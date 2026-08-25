@@ -316,6 +316,59 @@
   .desktop-copy-break{display:none;}
 }
 .about-copy-line + .about-copy-line{margin-top:16px;}
+
+
+/* REDUCT editorial glass system — 2026-08-26 */
+#overview,#optimization,#technology,#project,#case{position:relative;overflow:hidden}
+#overview:before,#optimization:before,#technology:before,#project:before,#case:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 8%,rgba(0,0,0,.035),transparent 28%),radial-gradient(circle at 88% 72%,rgba(0,0,0,.025),transparent 32%);opacity:.9}
+#overview>.shell,#optimization>.shell,#technology>.shell,#project>.shell,#case>.shell{position:relative;z-index:1}
+
+#overview .overview-grid{grid-template-columns:1.08fr .94fr .98fr;gap:20px;align-items:stretch}
+#overview .info-card{min-height:286px;padding:38px 40px 36px;border-radius:28px;background:rgba(255,255,255,.62);border:1px solid rgba(17,17,17,.085);box-shadow:0 18px 48px rgba(0,0,0,.035),inset 0 1px 0 rgba(255,255,255,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#overview .info-card:nth-child(1){min-height:304px}
+#overview .info-card:nth-child(2){margin-top:18px}
+#overview .info-card:nth-child(3){margin-top:8px}
+#overview .card-index{font-size:14px!important;line-height:1.2;font-weight:600!important;letter-spacing:.14em!important;color:rgba(17,17,17,.5)!important}
+#overview .info-card h3{margin-top:36px;font-size:clamp(29px,2.2vw,36px);line-height:1.12;font-weight:700;letter-spacing:-.035em}
+#overview .info-card p{font-size:18px;line-height:1.72;font-weight:500;color:rgba(17,17,17,.72)}
+
+#optimization .optimization-pillar-grid{gap:20px;align-items:stretch}
+#optimization .optimization-pillar{min-height:300px;padding:38px 38px 36px;border-radius:28px;background:rgba(255,255,255,.58);border:1px solid rgba(17,17,17,.08);box-shadow:0 16px 44px rgba(0,0,0,.032),inset 0 1px 0 rgba(255,255,255,.82);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+#optimization .optimization-pillar:nth-child(2){transform:translateY(14px)}
+#optimization .optimization-pillar>span{font-size:14px;font-weight:600;letter-spacing:.12em;color:rgba(17,17,17,.48)}
+#optimization .optimization-pillar h3{font-size:clamp(28px,2.35vw,35px);line-height:1.14}
+#optimization .optimization-pillar p{font-size:18px;line-height:1.72;color:rgba(17,17,17,.72)}
+
+#technology .final-capability-grid{gap:20px}
+#technology .final-capability-grid .technology-card{min-height:230px;padding:88px 34px 34px;border-radius:28px;background:rgba(248,248,248,.68);border:1px solid rgba(17,17,17,.075);box-shadow:0 16px 44px rgba(0,0,0,.03),inset 0 1px 0 rgba(255,255,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#technology .final-capability-grid .technology-card:before{left:34px;right:34px;top:58px;background:linear-gradient(90deg,rgba(17,17,17,.82) 0 30px,rgba(17,17,17,.12) 30px,rgba(17,17,17,.025) 100%)}
+#technology .tech-tag{left:34px;top:30px;font-size:13px;font-weight:600;letter-spacing:.14em;color:rgba(17,17,17,.48)}
+#technology .technology-card h3{font-size:27px;line-height:1.16;font-weight:700}
+#technology .technology-card .tech-en{font-size:17px!important;line-height:1.5;color:rgba(17,17,17,.62)!important;font-weight:500}
+
+#project .optimization-lens-grid{gap:18px}
+#project .optimization-lens{min-height:286px;padding:32px 28px;border-radius:26px;background:rgba(248,248,248,.64);border:1px solid rgba(17,17,17,.075);box-shadow:0 14px 38px rgba(0,0,0,.026);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
+#project .optimization-lens>span{font-size:13px;font-weight:600;letter-spacing:.14em;color:rgba(17,17,17,.46)}
+#project .optimization-lens h3{font-size:28px;line-height:1.14}
+#project .optimization-lens p{font-size:17px;line-height:1.7;color:rgba(17,17,17,.7)}
+
+#case .case-card{border-radius:28px;background:rgba(255,255,255,.58)!important;border:1px solid rgba(17,17,17,.08)!important;box-shadow:0 18px 46px rgba(0,0,0,.03);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+#case .case-card p,#case .case-card li{font-size:17px;line-height:1.7}
+
+#manufacturing .manufacturing-chips span{font-size:15px!important;background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.13)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+@media(max-width:1100px){
+  #overview .overview-grid{grid-template-columns:1fr}
+  #overview .info-card:nth-child(1),#overview .info-card:nth-child(2),#overview .info-card:nth-child(3){min-height:0;margin-top:0}
+  #optimization .optimization-pillar:nth-child(2){transform:none}
+}
+@media(max-width:760px){
+  #overview .info-card,#optimization .optimization-pillar,#technology .final-capability-grid .technology-card,#project .optimization-lens{padding-left:24px;padding-right:24px;border-radius:22px}
+  #overview .info-card h3{font-size:28px}
+  #overview .info-card p,#optimization .optimization-pillar p{font-size:17px}
+  #technology .tech-tag{left:24px}
+  #technology .final-capability-grid .technology-card:before{left:24px;right:24px}
+}
 </style>
 </head>
 <body>
