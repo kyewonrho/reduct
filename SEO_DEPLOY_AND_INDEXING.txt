@@ -1,0 +1,36 @@
+REDUCT SEO DEPLOY / INDEXING CHECKLIST (2026-09-05)
+
+1) GitHub/Vercel 배포 후 아래 URL이 HTTP 200인지 확인
+https://reduct.co.kr/
+https://reduct.co.kr/mold-design/
+https://reduct.co.kr/blow-mold-design/
+https://reduct.co.kr/mold-analysis/
+https://reduct.co.kr/structure-optimization/
+https://reduct.co.kr/songdo-mold-design/
+https://reduct.co.kr/en/
+https://reduct.co.kr/en/mold-design/
+https://reduct.co.kr/en/blow-mold-design/
+https://reduct.co.kr/en/moldflow-analysis/
+https://reduct.co.kr/en/product-design-optimization/
+
+2) Google Search Console
+- sitemap 제출: https://reduct.co.kr/sitemap.xml
+- URL 검사 > 색인 생성 요청: 위 핵심 URL 우선
+- 색인/중복 canonical 경고 확인
+
+3) 네이버 서치어드바이저
+- 사이트 소유 확인 유지
+- sitemap 제출: https://reduct.co.kr/sitemap.xml
+- RSS 제출 가능 시: https://reduct.co.kr/rss.xml
+- 수집 요청: 메인 + mold-design + blow-mold-design + mold-analysis + structure-optimization + songdo-mold-design
+- robots.txt 수집/검증
+
+4) 로컬 검색
+- Google Business Profile / 네이버 플레이스의 업체명, 주소, 전화번호, 홈페이지를 사이트와 동일하게 유지
+- 주소: 인천광역시 연수구 송도과학로 80, 송도 AIT센터 지식산업센터동 101-1202호
+- 전화: 070-4575-0014
+- 이메일: contact@reduct.co.kr
+
+5) 콘텐츠
+- 실제 프로젝트 사례, 금형 구조 이미지, DFM Before/After, CAE 결과 예시가 생길 때 서비스 페이지에 추가
+- 같은 문장을 지역명만 바꾼 페이지를 대량 생성하지 말 것

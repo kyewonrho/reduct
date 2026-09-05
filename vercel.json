@@ -51,6 +51,21 @@
   ],
   "redirects": [
     {
+      "source": "/en/services/mold-design",
+      "destination": "/en/mold-design/",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/blow-mold-design",
+      "destination": "/en/blow-mold-design/",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/(.*)",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
       "source": "/services",
       "destination": "/optimization/",
       "permanent": true
@@ -58,16 +73,6 @@
     {
       "source": "/services/(.*)",
       "destination": "/optimization/",
-      "permanent": true
-    },
-    {
-      "source": "/en/services",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/en/services/(.*)",
-      "destination": "/",
       "permanent": true
     },
     {
@@ -97,11 +102,6 @@
     },
     {
       "source": "/mechanical-design",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/mold-design",
       "destination": "/",
       "permanent": true
     },

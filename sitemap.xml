@@ -5,20 +5,135 @@
     <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://reduct.co.kr/ja/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/"/>
-    <lastmod>2026-09-05</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://reduct.co.kr/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://reduct.co.kr/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/mold-design/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/mold-design/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/blow-mold-design/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/blow-mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/blow-mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/blow-mold-design/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/mold-analysis/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/mold-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/moldflow-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/moldflow-analysis/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/structure-optimization/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/structure-optimization/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/product-design-optimization/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/product-design-optimization/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/songdo-mold-design/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/en/mold-design/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/mold-design/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.93</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/en/blow-mold-design/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/blow-mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/blow-mold-design/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/blow-mold-design/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/en/moldflow-analysis/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/mold-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/moldflow-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/moldflow-analysis/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/en/product-design-optimization/</loc>
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/structure-optimization/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/product-design-optimization/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/product-design-optimization/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
   </url>
   <url>
     <loc>https://reduct.co.kr/optimization/</loc>
     <xhtml:link rel="alternate" hreflang="ko-KR" href="https://reduct.co.kr/optimization/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://reduct.co.kr/en/optimization/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://reduct.co.kr/ja/optimization/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/optimization/"/>
-    <lastmod>2026-09-05</lastmod><changefreq>weekly</changefreq><priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reduct.co.kr/en/optimization/"/>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
-  <url><loc>https://reduct.co.kr/en/</loc><lastmod>2026-09-05</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://reduct.co.kr/en/optimization/</loc><lastmod>2026-09-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://reduct.co.kr/ja/</loc><lastmod>2026-09-05</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://reduct.co.kr/ja/optimization/</loc><lastmod>2026-09-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://reduct.co.kr/careers/</loc><lastmod>2026-09-05</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url>
+    <loc>https://reduct.co.kr/en/optimization/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/ja/optimization/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://reduct.co.kr/careers/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.45</priority>
+  </url>
 </urlset>
