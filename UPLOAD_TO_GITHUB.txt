@@ -1,19 +1,5 @@
-REDUCT GitHub 최종 업로드본
-
-1. 이 ZIP의 '안쪽 파일/폴더 전체'를 GitHub 저장소 최상단(root)에 업로드/덮어쓰기 하세요.
-2. REDUCT_GITHUB_FINAL_ALL 폴더 자체를 저장소에 만들지 마세요.
-3. 저장소 최상단에 아래가 직접 보여야 합니다:
-   index.html
-   app.js
-   style.css
-   style-v5.css
-   vercel.json
-   sitemap.xml
-   robots.txt
-   careers/
-   en/
-   ja/
-   services/
-   ...
-4. 기존에 잘못 올린 REDUCT_... 임시 폴더들은 삭제해도 됩니다.
-5. /careers/ 채용안내, /careers/apply/ 입사지원, /careers/thanks/ 제출완료 페이지가 포함되어 있습니다.
+REDUCT corrected homepage build
+- Main positioning: Structure Optimization + Mold Design
+- REDUCT performs design directly. Mold manufacturing / texture / trial molding / injection production are linked through partners.
+- Legacy SEO landing pages permanently redirect to the homepage and are removed from sitemap.
+Upload the CONTENTS of this folder to the GitHub repository root.

@@ -48,5 +48,137 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/services",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/services/(.*)",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/en/services",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ja/services",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ja/services/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cost-reduction",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/equipment-parts",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-outsourcing",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/mechanical-design",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/mold-design",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/hardware-firmware",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/automotive-advanced-development",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/automotive-prototype-parts",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/prototype-development",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cnc-machining",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/sheet-metal-fabrication",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/jig-fixture",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/reverse-engineering",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/industrial-design",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/3d-printing",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/industrial-equipment-design",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/machining-drawing-review",
+      "destination": "/optimization/",
+      "permanent": true
+    },
+    {
+      "source": "/signage-fabrication",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/service-area",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/(.*)",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
