@@ -107,7 +107,7 @@ if(form){
     };
 
     try{
-      const response = await fetch('https://formsubmit.co/ajax/ceo@reduct.co.kr', {
+      const response = await fetch('https://formsubmit.co/ajax/contact@reduct.co.kr', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ if(form){
     }catch(error){
       console.error('Inquiry submission failed:', error);
       formStatus.className = 'form-status error';
-      formStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하거나 ceo@reduct.co.kr로 직접 문의해 주세요.';
+      formStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하거나 contact@reduct.co.kr로 직접 문의해 주세요.';
     }finally{
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;
@@ -162,7 +162,7 @@ if(form){
       q6:'추가로 알려주실 내용이 있나요?', q6b:'재질, 공차, 현재 문제점, 납기, 원가가 높은 것으로 예상되는 부품 등을 적어주세요.', note:'추가 내용 (선택)', exNote:'예: SUS 가공품 8종의 단가가 높고 납기가 3주 이상 걸립니다.', result:'진단 결과 보기',
       done:'원가 최적화 진단 정보가 정리되었습니다.', doneb:'아래 내용을 보내면 실제 도면·사양·제작조건을 기준으로 검토할 수 있습니다.', area:'검토 영역', stage:'현재 단계', cost:'비용 조건', now:'현재', goal:'목표', qtyDocs:'예상 수량 / 자료', saving:'입력 기준 목표 절감폭',
       name:'이름 *', company:'회사명', email:'이메일 *', phone:'연락처 *', consent:'원가 최적화 진단 및 상담을 위한 개인정보 수집·이용에 동의합니다. 입력정보는 상담 목적으로만 사용합니다.', submit:'진단 요청 보내기',
-      needContact:'이름, 이메일, 연락처를 입력해 주세요.', badEmail:'이메일 주소를 확인해 주세요.', needConsent:'상담을 위해 개인정보 수집·이용 동의가 필요합니다.', sending:'진단 정보를 전송하고 있습니다.', sent:'진단 요청이 전송되었습니다.', sentb:'도면이나 BOM이 있다면 회신 메일에 첨부해 주세요. 검토 후 연락드리겠습니다.', fail:'전송에 실패했습니다. 잠시 후 다시 시도하거나 ceo@reduct.co.kr로 문의해 주세요.', completed:'전송 완료',
+      needContact:'이름, 이메일, 연락처를 입력해 주세요.', badEmail:'이메일 주소를 확인해 주세요.', needConsent:'상담을 위해 개인정보 수집·이용 동의가 필요합니다.', sending:'진단 정보를 전송하고 있습니다.', sent:'진단 요청이 전송되었습니다.', sentb:'도면이나 BOM이 있다면 회신 메일에 첨부해 주세요. 검토 후 연락드리겠습니다.', fail:'전송에 실패했습니다. 잠시 후 다시 시도하거나 contact@reduct.co.kr로 문의해 주세요.', completed:'전송 완료',
       noInput:'미입력', review:'추가 검토 필요', restart:'처음부터', subject:'[홈페이지 원가 최적화 진단]'
     },
     en:{
@@ -178,7 +178,7 @@ if(form){
       q6:'Anything else we should know?', q6b:'Add material, tolerance, current issues, lead time, or parts you believe are driving cost.', note:'Additional information (optional)', exNote:'e.g. Eight SUS machined parts are expensive and lead time exceeds three weeks.', result:'View assessment',
       done:'Your preliminary assessment is ready.', doneb:'Send the information below and we can review the actual drawings, specifications, and manufacturing conditions.', area:'Review area', stage:'Current stage', cost:'Cost condition', now:'Current', goal:'Target', qtyDocs:'Quantity / materials', saving:'Target reduction based on input',
       name:'Name *', company:'Company', email:'Email *', phone:'Phone *', consent:'I agree to the collection and use of this information for preliminary assessment and consultation. The information will be used only for consultation purposes.', submit:'Send Assessment',
-      needContact:'Please enter your name, email, and phone number.', badEmail:'Please check your email address.', needConsent:'Consent is required to proceed with the consultation.', sending:'Sending your assessment information.', sent:'Assessment request sent.', sentb:'If you have drawings or a BOM, attach them when replying to the email. We will review the information and contact you.', fail:'Submission failed. Please try again later or contact ceo@reduct.co.kr.', completed:'Sent',
+      needContact:'Please enter your name, email, and phone number.', badEmail:'Please check your email address.', needConsent:'Consent is required to proceed with the consultation.', sending:'Sending your assessment information.', sent:'Assessment request sent.', sentb:'If you have drawings or a BOM, attach them when replying to the email. We will review the information and contact you.', fail:'Submission failed. Please try again later or contact contact@reduct.co.kr.', completed:'Sent',
       noInput:'Not entered', review:'Further review required', restart:'Restart', subject:'[Website Cost Optimization Pre-Check]'
     },
     ja:{
@@ -194,7 +194,7 @@ if(form){
       q6:'追加情報があれば入力してください。', q6b:'材質、公差、現在の問題、納期、原価が高いと想定される部品などをご記入ください。', note:'追加内容（任意）', exNote:'例：SUS加工品8種類の単価が高く、納期が3週間以上かかります。', result:'診断結果を見る',
       done:'原価最適化診断情報を整理しました。', doneb:'以下の内容を送信すると、実際の図面・仕様・製造条件を基準に検討できます。', area:'検討領域', stage:'現在段階', cost:'コスト条件', now:'現在', goal:'目標', qtyDocs:'数量 / 資料', saving:'入力値ベースの目標削減幅',
       name:'お名前 *', company:'会社名', email:'メール *', phone:'連絡先 *', consent:'原価最適化診断および相談のための個人情報収集・利用に同意します。入力情報は相談目的にのみ使用します。', submit:'診断内容を送信',
-      needContact:'お名前、メール、連絡先を入力してください。', badEmail:'メールアドレスをご確認ください。', needConsent:'相談のため個人情報の収集・利用への同意が必要です。', sending:'診断情報を送信しています。', sent:'診断依頼を送信しました。', sentb:'図面やBOMがある場合は返信メールに添付してください。確認後ご連絡します。', fail:'送信に失敗しました。しばらくしてから再度お試しいただくか、ceo@reduct.co.krへお問い合わせください。', completed:'送信完了',
+      needContact:'お名前、メール、連絡先を入力してください。', badEmail:'メールアドレスをご確認ください。', needConsent:'相談のため個人情報の収集・利用への同意が必要です。', sending:'診断情報を送信しています。', sent:'診断依頼を送信しました。', sentb:'図面やBOMがある場合は返信メールに添付してください。確認後ご連絡します。', fail:'送信に失敗しました。しばらくしてから再度お試しいただくか、contact@reduct.co.krへお問い合わせください。', completed:'送信完了',
       noInput:'未入力', review:'追加検討が必要', restart:'最初から', subject:'[Webサイト 原価最適化診断]'
     }
   };
@@ -256,7 +256,7 @@ if(form){
     const payload={_subject:`${L.subject} ${state.company||state.name} / ${state.category}`,_template:'table',_replyto:state.email,Language:LANG,Name:state.name,Company:state.company||'-',Email:state.email,Phone:state.phone,Diagnosis_Type:state.category,Project_Stage:state.stage,Current_Cost:cur?money(cur):L.noInput,Target_Cost:tar?money(tar):L.noInput,Target_Saving:saving?`${money(saving)} (${rate}%)`:L.review,Quantity:state.quantity,Documents:state.documents,Additional_Note:state.note||'-'};
     try{
       button.disabled=true;button.textContent=LANG==='ko'?'전송 중...':LANG==='ja'?'送信中...':'Sending...';status.textContent=L.sending;
-      const response=await fetch('https://formsubmit.co/ajax/ceo@reduct.co.kr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});const result=await response.json().catch(()=>({}));if(!response.ok||result.success===false||result.success==='false')throw new Error(result.message||'failed');
+      const response=await fetch('https://formsubmit.co/ajax/contact@reduct.co.kr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});const result=await response.json().catch(()=>({}));if(!response.ok||result.success===false||result.success==='false')throw new Error(result.message||'failed');
       status.className='diagnosis-status success';status.innerHTML=`<strong>${L.sent}</strong><br>${L.sentb}`;button.textContent=L.completed;
     }catch(err){console.error('Diagnosis submission failed:',err);status.className='diagnosis-status error';status.textContent=L.fail;button.disabled=false;button.textContent=L.submit;}
   }
