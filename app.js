@@ -1,3 +1,4 @@
+const REDUCT_PAGE_STARTED_AT = Date.now();
 // REDUCT Careers: FormSubmit native file upload redirects here only after submission handling.
 (async function clearCareerDraftAfterSuccessfulSubmit(){
   try{
@@ -82,6 +83,9 @@ const formStatus = document.getElementById('formStatus');
 const submitButton = form?.querySelector('button[type="submit"]');
 
 if(form){
+  if(!form.querySelector('[name="website"]')){
+    const hp=document.createElement('input'); hp.type='text'; hp.name='website'; hp.tabIndex=-1; hp.autocomplete='off'; hp.setAttribute('aria-hidden','true'); hp.style.cssText='position:absolute;left:-100000px;width:1px;height:1px;opacity:0;pointer-events:none'; form.appendChild(hp);
+  }
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
     if(!form.reportValidity()) return;
@@ -95,9 +99,9 @@ if(form){
     formStatus.textContent = '문의 내용을 전송하고 있습니다.';
 
     const payload = {
-      _subject: `[홈페이지 문의] ${data.get('type')} / ${data.get('company') || data.get('name')}`,
-      _template: 'table',
-      _replyto: data.get('email'),
+      kind: 'contact',
+      startedAt: REDUCT_PAGE_STARTED_AT,
+      website: data.get('website') || '',
       Name: data.get('name'),
       Company: data.get('company') || '-',
       Email: data.get('email'),
@@ -107,7 +111,7 @@ if(form){
     };
 
     try{
-      const response = await fetch('https://formsubmit.co/ajax/contact@reduct.co.kr', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -234,7 +238,7 @@ if(form){
     }else if(state.step===7){
       const cur=num(state.currentCost),tar=num(state.targetCost);const saving=cur>0&&tar>0&&cur>tar?cur-tar:0;const rate=saving?(saving/cur*100).toFixed(1):'';
       const savingText=LANG==='ko'?`${saving.toLocaleString('ko-KR')}원 / ${rate}%`:`KRW ${saving.toLocaleString(LANG==='ja'?'ja-JP':'en-US')} / ${rate}%`;
-      body.innerHTML=`<div class="diagnosis-message"><strong>${L.done}</strong>${L.doneb}</div><div class="diagnosis-summary"><div class="diagnosis-summary-row"><span>${L.area}</span><strong>${esc(state.category)}</strong></div><div class="diagnosis-summary-row"><span>${L.stage}</span><strong>${esc(state.stage)}</strong></div><div class="diagnosis-summary-row"><span>${L.cost}</span><strong>${L.now} ${money(state.currentCost)} → ${L.goal} ${money(state.targetCost)}</strong></div><div class="diagnosis-summary-row"><span>${L.qtyDocs}</span><strong>${esc(state.quantity||'-')} · ${esc(state.documents)}</strong></div></div>${saving?`<div class="diagnosis-saving"><span>${L.saving}</span><strong>${savingText}</strong></div>`:''}<div class="diagnosis-fields two"><label class="diagnosis-field"><span>${L.name}</span><input id="dName" type="text" autocomplete="name" value="${esc(state.name)}"></label><label class="diagnosis-field"><span>${L.company}</span><input id="dCompany" type="text" autocomplete="organization" value="${esc(state.company)}"></label><label class="diagnosis-field"><span>${L.email}</span><input id="dEmail" type="email" autocomplete="email" value="${esc(state.email)}"></label><label class="diagnosis-field"><span>${L.phone}</span><input id="dPhone" type="tel" autocomplete="tel" value="${esc(state.phone)}"></label></div><label class="diagnosis-consent"><input id="dConsent" type="checkbox"> <span>${L.consent}</span></label><div class="diagnosis-actions"><button class="diagnosis-next" id="dSubmit" type="button">${L.submit}</button></div><div class="diagnosis-status" id="dStatus"></div>`;
+      body.innerHTML=`<div class="diagnosis-message"><strong>${L.done}</strong>${L.doneb}</div><div class="diagnosis-summary"><div class="diagnosis-summary-row"><span>${L.area}</span><strong>${esc(state.category)}</strong></div><div class="diagnosis-summary-row"><span>${L.stage}</span><strong>${esc(state.stage)}</strong></div><div class="diagnosis-summary-row"><span>${L.cost}</span><strong>${L.now} ${money(state.currentCost)} → ${L.goal} ${money(state.targetCost)}</strong></div><div class="diagnosis-summary-row"><span>${L.qtyDocs}</span><strong>${esc(state.quantity||'-')} · ${esc(state.documents)}</strong></div></div>${saving?`<div class="diagnosis-saving"><span>${L.saving}</span><strong>${savingText}</strong></div>`:''}<div class="diagnosis-fields two"><label class="diagnosis-field"><span>${L.name}</span><input id="dName" type="text" autocomplete="name" value="${esc(state.name)}"></label><label class="diagnosis-field"><span>${L.company}</span><input id="dCompany" type="text" autocomplete="organization" value="${esc(state.company)}"></label><label class="diagnosis-field"><span>${L.email}</span><input id="dEmail" type="email" autocomplete="email" value="${esc(state.email)}"></label><label class="diagnosis-field"><span>${L.phone}</span><input id="dPhone" type="tel" autocomplete="tel" value="${esc(state.phone)}"></label></div><label class="diagnosis-consent"><input id="dConsent" type="checkbox"> <span>${L.consent}</span></label><input id="dWebsite" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-100000px;width:1px;height:1px;opacity:0;pointer-events:none"><div class="diagnosis-actions"><button class="diagnosis-next" id="dSubmit" type="button">${L.submit}</button></div><div class="diagnosis-status" id="dStatus"></div>`;
     }
     body.scrollTop=0;bindStep();
   }
@@ -253,10 +257,10 @@ if(form){
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)){status.textContent=L.badEmail;return;}
     if(!consent){status.textContent=L.needConsent;return;}
     const cur=num(state.currentCost),tar=num(state.targetCost);const saving=cur>0&&tar>0&&cur>tar?cur-tar:0;const rate=saving?(saving/cur*100).toFixed(1):'-';
-    const payload={_subject:`${L.subject} ${state.company||state.name} / ${state.category}`,_template:'table',_replyto:state.email,Language:LANG,Name:state.name,Company:state.company||'-',Email:state.email,Phone:state.phone,Diagnosis_Type:state.category,Project_Stage:state.stage,Current_Cost:cur?money(cur):L.noInput,Target_Cost:tar?money(tar):L.noInput,Target_Saving:saving?`${money(saving)} (${rate}%)`:L.review,Quantity:state.quantity,Documents:state.documents,Additional_Note:state.note||'-'};
+    const payload={kind:'diagnosis',startedAt:REDUCT_PAGE_STARTED_AT,website:(document.getElementById('dWebsite')?.value||''),Language:LANG,Name:state.name,Company:state.company||'-',Email:state.email,Phone:state.phone,Diagnosis_Type:state.category,Project_Stage:state.stage,Current_Cost:cur?money(cur):L.noInput,Target_Cost:tar?money(tar):L.noInput,Target_Saving:saving?`${money(saving)} (${rate}%)`:L.review,Quantity:state.quantity,Documents:state.documents,Additional_Note:state.note||'-'};
     try{
       button.disabled=true;button.textContent=LANG==='ko'?'전송 중...':LANG==='ja'?'送信中...':'Sending...';status.textContent=L.sending;
-      const response=await fetch('https://formsubmit.co/ajax/contact@reduct.co.kr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});const result=await response.json().catch(()=>({}));if(!response.ok||result.success===false||result.success==='false')throw new Error(result.message||'failed');
+      const response=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});const result=await response.json().catch(()=>({}));if(!response.ok||result.success===false||result.success==='false')throw new Error(result.message||'failed');
       status.className='diagnosis-status success';status.innerHTML=`<strong>${L.sent}</strong><br>${L.sentb}`;button.textContent=L.completed;
     }catch(err){console.error('Diagnosis submission failed:',err);status.className='diagnosis-status error';status.textContent=L.fail;button.disabled=false;button.textContent=L.submit;}
   }
