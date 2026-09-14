@@ -6,14 +6,15 @@ function text(v, max=500) {
   return String(v ?? '').replace(/[\u0000-\u001F\u007F]/g, ' ').trim().slice(0, max);
 }
 function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) && v.length <= 160; }
-function validPhone(v){ return /^[0-9+()\-\.\s]{6,40}$/.test(v); }
+function validPhone(v){ return /^[0-9+()\-.\s]{6,40}$/.test(v); }
 function getIp(req){
   const f = req.headers['x-forwarded-for'];
   return text(Array.isArray(f) ? f[0] : (f || req.headers['x-real-ip'] || 'unknown'), 80).split(',')[0].trim();
 }
 function sameSite(req){
   const raw = String(req.headers.origin || req.headers.referer || '');
-  if(!raw) return false;
+  // Some privacy tools omit Origin/Referer on same-site requests.
+  if(!raw) return true;
   try{
     const host = new URL(raw).hostname.toLowerCase();
     return host === 'reduct.co.kr' || host === 'www.reduct.co.kr' || host.endsWith('.vercel.app');
@@ -51,11 +52,10 @@ module.exports = async function handler(req,res){
   try{ if(typeof b==='string') b=JSON.parse(b); }catch{return json(res,400,{success:false,message:'Invalid JSON'});}
   if(!b || typeof b!=='object') return json(res,400,{success:false,message:'Invalid payload'});
 
-  // Honeypot and human timing checks are enforced server-side.
   if(text(b.website,200)) return json(res,200,{success:true});
   const started=Number(b.startedAt||0);
   const elapsed=Date.now()-started;
-  if(!started || elapsed < 2500 || elapsed > 2*60*60*1000) return json(res,400,{success:false,message:'Invalid submission timing'});
+  if(!started || elapsed < 1200 || elapsed < 0) return json(res,400,{success:false,message:'Invalid submission timing'});
 
   const kind=text(b.kind,30);
   const email=text(b.Email || b.email,160);
@@ -86,15 +86,30 @@ module.exports = async function handler(req,res){
     };
   }else return json(res,400,{success:false,message:'Unknown form type'});
 
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), 10000);
   try{
     const upstream=await fetch('https://formsubmit.co/ajax/contact@reduct.co.kr',{
-      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(out)
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(out),
+      signal:controller.signal
     });
-    const data=await upstream.json().catch(()=>({}));
-    if(!upstream.ok || data.success===false || data.success==='false') return json(res,502,{success:false,message:'Upstream submission failed'});
+    const raw=await upstream.text();
+    let data={};
+    try{ data=raw ? JSON.parse(raw) : {}; }catch{ data={message:raw.slice(0,300)}; }
+    if(!upstream.ok || data.success===false || data.success==='false'){
+      console.error('REDUCT FormSubmit upstream rejected',{
+        status:upstream.status,
+        message:data.message || data.error || 'unknown'
+      });
+      return json(res,502,{success:false,message:'Upstream submission failed'});
+    }
     return json(res,200,{success:true});
   }catch(e){
     console.error('REDUCT contact proxy error',e);
     return json(res,502,{success:false,message:'Submission service unavailable'});
+  }finally{
+    clearTimeout(timer);
   }
 };

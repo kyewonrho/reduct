@@ -82,6 +82,86 @@ const form = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 const submitButton = form?.querySelector('button[type="submit"]');
 
+const REDUCT_FORM_ENDPOINT = '/api/contact';
+const REDUCT_FORM_FALLBACK = 'https://formsubmit.co/ajax/contact@reduct.co.kr';
+
+function buildDirectFormPayload(payload){
+  const email = payload.Email || payload.email || '';
+  const name = payload.Name || payload.name || '';
+  const company = payload.Company || payload.company || '-';
+  const subject = payload.kind === 'diagnosis'
+    ? `[홈페이지 원가 최적화 진단] ${company || name} / ${payload.Diagnosis_Type || '-'}`
+    : `[홈페이지 문의] ${payload.Inquiry_Type || payload.type || '-'} / ${company || name}`;
+
+  const out = {
+    ...payload,
+    _template: 'table',
+    _replyto: email,
+    _subject: subject,
+    _honey: payload.website || ''
+  };
+  delete out.kind;
+  delete out.startedAt;
+  delete out.website;
+  return out;
+}
+
+async function readJsonResponse(response){
+  const raw = await response.text();
+  if(!raw) return {};
+  try { return JSON.parse(raw); } catch { return { message: raw.slice(0, 300) }; }
+}
+
+async function submitWebsitePayload(payload){
+  let proxyError = null;
+
+  try{
+    const response = await fetch(REDUCT_FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    const result = await readJsonResponse(response);
+
+    if(response.ok && result.success !== false && result.success !== 'false'){
+      return result;
+    }
+
+    // Do not bypass real validation/rate-limit rejections.
+    if(response.status >= 400 && response.status < 500 && ![404,405].includes(response.status)){
+      throw new Error(result.message || `Submission rejected (${response.status})`);
+    }
+
+    proxyError = new Error(result.message || `Proxy submission failed (${response.status})`);
+  }catch(error){
+    proxyError = error;
+  }
+
+  // Fallback to FormSubmit AJAX if the Vercel API route is unavailable/upstream fails.
+  try{
+    const response = await fetch(REDUCT_FORM_FALLBACK, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(buildDirectFormPayload(payload))
+    });
+    const result = await readJsonResponse(response);
+    if(!response.ok || result.success === false || result.success === 'false'){
+      throw new Error(result.message || `Fallback submission failed (${response.status})`);
+    }
+    return result;
+  }catch(fallbackError){
+    console.error('Primary form endpoint failed:', proxyError);
+    console.error('Fallback form endpoint failed:', fallbackError);
+    throw fallbackError;
+  }
+}
+
 if(form){
   if(!form.querySelector('[name="website"]')){
     const hp=document.createElement('input'); hp.type='text'; hp.name='website'; hp.tabIndex=-1; hp.autocomplete='off'; hp.setAttribute('aria-hidden','true'); hp.style.cssText='position:absolute;left:-100000px;width:1px;height:1px;opacity:0;pointer-events:none'; form.appendChild(hp);
@@ -111,19 +191,7 @@ if(form){
     };
 
     try{
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-
-      const result = await response.json().catch(()=>({}));
-      if(!response.ok || result.success === 'false' || result.success === false){
-        throw new Error(result.message || 'Submission failed');
-      }
+      await submitWebsitePayload(payload);
 
       form.reset();
       formStatus.className = 'form-status success';
@@ -260,7 +328,7 @@ if(form){
     const payload={kind:'diagnosis',startedAt:REDUCT_PAGE_STARTED_AT,website:(document.getElementById('dWebsite')?.value||''),Language:LANG,Name:state.name,Company:state.company||'-',Email:state.email,Phone:state.phone,Diagnosis_Type:state.category,Project_Stage:state.stage,Current_Cost:cur?money(cur):L.noInput,Target_Cost:tar?money(tar):L.noInput,Target_Saving:saving?`${money(saving)} (${rate}%)`:L.review,Quantity:state.quantity,Documents:state.documents,Additional_Note:state.note||'-'};
     try{
       button.disabled=true;button.textContent=LANG==='ko'?'전송 중...':LANG==='ja'?'送信中...':'Sending...';status.textContent=L.sending;
-      const response=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});const result=await response.json().catch(()=>({}));if(!response.ok||result.success===false||result.success==='false')throw new Error(result.message||'failed');
+      await submitWebsitePayload(payload);
       status.className='diagnosis-status success';status.innerHTML=`<strong>${L.sent}</strong><br>${L.sentb}`;button.textContent=L.completed;
     }catch(err){console.error('Diagnosis submission failed:',err);status.className='diagnosis-status error';status.textContent=L.fail;button.disabled=false;button.textContent=L.submit;}
   }
