@@ -31,7 +31,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data: blob: https://images.pexels.com; media-src 'self' https://videos.pexels.com; frame-src https://www.google.com; connect-src 'self' https://cdn.jsdelivr.net https://formsubmit.co; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.vercel-insights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data: blob: https://images.pexels.com; media-src 'self' https://videos.pexels.com; frame-src https://www.google.com; connect-src 'self' https://cdn.jsdelivr.net https://formsubmit.co https://vitals.vercel-insights.com; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
         },
         {
           "key": "Cross-Origin-Resource-Policy",
