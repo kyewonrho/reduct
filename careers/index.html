@@ -171,4 +171,5 @@ p,h1,h2,h3{word-break:keep-all}
 <script>
 (()=>{if(!matchMedia('(pointer:fine)').matches)return;const cards=[...document.querySelectorAll('.fx')];for(const card of cards){card.classList.add('prox');const g=document.createElement('i');g.className='fx-glow';card.appendChild(g)}let x=-9999,y=-9999,raf=0;const r=170;function draw(){raf=0;for(const c of cards){const b=c.getBoundingClientRect(),cx=Math.max(b.left,Math.min(x,b.right)),cy=Math.max(b.top,Math.min(y,b.bottom)),d=Math.hypot(x-cx,y-cy),p=Math.max(0,Math.min(1,1-d/r));c.style.setProperty('--prox',p?String(.18+p*.72):'0');if(p){c.style.setProperty('--mx',(x-b.left)+'px');c.style.setProperty('--my',(y-b.top)+'px')}}}addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY;if(!raf)raf=requestAnimationFrame(draw)},{passive:true});addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(draw)},{passive:true})})();
 </script>
+<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body></html>

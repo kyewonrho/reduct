@@ -1,0 +1,14 @@
+{
+  "name": "reduct",
+  "version": "1.0.0",
+  "description": "REDUCT Engineering Services Website",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static HTML - no build needed'",
+    "lint": "echo 'No linter configured'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
