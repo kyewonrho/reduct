@@ -23,17 +23,21 @@ let editorBase = null;
 let newProjectRequestId = null;
 let activityBase = null;
 let budgetBase = null;
+let scheduleBase = null;
+let newScheduleRequestId = null;
 let editorDirty = false;
 let activityDirty = false;
 let budgetDirty = false;
+let scheduleDirty = false;
 let savingProject = false;
 let savingActivity = false;
 let savingBudget = false;
+let savingSchedule = false;
 let authenticated = false;
 let sessionEpoch = 0;
 let authenticating = false;
 let searchTimer;
-let projectView = 'list';
+let projectView = 'overview';
 let calendarMonth = localDate().slice(0,7);
 let calendarDate = localDate();
 const expanded = new Set();
@@ -62,13 +66,13 @@ async function api(path,options={}) {
 
 function showGate(message='',error=false){
   authenticated=false;sessionEpoch++;state=null;
-  editorBase=null;newProjectRequestId=null;activityBase=null;budgetBase=null;expanded.clear();pending.clear();
-  editorDirty=false;activityDirty=false;budgetDirty=false;
-  for(const id of ['projectDialog','activityDialog','budgetDialog'])if($(id).open)$(id).close();
-  for(const id of ['projectForm','activityForm','budgetForm'])$(id).reset();
-  for(const id of ['overviewStats','categoryCounts','categoryChart','deadlineChart','projectList','projectCalendar','stageEditor','projectConflict','activityConflict'])$(id).replaceChildren();
+  editorBase=null;newProjectRequestId=null;activityBase=null;budgetBase=null;scheduleBase=null;newScheduleRequestId=null;expanded.clear();pending.clear();
+  editorDirty=false;activityDirty=false;budgetDirty=false;scheduleDirty=false;
+  for(const id of ['projectDialog','activityDialog','budgetDialog','scheduleDialog'])if($(id).open)$(id).close();
+  for(const id of ['projectForm','activityForm','budgetForm','scheduleForm'])$(id).reset();
+  for(const id of ['overviewStats','categoryCounts','categoryChart','deadlineChart','projectList','projectCalendar','stageEditor','projectConflict','activityConflict','scheduleConflict'])$(id).replaceChildren();
   calendarMonth=localDate().slice(0,7);calendarDate=localDate();
-  for(const id of ['projectFormError','activityFormError','budgetFormError'])fieldError(id,'');
+  for(const id of ['projectFormError','activityFormError','budgetFormError','scheduleFormError'])fieldError(id,'');
   $('revisionText').textContent='공용 프로젝트 관리';$('storePath').textContent='모든 담당자가 같은 공용 데이터로 작업합니다.';
   $('notice').textContent='';$('notice').hidden=true;
   $('actorName').value='';
@@ -101,8 +105,8 @@ async function login(event){
 }
 
 async function logout(){
-  if(savingProject||savingActivity||savingBudget){notice('저장이 끝난 뒤 로그아웃해 주세요.',true);return;}
-  const dirty=editorDirty||activityDirty||budgetDirty;
+  if(savingProject||savingActivity||savingBudget||savingSchedule){notice('저장이 끝난 뒤 로그아웃해 주세요.',true);return;}
+  const dirty=editorDirty||activityDirty||budgetDirty||scheduleDirty;
   if(!confirm(dirty?'저장하지 않은 편집 내용이 있습니다. 저장하지 않고 로그아웃할까요?':'로그아웃할까요?'))return;
   showGate('로그아웃 중입니다.');authenticating=true;$('loginButton').disabled=true;
   try{await api('/api/auth',{method:'DELETE',body:'{}'});showGate('로그아웃했습니다.');}
@@ -111,15 +115,17 @@ async function logout(){
 }
 
 async function exportBackup(){
+  const epoch=sessionEpoch;
   const button=$('exportBackup');button.disabled=true;
   try{
     const response=await fetch(apiUrl('/api/export'),{cache:'no-store',credentials:'same-origin'});
-    if(!response.ok){const body=await response.json().catch(()=>({}));if(response.status===401)showGate('로그인이 만료되었습니다. 다시 로그인해 주세요.',true);throw new Error(body.message||'백업 데이터를 받지 못했습니다.');}
-    if(!authenticated)return;
+    if(!response.ok){const body=await response.json().catch(()=>({}));if(response.status===401&&epoch===sessionEpoch)showGate('로그인이 만료되었습니다. 다시 로그인해 주세요.',true);throw new Error(body.message||'백업 데이터를 받지 못했습니다.');}
+    if(!authenticated||epoch!==sessionEpoch)return;
     const blob=await response.blob(),url=URL.createObjectURL(blob),link=document.createElement('a');
+    if(!authenticated||epoch!==sessionEpoch){URL.revokeObjectURL(url);return;}
     link.href=url;link.download=`REDUCT_Project_Hub_Backup_${localDate()}.json`;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
     notice('프로젝트 데이터 백업을 다운로드했습니다.');
-  }catch(error){if(authenticated)notice(error.message,true);}
+  }catch(error){if(authenticated&&epoch===sessionEpoch)notice(error.message,true);}
   finally{button.disabled=false;}
 }
 
@@ -131,10 +137,10 @@ function fieldError(id,message){const box=$(id);box.textContent=message;box.hidd
 function statusLabel(p){return p.finalDone?'완료':STATUSES[p.status]||'현황미입력';}
 function latestConflict(container,latest,kind){
   container.hidden=false;
-  const summary=kind==='project'?`${latest.client} · ${statusLabel(latest)} · 담당자 ${latest.owner||'미지정'}`:`${latest.title} · ${latest.done?'완료':'진행중'}`;
+  const summary=kind==='project'?`${latest.client} · ${statusLabel(latest)} · 담당자 ${latest.owner||'미지정'}`:kind==='schedule'?`${latest.title} · ${latest.startDate}–${latest.endDate} · 참석 ${latest.attendees||'미입력'}`:`${latest.title} · ${latest.done?'완료':'진행중'}`;
   container.replaceChildren(document.createTextNode(`다른 담당자가 먼저 수정했습니다. 입력한 내용은 유지되어 있으며, 아직 저장되지 않았습니다.\n최신 내용: ${summary}\n최신 버전을 다시 열고 변경 사항을 확인한 뒤 저장해 주세요.`));
   const button=document.createElement('button');button.type='button';button.textContent='최신 버전으로 다시 열기';
-  button.addEventListener('click',()=>{if(!confirm('현재 편집 내용은 저장되지 않습니다. 최신 버전으로 다시 열까요?'))return;if(kind==='project')openProject(latest.id,latest);else openActivity(latest.id,latest);});
+  button.addEventListener('click',()=>{if(!authenticated||!confirm('현재 편집 내용은 저장되지 않습니다. 최신 버전으로 다시 열까요?'))return;if(kind==='project')openProject(latest.id,latest);else if(kind==='schedule')openSchedule(latest.id,null,latest);else openActivity(latest.id,latest);});
   container.append(button);
 }
 
@@ -152,6 +158,7 @@ async function refresh(force=false){
         state=next;render();$('loginGate').hidden=true;$('projectApp').hidden=false;
       }
     }catch(error){
+      if(!authenticated||epoch!==sessionEpoch)return;
       if(error.status===401)return;
       if(!state){showGate(error.message,true);return;}
       $('connectionState').textContent='연결 확인 필요';$('connectionState').classList.add('error');
@@ -211,29 +218,38 @@ function filteredProjects(){
 }
 
 function setProjectView(view){
-  projectView=view==='calendar'?'calendar':'list';
+  projectView=['overview','list','calendar'].includes(view)?view:'overview';
   try{localStorage.setItem('reductProjectHub.view',projectView);}catch{}
   syncProjectView();renderProjects();
-  if(projectView==='calendar')$('calendarViewTab').closest('.project-view-bar').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function syncProjectView(){
-  for(const [view,tab,panel] of [['list','listViewTab','projectListPanel'],['calendar','calendarViewTab','calendarPanel']]){
+  for(const [view,tab,panel] of [['overview','overviewViewTab','overviewPanel'],['list','listViewTab','projectListPanel'],['calendar','calendarViewTab','calendarPanel']]){
     const selected=projectView===view;
     $(tab).setAttribute('aria-selected',String(selected));$(tab).tabIndex=selected?0:-1;$(panel).hidden=!selected;
   }
+  $('workPanels').hidden=projectView==='overview';
+  $('calendarFilterHint').hidden=projectView!=='calendar';
+  $('viewDescription').textContent=projectView==='overview'?'전체 프로젝트의 진행 현황을 확인합니다.':projectView==='list'?'프로젝트별 일정·담당자·완료 상태를 관리합니다.':'날짜를 눌러 미팅·회의·출장을 추가하세요.';
+}
+
+function filteredSchedules(){
+  const query=$('searchInput').value.trim().toLocaleLowerCase(),archived=$('showArchived').checked;
+  return (state.schedules||[]).filter(s=>Boolean(s.archived)===archived).filter(s=>!query||[s.title,s.attendees,s.location,s.notes,{meeting:'미팅',conference:'회의',trip:'출장',other:'기타 일정'}[s.kind]].join(' ').toLocaleLowerCase().includes(query));
 }
 
 function renderProjectCalendar(projects){
   if(!window.ReductCalendar){$('projectCalendar').textContent='캘린더를 불러오지 못했습니다. 페이지를 새로고침해 주세요.';return;}
   const parentIds=new Set(projects.map(project=>project.id));
   window.ReductCalendar.render($('projectCalendar'),{
-    projects,activities:(state.activities||[]).filter(activity=>parentIds.has(activity.projectId)),
+    projects,activities:(state.activities||[]).filter(activity=>parentIds.has(activity.projectId)),schedules:filteredSchedules(),showArchived:$('showArchived').checked,
     month:calendarMonth,selectedDate:calendarDate,today:localDate(),
     onMonthChange:month=>{if(!authenticated)return;calendarMonth=month;if(!calendarDate.startsWith(month))calendarDate=month===localDate().slice(0,7)?localDate():`${month}-01`;renderProjects();},
     onDateSelect:date=>{if(!authenticated)return;calendarDate=date;calendarMonth=date.slice(0,7);renderProjects();},
     onOpenProject:id=>{if(authenticated&&state.projects.some(project=>project.id===id))openProject(id);},
-    onOpenActivity:id=>{if(authenticated&&state.activities.some(activity=>activity.id===id))openActivity(id);}
+    onOpenActivity:id=>{if(authenticated&&state.activities.some(activity=>activity.id===id))openActivity(id);},
+    onCreateSchedule:date=>{if(authenticated)openSchedule(null,date);},
+    onOpenSchedule:id=>{if(authenticated&&(state.schedules||[]).some(schedule=>schedule.id===id))openSchedule(id);}
   });
 }
 
@@ -242,6 +258,7 @@ function renderProjects(){
   const projects=filteredProjects();
   const category=$('categoryFilter').value,archive=$('showArchived').checked;
   syncProjectView();
+  if(projectView==='overview')return;
   if(projectView==='calendar'){renderProjectCalendar(projects);return;}
   const html=[];
   if(archive)html.push('<div class="notice">보관함입니다. 보관된 프로젝트는 전체 현황에서 제외됩니다. 상세 내용을 열어 다시 복원할 수 있습니다.</div>');
@@ -314,6 +331,7 @@ function validateProject(values){
 }
 async function saveProject(event){
   event.preventDefault();if(savingProject)return;
+  const epoch=sessionEpoch;
   const values=readProject(),validation=validateProject(values);if(validation){fieldError('projectFormError',validation);return;}
   const changes=narrowChanges(editorBase,values);
   if(editorBase.id&&!Object.keys(changes).length){$('projectDialog').close();return;}
@@ -321,17 +339,19 @@ async function saveProject(event){
   try{
     if(editorBase.id)await api(`/api/projects/${encodeURIComponent(editorBase.id)}`,{method:'PATCH',body:JSON.stringify({version:editorBase.version,changes,actor:actor()})});
     else await api('/api/projects',{method:'POST',body:JSON.stringify({project:values,actor:actor(),requestId:newProjectRequestId})});
-    newProjectRequestId=null;editorDirty=false;$('projectDialog').close();await refresh(true);notice('프로젝트를 공용 데이터에 저장했습니다.');
-  }catch(error){if(error.status===409&&error.body?.latest){latestConflict($('projectConflict'),error.body.latest,'project');await refresh(true);}else fieldError('projectFormError',error.message);}
+    if(!authenticated||epoch!==sessionEpoch)return;
+    newProjectRequestId=null;editorDirty=false;$('projectDialog').close();await refresh(true);if(authenticated&&epoch===sessionEpoch)notice('프로젝트를 공용 데이터에 저장했습니다.');
+  }catch(error){if(!authenticated||epoch!==sessionEpoch)return;if(error.status===409&&error.body?.latest){latestConflict($('projectConflict'),error.body.latest,'project');await refresh(true);}else fieldError('projectFormError',error.message);}
   finally{savingProject=false;$('saveProject').disabled=false;$('saveProject').textContent='저장';}
 }
 
 async function quickProject(id,changes){
   if(pending.has(id))return;
+  const epoch=sessionEpoch;
   const project=state.projects.find(p=>p.id===id);if(!project)return;
   pending.add(id);renderProjects();
-  try{await api(`/api/projects/${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({version:project.version,changes,actor:actor()})});await refresh(true);notice('변경 사항을 저장했습니다.');}
-  catch(error){if(error.status===409){notice('다른 담당자가 먼저 수정하여 저장하지 않았습니다. 최신 내용을 불러왔습니다. 확인 후 다시 변경해 주세요.',true);await refresh(true);}else notice(error.message,true);}
+  try{await api(`/api/projects/${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({version:project.version,changes,actor:actor()})});if(!authenticated||epoch!==sessionEpoch)return;await refresh(true);if(authenticated&&epoch===sessionEpoch)notice('변경 사항을 저장했습니다.');}
+  catch(error){if(!authenticated||epoch!==sessionEpoch)return;if(error.status===409){notice('다른 담당자가 먼저 수정하여 저장하지 않았습니다. 최신 내용을 불러왔습니다. 확인 후 다시 변경해 주세요.',true);await refresh(true);}else notice(error.message,true);}
   finally{pending.delete(id);renderProjects();}
 }
 
@@ -341,21 +361,23 @@ function openActivity(id,latest=null){
 }
 async function saveActivity(event){
   event.preventDefault();if(savingActivity)return;
+  const epoch=sessionEpoch;
   const form=$('activityForm'),values={};
   for(const name of ['title','owner','current','notes'])values[name]=form.elements.namedItem(name).value.trim();
   for(const name of ['dueDate','doneDate','startTime'])values[name]=form.elements.namedItem(name).value||null;
   values.done=form.elements.namedItem('done').checked;values.durationMinutes=numOrNull(form,'durationMinutes');
   const changes=narrowChanges(activityBase,values);if(!Object.keys(changes).length){$('activityDialog').close();return;}
   savingActivity=true;$('saveActivity').disabled=true;fieldError('activityFormError','');
-  try{await api(`/api/activities/${encodeURIComponent(activityBase.id)}`,{method:'PATCH',body:JSON.stringify({version:activityBase.version,changes,actor:actor()})});activityDirty=false;$('activityDialog').close();await refresh(true);notice('활동 내역을 저장했습니다.');}
-  catch(error){if(error.status===409&&error.body?.latest){latestConflict($('activityConflict'),error.body.latest,'activity');await refresh(true);}else fieldError('activityFormError',error.message);}
+  try{await api(`/api/activities/${encodeURIComponent(activityBase.id)}`,{method:'PATCH',body:JSON.stringify({version:activityBase.version,changes,actor:actor()})});if(!authenticated||epoch!==sessionEpoch)return;activityDirty=false;$('activityDialog').close();await refresh(true);if(authenticated&&epoch===sessionEpoch)notice('활동 내역을 저장했습니다.');}
+  catch(error){if(!authenticated||epoch!==sessionEpoch)return;if(error.status===409&&error.body?.latest){latestConflict($('activityConflict'),error.body.latest,'activity');await refresh(true);}else fieldError('activityFormError',error.message);}
   finally{savingActivity=false;$('saveActivity').disabled=false;}
 }
 async function quickActivity(id,done){
+  const epoch=sessionEpoch;
   const activity=state.activities.find(a=>a.id===id);if(!activity||pending.has(id))return;
   pending.add(id);renderProjects();
-  try{await api(`/api/activities/${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({version:activity.version,changes:{done,...(done&&!activity.doneDate?{doneDate:localDate()}:{})},actor:actor()})});await refresh(true);notice('활동 완료 상태를 저장했습니다.');}
-  catch(error){if(error.status===409){notice('다른 담당자가 활동을 먼저 수정했습니다. 최신 내용을 확인 후 다시 변경해 주세요.',true);await refresh(true);}else notice(error.message,true);}
+  try{await api(`/api/activities/${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({version:activity.version,changes:{done,...(done&&!activity.doneDate?{doneDate:localDate()}:{})},actor:actor()})});if(!authenticated||epoch!==sessionEpoch)return;await refresh(true);if(authenticated&&epoch===sessionEpoch)notice('활동 완료 상태를 저장했습니다.');}
+  catch(error){if(!authenticated||epoch!==sessionEpoch)return;if(error.status===409){notice('다른 담당자가 활동을 먼저 수정했습니다. 최신 내용을 확인 후 다시 변경해 주세요.',true);await refresh(true);}else notice(error.message,true);}
   finally{pending.delete(id);renderProjects();}
 }
 function openBudget(){
@@ -363,29 +385,100 @@ function openBudget(){
 }
 async function saveBudget(event){
   event.preventDefault();if(savingBudget)return;const form=$('budgetForm'),values={total:Number(form.elements.namedItem('total').value),spent:Number(form.elements.namedItem('spent').value)},changes=narrowChanges(budgetBase,values);if(!Object.keys(changes).length){$('budgetDialog').close();return;}
+  const epoch=sessionEpoch;
   savingBudget=true;$('saveBudget').disabled=true;fieldError('budgetFormError','');
-  try{await api('/api/budget',{method:'PATCH',body:JSON.stringify({version:budgetBase.version,changes,actor:actor()})});budgetDirty=false;$('budgetDialog').close();await refresh(true);notice('활동비를 저장했습니다.');}
-  catch(error){if(error.status===409){fieldError('budgetFormError','다른 담당자가 활동비를 먼저 수정했습니다. 입력한 내용은 저장되지 않았습니다. 이 창을 닫고 최신 활동비를 다시 확인해 주세요.');await refresh(true);}else fieldError('budgetFormError',error.message);}
+  try{await api('/api/budget',{method:'PATCH',body:JSON.stringify({version:budgetBase.version,changes,actor:actor()})});if(!authenticated||epoch!==sessionEpoch)return;budgetDirty=false;$('budgetDialog').close();await refresh(true);if(authenticated&&epoch===sessionEpoch)notice('활동비를 저장했습니다.');}
+  catch(error){if(!authenticated||epoch!==sessionEpoch)return;if(error.status===409){fieldError('budgetFormError','다른 담당자가 활동비를 먼저 수정했습니다. 입력한 내용은 저장되지 않았습니다. 이 창을 닫고 최신 활동비를 다시 확인해 주세요.');await refresh(true);}else fieldError('budgetFormError',error.message);}
   finally{savingBudget=false;$('saveBudget').disabled=false;}
 }
 
+function syncScheduleTimes(){
+  const form=$('scheduleForm'),allDay=form.elements.namedItem('allDay').checked;
+  for(const name of ['startTime','endTime']){const input=form.elements.namedItem(name);input.disabled=allDay;input.required=!allDay;if(!allDay&&!input.value)input.value=name==='startTime'?'09:00':'10:00';}
+}
+function openSchedule(id,date=null,latest=null){
+  if(!authenticated||!state)return;
+  const schedule=latest||(id?(state.schedules||[]).find(s=>s.id===id):null);
+  if(id&&!schedule)return;
+  const day=date||calendarDate||localDate();
+  scheduleBase=structuredClone(schedule||{id:null,kind:'meeting',title:'',attendees:'',startDate:day,endDate:day,allDay:false,startTime:'09:00',endTime:'10:00',location:'',notes:'',archived:false});
+  newScheduleRequestId=schedule?null:crypto.randomUUID();scheduleDirty=false;
+  const form=$('scheduleForm');form.reset();
+  for(const [key,value] of Object.entries(scheduleBase))setFormValue(form,key,value);
+  $('scheduleDialogTitle').textContent=schedule?'일정 수정':'일정 추가';
+  $('archiveSchedule').hidden=!schedule;$('archiveSchedule').textContent=schedule?.archived?'일정 복원':'일정 보관';
+  $('scheduleArchiveNotice').hidden=!schedule?.archived;
+  fieldError('scheduleFormError','');$('scheduleConflict').replaceChildren();$('scheduleConflict').hidden=true;syncScheduleTimes();
+  if(!$('scheduleDialog').open)$('scheduleDialog').showModal();
+}
+function readSchedule(){
+  const form=$('scheduleForm'),values={};
+  for(const name of ['kind','title','attendees','startDate','endDate','location','notes'])values[name]=form.elements.namedItem(name).value.trim();
+  values.allDay=form.elements.namedItem('allDay').checked;
+  for(const name of ['startTime','endTime'])values[name]=values.allDay?null:form.elements.namedItem(name).value||null;
+  return values;
+}
+function validateSchedule(values){
+  if(!values.title)return '일정명을 입력해 주세요.';
+  if(!values.startDate||!values.endDate)return '시작일과 종료일을 입력해 주세요.';
+  if(values.endDate<values.startDate)return '종료일은 시작일 이후로 설정해 주세요.';
+  if(!values.allDay&&(!values.startTime||!values.endTime))return '시작 시간과 종료 시간을 입력해 주세요.';
+  if(!values.allDay&&values.startDate===values.endDate&&values.endTime<values.startTime)return '종료 시간은 시작 시간 이후로 설정해 주세요. 다음 날 끝나는 일정은 종료일을 변경해 주세요.';
+  return '';
+}
+async function persistSchedule(values,archiveOnly=false){
+  if(savingSchedule||!scheduleBase||!authenticated)return;
+  const epoch=sessionEpoch,base=structuredClone(scheduleBase),changes=narrowChanges(base,values);
+  if(base.id&&!Object.keys(changes).length){scheduleDirty=false;$('scheduleDialog').close();return;}
+  savingSchedule=true;$('saveSchedule').disabled=true;$('archiveSchedule').disabled=true;$('saveSchedule').textContent='저장 중…';fieldError('scheduleFormError','');
+  try{
+    const result=base.id?await api(`/api/schedules/${encodeURIComponent(base.id)}`,{method:'PATCH',body:JSON.stringify({version:base.version,changes,actor:actor()})}):await api('/api/schedules',{method:'POST',body:JSON.stringify({schedule:values,actor:actor(),requestId:newScheduleRequestId})});
+    if(!authenticated||epoch!==sessionEpoch)return;
+    if(!base.id&&(Object.keys(narrowChanges(result.schedule,values)).length||result.schedule.archived)){
+      scheduleBase=structuredClone(result.schedule);newScheduleRequestId=null;scheduleDirty=true;
+      $('scheduleDialogTitle').textContent='일정 수정';$('archiveSchedule').hidden=false;$('archiveSchedule').textContent=result.schedule.archived?'일정 복원':'일정 보관';$('scheduleArchiveNotice').hidden=!result.schedule.archived;
+      fieldError('scheduleFormError','최초 저장 요청은 이미 반영되었습니다. 이후 입력한 변경 내용은 이 창에 유지했습니다. 내용을 확인하고 다시 저장해 주세요.');await refresh(true);return;
+    }
+    scheduleDirty=false;newScheduleRequestId=null;$('scheduleDialog').close();await refresh(true);
+    if(authenticated&&epoch===sessionEpoch)notice(archiveOnly?(values.archived?'일정을 보관했습니다. 보관함에서 복원할 수 있습니다.':'일정을 복원했습니다.'):'일정을 공용 캘린더에 저장했습니다.');
+  }catch(error){
+    if(!authenticated||epoch!==sessionEpoch)return;
+    if(error.status===409&&error.body?.latest){latestConflict($('scheduleConflict'),error.body.latest,'schedule');await refresh(true);}else fieldError('scheduleFormError',error.message);
+  }finally{savingSchedule=false;$('saveSchedule').disabled=false;$('archiveSchedule').disabled=false;$('saveSchedule').textContent='저장';}
+}
+async function saveSchedule(event){
+  event.preventDefault();const values=readSchedule(),error=validateSchedule(values);
+  if(error){fieldError('scheduleFormError',error);return;}
+  await persistSchedule(values);
+}
+async function archiveSchedule(){
+  if(!scheduleBase?.id||savingSchedule)return;
+  const archived=!scheduleBase.archived;
+  if(!confirm(`${scheduleDirty?'저장하지 않은 입력 내용은 반영되지 않습니다.\n':''}${archived?'이 일정을 보관할까요? 캘린더에서 숨겨지며 보관함에서 복원할 수 있습니다.':'이 일정을 복원할까요?'}`))return;
+  await persistSchedule({archived},true);
+}
+
 function closeDialog(id){
-  const dirty=id==='projectDialog'?editorDirty:id==='activityDialog'?activityDirty:budgetDirty;
-  const saving=id==='projectDialog'?savingProject:id==='activityDialog'?savingActivity:savingBudget;
+  const dirty=id==='projectDialog'?editorDirty:id==='activityDialog'?activityDirty:id==='scheduleDialog'?scheduleDirty:budgetDirty;
+  const saving=id==='projectDialog'?savingProject:id==='activityDialog'?savingActivity:id==='scheduleDialog'?savingSchedule:savingBudget;
   if(saving)return;
   if(dirty&&!confirm('저장하지 않은 내용이 있습니다. 편집을 닫을까요?'))return;
-  if(id==='projectDialog')newProjectRequestId=null;
+  if(id==='projectDialog'){newProjectRequestId=null;editorDirty=false;}
+  else if(id==='activityDialog')activityDirty=false;
+  else if(id==='scheduleDialog'){newScheduleRequestId=null;scheduleDirty=false;}
+  else budgetDirty=false;
   $(id).close();
 }
 function setup(){
-  try{projectView=localStorage.getItem('reductProjectHub.view')==='calendar'?'calendar':'list';}catch{}
+  try{const saved=localStorage.getItem('reductProjectHub.view');projectView=['overview','list','calendar'].includes(saved)?saved:'overview';}catch{}
   syncProjectView();
-  for(const [view,id] of [['list','listViewTab'],['calendar','calendarViewTab']]){
+  const views=[['overview','overviewViewTab'],['list','listViewTab'],['calendar','calendarViewTab']];
+  for(const [view,id] of views){
     $(id).addEventListener('click',()=>setProjectView(view));
     $(id).addEventListener('keydown',event=>{
       if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-      event.preventDefault();const target=event.key==='Home'?'list':event.key==='End'?'calendar':view==='list'?'calendar':'list';
-      setProjectView(target);$(target==='list'?'listViewTab':'calendarViewTab').focus();
+      event.preventDefault();const index=views.findIndex(([key])=>key===view),target=event.key==='Home'?0:event.key==='End'?2:(index+(event.key==='ArrowRight'?1:2))%3;
+      setProjectView(views[target][0]);$(views[target][1]).focus();
     });
   }
   $('categoryFilter').insertAdjacentHTML('beforeend',Object.entries(CATEGORIES).map(([key,label])=>`<option value="${key}">${esc(label)}</option>`).join(''));
@@ -410,16 +503,20 @@ function setup(){
   $('projectForm').addEventListener('input',()=>{editorDirty=true;});$('projectForm').addEventListener('change',()=>{editorDirty=true;});
   $('activityForm').addEventListener('input',()=>{activityDirty=true;});$('activityForm').addEventListener('change',()=>{activityDirty=true;});
   $('budgetForm').addEventListener('input',()=>{budgetDirty=true;});
+  $('scheduleForm').addEventListener('input',()=>{scheduleDirty=true;});$('scheduleForm').addEventListener('change',()=>{scheduleDirty=true;});
+  $('scheduleForm').elements.namedItem('allDay').addEventListener('change',syncScheduleTimes);
+  $('scheduleForm').elements.namedItem('startDate').addEventListener('change',event=>{const end=$('scheduleForm').elements.namedItem('endDate');if(!end.value||end.value<event.target.value)end.value=event.target.value;});
+  $('archiveSchedule').addEventListener('click',archiveSchedule);
   $('projectForm').elements.namedItem('category').addEventListener('change',event=>{if(editorBase?.id)return;const current=Array.from($('stageEditor').querySelectorAll('select')).map(s=>s.value);buildStageEditor(DEFAULT_STAGES[event.target.value].map((label,i)=>({label,state:current[i]||'unknown'})));});
   for(const [flag,dateField] of [['productionDone','productionDoneDate'],['receiptDone','receiptDoneDate'],['finalDone','finalDoneDate']])$('projectForm').elements.namedItem(flag).addEventListener('change',event=>{if(event.target.checked&&!$('projectForm').elements.namedItem(dateField).value)$('projectForm').elements.namedItem(dateField).value=localDate();});
   $('activityForm').elements.namedItem('done').addEventListener('change',event=>{if(event.target.checked&&!$('activityForm').elements.namedItem('doneDate').value)$('activityForm').elements.namedItem('doneDate').value=localDate();});
-  $('projectForm').addEventListener('submit',saveProject);$('activityForm').addEventListener('submit',saveActivity);$('budgetForm').addEventListener('submit',saveBudget);
+  $('projectForm').addEventListener('submit',saveProject);$('activityForm').addEventListener('submit',saveActivity);$('budgetForm').addEventListener('submit',saveBudget);$('scheduleForm').addEventListener('submit',saveSchedule);
   for(const button of document.querySelectorAll('[data-close]'))button.addEventListener('click',()=>closeDialog(button.dataset.close));
-  for(const id of ['projectDialog','activityDialog','budgetDialog'])$(id).addEventListener('cancel',event=>{event.preventDefault();closeDialog(id);});
+  for(const id of ['projectDialog','activityDialog','budgetDialog','scheduleDialog'])$(id).addEventListener('cancel',event=>{event.preventDefault();closeDialog(id);});
   $('loginForm').addEventListener('submit',login);
   $('logoutButton').addEventListener('click',logout);
   $('exportBackup').addEventListener('click',exportBackup);
-  window.addEventListener('beforeunload',event=>{if(($('projectDialog').open&&editorDirty)||($('activityDialog').open&&activityDirty)||($('budgetDialog').open&&budgetDirty)){event.preventDefault();event.returnValue='';}});
+  window.addEventListener('beforeunload',event=>{if(($('projectDialog').open&&editorDirty)||($('activityDialog').open&&activityDirty)||($('budgetDialog').open&&budgetDirty)||($('scheduleDialog').open&&scheduleDirty)){event.preventDefault();event.returnValue='';}});
   window.addEventListener('pagehide',()=>showGate('접속 권한을 다시 확인해 주세요.'));
   window.addEventListener('pageshow',event=>{if(event.persisted)checkSession();});
   checkSession();setInterval(()=>{if(authenticated&&!document.hidden)refresh();},15000);document.addEventListener('visibilitychange',()=>{if(authenticated&&!document.hidden)refresh();});
