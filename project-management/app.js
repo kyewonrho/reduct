@@ -33,6 +33,9 @@ let authenticated = false;
 let sessionEpoch = 0;
 let authenticating = false;
 let searchTimer;
+let projectView = 'list';
+let calendarMonth = localDate().slice(0,7);
+let calendarDate = localDate();
 const expanded = new Set();
 const pending = new Set();
 
@@ -63,7 +66,8 @@ function showGate(message='',error=false){
   editorDirty=false;activityDirty=false;budgetDirty=false;
   for(const id of ['projectDialog','activityDialog','budgetDialog'])if($(id).open)$(id).close();
   for(const id of ['projectForm','activityForm','budgetForm'])$(id).reset();
-  for(const id of ['overviewStats','categoryCounts','categoryChart','deadlineChart','projectList','stageEditor','projectConflict','activityConflict'])$(id).replaceChildren();
+  for(const id of ['overviewStats','categoryCounts','categoryChart','deadlineChart','projectList','projectCalendar','stageEditor','projectConflict','activityConflict'])$(id).replaceChildren();
+  calendarMonth=localDate().slice(0,7);calendarDate=localDate();
   for(const id of ['projectFormError','activityFormError','budgetFormError'])fieldError(id,'');
   $('revisionText').textContent='공용 프로젝트 관리';$('storePath').textContent='모든 담당자가 같은 공용 데이터로 작업합니다.';
   $('notice').textContent='';$('notice').hidden=true;
@@ -200,10 +204,45 @@ function dueMarkup(p){
   return `<div class="project-due${overdue?' overdue':''}">${esc(label)}<small>${overdue?'기한 경과 · 미완료':p.dueDate?(p.category==='manufacturing'?'입고 예정':'완료 예정'):'담당자 일정 입력'}</small></div>`;
 }
 
+function filteredProjects(){
+  if(!state)return [];
+  const query=$('searchInput').value.trim().toLocaleLowerCase(),category=$('categoryFilter').value,status=$('statusFilter').value,archive=$('showArchived').checked;
+  return state.projects.filter(p=>Boolean(p.archived)===archive).filter(p=>category==='all'||p.category===category).filter(p=>status==='all'||(status==='done'?p.finalDone:status==='open'?!p.finalDone:!p.finalDone&&p.status===status)).filter(p=>!query||[p.client,p.task,p.owner,p.current,p.code].join(' ').toLocaleLowerCase().includes(query));
+}
+
+function setProjectView(view){
+  projectView=view==='calendar'?'calendar':'list';
+  try{localStorage.setItem('reductProjectHub.view',projectView);}catch{}
+  syncProjectView();renderProjects();
+  if(projectView==='calendar')$('calendarViewTab').closest('.project-view-bar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function syncProjectView(){
+  for(const [view,tab,panel] of [['list','listViewTab','projectListPanel'],['calendar','calendarViewTab','calendarPanel']]){
+    const selected=projectView===view;
+    $(tab).setAttribute('aria-selected',String(selected));$(tab).tabIndex=selected?0:-1;$(panel).hidden=!selected;
+  }
+}
+
+function renderProjectCalendar(projects){
+  if(!window.ReductCalendar){$('projectCalendar').textContent='캘린더를 불러오지 못했습니다. 페이지를 새로고침해 주세요.';return;}
+  const parentIds=new Set(projects.map(project=>project.id));
+  window.ReductCalendar.render($('projectCalendar'),{
+    projects,activities:(state.activities||[]).filter(activity=>parentIds.has(activity.projectId)),
+    month:calendarMonth,selectedDate:calendarDate,today:localDate(),
+    onMonthChange:month=>{if(!authenticated)return;calendarMonth=month;if(!calendarDate.startsWith(month))calendarDate=month===localDate().slice(0,7)?localDate():`${month}-01`;renderProjects();},
+    onDateSelect:date=>{if(!authenticated)return;calendarDate=date;calendarMonth=date.slice(0,7);renderProjects();},
+    onOpenProject:id=>{if(authenticated&&state.projects.some(project=>project.id===id))openProject(id);},
+    onOpenActivity:id=>{if(authenticated&&state.activities.some(activity=>activity.id===id))openActivity(id);}
+  });
+}
+
 function renderProjects(){
   if(!state)return;
-  const query=$('searchInput').value.trim().toLocaleLowerCase(),category=$('categoryFilter').value,status=$('statusFilter').value,archive=$('showArchived').checked;
-  const projects=state.projects.filter(p=>Boolean(p.archived)===archive).filter(p=>category==='all'||p.category===category).filter(p=>status==='all'||(status==='done'?p.finalDone:status==='open'?!p.finalDone:!p.finalDone&&p.status===status)).filter(p=>!query||[p.client,p.task,p.owner,p.current,p.code].join(' ').toLocaleLowerCase().includes(query));
+  const projects=filteredProjects();
+  const category=$('categoryFilter').value,archive=$('showArchived').checked;
+  syncProjectView();
+  if(projectView==='calendar'){renderProjectCalendar(projects);return;}
   const html=[];
   if(archive)html.push('<div class="notice">보관함입니다. 보관된 프로젝트는 전체 현황에서 제외됩니다. 상세 내용을 열어 다시 복원할 수 있습니다.</div>');
   for(const [key,label] of Object.entries(CATEGORIES)){
@@ -339,6 +378,16 @@ function closeDialog(id){
   $(id).close();
 }
 function setup(){
+  try{projectView=localStorage.getItem('reductProjectHub.view')==='calendar'?'calendar':'list';}catch{}
+  syncProjectView();
+  for(const [view,id] of [['list','listViewTab'],['calendar','calendarViewTab']]){
+    $(id).addEventListener('click',()=>setProjectView(view));
+    $(id).addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();const target=event.key==='Home'?'list':event.key==='End'?'calendar':view==='list'?'calendar':'list';
+      setProjectView(target);$(target==='list'?'listViewTab':'calendarViewTab').focus();
+    });
+  }
   $('categoryFilter').insertAdjacentHTML('beforeend',Object.entries(CATEGORIES).map(([key,label])=>`<option value="${key}">${esc(label)}</option>`).join(''));
   $('projectForm').elements.namedItem('category').innerHTML=Object.entries(CATEGORIES).map(([key,label])=>`<option value="${key}">${esc(label)}</option>`).join('');
   $('projectForm').elements.namedItem('status').innerHTML=Object.entries(STATUSES).map(([key,label])=>`<option value="${key}">${esc(label)}</option>`).join('');
