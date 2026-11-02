@@ -45,10 +45,14 @@ function createHandler(dependencies={}){
       if(method==='POST'&&resource==='projects'){
         const payload=await body(req);keys(payload,['project','actor','requestId'],'요청');required(payload,['project'],'요청');return reply(res,201,await store.addProject(payload.project,Object.hasOwn(payload,'actor')?payload.actor:'',payload.requestId));
       }
-      if(method==='PATCH'&&['projects','activities','budget'].includes(resource)){
+      if(method==='POST'&&resource==='schedules'){
+        const payload=await body(req);keys(payload,['schedule','actor','requestId'],'요청');required(payload,['schedule'],'요청');return reply(res,201,await store.addSchedule(payload.schedule,Object.hasOwn(payload,'actor')?payload.actor:'',payload.requestId));
+      }
+      if(method==='PATCH'&&['projects','activities','budget','schedules'].includes(resource)){
         const payload=await body(req);keys(payload,['version','changes','actor'],'요청');required(payload,['version','changes'],'요청');const args=[payload.version,payload.changes,Object.hasOwn(payload,'actor')?payload.actor:''];
         if(resource==='budget')return reply(res,200,await store.patchBudget(...args));
         if(typeof id!=='string'||!id||id.length>100||!/^[A-Za-z0-9_-]+$/.test(id))throw new HubError('invalid_input','수정할 항목 ID가 필요합니다.');
+        if(resource==='schedules')return reply(res,200,await store.patchSchedule(id,...args));
         return reply(res,200,await(resource==='projects'?store.patchProject(id,...args):store.patchActivity(id,...args)));
       }
       throw new HubError('not_found','요청한 기능을 찾을 수 없습니다.',404);
