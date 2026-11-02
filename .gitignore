@@ -1,0 +1,6 @@
+.env
+.env.*
+!.env.example
+project-hub.env
+node_modules/
+.vercel/
