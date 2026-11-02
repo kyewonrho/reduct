@@ -373,6 +373,6 @@ function setup(){
   window.addEventListener('beforeunload',event=>{if(($('projectDialog').open&&editorDirty)||($('activityDialog').open&&activityDirty)||($('budgetDialog').open&&budgetDirty)){event.preventDefault();event.returnValue='';}});
   window.addEventListener('pagehide',()=>showGate('접속 권한을 다시 확인해 주세요.'));
   window.addEventListener('pageshow',event=>{if(event.persisted)checkSession();});
-  checkSession();setInterval(()=>{if(authenticated&&!document.hidden)refresh();},3000);document.addEventListener('visibilitychange',()=>{if(authenticated&&!document.hidden)refresh();});
+  checkSession();setInterval(()=>{if(authenticated&&!document.hidden)refresh();},15000);document.addEventListener('visibilitychange',()=>{if(authenticated&&!document.hidden)refresh();});
 }
 setup();
