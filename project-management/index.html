@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <base href="/project-management/">
+  <title>REDUCT Project Hub · 프로젝트 진척 관리</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <section id="loginGate" class="login-gate" aria-labelledby="loginTitle">
+    <form id="loginForm" class="login-form">
+      <p class="eyebrow">REDUCT PROJECT HUB</p>
+      <h1 id="loginTitle">프로젝트 진척 관리</h1>
+      <p class="login-description">담당자용 프로젝트 관리 화면입니다.<br>비밀번호를 입력해 주세요.</p>
+      <label class="password-label">접속 비밀번호<input id="loginPassword" name="password" type="password" autocomplete="current-password" maxlength="512" required></label>
+      <p id="loginMessage" class="login-message" role="status">접속 권한을 확인하고 있습니다.</p>
+      <button type="submit" class="primary" id="loginButton" disabled>로그인</button>
+      <noscript><p class="login-message error">프로젝트 관리를 사용하려면 브라우저에서 JavaScript를 켜 주세요.</p></noscript>
+    </form>
+  </section>
+  <main class="page" id="projectApp" hidden>
+    <header class="masthead">
+      <div><p class="eyebrow">REDUCT PROJECT HUB</p><h1>프로젝트 진척 관리</h1><p class="subtitle" id="revisionText">공용 데이터를 불러오는 중입니다.</p></div>
+      <div class="toolbar"><label class="actor-label">작업자 <input id="actorName" maxlength="80" placeholder="이름 입력" autocomplete="name"></label><button type="button" class="primary" id="addProject">＋ 프로젝트 추가</button><button type="button" id="logoutButton" class="text-control">로그아웃</button></div>
+    </header>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <section class="overview" aria-labelledby="overviewTitle">
+      <div class="section-heading"><h2 id="overviewTitle">전체 현황</h2><span id="connectionState" class="sync-state">연결 중</span></div>
+      <div id="overviewStats" class="overview-stats"></div>
+      <p id="categoryCounts" class="category-counts"></p>
+      <div class="mini-charts">
+        <section aria-labelledby="categoryChartTitle"><h3 id="categoryChartTitle">분야별 진행 현황</h3><div id="categoryChart" class="category-chart"></div><p class="chart-key"><i class="key-dot blue"></i> 진행 <i class="key-dot gray"></i> 대기 <i class="key-dot gold"></i> 완료</p></section>
+        <section aria-labelledby="deadlineChartTitle"><h3 id="deadlineChartTitle">다가오는 완료·입고 일정 <span>미완료 프로젝트</span></h3><div id="deadlineChart" class="deadline-chart"></div></section>
+      </div>
+    </section>
+    <section aria-label="프로젝트 목록">
+      <div class="list-toolbar"><label class="search-label"><span class="sr-only">프로젝트 검색</span><input id="searchInput" type="search" placeholder="고객사, 프로젝트, 담당자 검색"></label><label><span class="sr-only">분야 필터</span><select id="categoryFilter"><option value="all">전체 분야</option></select></label><label><span class="sr-only">상태 필터</span><select id="statusFilter"><option value="all">전체 상태</option><option value="open">미완료</option><option value="done">완료</option><option value="in_progress">진행중</option><option value="rework">재제작중</option><option value="quote">견적검토</option><option value="waiting">착수대기</option><option value="hold">보류</option><option value="unknown">현황미입력</option></select></label><label class="checkbox-label archived-toggle"><input type="checkbox" id="showArchived"> 보관함 보기</label></div>
+      <div class="legend"><span><i class="legend-swatch done"></i> ✓ 완료 확인</span><span><i class="legend-swatch active"></i> 진행·예정</span><span><i class="legend-swatch rework"></i> 재제작</span><span><i class="legend-swatch unknown"></i> 미확인</span><span class="legend-hint">프로젝트를 누르면 상세 내용이 열립니다.</span></div>
+      <div id="projectList" aria-live="polite"><p class="empty">프로젝트를 불러오는 중입니다.</p></div>
+    </section>
+    <footer class="footer"><span id="storePath">모든 담당자가 같은 공용 데이터로 작업합니다.</span><div><button type="button" id="exportBackup" class="text-control">데이터 백업</button></div></footer>
+  </main>
+
+  <dialog id="projectDialog" class="editor-dialog">
+    <form id="projectForm">
+      <header class="dialog-header"><div><p class="eyebrow">PROJECT</p><h2 id="projectDialogTitle">프로젝트 수정</h2></div><button type="button" class="icon-button" data-close="projectDialog" aria-label="닫기">×</button></header>
+      <div id="projectConflict" class="conflict" role="alert" hidden></div>
+      <div id="projectFormError" class="form-error" role="alert" hidden></div>
+      <div class="form-grid"><label>분야<select name="category" required></select></label><label>고객사 / 프로젝트명<input name="client" maxlength="300" required></label><label class="wide">작업 내용<input name="task" maxlength="1000" required></label><label>담당자<input name="owner" maxlength="100" placeholder="담당자 이름"></label><label>현재 상태<select name="status"></select></label><label class="wide">현재 진행 내용<textarea name="current" rows="2" maxlength="6000" placeholder="현재까지 완료한 일과 남은 작업"></textarea></label><label>작업 진척률 (%)<input name="progress" type="number" min="0" max="100" step="0.1" placeholder="미입력"></label><p class="field-help">진척률을 모르면 비워 두세요. 최종 완료를 체크하면 100%로 집계됩니다.</p></div>
+      <fieldset><legend>예정 일정</legend><div class="form-grid thirds"><label>제작 완료 예정<input name="productionDue" type="date"></label><label>입고·완료 시작일<input name="windowStart" type="date"></label><label>입고·최종 완료 예정<input name="dueDate" type="date"></label></div></fieldset>
+      <fieldset><legend>완료 확인 <span>각 항목을 따로 확인합니다.</span></legend><div class="completion-editor"><label class="checkbox-label"><input type="checkbox" name="productionDone"> 제작 완료</label><label class="date-inline">실제 완료일<input type="date" name="productionDoneDate"></label><label class="checkbox-label"><input type="checkbox" name="receiptDone"> 입고 완료</label><label class="date-inline">실제 입고일<input type="date" name="receiptDoneDate"></label><label class="checkbox-label"><input type="checkbox" name="finalDone"> 프로젝트 최종 완료</label><label class="date-inline">최종 완료일<input type="date" name="finalDoneDate"></label></div></fieldset>
+      <fieldset><legend>단계별 진행 <span>앞 단계가 자동으로 완료 처리되지 않습니다.</span></legend><div id="stageEditor" class="stage-editor"></div></fieldset>
+      <fieldset><legend>수량 관리 <span>필요한 프로젝트만 입력하세요.</span></legend><div class="form-grid"><label>완료 수량<input name="quantityDone" type="number" min="0" step="1" placeholder="미입력"></label><label>전체 수량<input name="quantityTotal" type="number" min="1" step="1" placeholder="미입력"></label></div></fieldset>
+      <footer class="dialog-footer"><button type="button" data-close="projectDialog">취소</button><button type="submit" class="primary" id="saveProject">저장</button></footer>
+    </form>
+  </dialog>
+
+  <dialog id="activityDialog" class="editor-dialog small-dialog"><form id="activityForm"><header class="dialog-header"><h2>내부 프로젝트 활동 수정</h2><button type="button" class="icon-button" data-close="activityDialog" aria-label="닫기">×</button></header><div id="activityFormError" class="form-error" role="alert" hidden></div><div id="activityConflict" class="conflict" role="alert" hidden></div><div class="form-grid"><label class="wide">활동명<input name="title" maxlength="1000" required></label><label>담당자<input name="owner" maxlength="100"></label><label>예정일<input name="dueDate" type="date"></label><label class="checkbox-label"><input name="done" type="checkbox"> 완료</label><label>실제 완료일<input name="doneDate" type="date"></label><label>시작 시간<input name="startTime" type="time"></label><label>소요 시간 (분)<input name="durationMinutes" type="number" min="0" step="1"></label><label class="wide">진행 내용<textarea name="current" rows="2" maxlength="6000"></textarea></label><label class="wide">메모<textarea name="notes" rows="3" maxlength="10000"></textarea></label></div><footer class="dialog-footer"><button type="button" data-close="activityDialog">취소</button><button type="submit" class="primary" id="saveActivity">저장</button></footer></form></dialog>
+
+  <dialog id="budgetDialog" class="editor-dialog small-dialog"><form id="budgetForm"><header class="dialog-header"><h2>활동비 수정</h2><button type="button" class="icon-button" data-close="budgetDialog" aria-label="닫기">×</button></header><div id="budgetFormError" class="form-error" role="alert" hidden></div><div class="form-grid"><label>전체 활동비 (원)<input name="total" type="number" min="0" step="1" required></label><label>사용 금액 (원)<input name="spent" type="number" min="0" step="1" required></label></div><footer class="dialog-footer"><button type="button" data-close="budgetDialog">취소</button><button type="submit" class="primary" id="saveBudget">저장</button></footer></form></dialog>
+</body>
+</html>
