@@ -8,10 +8,10 @@
   <meta name="referrer" content="no-referrer">
   <base href="/project-management/">
   <title>REDUCT Project Hub · 프로젝트 진척 관리</title>
-  <link rel="stylesheet" href="./styles.css?v=20261102-calendar">
-  <link rel="stylesheet" href="./calendar.css?v=20261102-calendar">
-  <script src="./calendar.js?v=20261102-calendar" defer></script>
-  <script src="./app.js?v=20261102-calendar" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=20261102-schedules">
+  <link rel="stylesheet" href="./calendar.css?v=20261102-schedules">
+  <script src="./calendar.js?v=20261102-schedules" defer></script>
+  <script src="./app.js?v=20261102-schedules" defer></script>
 </head>
 <body>
   <section id="loginGate" class="login-gate" aria-labelledby="loginTitle">
@@ -31,7 +31,8 @@
       <div class="toolbar"><label class="actor-label">작업자 <input id="actorName" maxlength="80" placeholder="이름 입력" autocomplete="name"></label><button type="button" class="primary" id="addProject">＋ 프로젝트 추가</button><button type="button" id="logoutButton" class="text-control">로그아웃</button></div>
     </header>
     <div id="notice" class="notice" role="status" hidden></div>
-    <section class="overview" aria-labelledby="overviewTitle">
+    <div class="project-view-bar"><div class="project-view-tabs" role="tablist" aria-label="관리 화면"><button type="button" id="overviewViewTab" role="tab" aria-selected="true" aria-controls="overviewPanel">오버뷰</button><button type="button" id="listViewTab" role="tab" aria-selected="false" aria-controls="projectListPanel" tabindex="-1">프로젝트</button><button type="button" id="calendarViewTab" role="tab" aria-selected="false" aria-controls="calendarPanel" tabindex="-1">캘린더</button></div><p class="view-description" id="viewDescription">전체 프로젝트의 진행 현황을 확인합니다.</p></div>
+    <section class="overview" id="overviewPanel" role="tabpanel" aria-labelledby="overviewViewTab">
       <div class="section-heading"><h2 id="overviewTitle">전체 현황</h2><span id="connectionState" class="sync-state">연결 중</span></div>
       <div id="overviewStats" class="overview-stats"></div>
       <p id="categoryCounts" class="category-counts"></p>
@@ -40,9 +41,9 @@
         <section aria-labelledby="deadlineChartTitle"><h3 id="deadlineChartTitle">다가오는 완료·입고 일정 <span>미완료 프로젝트</span></h3><div id="deadlineChart" class="deadline-chart"></div></section>
       </div>
     </section>
-    <section aria-label="프로젝트 일정과 목록">
-      <div class="project-view-bar"><div class="project-view-tabs" role="tablist" aria-label="프로젝트 보기"><button type="button" id="listViewTab" role="tab" aria-selected="true" aria-controls="projectListPanel">목록</button><button type="button" id="calendarViewTab" role="tab" aria-selected="false" aria-controls="calendarPanel" tabindex="-1">캘린더</button></div><p class="view-description">예정일을 달력에서 모아볼 수 있습니다.</p></div>
-      <div class="list-toolbar"><label class="search-label"><span class="sr-only">프로젝트 검색</span><input id="searchInput" type="search" placeholder="고객사, 프로젝트, 담당자 검색"></label><label><span class="sr-only">분야 필터</span><select id="categoryFilter"><option value="all">전체 분야</option></select></label><label><span class="sr-only">상태 필터</span><select id="statusFilter"><option value="all">전체 상태</option><option value="open">미완료</option><option value="done">완료</option><option value="in_progress">진행중</option><option value="rework">재제작중</option><option value="quote">견적검토</option><option value="waiting">착수대기</option><option value="hold">보류</option><option value="unknown">현황미입력</option></select></label><label class="checkbox-label archived-toggle"><input type="checkbox" id="showArchived"> 보관함 보기</label></div>
+    <section aria-label="프로젝트 일정과 목록" id="workPanels" hidden>
+      <div class="list-toolbar"><label class="search-label"><span class="sr-only">프로젝트·일정 검색</span><input id="searchInput" type="search" placeholder="프로젝트, 일정명, 참석자 검색"></label><label><span class="sr-only">프로젝트 분야 필터</span><select id="categoryFilter"><option value="all">전체 분야</option></select></label><label><span class="sr-only">프로젝트 상태 필터</span><select id="statusFilter"><option value="all">전체 상태</option><option value="open">미완료</option><option value="done">완료</option><option value="in_progress">진행중</option><option value="rework">재제작중</option><option value="quote">견적검토</option><option value="waiting">착수대기</option><option value="hold">보류</option><option value="unknown">현황미입력</option></select></label><label class="checkbox-label archived-toggle"><input type="checkbox" id="showArchived"> 보관함 보기</label></div>
+      <p id="calendarFilterHint" class="filter-hint" hidden>분야·상태 필터는 프로젝트 일정에 적용됩니다. 미팅·회의·출장은 검색과 보관함 설정으로 조회합니다.</p>
       <div id="projectListPanel" role="tabpanel" aria-labelledby="listViewTab">
         <div class="legend"><span><i class="legend-swatch done"></i> ✓ 완료 확인</span><span><i class="legend-swatch active"></i> 진행·예정</span><span><i class="legend-swatch rework"></i> 재제작</span><span><i class="legend-swatch unknown"></i> 미확인</span><span class="legend-hint">프로젝트를 누르면 상세 내용이 열립니다.</span></div>
         <div id="projectList" aria-live="polite"><p class="empty">프로젝트를 불러오는 중입니다.</p></div>
@@ -69,5 +70,25 @@
   <dialog id="activityDialog" class="editor-dialog small-dialog"><form id="activityForm"><header class="dialog-header"><h2>내부 프로젝트 활동 수정</h2><button type="button" class="icon-button" data-close="activityDialog" aria-label="닫기">×</button></header><div id="activityFormError" class="form-error" role="alert" hidden></div><div id="activityConflict" class="conflict" role="alert" hidden></div><div class="form-grid"><label class="wide">활동명<input name="title" maxlength="1000" required></label><label>담당자<input name="owner" maxlength="100"></label><label>예정일<input name="dueDate" type="date"></label><label class="checkbox-label"><input name="done" type="checkbox"> 완료</label><label>실제 완료일<input name="doneDate" type="date"></label><label>시작 시간<input name="startTime" type="time"></label><label>소요 시간 (분)<input name="durationMinutes" type="number" min="0" step="1"></label><label class="wide">진행 내용<textarea name="current" rows="2" maxlength="6000"></textarea></label><label class="wide">메모<textarea name="notes" rows="3" maxlength="10000"></textarea></label></div><footer class="dialog-footer"><button type="button" data-close="activityDialog">취소</button><button type="submit" class="primary" id="saveActivity">저장</button></footer></form></dialog>
 
   <dialog id="budgetDialog" class="editor-dialog small-dialog"><form id="budgetForm"><header class="dialog-header"><h2>활동비 수정</h2><button type="button" class="icon-button" data-close="budgetDialog" aria-label="닫기">×</button></header><div id="budgetFormError" class="form-error" role="alert" hidden></div><div class="form-grid"><label>전체 활동비 (원)<input name="total" type="number" min="0" step="1" required></label><label>사용 금액 (원)<input name="spent" type="number" min="0" step="1" required></label></div><footer class="dialog-footer"><button type="button" data-close="budgetDialog">취소</button><button type="submit" class="primary" id="saveBudget">저장</button></footer></form></dialog>
+
+  <dialog id="scheduleDialog" class="editor-dialog">
+    <form id="scheduleForm">
+      <header class="dialog-header"><div><p class="eyebrow">TEAM SCHEDULE · KST</p><h2 id="scheduleDialogTitle">일정 추가</h2></div><button type="button" class="icon-button" data-close="scheduleDialog" aria-label="닫기">×</button></header>
+      <div id="scheduleConflict" class="conflict" role="alert" hidden></div><div id="scheduleFormError" class="form-error" role="alert" hidden></div>
+      <div class="form-grid">
+        <label>일정 종류<select name="kind" required><option value="meeting">미팅</option><option value="conference">회의</option><option value="trip">출장</option><option value="other">기타 일정</option></select></label>
+        <label class="checkbox-label"><input type="checkbox" name="allDay"> 종일 일정</label>
+        <label class="wide">일정명<input name="title" maxlength="300" placeholder="예: 고객사 개발 미팅" required></label>
+        <label class="wide">참석자<input name="attendees" maxlength="1000" placeholder="예: 담당자 A, 담당자 B, 고객사 담당자"></label>
+        <label>시작일<input name="startDate" type="date" required></label><label>종료일<input name="endDate" type="date" required></label>
+        <label>시작 시간<input name="startTime" type="time" required></label><label>종료 시간<input name="endTime" type="time" required></label>
+        <label class="wide">장소 / 화상회의 링크<input name="location" maxlength="1000" placeholder="예: 본사 회의실 / 고객사 / 화상회의 링크"></label>
+        <label class="wide">메모<textarea name="notes" rows="3" maxlength="10000" placeholder="회의 안건, 출장 목적 등"></textarea></label>
+      </div>
+      <p class="field-help">한국 시간 기준입니다. 여러 날에 걸친 일정은 시작일과 종료일을 각각 설정하세요.</p>
+      <p id="scheduleArchiveNotice" class="field-help" hidden>보관된 일정입니다. 복원하면 캘린더에 다시 표시됩니다.</p>
+      <footer class="dialog-footer"><button type="button" id="archiveSchedule" class="archive-schedule" hidden>일정 보관</button><button type="button" data-close="scheduleDialog">취소</button><button type="submit" class="primary" id="saveSchedule">저장</button></footer>
+    </form>
+  </dialog>
 </body>
 </html>
