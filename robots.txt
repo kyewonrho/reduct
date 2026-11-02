@@ -1,10 +1,19 @@
 User-agent: *
+Disallow: /4leaf
+Disallow: /project-management
+Disallow: /api/project-hub
 Allow: /
 
 User-agent: Googlebot
+Disallow: /4leaf
+Disallow: /project-management
+Disallow: /api/project-hub
 Allow: /
 
 User-agent: Yeti
+Disallow: /4leaf
+Disallow: /project-management
+Disallow: /api/project-hub
 Allow: /
 
 Sitemap: https://reduct.co.kr/sitemap.xml
