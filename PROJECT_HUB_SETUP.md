@@ -20,6 +20,7 @@ The encrypted initial dataset initializes the database only when its state key i
 - All private API reads, exports and changes require a valid session. Mutations check their Origin. Login attempts are limited in the shared database.
 - State and the latest 100 previous states are AES-256-GCM encrypted in Redis. The dashboard's authenticated backup download is a readable JSON copy; keep downloaded copies private.
 - Atomic Redis compare-and-swap preserves edits to different records; a stale version on the same record returns HTTP 409. The UI asks the editor to reopen the latest version.
+- Visible tabs refresh shared data every 15 seconds and immediately after saving; background tabs pause polling.
 - Final completion is an explicit checkbox. Production completion, receipt, partial quantity and manually entered progress remain distinct.
 - Missing login/storage settings return HTTP 503 and never fall back to browser-only storage.
 
