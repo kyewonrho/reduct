@@ -2,7 +2,8 @@
   'use strict';
 
   const CATEGORIES={manufacturing:'제조',onestop:'원스톱 서비스',circuit:'회로개발',structure:'구조설계',internal:'내부 프로젝트'};
-  const SCHEDULE_KINDS={meeting:'미팅',conference:'회의',trip:'출장',other:'기타 일정'};
+  const SCHEDULE_KINDS={meeting:'미팅',conference:'회의',trip:'출장',annual_leave:'연차',half_day_am:'오전 반차',half_day_pm:'오후 반차',other:'기타 일정'};
+  const LEAVE_KINDS=new Set(['annual_leave','half_day_am','half_day_pm']);
   const WEEKDAYS=['일','월','화','수','목','금','토'];
   const TYPE_ORDER={schedule:0,production:1,deadline:2,activity:3};
   const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -72,16 +73,20 @@
       const start=validDate(schedule.startDate)?schedule.startDate:null;
       const end=schedule.endDate===null||schedule.endDate===undefined||schedule.endDate===''?start:validDate(schedule.endDate)?schedule.endDate:null;
       if(!start||!end||end<start)continue;
+      const kind=Object.prototype.hasOwnProperty.call(SCHEDULE_KINDS,schedule.kind)?schedule.kind:'other';
+      const isLeave=LEAVE_KINDS.has(kind);
+      const attendees=text(schedule.attendees);
       const allDay=schedule.allDay===true;
+      if(isLeave&&(!allDay||schedule.startTime!=null||schedule.endTime!=null||!attendees.trim()||(kind!=='annual_leave'&&start!==end)))continue;
       if(!allDay&&(!validTime(schedule.startTime)||!validTime(schedule.endTime)))continue;
       const startTime=!allDay&&validTime(schedule.startTime)?schedule.startTime:'';
       const endTime=!allDay&&validTime(schedule.endTime)?schedule.endTime:'';
       if(!allDay&&start===end&&startTime&&endTime&&startTime>endTime)continue;
-      const kind=Object.prototype.hasOwnProperty.call(SCHEDULE_KINDS,schedule.kind)?schedule.kind:'other';
+      const title=text(schedule.title)||SCHEDULE_KINDS[kind];
       events.push({id:`schedule:${schedule.id}`,type:'schedule',scheduleId:schedule.id,projectId:null,activityId:null,
-        kind,category:null,title:text(schedule.title)||SCHEDULE_KINDS[kind],stageLabel:SCHEDULE_KINDS[kind],
+        kind,category:null,title,displayTitle:isLeave?attendees.trim():title,isLeave,stageLabel:SCHEDULE_KINDS[kind],
         startDate:start,endDate:end,date:end,isRange:start!==end,allDay,startTime,endTime,
-        attendees:text(schedule.attendees),location:text(schedule.location),notes:text(schedule.notes),
+        attendees:isLeave?attendees.trim():attendees,location:text(schedule.location),notes:text(schedule.notes),
         done:false,doneDate:null,actualOnly:false,missingEnd:false,archived:schedule.archived===true});
     }
     return events.sort((a,b)=>a.startDate.localeCompare(b.startDate)||TYPE_ORDER[a.type]-TYPE_ORDER[b.type]
@@ -98,6 +103,7 @@
   function eventTypeLabel(event){return event.type==='schedule'?event.stageLabel:event.type==='production'?'제작':event.type==='activity'?'활동':event.stageLabel==='입고'?'입고':'완료';}
   function eventColorClass(event){return event.type==='schedule'?`rc-schedule-${event.kind}`:`rc-category-${event.category}`;}
   function scheduleDateText(event){
+    if(event.isLeave)return `${rangeText(event)} · ${event.stageLabel}`;
     if(event.allDay)return `${rangeText(event)} · 종일`;
     const start=`${fullDate(event.startDate)} ${event.startTime||'시간 미입력'}`;
     const end=`${event.startDate===event.endDate?'':`${fullDate(event.endDate)} `}${event.endTime||'종료 시간 미입력'}`;
@@ -109,18 +115,18 @@
     return event.isRange?`${fullDate(event.startDate)} – ${fullDate(event.endDate)}`:fullDate(event.endDate);
   }
   function eventDescription(event){
-    if(event.type==='schedule')return `${event.stageLabel} · ${event.title} · ${scheduleDateText(event)}${event.attendees?` · 참석자 ${event.attendees}`:''}${event.location?` · 장소 ${event.location}`:''}${event.archived?' · 보관됨':''}`;
+    if(event.type==='schedule')return `${event.stageLabel} · ${event.displayTitle||event.title}${event.isLeave&&event.title!==event.displayTitle?` · ${event.title}`:''} · ${scheduleDateText(event)}${event.attendees?` · ${event.isLeave?'휴가자':'참석자'} ${event.attendees}`:''}${event.location?` · 장소 ${event.location}`:''}${event.archived?' · 보관됨':''}`;
     const completed=event.done?`완료 · ${event.doneDate?`실제 완료일 ${fullDate(event.doneDate)}`:'완료일 미입력'}`:'미완료';
     return `${event.stageLabel} · ${event.title} · ${rangeText(event)} · ${completed}`;
   }
   function eventPill(event,date,index){
     const rangeClass=event.isRange?(date===event.startDate?' rc-range-start':date===event.endDate?' rc-range-end':' rc-range-middle'):'';
     const prefix=event.done?'✓ ':event.isRange&&date!==event.startDate?'↔ ':'';
-    return `<button type="button" class="rc-event ${eventColorClass(event)}${event.done?' rc-event-done':''}${event.archived?' rc-event-archived':''}${rangeClass}" data-rc-event="${index}" title="${escapeHTML(eventDescription(event))}" aria-label="${escapeHTML(eventDescription(event))}"><span class="rc-event-type">${escapeHTML(prefix+eventTypeLabel(event))}</span><span class="rc-event-name">${escapeHTML(event.title)}</span></button>`;
+    return `<button type="button" class="rc-event ${eventColorClass(event)}${event.isLeave?' rc-event-leave':''}${event.done?' rc-event-done':''}${event.archived?' rc-event-archived':''}${rangeClass}" data-rc-event="${index}" title="${escapeHTML(eventDescription(event))}" aria-label="${escapeHTML(eventDescription(event))}"><span class="rc-event-type">${escapeHTML(prefix+eventTypeLabel(event))}</span><span class="rc-event-name">${escapeHTML(event.displayTitle||event.title)}</span></button>`;
   }
   function scheduleAgendaMarkup(event,index,today){
     const status=event.archived?'보관됨':event.endDate<today?'지난 일정':event.startDate<=today&&today<=event.endDate?'오늘 일정':'예정';
-    return `<button type="button" class="rc-agenda-item ${eventColorClass(event)}${event.archived?' rc-event-archived':''}" data-rc-event="${index}" aria-label="${escapeHTML(eventDescription(event))}, 일정 수정"><span class="rc-agenda-meta"><span>${escapeHTML(event.stageLabel)}</span><span class="rc-agenda-status">${status}</span></span><strong>${escapeHTML(event.title)}</strong><span class="rc-agenda-date">${escapeHTML(scheduleDateText(event))}</span>${event.attendees?`<span class="rc-schedule-detail">참석자 <span>${escapeHTML(event.attendees)}</span></span>`:''}${event.location?`<span class="rc-schedule-detail">장소 <span>${escapeHTML(event.location)}</span></span>`:''}${event.notes?`<span class="rc-schedule-notes">${escapeHTML(event.notes)}</span>`:''}</button>`;
+    return `<button type="button" class="rc-agenda-item ${eventColorClass(event)}${event.archived?' rc-event-archived':''}" data-rc-event="${index}" aria-label="${escapeHTML(eventDescription(event))}, 일정 수정"><span class="rc-agenda-meta"><span>${escapeHTML(event.stageLabel)}</span><span class="rc-agenda-status">${status}</span></span><strong>${escapeHTML(event.displayTitle||event.title)}</strong>${event.isLeave&&event.title!==event.displayTitle?`<span class="rc-agenda-task">${escapeHTML(event.title)}</span>`:''}<span class="rc-agenda-date">${escapeHTML(scheduleDateText(event))}</span>${event.attendees?`<span class="rc-schedule-detail">${event.isLeave?'휴가자':'참석자'} <span>${escapeHTML(event.attendees)}</span></span>`:''}${event.location?`<span class="rc-schedule-detail">장소 <span>${escapeHTML(event.location)}</span></span>`:''}${event.notes?`<span class="rc-schedule-notes">${escapeHTML(event.notes)}</span>`:''}</button>`;
   }
   function agendaMarkup(events,selectedDate,today){
     const selected=getEventsForDate(events,selectedDate);
