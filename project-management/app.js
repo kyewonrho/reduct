@@ -3,6 +3,8 @@
 const CATEGORIES = {manufacturing:'제조',onestop:'원스톱 서비스',circuit:'회로개발',structure:'구조설계',internal:'내부 프로젝트'};
 const STATUSES = {in_progress:'진행중',rework:'재제작중',quote:'견적검토',waiting:'착수대기',hold:'보류',unknown:'현황미입력'};
 const STAGE_STATES = {unknown:'미확인',done:'완료',active:'진행',planned:'예정',rework:'재제작'};
+const SCHEDULE_KINDS = {meeting:'미팅',conference:'회의',trip:'출장',other:'기타 일정',annual_leave:'연차',half_day_am:'오전 반차',half_day_pm:'오후 반차'};
+const LEAVE_KINDS = new Set(['annual_leave','half_day_am','half_day_pm']);
 const DEFAULT_STAGES = {manufacturing:['검토·준비','제작','제작 완료','입고'],onestop:['기획·착수','설계','제작·연동','완료'],circuit:['요구사항','회로설계','제작·시험','완료'],structure:['콘셉트','3D 모델링','검토·수정','완료'],internal:['문서초안','외관디자인','제출준비','최종제출']};
 const WAITING = new Set(['quote','waiting','hold','unknown']);
 const $ = id => document.getElementById(id);
@@ -25,6 +27,8 @@ let activityBase = null;
 let budgetBase = null;
 let scheduleBase = null;
 let newScheduleRequestId = null;
+let schedulePreviousKind = null;
+let scheduleGeneralAllDay = false;
 let editorDirty = false;
 let activityDirty = false;
 let budgetDirty = false;
@@ -66,7 +70,7 @@ async function api(path,options={}) {
 
 function showGate(message='',error=false){
   authenticated=false;sessionEpoch++;state=null;
-  editorBase=null;newProjectRequestId=null;activityBase=null;budgetBase=null;scheduleBase=null;newScheduleRequestId=null;expanded.clear();pending.clear();
+  editorBase=null;newProjectRequestId=null;activityBase=null;budgetBase=null;scheduleBase=null;newScheduleRequestId=null;schedulePreviousKind=null;scheduleGeneralAllDay=false;expanded.clear();pending.clear();
   editorDirty=false;activityDirty=false;budgetDirty=false;scheduleDirty=false;
   for(const id of ['projectDialog','activityDialog','budgetDialog','scheduleDialog'])if($(id).open)$(id).close();
   for(const id of ['projectForm','activityForm','budgetForm','scheduleForm'])$(id).reset();
@@ -137,7 +141,7 @@ function fieldError(id,message){const box=$(id);box.textContent=message;box.hidd
 function statusLabel(p){return p.finalDone?'완료':STATUSES[p.status]||'현황미입력';}
 function latestConflict(container,latest,kind){
   container.hidden=false;
-  const summary=kind==='project'?`${latest.client} · ${statusLabel(latest)} · 담당자 ${latest.owner||'미지정'}`:kind==='schedule'?`${latest.title} · ${latest.startDate}–${latest.endDate} · 참석 ${latest.attendees||'미입력'}`:`${latest.title} · ${latest.done?'완료':'진행중'}`;
+  const summary=kind==='project'?`${latest.client} · ${statusLabel(latest)} · 담당자 ${latest.owner||'미지정'}`:kind==='schedule'?`${latest.title} · ${latest.startDate}–${latest.endDate} · ${LEAVE_KINDS.has(latest.kind)?'휴가자':'참석자'} ${latest.attendees||'미입력'}`:`${latest.title} · ${latest.done?'완료':'진행중'}`;
   container.replaceChildren(document.createTextNode(`다른 담당자가 먼저 수정했습니다. 입력한 내용은 유지되어 있으며, 아직 저장되지 않았습니다.\n최신 내용: ${summary}\n최신 버전을 다시 열고 변경 사항을 확인한 뒤 저장해 주세요.`));
   const button=document.createElement('button');button.type='button';button.textContent='최신 버전으로 다시 열기';
   button.addEventListener('click',()=>{if(!authenticated||!confirm('현재 편집 내용은 저장되지 않습니다. 최신 버전으로 다시 열까요?'))return;if(kind==='project')openProject(latest.id,latest);else if(kind==='schedule')openSchedule(latest.id,null,latest);else openActivity(latest.id,latest);});
@@ -230,12 +234,12 @@ function syncProjectView(){
   }
   $('workPanels').hidden=projectView==='overview';
   $('calendarFilterHint').hidden=projectView!=='calendar';
-  $('viewDescription').textContent=projectView==='overview'?'전체 프로젝트의 진행 현황을 확인합니다.':projectView==='list'?'프로젝트별 일정·담당자·완료 상태를 관리합니다.':'날짜를 눌러 미팅·회의·출장을 추가하세요.';
+  $('viewDescription').textContent=projectView==='overview'?'전체 프로젝트의 진행 현황을 확인합니다.':projectView==='list'?'프로젝트별 일정·담당자·완료 상태를 관리합니다.':'날짜를 눌러 업무 일정·연차·반차를 추가하세요.';
 }
 
 function filteredSchedules(){
   const query=$('searchInput').value.trim().toLocaleLowerCase(),archived=$('showArchived').checked;
-  return (state.schedules||[]).filter(s=>Boolean(s.archived)===archived).filter(s=>!query||[s.title,s.attendees,s.location,s.notes,{meeting:'미팅',conference:'회의',trip:'출장',other:'기타 일정'}[s.kind]].join(' ').toLocaleLowerCase().includes(query));
+  return (state.schedules||[]).filter(s=>Boolean(s.archived)===archived).filter(s=>!query||[s.title,s.attendees,s.location,s.notes,SCHEDULE_KINDS[s.kind]].join(' ').toLocaleLowerCase().includes(query));
 }
 
 function renderProjectCalendar(projects){
@@ -396,6 +400,23 @@ function syncScheduleTimes(){
   const form=$('scheduleForm'),allDay=form.elements.namedItem('allDay').checked;
   for(const name of ['startTime','endTime']){const input=form.elements.namedItem(name);input.disabled=allDay;input.required=!allDay;if(!allDay&&!input.value)input.value=name==='startTime'?'09:00':'10:00';}
 }
+function syncScheduleKind(){
+  const form=$('scheduleForm'),kind=form.elements.namedItem('kind').value,leave=LEAVE_KINDS.has(kind),wasLeave=LEAVE_KINDS.has(schedulePreviousKind);
+  const allDay=form.elements.namedItem('allDay'),title=form.elements.namedItem('title'),people=form.elements.namedItem('attendees');
+  if(leave&&!wasLeave)scheduleGeneralAllDay=allDay.checked;
+  if(leave)allDay.checked=true;else if(wasLeave)allDay.checked=scheduleGeneralAllDay;
+  allDay.disabled=leave;$('scheduleAllDayLabel').hidden=leave;
+  for(const name of ['startTime','endTime'])form.elements.namedItem(name).closest('label').hidden=leave;
+  title.required=!leave;title.placeholder=leave?'비워 두면 휴가 종류와 이름으로 저장됩니다.':'예: 고객사 개발 미팅';
+  $('scheduleTitleLabel').textContent=leave?'일정명 (선택)':'일정명';
+  people.required=leave;people.placeholder=leave?'휴가자 이름 입력':'예: 담당자 A, 담당자 B, 고객사 담당자';
+  $('schedulePeopleLabel').textContent=leave?'휴가자 (필수)':'참석자';
+  $('scheduleLocationLabel').textContent=leave?'장소 (선택)':'장소 / 화상회의 링크';
+  form.elements.namedItem('location').placeholder=leave?'필요할 때만 입력하세요.':'예: 본사 회의실 / 고객사 / 화상회의 링크';
+  form.elements.namedItem('notes').placeholder=leave?'인수인계 등 필요한 메모 (선택)':'회의 안건, 출장 목적 등';
+  $('scheduleTypeHelp').textContent=kind==='annual_leave'?'휴가자와 연차 기간을 입력하세요. 시작일과 종료일을 포함해 달력에 표시됩니다.':leave?'반차는 하루씩 등록합니다. 시작일과 종료일을 같은 날짜로 설정하세요. 오전·오후는 선택한 종류로 표시됩니다.':'한국 시간 기준입니다. 여러 날에 걸친 일정은 시작일과 종료일을 각각 설정하세요.';
+  schedulePreviousKind=kind;syncScheduleTimes();
+}
 function openSchedule(id,date=null,latest=null){
   if(!authenticated||!state)return;
   const schedule=latest||(id?(state.schedules||[]).find(s=>s.id===id):null);
@@ -405,10 +426,11 @@ function openSchedule(id,date=null,latest=null){
   newScheduleRequestId=schedule?null:crypto.randomUUID();scheduleDirty=false;
   const form=$('scheduleForm');form.reset();
   for(const [key,value] of Object.entries(scheduleBase))setFormValue(form,key,value);
+  schedulePreviousKind=LEAVE_KINDS.has(scheduleBase.kind)?scheduleBase.kind:null;scheduleGeneralAllDay=false;
   $('scheduleDialogTitle').textContent=schedule?'일정 수정':'일정 추가';
   $('archiveSchedule').hidden=!schedule;$('archiveSchedule').textContent=schedule?.archived?'일정 복원':'일정 보관';
   $('scheduleArchiveNotice').hidden=!schedule?.archived;
-  fieldError('scheduleFormError','');$('scheduleConflict').replaceChildren();$('scheduleConflict').hidden=true;syncScheduleTimes();
+  fieldError('scheduleFormError','');$('scheduleConflict').replaceChildren();$('scheduleConflict').hidden=true;syncScheduleKind();
   if(!$('scheduleDialog').open)$('scheduleDialog').showModal();
 }
 function readSchedule(){
@@ -416,9 +438,12 @@ function readSchedule(){
   for(const name of ['kind','title','attendees','startDate','endDate','location','notes'])values[name]=form.elements.namedItem(name).value.trim();
   values.allDay=form.elements.namedItem('allDay').checked;
   for(const name of ['startTime','endTime'])values[name]=values.allDay?null:form.elements.namedItem(name).value||null;
+  if(LEAVE_KINDS.has(values.kind)){values.allDay=true;values.startTime=null;values.endTime=null;if(!values.title)values.title=`${SCHEDULE_KINDS[values.kind]} · ${values.attendees}`.slice(0,300);}
   return values;
 }
 function validateSchedule(values){
+  if(LEAVE_KINDS.has(values.kind)&&!values.attendees)return '휴가자 이름을 입력해 주세요.';
+  if(['half_day_am','half_day_pm'].includes(values.kind)&&values.startDate!==values.endDate)return '반차는 하루씩 등록해 주세요. 시작일과 종료일을 같은 날짜로 설정하세요.';
   if(!values.title)return '일정명을 입력해 주세요.';
   if(!values.startDate||!values.endDate)return '시작일과 종료일을 입력해 주세요.';
   if(values.endDate<values.startDate)return '종료일은 시작일 이후로 설정해 주세요.';
@@ -505,6 +530,7 @@ function setup(){
   $('budgetForm').addEventListener('input',()=>{budgetDirty=true;});
   $('scheduleForm').addEventListener('input',()=>{scheduleDirty=true;});$('scheduleForm').addEventListener('change',()=>{scheduleDirty=true;});
   $('scheduleForm').elements.namedItem('allDay').addEventListener('change',syncScheduleTimes);
+  $('scheduleForm').elements.namedItem('kind').addEventListener('change',syncScheduleKind);
   $('scheduleForm').elements.namedItem('startDate').addEventListener('change',event=>{const end=$('scheduleForm').elements.namedItem('endDate');if(!end.value||end.value<event.target.value)end.value=event.target.value;});
   $('archiveSchedule').addEventListener('click',archiveSchedule);
   $('projectForm').elements.namedItem('category').addEventListener('change',event=>{if(editorBase?.id)return;const current=Array.from($('stageEditor').querySelectorAll('select')).map(s=>s.value);buildStageEditor(DEFAULT_STAGES[event.target.value].map((label,i)=>({label,state:current[i]||'unknown'})));});
