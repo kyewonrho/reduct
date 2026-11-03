@@ -140,6 +140,7 @@
 
   function render(container,options={}){
     if(!container||typeof container.replaceChildren!=='function')return;
+    const expandedDates=new Set(Array.from(container.querySelectorAll('details[data-rc-overflow-date][open]'),details=>details.dataset.rcOverflowDate));
     const today=validDate(options.today)?options.today:new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
     const month=validMonth(options.month)?options.month:today.slice(0,7);
     const selectedDate=validDate(options.selectedDate)?options.selectedDate:today;
@@ -158,7 +159,7 @@
       const day=new Date(`${date}T00:00:00Z`).getUTCDay();
       return `<div class="rc-day${outside?' rc-day-outside':''}${date===today?' rc-day-today':''}${date===selectedDate?' rc-day-selected':''}${day===0?' rc-sunday':day===6?' rc-saturday':''}" data-rc-cell-date="${date}">
         <button type="button" class="rc-date-button" data-rc-date="${date}"${canCreate?' data-rc-create="true"':''} aria-label="${Number(date.slice(0,4))}년 ${escapeHTML(koreanDay(date))} ${dayEvents.length}건의 일정${date===today?', 오늘':''}${canCreate?', 일정 추가':''}" aria-pressed="${date===selectedDate}"><span>${Number(date.slice(8,10))}</span>${dayEvents.length?`<small>${dayEvents.length}건</small>`:''}</button>
-        <div class="rc-day-events">${dayEvents.slice(0,3).map(event=>eventPill(event,date,events.indexOf(event))).join('')}${dayEvents.length>3?`<button type="button" class="rc-more" data-rc-date="${date}" aria-label="${escapeHTML(koreanDay(date))} 일정 ${dayEvents.length}건 모두 보기">＋ ${dayEvents.length-3}개 더</button>`:''}</div>
+        <div class="rc-day-events">${dayEvents.slice(0,3).map(event=>eventPill(event,date,events.indexOf(event))).join('')}${dayEvents.length>3?`<details class="rc-overflow" data-rc-overflow-date="${date}"${expandedDates.has(date)?' open':''}><summary class="rc-more" aria-controls="rc-overflow-${date}"><span class="sr-only">${escapeHTML(koreanDay(date))} 일정 </span><span class="rc-more-closed">＋ ${dayEvents.length-3}개 더</span><span class="rc-more-open">전체 ${dayEvents.length}건 · 접기</span></summary><div class="rc-overflow-panel" id="rc-overflow-${date}">${dayEvents.slice(3).map(event=>eventPill(event,date,events.indexOf(event))).join('')}<button type="button" class="rc-overflow-close" data-rc-close-overflow>접기</button></div></details>`:''}</div>
       </div>`;
     }).join('');
     container.innerHTML=`<section class="rc-calendar" aria-label="프로젝트·미팅·회의·출장 일정 달력">
@@ -186,9 +187,14 @@
     });
     for(const button of container.querySelectorAll('[data-rc-date]'))button.addEventListener('click',()=>selectDate(button.dataset.rcDate,button.dataset.rcCreate==='true'));
     for(const cell of container.querySelectorAll('[data-rc-cell-date]'))cell.addEventListener('click',event=>{
-      if(event.target.closest&&event.target.closest('button'))return;
+      if(event.target.closest&&event.target.closest('button,details'))return;
       selectDate(cell.dataset.rcCellDate,canCreate);
     });
+    function closeOverflow(details){details.open=false;details.querySelector('summary').focus();}
+    for(const details of container.querySelectorAll('[data-rc-overflow-date]')){
+      details.querySelector('[data-rc-close-overflow]').addEventListener('click',()=>closeOverflow(details));
+      details.addEventListener('keydown',event=>{if(event.key==='Escape'&&details.open){event.preventDefault();event.stopPropagation();closeOverflow(details);}});
+    }
     for(const button of container.querySelectorAll('[data-rc-event]'))button.addEventListener('click',()=>{
       const event=events[Number(button.dataset.rcEvent)];if(!event)return;
       if(event.type==='schedule'){
