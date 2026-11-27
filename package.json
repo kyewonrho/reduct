@@ -1,0 +1,19 @@
+{
+  "name": "reduct",
+  "version": "1.0.0",
+  "description": "REDUCT engineering website with Vercel Web Analytics",
+  "scripts": {
+    "install-analytics": "npm install"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
+  "keywords": [
+    "engineering",
+    "mold-design",
+    "optimization"
+  ],
+  "author": "REDUCT Co., Ltd.",
+  "license": "UNLICENSED",
+  "private": true
+}
